@@ -1,2 +1,6 @@
 *.class
 *.log
+sync.sh
+.idea/
+.idea_modules/
+out/
