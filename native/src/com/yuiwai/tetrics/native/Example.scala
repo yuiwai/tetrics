@@ -1,11 +1,14 @@
 package com.yuiwai.tetrics.native
 
-import com.yuiwai.tetrics.core.{Block, Field, Tetrics}
+import com.yuiwai.tetrics.core.{Block, Field, Tetrics, TetricsView}
 
 import scala.scalanative.native._
 
-object Example {
+object Example extends TetricsView {
   import Ncurses._
+  override def offset: CInt = 1
+  override def tileWidth: CInt = 2
+  override def tileHeight: CInt = 1
   private val blocks = Seq(
     Block("1111", 4),
     Block("1111", 2),
@@ -19,7 +22,7 @@ object Example {
   def main(args: Array[String]): Unit = {
     val screen: Ptr[Window] = initscr()
     val win = newwin(10, 10, 1, 1)
-    draw(tetrics.centralField, 1, 1)
+    drawAll(tetrics)
     cbreak()
     noecho()
     curs_set(0)
@@ -37,10 +40,10 @@ object Example {
         tetrics = tetrics.turnRight
       case _ => ()
     }
-    draw(tetrics.centralField, 1, 1)
+    drawAll(tetrics)
     loop()
   }
-  def draw(field: Field, offsetX: Int, offsetY: Int): Unit = {
+  def drawField(field: Field, offsetX: Int, offsetY: Int): Unit = {
     val pair1 = 1.toShort
     val pair2 = 2.toShort
     start_color()
