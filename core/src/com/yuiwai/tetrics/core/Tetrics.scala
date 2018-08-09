@@ -68,12 +68,12 @@ sealed trait Rotation {
 case object Rotation0 extends Rotation {
   lazy val right: Rotation = Rotation1
   lazy val left: Rotation = Rotation3
-  def round(d: Double): Int = Math.round(d).toInt
+  def round(d: Double): Int = Math.ceil(d).toInt
 }
 case object Rotation1 extends Rotation {
   lazy val right: Rotation = Rotation2
   lazy val left: Rotation = Rotation0
-  def round(d: Double): Int = Math.round(d).toInt
+  def round(d: Double): Int = Math.ceil(d).toInt
 }
 case object Rotation2 extends Rotation {
   lazy val right: Rotation = Rotation3
