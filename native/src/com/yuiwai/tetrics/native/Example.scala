@@ -44,28 +44,28 @@ object Example extends TetricsView {
           tetrics = tetrics.moveLeft
           drawCentral(tetrics)
         case 72 =>
-          tetrics = randPut(tetrics.dropLeft.normalized)
+          tetrics = randPut(tetrics.dropLeft.normalizeLeft)
           drawLeft(tetrics)
         // J
         case 106 =>
           tetrics = tetrics.moveDown
           drawCentral(tetrics)
         case 74 =>
-          tetrics = randPut(tetrics.dropBottom.normalized)
+          tetrics = randPut(tetrics.dropBottom.normalizeBottom)
           drawBottom(tetrics)
         // K
         case 107 =>
           tetrics = tetrics.moveUp
           drawCentral(tetrics)
         case 75 =>
-          tetrics = randPut(tetrics.dropTop.normalized)
+          tetrics = randPut(tetrics.dropTop.normalizeTop)
           drawTop(tetrics)
         // L
         case 108 =>
           tetrics = tetrics.moveRight
           drawCentral(tetrics)
         case 76 =>
-          tetrics = randPut(tetrics.dropRight.normalized)
+          tetrics = randPut(tetrics.dropRight.normalizeRight)
           drawRight(tetrics)
         case _ => ()
       }
