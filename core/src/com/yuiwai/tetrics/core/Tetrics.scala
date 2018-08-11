@@ -9,20 +9,29 @@ case class Tetrics(
   rightField: Field,
   leftField: Field,
   topField: Field
-) {
-  require(fieldSize >= block.width + offset.x && offset.x >= 0, "block is outside of field")
-  require(fieldSize >= block.height + offset.y && offset.y >= 0, "block is outside of field")
+) extends Publisher {
+  require(fieldSize >= block.width + offset.x && offset.x >= 0, "block is outside of field width")
+  require(fieldSize >= block.height + offset.y && offset.y >= 0, "block is outside of field height")
   private val emptyField = Field(fieldSize)
+  private def publishAndReturn(f: Tetrics => TetricsEvent): Tetrics = {
+    publish(f(this))
+    this
+  }
   def centralField: Field = emptyField.put(block, offset.x, offset.y)
-  def put(block: Block): Tetrics = copy(block = block)
-  def putCenter(block: Block): Tetrics = copy(block = block, offset = Offset(
+  def put(block: Block, offset: Offset = Offset()): Tetrics = copy(block = block, offset = offset)
+    .publishAndReturn(_ => BlockAdded(block))
+  def putCenter(block: Block): Tetrics = put(block, Offset(
     Math.round((fieldSize - block.width) / 2.0).toInt,
     Math.round((fieldSize - block.height) / 2.0).toInt
   ))
   def moveRight: Tetrics = copy(offset = offset.moveRight)
+    .publishAndReturn(_ => BlockMoved(MoveRight))
   def moveLeft: Tetrics = copy(offset = offset.moveLeft)
+    .publishAndReturn(_ => BlockMoved(MoveLeft))
   def moveUp: Tetrics = copy(offset = offset.moveUp)
+    .publishAndReturn(_ => BlockMoved(MoveUp))
   def moveDown: Tetrics = copy(offset = offset.moveDown)
+    .publishAndReturn(_ => BlockMoved(MoveDown))
   protected def turn(b: Block, r: Rotation): Tetrics =
     copy(block = b, offset = turnedOffset(b, r), rotation = r)
   protected def turnedOffset(b: Block, r: Rotation): Offset = Offset(
@@ -30,17 +39,25 @@ case class Tetrics(
     offset.y + r.round((block.height - b.height) / 2.0)
   )
   def turnRight: Tetrics = turn(block.turnRight, rotation.right)
+    .publishAndReturn(_ => BlockRotated(RotationRight))
   def turnLeft: Tetrics = turn(block.turnLeft, rotation.left)
+    .publishAndReturn(_ => BlockRotated(RotationLeft))
   def dropBottom: Tetrics = copy(bottomField = bottomField.drop(block, offset.x))
+    .publishAndReturn(t => BlockDropped(FieldBottom, t.bottomField.numRows))
   def dropRight: Tetrics = copy(rightField = rightField.drop(block.turnRight, fieldSize - offset.y - block.height))
+    .publishAndReturn(t => BlockDropped(FieldRight, t.rightField.numRows))
   def dropLeft: Tetrics = copy(leftField = leftField.drop(block.turnLeft, offset.y))
+    .publishAndReturn(t => BlockDropped(FieldLeft, t.leftField.numRows))
   def dropTop: Tetrics = copy(topField = topField.drop(block.turnLeft.turnLeft, fieldSize - offset.x - block.width))
-  def normalized: Tetrics = copy(
-    bottomField = bottomField.normalized,
-    rightField = rightField.normalized,
-    leftField = leftField.normalized,
-    topField = topField.normalized
-  )
+    .publishAndReturn(t => BlockDropped(FieldTop, t.topField.numRows))
+  def normalizeLeft: Tetrics = copy(leftField = leftField.normalized)
+    .publishAndReturn(t => FieldNormalized(FieldLeft, t.leftField.numRows))
+  def normalizeRight: Tetrics = copy(rightField = rightField.normalized)
+    .publishAndReturn(t => FieldNormalized(FieldRight, t.rightField.numRows))
+  def normalizeTop: Tetrics = copy(topField = topField.normalized)
+    .publishAndReturn(t => FieldNormalized(FieldTop, t.topField.numRows))
+  def normalizeBottom: Tetrics = copy(bottomField = bottomField.normalized)
+    .publishAndReturn(t => FieldNormalized(FieldBottom, t.bottomField.numRows))
 }
 object Tetrics {
   def apply(fieldSize: Int): Tetrics = Tetrics(
@@ -60,6 +77,14 @@ case class Offset(x: Int = 0, y: Int = 0) {
   def moveUp: Offset = copy(y = y - 1)
   def moveDown: Offset = copy(y = y + 1)
 }
+sealed trait MoveType
+case object MoveUp extends MoveType
+case object MoveLeft extends MoveType
+case object MoveRight extends MoveType
+case object MoveDown extends MoveType
+sealed trait RotationType
+case object RotationLeft extends RotationType
+case object RotationRight extends RotationType
 sealed trait Rotation {
   def right: Rotation
   def left: Rotation
@@ -85,10 +110,17 @@ case object Rotation3 extends Rotation {
   lazy val left: Rotation = Rotation2
   def round(d: Double): Int = Math.floor(d).toInt
 }
+sealed trait FieldType
+case object FieldTop extends FieldType
+case object FieldLeft extends FieldType
+case object FieldCentral extends FieldType
+case object FieldRight extends FieldType
+case object FieldBottom extends FieldType
 case class Field(rows: List[Row], width: Int) {
   import RowsOps._
   require(!rows.exists(_.width != width), "Field contains different width rows.")
   lazy val height: Int = rows.length
+  lazy val numRows: Int = rows.count(_.nonEmpty)
   def drop(block: Block, offset: Int): Field = put(block, offset, slice(offset, block.width).dropPos(block))
   def put(block: Block, x: Int, y: Int): Field = copy(put(rows, block.rows, x, y))
   protected def put(baseRows: List[Row], putRows: List[Row], x: Int, y: Int, resultRows: List[Row] = Nil): List[Row] =
