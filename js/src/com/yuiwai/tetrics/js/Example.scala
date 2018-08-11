@@ -1,15 +1,16 @@
 package com.yuiwai.tetrics.js
 
-import com.yuiwai.tetrics.core.{Block, Field, Tetrics}
+import com.yuiwai.tetrics.core.{Block, Field, Tetrics, TetricsView}
 import org.scalajs.dom
 import org.scalajs.dom.CanvasRenderingContext2D
 import org.scalajs.dom.ext.KeyCode
 import org.scalajs.dom.html.Canvas
 import org.scalajs.dom.raw.KeyboardEvent
 
-object Example {
+object Example extends TetricsView {
   val offset = 20
-  val tile = 15
+  val tileWidth: Int = 15
+  val tileHeight: Int = 15
   private var keyDown = false
   private val canvas = dom.window.document.createElement("canvas")
   private val blocks = Seq(
@@ -22,8 +23,8 @@ object Example {
     Block("011110", 3)
   )
   private var tetrics = randPut(Tetrics(10))
-  canvas.setAttribute("width", (offset * 2 + tile * 32).toString)
-  canvas.setAttribute("height", (offset * 2 + tile * 32).toString)
+  canvas.setAttribute("width", (offset * 2 + tileWidth * 32).toString)
+  canvas.setAttribute("height", (offset * 2 + tileHeight * 32).toString)
   private val ctx = canvas.asInstanceOf[Canvas].getContext("2d").asInstanceOf[CanvasRenderingContext2D]
   dom.window.document.body.appendChild(canvas)
   def main(args: Array[String]): Unit = {
@@ -40,50 +41,38 @@ object Example {
           case KeyCode.Right | KeyCode.L =>
             if (e.shiftKey) {
               tetrics = randPut(tetrics.dropRight.normalized)
-              drawRight()
+              drawRight(tetrics)
             }
             else tetrics = tetrics.moveRight
           case KeyCode.Left | KeyCode.H =>
             if (e.shiftKey) {
               tetrics = randPut(tetrics.dropLeft.normalized)
-              drawLeft()
+              drawLeft(tetrics)
             }
             else tetrics = tetrics.moveLeft
           case KeyCode.Up | KeyCode.K =>
             if (e.shiftKey) {
               tetrics = randPut(tetrics.dropTop.normalized)
-              drawTop()
+              drawTop(tetrics)
             }
             else tetrics = tetrics.moveUp
           case KeyCode.Down | KeyCode.J =>
             if (e.shiftKey) {
               tetrics = randPut(tetrics.dropBottom.normalized)
-              drawBottom()
+              drawBottom(tetrics)
             }
             else tetrics = tetrics.moveDown
           case _ =>
         }
-        drawCentral()
+        drawCentral(tetrics)
       }
     }
     dom.window.onkeyup = (_: KeyboardEvent) => {
       keyDown = false
     }
-    drawAll()
+    drawAll(tetrics)
   }
-  def drawAll(): Unit = {
-    drawTop()
-    drawLeft()
-    drawCentral()
-    drawRight()
-    drawBottom()
-  }
-  def drawTop(): Unit = draw(tetrics.topField.turnLeft.turnLeft, offset + (tile * 11), offset)
-  def drawLeft(): Unit = draw(tetrics.leftField.turnRight, offset, offset + (tile * 11))
-  def drawCentral(): Unit = draw(tetrics.centralField, offset + (tile * 11), offset + (tile * 11))
-  def drawRight(): Unit = draw(tetrics.rightField.turnLeft, offset + (tile * 22), offset + (tile * 11))
-  def drawBottom(): Unit = draw(tetrics.bottomField, offset + (tile * 11), offset + (tile * 22))
-  def draw(field: Field, offsetX: Int, offsetY: Int): Unit = {
+  def drawField(field: Field, offsetX: Int, offsetY: Int): Unit = {
     field.rows.zipWithIndex.foreach { case (row, y) =>
       (0 until row.width) foreach { x =>
         ctx.beginPath()
@@ -94,7 +83,7 @@ object Example {
           ctx.fillStyle = "red"
           ctx.strokeStyle = "grey"
         }
-        ctx.rect(x * tile + offsetX, y * tile + offsetY, tile, tile)
+        ctx.rect(x * tileWidth + offsetX, y * tileHeight + offsetY, tileWidth, tileHeight)
         ctx.fill()
         ctx.stroke()
       }
