@@ -40,25 +40,25 @@ object Example extends TetricsView {
             tetrics = tetrics.turnLeft
           case KeyCode.Right | KeyCode.L =>
             if (e.shiftKey) {
-              tetrics = randPut(tetrics.dropRight.normalized)
+              tetrics = randPut(tetrics.dropRight.normalizeRight)
               drawRight(tetrics)
             }
             else tetrics = tetrics.moveRight
           case KeyCode.Left | KeyCode.H =>
             if (e.shiftKey) {
-              tetrics = randPut(tetrics.dropLeft.normalized)
+              tetrics = randPut(tetrics.dropLeft.normalizeLeft)
               drawLeft(tetrics)
             }
             else tetrics = tetrics.moveLeft
           case KeyCode.Up | KeyCode.K =>
             if (e.shiftKey) {
-              tetrics = randPut(tetrics.dropTop.normalized)
+              tetrics = randPut(tetrics.dropTop.normalizeTop)
               drawTop(tetrics)
             }
             else tetrics = tetrics.moveUp
           case KeyCode.Down | KeyCode.J =>
             if (e.shiftKey) {
-              tetrics = randPut(tetrics.dropBottom.normalized)
+              tetrics = randPut(tetrics.dropBottom.normalizeBottom)
               drawBottom(tetrics)
             }
             else tetrics = tetrics.moveDown
