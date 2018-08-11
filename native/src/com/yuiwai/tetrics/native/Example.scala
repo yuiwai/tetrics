@@ -18,7 +18,7 @@ object Example extends TetricsView {
     Block("110011", 3),
     Block("011110", 3)
   )
-  private var tetrics = Tetrics(10).putCenter(blocks.head)
+  private var tetrics = randPut(Tetrics(10))
   def main(args: Array[String]): Unit = {
     val screen: Ptr[Window] = initscr()
     val win = newwin(10, 10, 1, 1)
@@ -31,16 +31,49 @@ object Example extends TetricsView {
   }
   def loop(): Unit = {
     val char = getch
-    char match {
-      // D
-      case 100 =>
-        tetrics = tetrics.turnLeft
-      // F
-      case 102 =>
-        tetrics = tetrics.turnRight
-      case _ => ()
+    try {
+      char match {
+        // D
+        case 100 =>
+          tetrics = tetrics.turnLeft
+        // F
+        case 102 =>
+          tetrics = tetrics.turnRight
+        // H
+        case 104 =>
+          tetrics = tetrics.moveLeft
+          drawCentral(tetrics)
+        case 72 =>
+          tetrics = randPut(tetrics.dropLeft.normalized)
+          drawLeft(tetrics)
+        // J
+        case 106 =>
+          tetrics = tetrics.moveDown
+          drawCentral(tetrics)
+        case 74 =>
+          tetrics = randPut(tetrics.dropBottom.normalized)
+          drawBottom(tetrics)
+        // K
+        case 107 =>
+          tetrics = tetrics.moveUp
+          drawCentral(tetrics)
+        case 75 =>
+          tetrics = randPut(tetrics.dropTop.normalized)
+          drawTop(tetrics)
+        // L
+        case 108 =>
+          tetrics = tetrics.moveRight
+          drawCentral(tetrics)
+        case 76 =>
+          tetrics = randPut(tetrics.dropRight.normalized)
+          drawRight(tetrics)
+        case _ => ()
+      }
+      drawAll(tetrics)
+    } catch {
+      case _: IllegalArgumentException =>
+      case e => throw e
     }
-    drawAll(tetrics)
     loop()
   }
   def drawField(field: Field, offsetX: Int, offsetY: Int): Unit = {
@@ -63,6 +96,7 @@ object Example extends TetricsView {
       }
     }
   }
+  def randPut(tetrics: Tetrics): Tetrics = tetrics.putCenter(blocks((Math.random() * blocks.size).toInt))
 }
 
 @link("ncurses")
