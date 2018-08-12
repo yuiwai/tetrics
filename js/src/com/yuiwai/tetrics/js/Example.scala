@@ -1,6 +1,6 @@
 package com.yuiwai.tetrics.js
 
-import com.yuiwai.tetrics.core.{Block, Field, Tetrics, TetricsView}
+import com.yuiwai.tetrics.core._
 import org.scalajs.dom
 import org.scalajs.dom.CanvasRenderingContext2D
 import org.scalajs.dom.ext.KeyCode
