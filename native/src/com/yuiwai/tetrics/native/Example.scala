@@ -1,82 +1,41 @@
 package com.yuiwai.tetrics.native
 
-import com.yuiwai.tetrics.core.{Block, Field, Tetrics, TetricsView}
+import com.yuiwai.tetrics.core._
 
 import scala.scalanative.native._
 
-object Example extends TetricsView {
+object Example {
+  import DefaultSettings._
   import Ncurses._
-  override def offset: CInt = 1
-  override def tileWidth: CInt = 2
-  override def tileHeight: CInt = 1
-  private val blocks = Seq(
-    Block("1111", 4),
-    Block("1111", 2),
-    Block("010111", 3),
-    Block("001111", 3),
-    Block("100111", 3),
-    Block("110011", 3),
-    Block("011110", 3)
-  )
-  private var tetrics = randPut(Tetrics(10))
+  implicit val ctx: NativeContext = new NativeContext
+  private var game = new TenTen[CInt, NativeContext] with NativeView with NativeController
   def main(args: Array[String]): Unit = {
     val screen: Ptr[Window] = initscr()
-    val win = newwin(10, 10, 1, 1)
-    drawAll(tetrics)
     cbreak()
     noecho()
     curs_set(0)
+    game.start()
     loop()
     endwin()
   }
   def loop(): Unit = {
     val char = getch
     try {
-      char match {
-        // D
-        case 100 =>
-          tetrics = tetrics.turnLeft
-        // F
-        case 102 =>
-          tetrics = tetrics.turnRight
-        // H
-        case 104 =>
-          tetrics = tetrics.moveLeft
-          drawCentral(tetrics)
-        case 72 =>
-          tetrics = randPut(tetrics.dropLeft.normalizeLeft)
-          drawLeft(tetrics)
-        // J
-        case 106 =>
-          tetrics = tetrics.moveDown
-          drawCentral(tetrics)
-        case 74 =>
-          tetrics = randPut(tetrics.dropBottom.normalizeBottom)
-          drawBottom(tetrics)
-        // K
-        case 107 =>
-          tetrics = tetrics.moveUp
-          drawCentral(tetrics)
-        case 75 =>
-          tetrics = randPut(tetrics.dropTop.normalizeTop)
-          drawTop(tetrics)
-        // L
-        case 108 =>
-          tetrics = tetrics.moveRight
-          drawCentral(tetrics)
-        case 76 =>
-          tetrics = randPut(tetrics.dropRight.normalizeRight)
-          drawRight(tetrics)
-        case _ => ()
-      }
-      drawAll(tetrics)
+      game.input(char)
     } catch {
       case _: IllegalArgumentException =>
       case e => throw e
     }
     loop()
   }
-  def drawField(field: Field, offsetX: Int, offsetY: Int): Unit = {
+}
+
+trait NativeView extends TetricsView[NativeContext] {
+  import Ncurses._
+  override def offset: CInt = 1
+  override def tileWidth: CInt = 2
+  override def tileHeight: CInt = 1
+  def drawField(field: Field, offsetX: Int, offsetY: Int)(implicit ctx: NativeContext): Unit = {
     val pair1 = 1.toShort
     val pair2 = 2.toShort
     start_color()
@@ -96,8 +55,34 @@ object Example extends TetricsView {
       }
     }
   }
-  def randPut(tetrics: Tetrics): Tetrics = tetrics.putCenter(blocks((Math.random() * blocks.size).toInt))
 }
+
+trait NativeController extends TetricsController[CInt, NativeContext] {
+  override protected def eventToAction(event: CInt): Option[TetricsAction] = {
+    event match {
+      // D
+      case 100 => Some(TurnLeftAction)
+      // F
+      case 102 => Some(TurnRightAction)
+      // H
+      case 104 => Some(MoveLeftAction)
+      case 72 => Some(DropLeftAction)
+      // J
+      case 106 => Some(MoveDownAction)
+      case 74 => Some(DropBottomAction)
+      // K
+      case 107 => Some(MoveUpAction)
+      case 75 => Some(DropTopAction)
+      // L
+      case 108 => Some(MoveRightAction)
+      case 76 => Some(DropRightAction)
+      // Other
+      case _ => None
+    }
+  }
+}
+
+class NativeContext
 
 @link("ncurses")
 @extern

@@ -1,5 +1,7 @@
 package com.yuiwai.tetrics.core
 
+import com.yuiwai.tetrics.core.EventBus.Callback
+
 sealed trait TetricsEvent
 final case class BlockAdded(block: Block) extends TetricsEvent
 final case class BlockRotated(rotationType: RotationType) extends TetricsEvent
@@ -8,15 +10,19 @@ final case class BlockDropped(fieldType: FieldType, numRows: Int) extends Tetric
 final case class FieldNormalized(fieldType: FieldType, numRows: Int) extends TetricsEvent
 
 trait EventBus {
-  type Callback = TetricsEvent => Unit
   private var subscribers: Seq[Callback] = Seq.empty
   private[core] def subscribe(callback: Callback): Unit = subscribers = subscribers :+ callback
   private[core] def publish(tetricsEvent: TetricsEvent): Unit = subscribers foreach (_ (tetricsEvent))
 }
-object EventBus extends EventBus
+object EventBus {
+  type Callback = TetricsEvent => Unit
+  def apply(): EventBus = new EventBus {}
+}
 trait Subscriber {
-  protected def subscribe(callback: EventBus.Callback): Unit = EventBus.subscribe(callback)
+  protected def subscribe(callback: EventBus.Callback)
+    (implicit eventBus: EventBus): Unit = eventBus.subscribe(callback)
 }
 trait Publisher {
-  protected def publish(tetricsEvent: TetricsEvent): Unit = EventBus.publish(tetricsEvent)
+  protected def publish(tetricsEvent: TetricsEvent)
+    (implicit eventBus: EventBus): Unit = eventBus.publish(tetricsEvent)
 }
