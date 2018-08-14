@@ -9,7 +9,7 @@ case class Tetrics(
   rightField: Field,
   leftField: Field,
   topField: Field
-) extends Publisher {
+)(implicit eventBus: EventBus) extends Publisher {
   require(fieldSize >= block.width + offset.x && offset.x >= 0, "block is outside of field width")
   require(fieldSize >= block.height + offset.y && offset.y >= 0, "block is outside of field height")
   private val emptyField = Field(fieldSize)
@@ -60,7 +60,7 @@ case class Tetrics(
     .publishAndReturn(t => FieldNormalized(FieldBottom, t.bottomField.numRows))
 }
 object Tetrics {
-  def apply(fieldSize: Int): Tetrics = Tetrics(
+  def apply(fieldSize: Int)(implicit eventBus: EventBus): Tetrics = new Tetrics(
     fieldSize,
     Block.empty,
     Offset(),

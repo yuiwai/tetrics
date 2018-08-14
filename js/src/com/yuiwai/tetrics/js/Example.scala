@@ -7,72 +7,39 @@ import org.scalajs.dom.ext.KeyCode
 import org.scalajs.dom.html.Canvas
 import org.scalajs.dom.raw.KeyboardEvent
 
-object Example extends TetricsView {
-  val offset = 20
-  val tileWidth: Int = 15
-  val tileHeight: Int = 15
+object Example {
+  import DefaultSettings._
   private var keyDown = false
   private val canvas = dom.window.document.createElement("canvas")
-  private val blocks = Seq(
-    Block("1111", 4),
-    Block("1111", 2),
-    Block("010111", 3),
-    Block("001111", 3),
-    Block("100111", 3),
-    Block("110011", 3),
-    Block("011110", 3)
-  )
-  private var tetrics = randPut(Tetrics(10))
-  canvas.setAttribute("width", (offset * 2 + tileWidth * 32).toString)
-  canvas.setAttribute("height", (offset * 2 + tileHeight * 32).toString)
-  private val ctx = canvas.asInstanceOf[Canvas].getContext("2d").asInstanceOf[CanvasRenderingContext2D]
-  dom.window.document.body.appendChild(canvas)
+  private implicit val ctx: CanvasRenderingContext2D =
+    canvas.asInstanceOf[Canvas].getContext("2d").asInstanceOf[CanvasRenderingContext2D]
+  private var game = new TenTen[KeyboardEvent, CanvasRenderingContext2D] with JsController with JsView
   def main(args: Array[String]): Unit = {
+    dom.window.document.body.appendChild(canvas)
     dom.window.onkeydown = (e: KeyboardEvent) => {
       if (!keyDown) {
         keyDown = true
         e.keyCode match {
           case KeyCode.Shift =>
             keyDown = false
-          case KeyCode.F =>
-            tetrics = tetrics.turnRight
-          case KeyCode.D =>
-            tetrics = tetrics.turnLeft
-          case KeyCode.Right | KeyCode.L =>
-            if (e.shiftKey) {
-              tetrics = randPut(tetrics.dropRight.normalizeRight)
-              drawRight(tetrics)
-            }
-            else tetrics = tetrics.moveRight
-          case KeyCode.Left | KeyCode.H =>
-            if (e.shiftKey) {
-              tetrics = randPut(tetrics.dropLeft.normalizeLeft)
-              drawLeft(tetrics)
-            }
-            else tetrics = tetrics.moveLeft
-          case KeyCode.Up | KeyCode.K =>
-            if (e.shiftKey) {
-              tetrics = randPut(tetrics.dropTop.normalizeTop)
-              drawTop(tetrics)
-            }
-            else tetrics = tetrics.moveUp
-          case KeyCode.Down | KeyCode.J =>
-            if (e.shiftKey) {
-              tetrics = randPut(tetrics.dropBottom.normalizeBottom)
-              drawBottom(tetrics)
-            }
-            else tetrics = tetrics.moveDown
-          case _ =>
+          case _ => game.input(e)
         }
-        drawCentral(tetrics)
+      }
+      dom.window.onkeyup = (_: KeyboardEvent) => {
+        keyDown = false
       }
     }
-    dom.window.onkeyup = (_: KeyboardEvent) => {
-      keyDown = false
-    }
-    drawAll(tetrics)
+    canvas.setAttribute("width", (game.offset * 2 + game.tileWidth * 32).toString)
+    canvas.setAttribute("height", (game.offset * 2 + game.tileHeight * 32).toString)
+    game.start()
   }
-  def drawField(field: Field, offsetX: Int, offsetY: Int): Unit = {
+}
+
+trait JsView extends TetricsView[CanvasRenderingContext2D] {
+  val offset = 20
+  val tileWidth: Int = 15
+  val tileHeight: Int = 15
+  def drawField(field: Field, offsetX: Int, offsetY: Int)(implicit ctx: CanvasRenderingContext2D): Unit = {
     field.rows.zipWithIndex.foreach { case (row, y) =>
       (0 until row.width) foreach { x =>
         ctx.beginPath()
@@ -89,5 +56,26 @@ object Example extends TetricsView {
       }
     }
   }
-  def randPut(tetrics: Tetrics): Tetrics = tetrics.putCenter(blocks((Math.random() * blocks.size).toInt))
+}
+
+trait JsController extends TetricsController[KeyboardEvent, CanvasRenderingContext2D] {
+  override protected def eventToAction(event: KeyboardEvent): Option[TetricsAction] = {
+    event.keyCode match {
+      case KeyCode.F => Some(TurnRightAction)
+      case KeyCode.D => Some(TurnLeftAction)
+      case KeyCode.Right | KeyCode.L =>
+        if (event.shiftKey) Some(DropRightAction)
+        else Some(MoveRightAction)
+      case KeyCode.Left | KeyCode.H =>
+        if (event.shiftKey) Some(DropLeftAction)
+        else Some(MoveLeftAction)
+      case KeyCode.Up | KeyCode.K =>
+        if (event.shiftKey) Some(DropTopAction)
+        else Some(MoveUpAction)
+      case KeyCode.Down | KeyCode.J =>
+        if (event.shiftKey) Some(DropBottomAction)
+        else Some(MoveDownAction)
+      case _ => None
+    }
+  }
 }
