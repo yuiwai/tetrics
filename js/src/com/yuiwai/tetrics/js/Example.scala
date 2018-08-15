@@ -37,9 +37,11 @@ object Example {
 
 trait JsView extends TetricsView[CanvasRenderingContext2D] {
   val offset = 20
+  override val labelHeight = 12
   val tileWidth: Int = 15
   val tileHeight: Int = 15
-  def drawField(field: Field, offsetX: Int, offsetY: Int)(implicit ctx: CanvasRenderingContext2D): Unit = {
+  def drawField(field: Field, offsetX: Int, offsetY: Int)
+    (implicit ctx: CanvasRenderingContext2D): Unit = {
     field.rows.zipWithIndex.foreach { case (row, y) =>
       (0 until row.width) foreach { x =>
         ctx.beginPath()
@@ -55,6 +57,18 @@ trait JsView extends TetricsView[CanvasRenderingContext2D] {
         ctx.stroke()
       }
     }
+  }
+  def drawLabel(label: Label, offsetX: Int, offsetY: Int)
+    (implicit ctx: CanvasRenderingContext2D): Unit = {
+    ctx.beginPath()
+    ctx.fillStyle = "white"
+    ctx.rect(offsetX, offsetY, tileWidth * fieldSize, labelHeight - 1)
+    ctx.fill()
+    ctx.fillStyle = "black"
+    ctx.font = "12px Arial"
+    ctx.textAlign = "left"
+    ctx.textBaseline = "top"
+    ctx.fillText(label.text, offsetX, offsetY)
   }
 }
 

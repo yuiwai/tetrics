@@ -6,17 +6,16 @@ trait TetricsGame[E, C]
     with TetricsView[C] {
   protected var tetrics: Tetrics
   implicit protected val eventBus: EventBus = EventBus()
-  val setting: TetricsSetting
   private def modify(f: Tetrics => Tetrics): Tetrics = {
     tetrics = f(tetrics)
     tetrics
   }
-  def start()(implicit ctx: C): Unit
-  def randPut(): Tetrics = {
+  def start()(implicit ctx: C, setting: TetricsSetting): Unit
+  def randPut()(implicit setting: TetricsSetting): Tetrics = {
     import setting.blocks
     modify(_.putCenter(blocks((Math.random() * blocks.size).toInt)))
   }
-  def input(event: E)(implicit ctx: C): Unit = eventToAction(event) foreach {
+  def input(event: E)(implicit ctx: C, setting: TetricsSetting): Unit = eventToAction(event) foreach {
     case MoveLeftAction => drawCentral(modify(_.moveLeft))
     case MoveRightAction => drawCentral(modify(_.moveRight))
     case MoveUpAction => drawCentral(modify(_.moveUp))
@@ -37,19 +36,22 @@ trait TetricsGame[E, C]
     case TurnRightAction => drawCentral(modify(_.turnRight))
   }
 }
-abstract class TenTen[E, C](implicit val setting: TetricsSetting)
+abstract class TenTen[E, C]
   extends TetricsGame[E, C]
+    with LabeledFieldView[C]
     with Subscriber {
   override protected var tetrics: Tetrics = Tetrics(10)
   private var stats: TetricsStats = TetricsStats()
-  override def start()(implicit ctx: C): Unit = {
-    subscribe(e => stats = stats(e))
+  override def start()(implicit ctx: C, setting: TetricsSetting): Unit = {
+    subscribe { e =>
+      stats = stats(e)
+      drawTopLabel(Label(stats.topField.deletedRows.toString))
+      drawBottomLabel(Label(stats.bottomField.deletedRows.toString))
+    }
     drawAll(randPut())
   }
 }
-case class TetricsSetting(
-  blocks: Seq[Block]
-)
+case class TetricsSetting(blocks: Seq[Block])
 sealed trait TetricsRule
 trait DefaultSettings {
   implicit val setting: TetricsSetting = TetricsSetting(

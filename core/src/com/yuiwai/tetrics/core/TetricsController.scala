@@ -1,7 +1,7 @@
 package com.yuiwai.tetrics.core
 
 trait TetricsController[E, C] {
-  def input(event: E)(implicit ctx: C): Unit
+  def input(event: E)(implicit ctx: C, setting: TetricsSetting): Unit
   protected def eventToAction(event: E): Option[TetricsAction]
 }
 sealed trait TetricsAction
@@ -15,4 +15,3 @@ case object DropTopAction extends TetricsAction
 case object DropBottomAction extends TetricsAction
 case object TurnLeftAction extends TetricsAction
 case object TurnRightAction extends TetricsAction
-

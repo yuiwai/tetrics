@@ -2,6 +2,7 @@ package com.yuiwai.tetrics.core
 
 trait TetricsView[C] {
   def offset: Int
+  def labelHeight: Int = offset
   def tileWidth: Int
   def tileHeight: Int
   def fieldSize: Int = 10
@@ -24,3 +25,11 @@ trait TetricsView[C] {
     drawField(tetrics.bottomField, offset + (tileWidth * (fieldSize + 1)), offset + (tileHeight * (fieldSize + 1) * 2))
   def drawField(field: Field, offsetX: Int, offsetY: Int)(implicit ctx: C): Unit
 }
+trait LabeledFieldView[C] extends TetricsView[C] {
+  def drawTopLabel(label: Label)(implicit ctx: C): Unit =
+    drawLabel(label, offset + (tileWidth * (fieldSize + 1)), offset - labelHeight)
+  def drawBottomLabel(label: Label)(implicit ctx: C): Unit =
+    drawLabel(label, offset + (tileWidth * (fieldSize + 1)), offset + tileHeight * ((fieldSize + 1) * 2 + fieldSize))
+  def drawLabel(label: Label, offsetX: Int, offsetY: Int)(implicit ctx: C): Unit
+}
+case class Label(text: String)
