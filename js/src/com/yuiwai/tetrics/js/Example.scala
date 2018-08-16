@@ -35,9 +35,10 @@ object Example {
   }
 }
 
-trait JsView extends TetricsView[CanvasRenderingContext2D] {
+trait JsView extends LabeledFieldView[CanvasRenderingContext2D] {
   val offset = 20
   override val labelHeight = 12
+  override val labelMargin = 1
   val tileWidth: Int = 15
   val tileHeight: Int = 15
   def drawField(field: Field, offsetX: Int, offsetY: Int)
@@ -62,7 +63,7 @@ trait JsView extends TetricsView[CanvasRenderingContext2D] {
     (implicit ctx: CanvasRenderingContext2D): Unit = {
     ctx.beginPath()
     ctx.fillStyle = "white"
-    ctx.rect(offsetX, offsetY, tileWidth * fieldSize, labelHeight - 1)
+    ctx.rect(offsetX, offsetY, tileWidth * fieldSize, labelHeight)
     ctx.fill()
     ctx.fillStyle = "black"
     ctx.font = "12px Arial"

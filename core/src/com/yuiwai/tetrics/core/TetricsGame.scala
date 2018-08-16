@@ -45,6 +45,8 @@ abstract class TenTen[E, C]
   override def start()(implicit ctx: C, setting: TetricsSetting): Unit = {
     subscribe { e =>
       stats = stats(e)
+      drawLeftLabel(Label(stats.leftField.deletedRows.toString))
+      drawRightLabel(Label(stats.rightField.deletedRows.toString))
       drawTopLabel(Label(stats.topField.deletedRows.toString))
       drawBottomLabel(Label(stats.bottomField.deletedRows.toString))
     }
