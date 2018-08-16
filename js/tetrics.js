@@ -1836,11 +1836,17 @@ function $m_Lcom_yuiwai_tetrics_core_EventBus$() {
   };
   return $n_Lcom_yuiwai_tetrics_core_EventBus$
 }
+function $f_Lcom_yuiwai_tetrics_core_LabeledFieldView__drawLeftLabel__Lcom_yuiwai_tetrics_core_Label__O__V($thiz, label, ctx) {
+  $thiz.drawLabel__Lcom_yuiwai_tetrics_core_Label__I__I__O__V(label, $thiz.offset__I(), (((((($thiz.offset__I() + $imul($thiz.tileHeight__I(), (($thiz.fieldSize__I() + 1) | 0))) | 0) - $thiz.labelHeight__I()) | 0) - $thiz.labelMargin__I()) | 0), ctx)
+}
+function $f_Lcom_yuiwai_tetrics_core_LabeledFieldView__drawRightLabel__Lcom_yuiwai_tetrics_core_Label__O__V($thiz, label, ctx) {
+  $thiz.drawLabel__Lcom_yuiwai_tetrics_core_Label__I__I__O__V(label, (($thiz.offset__I() + $imul($imul($thiz.tileWidth__I(), (($thiz.fieldSize__I() + 1) | 0)), 2)) | 0), (((((($thiz.offset__I() + $imul($thiz.tileHeight__I(), (($thiz.fieldSize__I() + 1) | 0))) | 0) - $thiz.labelHeight__I()) | 0) - $thiz.labelMargin__I()) | 0), ctx)
+}
 function $f_Lcom_yuiwai_tetrics_core_LabeledFieldView__drawTopLabel__Lcom_yuiwai_tetrics_core_Label__O__V($thiz, label, ctx) {
-  $thiz.drawLabel__Lcom_yuiwai_tetrics_core_Label__I__I__O__V(label, (($thiz.offset__I() + $imul($thiz.tileWidth__I(), (($thiz.fieldSize__I() + 1) | 0))) | 0), (($thiz.offset__I() - $thiz.labelHeight__I()) | 0), ctx)
+  $thiz.drawLabel__Lcom_yuiwai_tetrics_core_Label__I__I__O__V(label, (($thiz.offset__I() + $imul($thiz.tileWidth__I(), (($thiz.fieldSize__I() + 1) | 0))) | 0), (((($thiz.offset__I() - $thiz.labelHeight__I()) | 0) - $thiz.labelMargin__I()) | 0), ctx)
 }
 function $f_Lcom_yuiwai_tetrics_core_LabeledFieldView__drawBottomLabel__Lcom_yuiwai_tetrics_core_Label__O__V($thiz, label, ctx) {
-  $thiz.drawLabel__Lcom_yuiwai_tetrics_core_Label__I__I__O__V(label, (($thiz.offset__I() + $imul($thiz.tileWidth__I(), (($thiz.fieldSize__I() + 1) | 0))) | 0), (($thiz.offset__I() + $imul($thiz.tileHeight__I(), (($imul((($thiz.fieldSize__I() + 1) | 0), 2) + $thiz.fieldSize__I()) | 0))) | 0), ctx)
+  $thiz.drawLabel__Lcom_yuiwai_tetrics_core_Label__I__I__O__V(label, (($thiz.offset__I() + $imul($thiz.tileWidth__I(), (($thiz.fieldSize__I() + 1) | 0))) | 0), (((($thiz.offset__I() + $imul($thiz.tileHeight__I(), (($imul((($thiz.fieldSize__I() + 1) | 0), 2) + $thiz.fieldSize__I()) | 0))) | 0) + $thiz.labelMargin__I()) | 0), ctx)
 }
 function $f_Lcom_yuiwai_tetrics_core_LabeledFieldView__$$init$__V($thiz) {
   /*<skip>*/
@@ -2068,71 +2074,6 @@ function $f_Lcom_yuiwai_tetrics_js_JsController__eventToAction__Lorg_scalajs_dom
 }
 function $f_Lcom_yuiwai_tetrics_js_JsController__$$init$__V($thiz) {
   /*<skip>*/
-}
-function $f_Lcom_yuiwai_tetrics_js_JsView__drawField__Lcom_yuiwai_tetrics_core_Field__I__I__Lorg_scalajs_dom_raw_CanvasRenderingContext2D__V($thiz, field, offsetX, offsetY, ctx) {
-  $as_sci_List(field.rows__sci_List().zipWithIndex__scg_CanBuildFrom__O($m_sci_List$().canBuildFrom__scg_CanBuildFrom())).foreach__F1__V(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function($this, offsetX, offsetY, ctx) {
-    return (function(x0$1$2) {
-      var x0$1 = $as_T2(x0$1$2);
-      $this.$$anonfun$drawField$1__pLcom_yuiwai_tetrics_js_JsView__I__I__Lorg_scalajs_dom_raw_CanvasRenderingContext2D__T2__V(offsetX, offsetY, ctx, x0$1)
-    })
-  })($thiz, offsetX, offsetY, ctx)))
-}
-function $f_Lcom_yuiwai_tetrics_js_JsView__drawLabel__Lcom_yuiwai_tetrics_core_Label__I__I__Lorg_scalajs_dom_raw_CanvasRenderingContext2D__V($thiz, label, offsetX, offsetY, ctx) {
-  ctx.beginPath();
-  ctx.fillStyle = $m_sjs_js_Any$().fromString__T__sjs_js_Any("white");
-  ctx.rect(offsetX, offsetY, $imul($thiz.tileWidth__I(), $thiz.fieldSize__I()), (($thiz.labelHeight__I() - 1) | 0));
-  ctx.fill();
-  ctx.fillStyle = $m_sjs_js_Any$().fromString__T__sjs_js_Any("black");
-  ctx.font = "12px Arial";
-  ctx.textAlign = "left";
-  ctx.textBaseline = "top";
-  ctx.fillText(label.text__T(), offsetX, offsetY)
-}
-function $f_Lcom_yuiwai_tetrics_js_JsView__$$anonfun$drawField$2__pLcom_yuiwai_tetrics_js_JsView__I__I__Lorg_scalajs_dom_raw_CanvasRenderingContext2D__Lcom_yuiwai_tetrics_core_Row__I__I__V($thiz, offsetX$1, offsetY$1, ctx$1, row$1, y$1, x) {
-  ctx$1.beginPath();
-  if ((((row$1.cols__I() >> x) & 1) === 0)) {
-    ctx$1.fillStyle = $m_sjs_js_Any$().fromString__T__sjs_js_Any("yellow");
-    ctx$1.strokeStyle = $m_sjs_js_Any$().fromString__T__sjs_js_Any("grey")
-  } else {
-    ctx$1.fillStyle = $m_sjs_js_Any$().fromString__T__sjs_js_Any("red");
-    ctx$1.strokeStyle = $m_sjs_js_Any$().fromString__T__sjs_js_Any("grey")
-  };
-  ctx$1.rect((($imul(x, $thiz.tileWidth__I()) + offsetX$1) | 0), (($imul(y$1, $thiz.tileHeight__I()) + offsetY$1) | 0), $thiz.tileWidth__I(), $thiz.tileHeight__I());
-  ctx$1.fill();
-  ctx$1.stroke()
-}
-function $f_Lcom_yuiwai_tetrics_js_JsView__$$anonfun$drawField$1__pLcom_yuiwai_tetrics_js_JsView__I__I__Lorg_scalajs_dom_raw_CanvasRenderingContext2D__T2__V($thiz, offsetX$1, offsetY$1, ctx$1, x0$1) {
-  var x1 = x0$1;
-  if ((x1 !== null)) {
-    var row = $as_Lcom_yuiwai_tetrics_core_Row(x1.$$und1__O());
-    var y = x1.$$und2$mcI$sp__I();
-    $m_sr_RichInt$().until$extension0__I__I__sci_Range($m_s_Predef$().intWrapper__I__I(0), row.width__I()).foreach$mVc$sp__F1__V(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function($this, offsetX$1, offsetY$1, ctx$1, row, y) {
-      return (function(x$2) {
-        var x = $uI(x$2);
-        $this.$$anonfun$drawField$2__pLcom_yuiwai_tetrics_js_JsView__I__I__Lorg_scalajs_dom_raw_CanvasRenderingContext2D__Lcom_yuiwai_tetrics_core_Row__I__I__V(offsetX$1, offsetY$1, ctx$1, row, y, x)
-      })
-    })($thiz, offsetX$1, offsetY$1, ctx$1, row, y)))
-  } else {
-    throw new $c_s_MatchError().init___O(x1)
-  }
-}
-function $f_Lcom_yuiwai_tetrics_js_JsView__$$init$__V($thiz) {
-  $thiz.com$yuiwai$tetrics$js$JsView$$undsetter$und$offset$und$eq__I__V(20);
-  $thiz.com$yuiwai$tetrics$js$JsView$$undsetter$und$labelHeight$und$eq__I__V(12);
-  $thiz.com$yuiwai$tetrics$js$JsView$$undsetter$und$tileWidth$und$eq__I__V(15);
-  $thiz.com$yuiwai$tetrics$js$JsView$$undsetter$und$tileHeight$und$eq__I__V(15)
-}
-function $is_Lcom_yuiwai_tetrics_js_JsView(obj) {
-  return (!(!((obj && obj.$classData) && obj.$classData.ancestors.Lcom_yuiwai_tetrics_js_JsView)))
-}
-function $as_Lcom_yuiwai_tetrics_js_JsView(obj) {
-  return (($is_Lcom_yuiwai_tetrics_js_JsView(obj) || (obj === null)) ? obj : $throwClassCastException(obj, "com.yuiwai.tetrics.js.JsView"))
-}
-function $isArrayOf_Lcom_yuiwai_tetrics_js_JsView(obj, depth) {
-  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.Lcom_yuiwai_tetrics_js_JsView)))
-}
-function $asArrayOf_Lcom_yuiwai_tetrics_js_JsView(obj, depth) {
-  return (($isArrayOf_Lcom_yuiwai_tetrics_js_JsView(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lcom.yuiwai.tetrics.js.JsView;", depth))
 }
 function $is_Ljava_io_Closeable(obj) {
   return (!(!((obj && obj.$classData) && obj.$classData.ancestors.Ljava_io_Closeable)))
@@ -5492,6 +5433,72 @@ function $f_Lcom_yuiwai_tetrics_core_TetricsGame__$$anonfun$input$1__pLcom_yuiwa
 }
 function $f_Lcom_yuiwai_tetrics_core_TetricsGame__$$init$__V($thiz) {
   $thiz.com$yuiwai$tetrics$core$TetricsGame$$undsetter$und$eventBus$und$eq__Lcom_yuiwai_tetrics_core_EventBus__V($m_Lcom_yuiwai_tetrics_core_EventBus$().apply__Lcom_yuiwai_tetrics_core_EventBus())
+}
+function $f_Lcom_yuiwai_tetrics_js_JsView__drawField__Lcom_yuiwai_tetrics_core_Field__I__I__Lorg_scalajs_dom_raw_CanvasRenderingContext2D__V($thiz, field, offsetX, offsetY, ctx) {
+  $as_sci_List(field.rows__sci_List().zipWithIndex__scg_CanBuildFrom__O($m_sci_List$().canBuildFrom__scg_CanBuildFrom())).foreach__F1__V(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function($this, offsetX, offsetY, ctx) {
+    return (function(x0$1$2) {
+      var x0$1 = $as_T2(x0$1$2);
+      $this.$$anonfun$drawField$1__pLcom_yuiwai_tetrics_js_JsView__I__I__Lorg_scalajs_dom_raw_CanvasRenderingContext2D__T2__V(offsetX, offsetY, ctx, x0$1)
+    })
+  })($thiz, offsetX, offsetY, ctx)))
+}
+function $f_Lcom_yuiwai_tetrics_js_JsView__drawLabel__Lcom_yuiwai_tetrics_core_Label__I__I__Lorg_scalajs_dom_raw_CanvasRenderingContext2D__V($thiz, label, offsetX, offsetY, ctx) {
+  ctx.beginPath();
+  ctx.fillStyle = $m_sjs_js_Any$().fromString__T__sjs_js_Any("white");
+  ctx.rect(offsetX, offsetY, $imul($thiz.tileWidth__I(), $thiz.fieldSize__I()), $thiz.labelHeight__I());
+  ctx.fill();
+  ctx.fillStyle = $m_sjs_js_Any$().fromString__T__sjs_js_Any("black");
+  ctx.font = "12px Arial";
+  ctx.textAlign = "left";
+  ctx.textBaseline = "top";
+  ctx.fillText(label.text__T(), offsetX, offsetY)
+}
+function $f_Lcom_yuiwai_tetrics_js_JsView__$$anonfun$drawField$2__pLcom_yuiwai_tetrics_js_JsView__I__I__Lorg_scalajs_dom_raw_CanvasRenderingContext2D__Lcom_yuiwai_tetrics_core_Row__I__I__V($thiz, offsetX$1, offsetY$1, ctx$1, row$1, y$1, x) {
+  ctx$1.beginPath();
+  if ((((row$1.cols__I() >> x) & 1) === 0)) {
+    ctx$1.fillStyle = $m_sjs_js_Any$().fromString__T__sjs_js_Any("yellow");
+    ctx$1.strokeStyle = $m_sjs_js_Any$().fromString__T__sjs_js_Any("grey")
+  } else {
+    ctx$1.fillStyle = $m_sjs_js_Any$().fromString__T__sjs_js_Any("red");
+    ctx$1.strokeStyle = $m_sjs_js_Any$().fromString__T__sjs_js_Any("grey")
+  };
+  ctx$1.rect((($imul(x, $thiz.tileWidth__I()) + offsetX$1) | 0), (($imul(y$1, $thiz.tileHeight__I()) + offsetY$1) | 0), $thiz.tileWidth__I(), $thiz.tileHeight__I());
+  ctx$1.fill();
+  ctx$1.stroke()
+}
+function $f_Lcom_yuiwai_tetrics_js_JsView__$$anonfun$drawField$1__pLcom_yuiwai_tetrics_js_JsView__I__I__Lorg_scalajs_dom_raw_CanvasRenderingContext2D__T2__V($thiz, offsetX$1, offsetY$1, ctx$1, x0$1) {
+  var x1 = x0$1;
+  if ((x1 !== null)) {
+    var row = $as_Lcom_yuiwai_tetrics_core_Row(x1.$$und1__O());
+    var y = x1.$$und2$mcI$sp__I();
+    $m_sr_RichInt$().until$extension0__I__I__sci_Range($m_s_Predef$().intWrapper__I__I(0), row.width__I()).foreach$mVc$sp__F1__V(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function($this, offsetX$1, offsetY$1, ctx$1, row, y) {
+      return (function(x$2) {
+        var x = $uI(x$2);
+        $this.$$anonfun$drawField$2__pLcom_yuiwai_tetrics_js_JsView__I__I__Lorg_scalajs_dom_raw_CanvasRenderingContext2D__Lcom_yuiwai_tetrics_core_Row__I__I__V(offsetX$1, offsetY$1, ctx$1, row, y, x)
+      })
+    })($thiz, offsetX$1, offsetY$1, ctx$1, row, y)))
+  } else {
+    throw new $c_s_MatchError().init___O(x1)
+  }
+}
+function $f_Lcom_yuiwai_tetrics_js_JsView__$$init$__V($thiz) {
+  $thiz.com$yuiwai$tetrics$js$JsView$$undsetter$und$offset$und$eq__I__V(20);
+  $thiz.com$yuiwai$tetrics$js$JsView$$undsetter$und$labelHeight$und$eq__I__V(12);
+  $thiz.com$yuiwai$tetrics$js$JsView$$undsetter$und$labelMargin$und$eq__I__V(1);
+  $thiz.com$yuiwai$tetrics$js$JsView$$undsetter$und$tileWidth$und$eq__I__V(15);
+  $thiz.com$yuiwai$tetrics$js$JsView$$undsetter$und$tileHeight$und$eq__I__V(15)
+}
+function $is_Lcom_yuiwai_tetrics_js_JsView(obj) {
+  return (!(!((obj && obj.$classData) && obj.$classData.ancestors.Lcom_yuiwai_tetrics_js_JsView)))
+}
+function $as_Lcom_yuiwai_tetrics_js_JsView(obj) {
+  return (($is_Lcom_yuiwai_tetrics_js_JsView(obj) || (obj === null)) ? obj : $throwClassCastException(obj, "com.yuiwai.tetrics.js.JsView"))
+}
+function $isArrayOf_Lcom_yuiwai_tetrics_js_JsView(obj, depth) {
+  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.Lcom_yuiwai_tetrics_js_JsView)))
+}
+function $asArrayOf_Lcom_yuiwai_tetrics_js_JsView(obj, depth) {
+  return (($isArrayOf_Lcom_yuiwai_tetrics_js_JsView(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lcom.yuiwai.tetrics.js.JsView;", depth))
 }
 /** @constructor */
 function $c_jl_Number() {
@@ -14831,6 +14838,12 @@ $h_Lcom_yuiwai_tetrics_core_TenTen.prototype = $c_Lcom_yuiwai_tetrics_core_TenTe
 $c_Lcom_yuiwai_tetrics_core_TenTen.prototype.subscribe__F1__Lcom_yuiwai_tetrics_core_EventBus__V = (function(callback, eventBus) {
   $f_Lcom_yuiwai_tetrics_core_Subscriber__subscribe__F1__Lcom_yuiwai_tetrics_core_EventBus__V(this, callback, eventBus)
 });
+$c_Lcom_yuiwai_tetrics_core_TenTen.prototype.drawLeftLabel__Lcom_yuiwai_tetrics_core_Label__O__V = (function(label, ctx) {
+  $f_Lcom_yuiwai_tetrics_core_LabeledFieldView__drawLeftLabel__Lcom_yuiwai_tetrics_core_Label__O__V(this, label, ctx)
+});
+$c_Lcom_yuiwai_tetrics_core_TenTen.prototype.drawRightLabel__Lcom_yuiwai_tetrics_core_Label__O__V = (function(label, ctx) {
+  $f_Lcom_yuiwai_tetrics_core_LabeledFieldView__drawRightLabel__Lcom_yuiwai_tetrics_core_Label__O__V(this, label, ctx)
+});
 $c_Lcom_yuiwai_tetrics_core_TenTen.prototype.drawTopLabel__Lcom_yuiwai_tetrics_core_Label__O__V = (function(label, ctx) {
   $f_Lcom_yuiwai_tetrics_core_LabeledFieldView__drawTopLabel__Lcom_yuiwai_tetrics_core_Label__O__V(this, label, ctx)
 });
@@ -14893,6 +14906,8 @@ $c_Lcom_yuiwai_tetrics_core_TenTen.prototype.start__O__Lcom_yuiwai_tetrics_core_
 });
 $c_Lcom_yuiwai_tetrics_core_TenTen.prototype.$$anonfun$start$1__p1__O__Lcom_yuiwai_tetrics_core_TetricsEvent__V = (function(ctx$2, e) {
   this.stats$und$eq__p1__Lcom_yuiwai_tetrics_core_TetricsStats__V(this.stats__p1__Lcom_yuiwai_tetrics_core_TetricsStats().apply__Lcom_yuiwai_tetrics_core_TetricsEvent__Lcom_yuiwai_tetrics_core_TetricsStats(e));
+  this.drawLeftLabel__Lcom_yuiwai_tetrics_core_Label__O__V(new $c_Lcom_yuiwai_tetrics_core_Label().init___T($objectToString(this.stats__p1__Lcom_yuiwai_tetrics_core_TetricsStats().leftField__Lcom_yuiwai_tetrics_core_FieldStats().deletedRows__I())), ctx$2);
+  this.drawRightLabel__Lcom_yuiwai_tetrics_core_Label__O__V(new $c_Lcom_yuiwai_tetrics_core_Label().init___T($objectToString(this.stats__p1__Lcom_yuiwai_tetrics_core_TetricsStats().rightField__Lcom_yuiwai_tetrics_core_FieldStats().deletedRows__I())), ctx$2);
   this.drawTopLabel__Lcom_yuiwai_tetrics_core_Label__O__V(new $c_Lcom_yuiwai_tetrics_core_Label().init___T($objectToString(this.stats__p1__Lcom_yuiwai_tetrics_core_TetricsStats().topField__Lcom_yuiwai_tetrics_core_FieldStats().deletedRows__I())), ctx$2);
   this.drawBottomLabel__Lcom_yuiwai_tetrics_core_Label__O__V(new $c_Lcom_yuiwai_tetrics_core_Label().init___T($objectToString(this.stats__p1__Lcom_yuiwai_tetrics_core_TetricsStats().bottomField__Lcom_yuiwai_tetrics_core_FieldStats().deletedRows__I())), ctx$2)
 });
@@ -17784,6 +17799,7 @@ function $c_Lcom_yuiwai_tetrics_js_Example$$anon$1() {
   $c_Lcom_yuiwai_tetrics_core_TenTen.call(this);
   this.offset$2 = 0;
   this.labelHeight$2 = 0;
+  this.labelMargin$2 = 0;
   this.tileWidth$2 = 0;
   this.tileHeight$2 = 0
 }
@@ -17809,6 +17825,9 @@ $c_Lcom_yuiwai_tetrics_js_Example$$anon$1.prototype.offset__I = (function() {
 $c_Lcom_yuiwai_tetrics_js_Example$$anon$1.prototype.labelHeight__I = (function() {
   return this.labelHeight$2
 });
+$c_Lcom_yuiwai_tetrics_js_Example$$anon$1.prototype.labelMargin__I = (function() {
+  return this.labelMargin$2
+});
 $c_Lcom_yuiwai_tetrics_js_Example$$anon$1.prototype.tileWidth__I = (function() {
   return this.tileWidth$2
 });
@@ -17820,6 +17839,9 @@ $c_Lcom_yuiwai_tetrics_js_Example$$anon$1.prototype.com$yuiwai$tetrics$js$JsView
 });
 $c_Lcom_yuiwai_tetrics_js_Example$$anon$1.prototype.com$yuiwai$tetrics$js$JsView$$undsetter$und$labelHeight$und$eq__I__V = (function(x$1) {
   this.labelHeight$2 = x$1
+});
+$c_Lcom_yuiwai_tetrics_js_Example$$anon$1.prototype.com$yuiwai$tetrics$js$JsView$$undsetter$und$labelMargin$und$eq__I__V = (function(x$1) {
+  this.labelMargin$2 = x$1
 });
 $c_Lcom_yuiwai_tetrics_js_Example$$anon$1.prototype.com$yuiwai$tetrics$js$JsView$$undsetter$und$tileWidth$und$eq__I__V = (function(x$1) {
   this.tileWidth$2 = x$1

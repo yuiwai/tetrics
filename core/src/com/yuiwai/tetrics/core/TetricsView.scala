@@ -2,7 +2,6 @@ package com.yuiwai.tetrics.core
 
 trait TetricsView[C] {
   def offset: Int
-  def labelHeight: Int = offset
   def tileWidth: Int
   def tileHeight: Int
   def fieldSize: Int = 10
@@ -26,10 +25,16 @@ trait TetricsView[C] {
   def drawField(field: Field, offsetX: Int, offsetY: Int)(implicit ctx: C): Unit
 }
 trait LabeledFieldView[C] extends TetricsView[C] {
+  def labelHeight: Int = offset
+  def labelMargin: Int = 0
+  def drawLeftLabel(label: Label)(implicit ctx: C): Unit =
+    drawLabel(label, offset, offset + tileHeight * (fieldSize + 1) - labelHeight - labelMargin)
+  def drawRightLabel(label: Label)(implicit ctx: C): Unit =
+    drawLabel(label, offset + tileWidth * (fieldSize + 1) * 2, offset + tileHeight * (fieldSize + 1) - labelHeight - labelMargin)
   def drawTopLabel(label: Label)(implicit ctx: C): Unit =
-    drawLabel(label, offset + (tileWidth * (fieldSize + 1)), offset - labelHeight)
+    drawLabel(label, offset + (tileWidth * (fieldSize + 1)), offset - labelHeight - labelMargin)
   def drawBottomLabel(label: Label)(implicit ctx: C): Unit =
-    drawLabel(label, offset + (tileWidth * (fieldSize + 1)), offset + tileHeight * ((fieldSize + 1) * 2 + fieldSize))
+    drawLabel(label, offset + (tileWidth * (fieldSize + 1)), offset + tileHeight * ((fieldSize + 1) * 2 + fieldSize) + labelMargin)
   def drawLabel(label: Label, offsetX: Int, offsetY: Int)(implicit ctx: C): Unit
 }
 case class Label(text: String)
