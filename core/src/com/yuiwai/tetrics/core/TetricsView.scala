@@ -38,3 +38,6 @@ trait LabeledFieldView[C] extends TetricsView[C] {
   def drawLabel(label: Label, offsetX: Int, offsetY: Int)(implicit ctx: C): Unit
 }
 case class Label(text: String)
+object Label {
+  def apply(i: Int): Label = new Label(i.toString)
+}

@@ -45,16 +45,32 @@ abstract class TenTen[E, C]
   override def start()(implicit ctx: C, setting: TetricsSetting): Unit = {
     subscribe { e =>
       stats = stats(e)
-      drawLeftLabel(Label(stats.leftField.deletedRows.toString))
-      drawRightLabel(Label(stats.rightField.deletedRows.toString))
-      drawTopLabel(Label(stats.topField.deletedRows.toString))
-      drawBottomLabel(Label(stats.bottomField.deletedRows.toString))
+      judge(stats)
+      drawLabels(stats)
     }
     drawAll(randPut())
   }
+  private def judge(s: TetricsStats): Unit = {
+    import TenTen._
+    s.fields
+  }
+  private def drawLabels(s: TetricsStats)(implicit ctx: C): Unit = {
+    import s._
+    drawLeftLabel(Label(leftDeleted))
+    drawRightLabel(Label(rightDeleted))
+    drawTopLabel(Label(topDeleted))
+    drawBottomLabel(Label(bottomDeleted))
+  }
 }
-case class TetricsSetting(blocks: Seq[Block])
+object TenTen {
+  val goal = 10
+  implicit class StatsWrap(stats: TetricsStats) {
+    import stats._
+    def fields: Seq[FieldStats] = Seq(leftField, rightField, topField, bottomField)
+  }
+}
 sealed trait TetricsRule
+case class TetricsSetting(blocks: Seq[Block])
 trait DefaultSettings {
   implicit val setting: TetricsSetting = TetricsSetting(
     Seq(
