@@ -2,21 +2,28 @@ package com.yuiwai.tetrics.js
 
 import com.yuiwai.tetrics.core._
 import org.scalajs.dom
-import org.scalajs.dom.CanvasRenderingContext2D
+import org.scalajs.dom.{CanvasRenderingContext2D => Context2D}
 import org.scalajs.dom.ext.KeyCode
 import org.scalajs.dom.html.Canvas
 import org.scalajs.dom.raw.KeyboardEvent
 
 object Example {
   import DefaultSettings._
+  import dom.window
+  import window.document
   private var keyDown = false
-  private val canvas = dom.window.document.createElement("canvas")
-  private implicit val ctx: CanvasRenderingContext2D =
-    canvas.asInstanceOf[Canvas].getContext("2d").asInstanceOf[CanvasRenderingContext2D]
-  private var game = new TenTen[KeyboardEvent, CanvasRenderingContext2D] with JsController with JsView
+  private val canvas = document.createElement("canvas")
+  private implicit val ctx: Context2D =
+    canvas.asInstanceOf[Canvas].getContext("2d").asInstanceOf[Context2D]
+  private var game = new TenTen[KeyboardEvent, Context2D] with JsController with JsView
   def main(args: Array[String]): Unit = {
-    dom.window.document.body.appendChild(canvas)
-    dom.window.onkeydown = (e: KeyboardEvent) => {
+    if (window == window.parent) {
+      init()
+    }
+  }
+  def init(): Unit = {
+    document.body.appendChild(canvas)
+    window.onkeydown = (e: KeyboardEvent) => {
       if (!keyDown) {
         keyDown = true
         e.keyCode match {
@@ -25,7 +32,7 @@ object Example {
           case _ => game.input(e)
         }
       }
-      dom.window.onkeyup = (_: KeyboardEvent) => {
+      window.onkeyup = (_: KeyboardEvent) => {
         keyDown = false
       }
     }
@@ -35,14 +42,14 @@ object Example {
   }
 }
 
-trait JsView extends LabeledFieldView[CanvasRenderingContext2D] {
+trait JsView extends LabeledFieldView[Context2D] {
   val offset = 20
   override val labelHeight = 12
   override val labelMargin = 1
   val tileWidth: Int = 15
   val tileHeight: Int = 15
   def drawField(field: Field, offsetX: Int, offsetY: Int)
-    (implicit ctx: CanvasRenderingContext2D): Unit = {
+    (implicit ctx: Context2D): Unit = {
     field.rows.zipWithIndex.foreach { case (row, y) =>
       (0 until row.width) foreach { x =>
         ctx.beginPath()
@@ -60,7 +67,7 @@ trait JsView extends LabeledFieldView[CanvasRenderingContext2D] {
     }
   }
   def drawLabel(label: Label, offsetX: Int, offsetY: Int)
-    (implicit ctx: CanvasRenderingContext2D): Unit = {
+    (implicit ctx: Context2D): Unit = {
     ctx.beginPath()
     ctx.fillStyle = "white"
     ctx.rect(offsetX, offsetY, tileWidth * fieldSize, labelHeight)
@@ -73,7 +80,7 @@ trait JsView extends LabeledFieldView[CanvasRenderingContext2D] {
   }
 }
 
-trait JsController extends TetricsController[KeyboardEvent, CanvasRenderingContext2D] {
+trait JsController extends TetricsController[KeyboardEvent, Context2D] {
   override protected def eventToAction(event: KeyboardEvent): Option[TetricsAction] = {
     event.keyCode match {
       case KeyCode.F => Some(TurnRightAction)
@@ -93,4 +100,8 @@ trait JsController extends TetricsController[KeyboardEvent, CanvasRenderingConte
       case _ => None
     }
   }
+}
+
+trait MatchConnector {
+
 }

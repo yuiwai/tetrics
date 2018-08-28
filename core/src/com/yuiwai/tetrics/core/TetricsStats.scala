@@ -9,6 +9,10 @@ case class TetricsStats(
   topField: FieldStats = FieldStats(),
   bottomField: FieldStats = FieldStats()
 ) {
+  def leftDeleted: Int = leftField.deletedRows
+  def rightDeleted: Int = rightField.deletedRows
+  def topDeleted: Int = topField.deletedRows
+  def bottomDeleted: Int = bottomField.deletedRows
   def apply(event: TetricsEvent): TetricsStats = event match {
     case BlockAdded(_) =>
       copy(blockCount = blockCount + 1)

@@ -116,12 +116,23 @@ case object FieldLeft extends FieldType
 case object FieldCentral extends FieldType
 case object FieldRight extends FieldType
 case object FieldBottom extends FieldType
-case class Field(rows: List[Row], width: Int) {
+sealed trait FieldStatus
+case object FieldStatusActive extends FieldStatus
+case object FieldStatusFrozen extends FieldStatus
+case class Field(rows: List[Row], width: Int, status: FieldStatus = FieldStatusActive) {
   import RowsOps._
   require(!rows.exists(_.width != width), "Field contains different width rows.")
   lazy val height: Int = rows.length
   lazy val numRows: Int = rows.count(_.nonEmpty)
-  def drop(block: Block, offset: Int): Field = put(block, offset, slice(offset, block.width).dropPos(block))
+  def active: Boolean = status == FieldStatusActive
+  def freeze: Field = copy(status = FieldStatusFrozen)
+  def drop(block: Block, offset: Int): Field = {
+    require(active, "Field is not active")
+    val sliced = slice(offset, block.width)
+    val dropPos = sliced.dropPos(block)
+    val dropped = put(block, offset, dropPos)
+    if (sliced.hitTest(block, dropPos)) dropped.freeze else dropped
+  }
   def put(block: Block, x: Int, y: Int): Field = copy(put(rows, block.rows, x, y))
   protected def put(baseRows: List[Row], putRows: List[Row], x: Int, y: Int, resultRows: List[Row] = Nil): List[Row] =
     putRows match {
