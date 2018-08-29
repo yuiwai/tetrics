@@ -2046,7 +2046,15 @@ $c_Lcom_yuiwai_tetrics_js_Example$.prototype.game__p1__Lcom_yuiwai_tetrics_core_
 $c_Lcom_yuiwai_tetrics_js_Example$.prototype.main__AT__V = (function(args) {
   if ($m_sr_BoxesRunTime$().equals__O__O__Z($m_Lorg_scalajs_dom_package$().window__Lorg_scalajs_dom_raw_Window(), $m_Lorg_scalajs_dom_package$().window__Lorg_scalajs_dom_raw_Window().parent)) {
     this.init__V()
+  } else {
+    this.initWithParent__V()
   }
+});
+$c_Lcom_yuiwai_tetrics_js_Example$.prototype.initWithParent__V = (function() {
+  $m_Lorg_scalajs_dom_package$().window__Lorg_scalajs_dom_raw_Window().onmessage = (function(arg1$2) {
+    var arg1 = arg1$2;
+    return $m_Lcom_yuiwai_tetrics_js_Example$().com$yuiwai$tetrics$js$Example$$$anonfun$initWithParent$1__Lorg_scalajs_dom_raw_MessageEvent__O(arg1)
+  })
 });
 $c_Lcom_yuiwai_tetrics_js_Example$.prototype.init__V = (function() {
   $m_Lorg_scalajs_dom_package$().window__Lorg_scalajs_dom_raw_Window().document.body.appendChild(this.canvas__p1__Lorg_scalajs_dom_raw_Element());
@@ -2057,6 +2065,23 @@ $c_Lcom_yuiwai_tetrics_js_Example$.prototype.init__V = (function() {
   this.canvas__p1__Lorg_scalajs_dom_raw_Element().setAttribute("width", $objectToString((($imul($as_Lcom_yuiwai_tetrics_js_JsView(this.game__p1__Lcom_yuiwai_tetrics_core_TenTen()).offset__I(), 2) + $imul($as_Lcom_yuiwai_tetrics_js_JsView(this.game__p1__Lcom_yuiwai_tetrics_core_TenTen()).tileWidth__I(), 32)) | 0)));
   this.canvas__p1__Lorg_scalajs_dom_raw_Element().setAttribute("height", $objectToString((($imul($as_Lcom_yuiwai_tetrics_js_JsView(this.game__p1__Lcom_yuiwai_tetrics_core_TenTen()).offset__I(), 2) + $imul($as_Lcom_yuiwai_tetrics_js_JsView(this.game__p1__Lcom_yuiwai_tetrics_core_TenTen()).tileHeight__I(), 32)) | 0)));
   this.game__p1__Lcom_yuiwai_tetrics_core_TenTen().start__O__Lcom_yuiwai_tetrics_core_TetricsSetting__V(this.ctx__p1__Lorg_scalajs_dom_raw_CanvasRenderingContext2D(), $m_Lcom_yuiwai_tetrics_core_DefaultSettings$().setting__Lcom_yuiwai_tetrics_core_TetricsSetting())
+});
+$c_Lcom_yuiwai_tetrics_js_Example$.prototype.com$yuiwai$tetrics$js$Example$$$anonfun$initWithParent$1__Lorg_scalajs_dom_raw_MessageEvent__O = (function(e) {
+  if (($as_T(e.origin) === "https://lab.yuiwai.com")) {
+    var x1 = e.data;
+    if (("start" === x1)) {
+      $m_Lcom_yuiwai_tetrics_js_Example$().init__V();
+      var qual$1 = e.source;
+      var x$2 = $m_sjs_js_Any$().fromString__T__sjs_js_Any("started");
+      var x$3 = $as_T(e.origin);
+      qual$1.postMessage(x$2, x$3);
+      return (void 0)
+    } else {
+      throw new $c_s_MatchError().init___O(x1)
+    }
+  } else {
+    return (void 0)
+  }
 });
 $c_Lcom_yuiwai_tetrics_js_Example$.prototype.com$yuiwai$tetrics$js$Example$$$anonfun$init$2__Lorg_scalajs_dom_raw_KeyboardEvent__V = (function(x$1) {
   $m_Lcom_yuiwai_tetrics_js_Example$().keyDown$und$eq__p1__Z__V(false)
