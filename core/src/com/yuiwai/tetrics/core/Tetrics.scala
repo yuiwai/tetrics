@@ -17,6 +17,12 @@ case class Tetrics(
     publish(f(this))
     this
   }
+  def field(fieldType: FieldType): Field = fieldType match {
+    case FieldLeft => leftField
+    case FieldRight => rightField
+    case FieldTop => topField
+    case FieldBottom => bottomField
+  }
   def centralField: Field = emptyField.put(block, offset.x, offset.y)
   def put(block: Block, offset: Offset = Offset()): Tetrics = copy(block = block, offset = offset)
     .publishAndReturn(_ => BlockAdded(block))
@@ -60,7 +66,7 @@ case class Tetrics(
     .publishAndReturn(t => FieldNormalized(FieldBottom, t.bottomField.numRows))
 }
 object Tetrics {
-  def apply(fieldSize: Int)(implicit eventBus: EventBus): Tetrics = new Tetrics(
+  def apply(fieldSize: Int = 10)(implicit eventBus: EventBus): Tetrics = new Tetrics(
     fieldSize,
     Block.empty,
     Offset(),

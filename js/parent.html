@@ -6,10 +6,14 @@
 </head>
 <body>
 <iframe src="index.html" id="child" style="border: 0" width="520" height="520"></iframe>
-<button onclick="start()">Start</button>
+<button onclick="start()" id="startBtn">Start</button>
 <script>
     function start() {
         window.top.child.focus();
+        window.top.child.onblur = function() {
+            this.focus();
+        };
+        document.getElementById("startBtn").disabled = true;
         // TODO ここでゲーム開始に必要な情報を設定
         window.top.child.contentWindow.postMessage("start", "https://lab.yuiwai.com");
     }

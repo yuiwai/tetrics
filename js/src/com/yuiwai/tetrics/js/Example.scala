@@ -8,12 +8,13 @@ import org.scalajs.dom.html.Canvas
 import org.scalajs.dom.raw.KeyboardEvent
 import org.scalajs.dom.raw.MessageEvent
 
-object Example {
+object Example extends Subscriber {
   import DefaultSettings._
   import dom.window
   import window.document
   private var keyDown = false
   private val canvas = document.createElement("canvas")
+  private implicit val eventBus = EventBus()
   private implicit val ctx: Context2D =
     canvas.asInstanceOf[Canvas].getContext("2d").asInstanceOf[Context2D]
   private var game = new TenTen[KeyboardEvent, Context2D] with JsController with JsView
@@ -25,12 +26,15 @@ object Example {
     }
   }
   def initWithParent(): Unit = {
-    window.onmessage = (e: MessageEvent) => {
-      if (e.origin == "https://lab.yuiwai.com") {
-        e.data match {
+    window.onmessage = (messageEvent: MessageEvent) => {
+      if (messageEvent.origin == "https://lab.yuiwai.com") {
+        messageEvent.data match {
           case "start" =>
+            subscribe(gameEvent => {
+              // FIXME イベントをシリアライズ
+              messageEvent.source.postMessage(gameEvent.toString, messageEvent.origin)
+            })
             init()
-            e.source.postMessage("started", e.origin);
         }
       }
     }
