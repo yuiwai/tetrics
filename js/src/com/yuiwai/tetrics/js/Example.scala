@@ -6,6 +6,7 @@ import org.scalajs.dom.{CanvasRenderingContext2D => Context2D}
 import org.scalajs.dom.ext.KeyCode
 import org.scalajs.dom.html.Canvas
 import org.scalajs.dom.raw.KeyboardEvent
+import org.scalajs.dom.raw.MessageEvent
 
 object Example {
   import DefaultSettings._
@@ -19,6 +20,19 @@ object Example {
   def main(args: Array[String]): Unit = {
     if (window == window.parent) {
       init()
+    } else {
+      initWithParent()
+    }
+  }
+  def initWithParent(): Unit = {
+    window.onmessage = (e: MessageEvent) => {
+      if (e.origin == "https://lab.yuiwai.com") {
+        e.data match {
+          case "start" =>
+            init()
+            e.source.postMessage("started", e.origin);
+        }
+      }
     }
   }
   def init(): Unit = {
@@ -102,6 +116,7 @@ trait JsController extends TetricsController[KeyboardEvent, Context2D] {
   }
 }
 
-trait MatchConnector {
+trait JsMatchConnector {
 
 }
+object JsMatchConnector extends JsMatchConnector

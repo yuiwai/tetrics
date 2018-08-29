@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tetrics</title>
+</head>
+<body>
+<iframe src="index.html" id="child" style="border: 0" width="520" height="520"></iframe>
+<button onclick="start()">Start</button>
+<script>
+    function start() {
+        window.top.child.focus();
+        // TODO ここでゲーム開始に必要な情報を設定
+        window.top.child.contentWindow.postMessage("start", "https://lab.yuiwai.com");
+    }
+    window.addEventListener("message", function(e) {
+        if (e.origin != "https://lab.yuiwai.com") {
+            return;
+        }
+        console.log(e.data);
+    });
+</script>
+</body>
+</html>
