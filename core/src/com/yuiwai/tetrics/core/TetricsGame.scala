@@ -3,14 +3,18 @@ package com.yuiwai.tetrics.core
 trait TetricsGame[E, C]
   extends AnyRef
     with TetricsController[E, C]
-    with TetricsView[C] {
+    with TetricsView[C]
+    with Publisher {
+  val gameType: GameType
   protected var tetrics: Tetrics
-  implicit protected val eventBus: EventBus = EventBus()
+  implicit val eventBus: EventBus
   private def modify(f: Tetrics => Tetrics): Tetrics = {
     tetrics = f(tetrics)
     tetrics
   }
-  def start()(implicit ctx: C, setting: TetricsSetting): Unit
+  def start()(implicit ctx: C, setting: TetricsSetting): Unit = {
+    publish(GameStarted(gameType))
+  }
   def randPut()(implicit setting: TetricsSetting): Tetrics = {
     import setting.blocks
     modify(_.putCenter(blocks((Math.random() * blocks.size).toInt)))
@@ -36,13 +40,17 @@ trait TetricsGame[E, C]
     case TurnRightAction => drawCentral(modify(_.turnRight))
   }
 }
-abstract class TenTen[E, C]
+sealed trait GameType
+case object GameTypeTenTen extends GameType
+abstract class TenTen[E, C](implicit val eventBus: EventBus)
   extends TetricsGame[E, C]
     with LabeledFieldView[C]
     with Subscriber {
-  override protected var tetrics: Tetrics = Tetrics(10)
+  val gameType: GameType = GameTypeTenTen
+  override protected var tetrics: Tetrics = Tetrics()
   private var stats: TetricsStats = TetricsStats()
   override def start()(implicit ctx: C, setting: TetricsSetting): Unit = {
+    super.start()
     subscribe { e =>
       stats = stats(e)
       judge(stats)
@@ -52,7 +60,9 @@ abstract class TenTen[E, C]
   }
   private def judge(s: TetricsStats): Unit = {
     import TenTen._
-    s.fields
+    if (s.achieved) {
+      publish(GameEnded(gameType))
+    }
   }
   private def drawLabels(s: TetricsStats)(implicit ctx: C): Unit = {
     import s._
@@ -63,10 +73,15 @@ abstract class TenTen[E, C]
   }
 }
 object TenTen {
-  val goal = 10
+  type FieldMap[A] = Map[FieldType, A]
+  val goalRowCount = 10
+  val goalFieldCount = 2
   implicit class StatsWrap(stats: TetricsStats) {
     import stats._
-    def fields: Seq[FieldStats] = Seq(leftField, rightField, topField, bottomField)
+    def fields: FieldMap[FieldStats] =
+      Map(FieldLeft -> leftField, FieldRight -> rightField, FieldTop -> topField, FieldBottom -> bottomField)
+    def achieved: Boolean = achievedFields.size >= goalFieldCount
+    def achievedFields: FieldMap[FieldStats] = fields.filter(_._2.deletedRows >= goalRowCount)
   }
 }
 sealed trait TetricsRule
