@@ -65,12 +65,12 @@ abstract class TenTen[E, C](implicit val eventBus: EventBus, ctx: C)
   private var stats: TetricsStats = TetricsStats()
   protected val handler: TetricsEvent => Unit =  { e =>
       stats = stats(e)
-      judge(stats)
+      judge(stats, tetrics)
       drawLabels(stats)
     }
-  private def judge(s: TetricsStats): Unit = {
+  private def judge(s: TetricsStats, t: Tetrics): Unit = {
     import TenTen._
-    if (s.achieved) {
+    if (s.achieved || t.deactivedFields.size > 2) {
       end()
     }
   }

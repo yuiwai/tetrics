@@ -22,7 +22,10 @@ case class Tetrics(
     case FieldRight => rightField
     case FieldTop => topField
     case FieldBottom => bottomField
+    case FieldCentral => centralField
   }
+  def fields: Seq[Field] = Seq(leftField, rightField, topField, bottomField)
+  def deactivedFields: Seq[Field] = fields.filterNot(_.active)
   def centralField: Field = emptyField.put(block, offset.x, offset.y)
   def put(block: Block, offset: Offset = Offset()): Tetrics = copy(block = block, offset = offset)
     .publishAndReturn(_ => BlockAdded(block))

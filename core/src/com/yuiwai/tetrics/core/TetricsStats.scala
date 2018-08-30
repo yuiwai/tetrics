@@ -30,6 +30,7 @@ case class TetricsStats(
           copy(topField = topField(event))
         case FieldBottom =>
           copy(bottomField = bottomField(event))
+        case _ => this
       }
     case FieldNormalized(fieldType: FieldType, _) =>
       fieldType match {
@@ -43,6 +44,7 @@ case class TetricsStats(
           copy(bottomField = bottomField(event))
         case _ => this
       }
+    case _ => this
   }
 }
 case class FieldStats(numRows: Int = 0, droppedBlocks: Int = 0, deletedRows: Int = 0) {
