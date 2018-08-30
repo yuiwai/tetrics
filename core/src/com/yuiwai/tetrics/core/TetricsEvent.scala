@@ -18,9 +18,12 @@ trait EventSerializer {
 }
 
 trait EventBus {
-  private var subscribers: Seq[Callback] = Seq.empty
-  private[core] def subscribe(callback: Callback): Unit = subscribers = subscribers :+ callback
-  private[core] def publish(tetricsEvent: TetricsEvent): Unit = subscribers foreach (_ (tetricsEvent))
+  private var subscribers: Map[Subscriber, Callback] = Map.empty
+  private[core] def subscribe(subscriber: Subscriber, callback: Callback): Unit = {
+    subscribers = subscribers + (subscriber -> callback)
+  }
+  private[core] def unsubscribe(subscriber: Subscriber): Unit = subscribers = subscribers - subscriber
+  private[core] def publish(tetricsEvent: TetricsEvent): Unit = subscribers.values foreach (_ (tetricsEvent))
 }
 object EventBus {
   type Callback = TetricsEvent => Unit
@@ -28,7 +31,8 @@ object EventBus {
 }
 trait Subscriber {
   protected def subscribe(callback: EventBus.Callback)
-    (implicit eventBus: EventBus): Unit = eventBus.subscribe(callback)
+    (implicit eventBus: EventBus): Unit = eventBus.subscribe(this, callback)
+  protected def unsubscribe()(implicit eventBus: EventBus): Unit = eventBus.unsubscribe(this)
 }
 trait Publisher {
   protected def publish(tetricsEvent: TetricsEvent)
