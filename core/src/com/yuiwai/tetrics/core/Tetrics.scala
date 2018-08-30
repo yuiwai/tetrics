@@ -87,9 +87,9 @@ case class Offset(x: Int = 0, y: Int = 0) {
   def moveDown: Offset = copy(y = y + 1)
 }
 sealed trait MoveType
-case object MoveUp extends MoveType
 case object MoveLeft extends MoveType
 case object MoveRight extends MoveType
+case object MoveUp extends MoveType
 case object MoveDown extends MoveType
 sealed trait RotationType
 case object RotationLeft extends RotationType
