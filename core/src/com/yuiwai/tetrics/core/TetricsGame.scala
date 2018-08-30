@@ -4,9 +4,12 @@ trait TetricsGame[E, C]
   extends AnyRef
     with TetricsController[E, C]
     with TetricsView[C]
-    with Publisher {
+    with Publisher
+    with Subscriber {
   val gameType: GameType
+  protected var status: GameStatus = GameStatusReady
   protected var tetrics: Tetrics
+  protected val handler: TetricsEvent => Unit
   implicit val eventBus: EventBus
   private def modify(f: Tetrics => Tetrics): Tetrics = {
     tetrics = f(tetrics)
@@ -14,6 +17,13 @@ trait TetricsGame[E, C]
   }
   def start()(implicit ctx: C, setting: TetricsSetting): Unit = {
     publish(GameStarted(gameType))
+    subscribe(handler)
+    drawAll(randPut())
+  }
+  def end(): Unit = {
+    status = GameStatusFinished
+    unsubscribe()
+    publish(GameEnded(gameType))
   }
   def randPut()(implicit setting: TetricsSetting): Tetrics = {
     import setting.blocks
@@ -40,28 +50,28 @@ trait TetricsGame[E, C]
     case TurnRightAction => drawCentral(modify(_.turnRight))
   }
 }
+sealed trait GameStatus
+case object GameStatusReady extends GameStatus
+case object GameStatusPlaying extends GameStatus
+case object GameStatusFinished extends GameStatus
+
 sealed trait GameType
 case object GameTypeTenTen extends GameType
-abstract class TenTen[E, C](implicit val eventBus: EventBus)
+abstract class TenTen[E, C](implicit val eventBus: EventBus, ctx: C)
   extends TetricsGame[E, C]
-    with LabeledFieldView[C]
-    with Subscriber {
+    with LabeledFieldView[C] {
   val gameType: GameType = GameTypeTenTen
   override protected var tetrics: Tetrics = Tetrics()
   private var stats: TetricsStats = TetricsStats()
-  override def start()(implicit ctx: C, setting: TetricsSetting): Unit = {
-    super.start()
-    subscribe { e =>
+  protected val handler: TetricsEvent => Unit =  { e =>
       stats = stats(e)
       judge(stats)
       drawLabels(stats)
     }
-    drawAll(randPut())
-  }
   private def judge(s: TetricsStats): Unit = {
     import TenTen._
     if (s.achieved) {
-      publish(GameEnded(gameType))
+      end()
     }
   }
   private def drawLabels(s: TetricsStats)(implicit ctx: C): Unit = {
