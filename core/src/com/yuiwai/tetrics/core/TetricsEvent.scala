@@ -11,10 +11,9 @@ final case class BlockMoved(moveType: MoveType) extends TetricsEvent
 final case class BlockDropped(fieldType: FieldType, numRows: Int) extends TetricsEvent
 final case class FieldNormalized(fieldType: FieldType, numRows: Int) extends TetricsEvent
 
-// TODO イベントシリアライザ
-trait EventSerializer {
-  def serialize(event: TetricsEvent): String
-  def deserialize(data: String): TetricsEvent
+trait EventSerializer[T] {
+  def serialize(event: TetricsEvent): T
+  def deserialize(data: T): TetricsEvent
 }
 
 trait EventBus {

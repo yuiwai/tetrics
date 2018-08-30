@@ -16,6 +16,7 @@ trait TetricsGame[E, C]
     tetrics
   }
   def start()(implicit ctx: C, setting: TetricsSetting): Unit = {
+    status = GameStatusPlaying
     publish(GameStarted(gameType))
     subscribe(handler)
     drawAll(randPut())
@@ -29,26 +30,31 @@ trait TetricsGame[E, C]
     import setting.blocks
     modify(_.putCenter(blocks((Math.random() * blocks.size).toInt)))
   }
-  def input(event: E)(implicit ctx: C, setting: TetricsSetting): Unit = eventToAction(event) foreach {
-    case MoveLeftAction => drawCentral(modify(_.moveLeft))
-    case MoveRightAction => drawCentral(modify(_.moveRight))
-    case MoveUpAction => drawCentral(modify(_.moveUp))
-    case MoveDownAction => drawCentral(modify(_.moveDown))
-    case DropLeftAction =>
-      drawLeft(modify(_.dropLeft.normalizeLeft))
-      drawCentral(randPut())
-    case DropRightAction =>
-      drawRight(modify(_.dropRight.normalizeRight))
-      drawCentral(randPut())
-    case DropTopAction =>
-      drawTop(modify(_.dropTop.normalizeTop))
-      drawCentral(randPut())
-    case DropBottomAction =>
-      drawBottom(modify(_.dropBottom.normalizeBottom))
-      drawCentral(randPut())
-    case TurnLeftAction => drawCentral(modify(_.turnLeft))
-    case TurnRightAction => drawCentral(modify(_.turnRight))
-  }
+  def input(event: E)(implicit ctx: C, setting: TetricsSetting): Unit =
+    status match {
+      case GameStatusPlaying =>
+        eventToAction(event) foreach {
+          case MoveLeftAction => drawCentral(modify(_.moveLeft))
+          case MoveRightAction => drawCentral(modify(_.moveRight))
+          case MoveUpAction => drawCentral(modify(_.moveUp))
+          case MoveDownAction => drawCentral(modify(_.moveDown))
+          case DropLeftAction =>
+            drawLeft(modify(_.dropLeft.normalizeLeft))
+            drawCentral(randPut())
+          case DropRightAction =>
+            drawRight(modify(_.dropRight.normalizeRight))
+            drawCentral(randPut())
+          case DropTopAction =>
+            drawTop(modify(_.dropTop.normalizeTop))
+            drawCentral(randPut())
+          case DropBottomAction =>
+            drawBottom(modify(_.dropBottom.normalizeBottom))
+            drawCentral(randPut())
+          case TurnLeftAction => drawCentral(modify(_.turnLeft))
+          case TurnRightAction => drawCentral(modify(_.turnRight))
+        }
+      case _ => ()
+    }
 }
 sealed trait GameStatus
 case object GameStatusReady extends GameStatus

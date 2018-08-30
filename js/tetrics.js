@@ -8525,6 +8525,7 @@ function $f_Lcom_yuiwai_tetrics_core_TetricsGame__modify__pLcom_yuiwai_tetrics_c
   return $thiz.tetrics__Lcom_yuiwai_tetrics_core_Tetrics()
 }
 function $f_Lcom_yuiwai_tetrics_core_TetricsGame__start__O__Lcom_yuiwai_tetrics_core_TetricsSetting__V($thiz, ctx, setting) {
+  $thiz.status$und$eq__Lcom_yuiwai_tetrics_core_GameStatus__V($m_Lcom_yuiwai_tetrics_core_GameStatusPlaying$());
   $thiz.publish__Lcom_yuiwai_tetrics_core_TetricsEvent__Lcom_yuiwai_tetrics_core_EventBus__V(new $c_Lcom_yuiwai_tetrics_core_GameStarted().init___Lcom_yuiwai_tetrics_core_GameType($thiz.gameType__Lcom_yuiwai_tetrics_core_GameType()), $thiz.eventBus__Lcom_yuiwai_tetrics_core_EventBus());
   $thiz.subscribe__F1__Lcom_yuiwai_tetrics_core_EventBus__V($thiz.handler__F1(), $thiz.eventBus__Lcom_yuiwai_tetrics_core_EventBus());
   $thiz.drawAll__Lcom_yuiwai_tetrics_core_Tetrics__O__V($thiz.randPut__Lcom_yuiwai_tetrics_core_TetricsSetting__Lcom_yuiwai_tetrics_core_Tetrics(setting), ctx)
@@ -8543,12 +8544,17 @@ function $f_Lcom_yuiwai_tetrics_core_TetricsGame__randPut__Lcom_yuiwai_tetrics_c
   })($thiz, setting)))
 }
 function $f_Lcom_yuiwai_tetrics_core_TetricsGame__input__O__O__Lcom_yuiwai_tetrics_core_TetricsSetting__V($thiz, event, ctx, setting) {
-  $thiz.eventToAction__O__s_Option(event).foreach__F1__V(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function($this, ctx, setting) {
-    return (function(x0$1$2) {
-      var x0$1 = $as_Lcom_yuiwai_tetrics_core_TetricsAction(x0$1$2);
-      $this.$$anonfun$input$1__pLcom_yuiwai_tetrics_core_TetricsGame__O__Lcom_yuiwai_tetrics_core_TetricsSetting__Lcom_yuiwai_tetrics_core_TetricsAction__V(ctx, setting, x0$1)
-    })
-  })($thiz, ctx, setting)))
+  var x1 = $thiz.status__Lcom_yuiwai_tetrics_core_GameStatus();
+  var x = $m_Lcom_yuiwai_tetrics_core_GameStatusPlaying$();
+  var x$2 = x1;
+  if (((x === null) ? (x$2 === null) : x.equals__O__Z(x$2))) {
+    $thiz.eventToAction__O__s_Option(event).foreach__F1__V(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function($this, ctx, setting) {
+      return (function(x0$1$2) {
+        var x0$1 = $as_Lcom_yuiwai_tetrics_core_TetricsAction(x0$1$2);
+        $this.$$anonfun$input$1__pLcom_yuiwai_tetrics_core_TetricsGame__O__Lcom_yuiwai_tetrics_core_TetricsSetting__Lcom_yuiwai_tetrics_core_TetricsAction__V(ctx, setting, x0$1)
+      })
+    })($thiz, ctx, setting)))
+  }
 }
 function $f_Lcom_yuiwai_tetrics_core_TetricsGame__$$anonfun$randPut$1__pLcom_yuiwai_tetrics_core_TetricsGame__Lcom_yuiwai_tetrics_core_TetricsSetting__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_Tetrics($thiz, setting$1, x$1) {
   return x$1.putCenter__Lcom_yuiwai_tetrics_core_Block__Lcom_yuiwai_tetrics_core_Tetrics($as_Lcom_yuiwai_tetrics_core_Block(setting$1.blocks__sc_Seq().apply__I__O($doubleToInt(($m_jl_Math$().random__D() * setting$1.blocks__sc_Seq().size__I())))))
@@ -14883,6 +14889,61 @@ function $m_Lcom_yuiwai_tetrics_core_GameStatusFinished$() {
   return $n_Lcom_yuiwai_tetrics_core_GameStatusFinished$
 }
 /** @constructor */
+function $c_Lcom_yuiwai_tetrics_core_GameStatusPlaying$() {
+  $c_O.call(this)
+}
+$c_Lcom_yuiwai_tetrics_core_GameStatusPlaying$.prototype = new $h_O();
+$c_Lcom_yuiwai_tetrics_core_GameStatusPlaying$.prototype.constructor = $c_Lcom_yuiwai_tetrics_core_GameStatusPlaying$;
+/** @constructor */
+function $h_Lcom_yuiwai_tetrics_core_GameStatusPlaying$() {
+  /*<skip>*/
+}
+$h_Lcom_yuiwai_tetrics_core_GameStatusPlaying$.prototype = $c_Lcom_yuiwai_tetrics_core_GameStatusPlaying$.prototype;
+$c_Lcom_yuiwai_tetrics_core_GameStatusPlaying$.prototype.productPrefix__T = (function() {
+  return "GameStatusPlaying"
+});
+$c_Lcom_yuiwai_tetrics_core_GameStatusPlaying$.prototype.productArity__I = (function() {
+  return 0
+});
+$c_Lcom_yuiwai_tetrics_core_GameStatusPlaying$.prototype.productElement__I__O = (function(x$1) {
+  var x1 = x$1;
+  throw new $c_jl_IndexOutOfBoundsException().init___T($objectToString(x$1))
+});
+$c_Lcom_yuiwai_tetrics_core_GameStatusPlaying$.prototype.productIterator__sc_Iterator = (function() {
+  return $m_sr_ScalaRunTime$().typedProductIterator__s_Product__sc_Iterator(this)
+});
+$c_Lcom_yuiwai_tetrics_core_GameStatusPlaying$.prototype.hashCode__I = (function() {
+  return (-697122582)
+});
+$c_Lcom_yuiwai_tetrics_core_GameStatusPlaying$.prototype.toString__T = (function() {
+  return "GameStatusPlaying"
+});
+$c_Lcom_yuiwai_tetrics_core_GameStatusPlaying$.prototype.init___ = (function() {
+  $c_O.prototype.init___.call(this);
+  $n_Lcom_yuiwai_tetrics_core_GameStatusPlaying$ = this;
+  $f_s_Product__$$init$__V(this);
+  return this
+});
+var $d_Lcom_yuiwai_tetrics_core_GameStatusPlaying$ = new $TypeData().initClass({
+  Lcom_yuiwai_tetrics_core_GameStatusPlaying$: 0
+}, false, "com.yuiwai.tetrics.core.GameStatusPlaying$", {
+  Lcom_yuiwai_tetrics_core_GameStatusPlaying$: 1,
+  O: 1,
+  Lcom_yuiwai_tetrics_core_GameStatus: 1,
+  s_Product: 1,
+  s_Equals: 1,
+  s_Serializable: 1,
+  Ljava_io_Serializable: 1
+});
+$c_Lcom_yuiwai_tetrics_core_GameStatusPlaying$.prototype.$classData = $d_Lcom_yuiwai_tetrics_core_GameStatusPlaying$;
+var $n_Lcom_yuiwai_tetrics_core_GameStatusPlaying$ = (void 0);
+function $m_Lcom_yuiwai_tetrics_core_GameStatusPlaying$() {
+  if ((!$n_Lcom_yuiwai_tetrics_core_GameStatusPlaying$)) {
+    $n_Lcom_yuiwai_tetrics_core_GameStatusPlaying$ = new $c_Lcom_yuiwai_tetrics_core_GameStatusPlaying$().init___()
+  };
+  return $n_Lcom_yuiwai_tetrics_core_GameStatusPlaying$
+}
+/** @constructor */
 function $c_Lcom_yuiwai_tetrics_core_GameStatusReady$() {
   $c_O.call(this)
 }
@@ -17842,6 +17903,9 @@ $c_Lcom_yuiwai_tetrics_core_TenTen.prototype.drawRight__Lcom_yuiwai_tetrics_core
 });
 $c_Lcom_yuiwai_tetrics_core_TenTen.prototype.drawBottom__Lcom_yuiwai_tetrics_core_Tetrics__O__V = (function(tetrics, ctx) {
   $f_Lcom_yuiwai_tetrics_core_TetricsView__drawBottom__Lcom_yuiwai_tetrics_core_Tetrics__O__V(this, tetrics, ctx)
+});
+$c_Lcom_yuiwai_tetrics_core_TenTen.prototype.status__Lcom_yuiwai_tetrics_core_GameStatus = (function() {
+  return this.status$1
 });
 $c_Lcom_yuiwai_tetrics_core_TenTen.prototype.status$und$eq__Lcom_yuiwai_tetrics_core_GameStatus__V = (function(x$1) {
   this.status$1 = x$1
