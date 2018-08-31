@@ -120,11 +120,11 @@ case object Rotation3 extends Rotation {
   def round(d: Double): Int = Math.floor(d).toInt
 }
 sealed trait FieldType
-case object FieldTop extends FieldType
 case object FieldLeft extends FieldType
-case object FieldCentral extends FieldType
 case object FieldRight extends FieldType
+case object FieldTop extends FieldType
 case object FieldBottom extends FieldType
+case object FieldCentral extends FieldType
 sealed trait FieldStatus
 case object FieldStatusActive extends FieldStatus
 case object FieldStatusFrozen extends FieldStatus

@@ -29,11 +29,11 @@ trait EventSerializer[T] {
     case MoveDown => 4
   }
   def fieldType2Int(fieldType: FieldType): Int = fieldType match {
-    case FieldTop => 1
-    case FieldLeft => 2
-    case FieldCentral => 3
-    case FieldRight => 4
-    case FieldBottom => 5
+    case FieldLeft => 1
+    case FieldRight => 2
+    case FieldTop => 3
+    case FieldBottom => 4
+    case FieldCentral => 5
   }
   def block2Int(block: Block): Int = setting.blocks.indexOf(block)
 }
@@ -56,13 +56,34 @@ trait ByteEventSerializer extends EventSerializer[Array[Byte]] {
   private def s(fieldType: FieldType): Array[Byte] = s(fieldType2Int(fieldType))
   private def s(block: Block): Array[Byte] = s(block2Int(block))
   override def deserialize(data: Array[Byte]): TetricsEvent = data.head.toInt match {
-    case 1 =>
-    case 2 =>
-    case 3 =>
-    case 4 =>
-    case 5 =>
-    case 6 =>
-    case 7 =>
+    case 1 => GameStarted(a2gt(data.tail))
+    case 2 => GameEnded(a2gt(data.tail))
+    case 3 => BlockAdded(a2bl(data.tail))
+    case 4 => BlockRotated(a2rt(data.tail))
+    case 5 => BlockMoved(a2mt(data.tail))
+    case 6 => BlockDropped(a2ft(data.tail), data.drop(2).head.toInt)
+    case 7 => FieldNormalized(a2ft(data.tail), data.drop(2).head.toInt)
+  }
+  private def a2gt(a: Array[Byte]): GameType = a.head.toInt match {
+    case 1 => GameTypeTenTen
+  }
+  private def a2bl(a: Array[Byte]): Block = setting.blocks(a.head.toInt)
+  private def a2rt(a: Array[Byte]): RotationType = a.head.toInt match {
+    case 1 => RotationLeft
+    case 2 => RotationRight
+  }
+  private def a2mt(a: Array[Byte]): MoveType = a.head.toInt match {
+    case 1 => MoveLeft
+    case 2 => MoveRight
+    case 3 => MoveUp
+    case 4 => MoveDown
+  }
+  private def a2ft(a: Array[Byte]): FieldType = a.head.toInt match {
+    case 1 => FieldLeft
+    case 2 => FieldRight
+    case 3 => FieldTop
+    case 4 => FieldBottom
+    case 5 => FieldCentral
   }
 }
 
