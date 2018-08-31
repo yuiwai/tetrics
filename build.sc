@@ -1,14 +1,16 @@
 import ammonite.ops._
 import mill._, scalalib._, scalajslib._, scalanativelib._
 
-trait TetricsModule extends CrossScalaModule {
-  override def millSourcePath: Path = pwd / "core"
+trait Base extends ScalaModule {
   def scalacOptions = Seq(
     "-unchecked",
     "-deprecation",
     "-encoding", "utf8",
     "-feature"
   )
+}
+trait TetricsModule extends CrossScalaModule with Base {
+  override def millSourcePath: Path = pwd / "core"
 }
 object tetricsJvm extends Cross[TetricsJvmModule]("2.11.12", "2.12.6")
 class TetricsJvmModule(val crossScalaVersion: String) extends TetricsModule {
@@ -23,7 +25,7 @@ class TetricsNativeModule(val crossScalaVersion: String) extends TetricsModule w
   def scalaNativeVersion = "0.3.8"
 }
 
-object js extends ScalaJSModule {
+object js extends ScalaJSModule with Base {
   override def scalaVersion: T[String] = "2.12.6"
   override def scalaJSVersion = "0.6.24"
   override def moduleDeps = Seq(tetricsJs("2.12.6"))
@@ -39,7 +41,7 @@ object js extends ScalaJSModule {
   }
 }
 
-object native extends ScalaNativeModule {
+object native extends ScalaNativeModule with Base {
   def scalaVersion = "2.11.12"
   def scalaNativeVersion = "0.3.8"
   override def moduleDeps = Seq(tetricsNative("2.11.12"))

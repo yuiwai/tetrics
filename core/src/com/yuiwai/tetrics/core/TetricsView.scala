@@ -24,3 +24,20 @@ trait TetricsView[C] {
     drawField(tetrics.bottomField, offset + (tileWidth * (fieldSize + 1)), offset + (tileHeight * (fieldSize + 1) * 2))
   def drawField(field: Field, offsetX: Int, offsetY: Int)(implicit ctx: C): Unit
 }
+trait LabeledFieldView[C] extends TetricsView[C] {
+  def labelHeight: Int = offset
+  def labelMargin: Int = 0
+  def drawLeftLabel(label: Label)(implicit ctx: C): Unit =
+    drawLabel(label, offset, offset + tileHeight * (fieldSize + 1) - labelHeight - labelMargin)
+  def drawRightLabel(label: Label)(implicit ctx: C): Unit =
+    drawLabel(label, offset + tileWidth * (fieldSize + 1) * 2, offset + tileHeight * (fieldSize + 1) - labelHeight - labelMargin)
+  def drawTopLabel(label: Label)(implicit ctx: C): Unit =
+    drawLabel(label, offset + (tileWidth * (fieldSize + 1)), offset - labelHeight - labelMargin)
+  def drawBottomLabel(label: Label)(implicit ctx: C): Unit =
+    drawLabel(label, offset + (tileWidth * (fieldSize + 1)), offset + tileHeight * ((fieldSize + 1) * 2 + fieldSize) + labelMargin)
+  def drawLabel(label: Label, offsetX: Int, offsetY: Int)(implicit ctx: C): Unit
+}
+case class Label(text: String)
+object Label {
+  def apply(i: Int): Label = new Label(i.toString)
+}
