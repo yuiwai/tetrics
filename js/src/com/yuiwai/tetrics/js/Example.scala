@@ -23,7 +23,7 @@ object Example extends Subscriber with DefaultSettings { self =>
   }
   def main(args: Array[String]): Unit = {
     if (window == window.parent) {
-      init()
+      init().start()
     } else {
       initWithParent()
     }
@@ -34,18 +34,20 @@ object Example extends Subscriber with DefaultSettings { self =>
         messageEvent.data match {
           case "start" =>
             subscribe(gameEvent => {
-              // FIXME イベントをシリアライズ
               messageEvent.source.postMessage(
                 byteArray2Int8Array(serializer.serialize(gameEvent)),
                 messageEvent.origin
               )
             })
-            init()
+            init().start()
+          case "readOnly" =>
+            init().readOnly()
+            window.onmessage = handleEvent
         }
       }
     }
   }
-  def init(): Unit = {
+  def init(): TetricsGame[KeyboardEvent, Context2D] = {
     document.body.appendChild(canvas)
     window.onkeydown = (e: KeyboardEvent) => {
       if (!keyDown) {
@@ -62,7 +64,12 @@ object Example extends Subscriber with DefaultSettings { self =>
     }
     canvas.setAttribute("width", (game.offset * 2 + game.tileWidth * 32).toString)
     canvas.setAttribute("height", (game.offset * 2 + game.tileHeight * 32).toString)
-    game.start()
+    game
+  }
+  val handleEvent = (messageEvent: MessageEvent) => {
+    game.act( 
+      serializer.deserialize(int8Array2ByteArray(messageEvent.data.asInstanceOf[Int8Array]))
+    )
   }
 }
 
