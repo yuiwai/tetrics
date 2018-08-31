@@ -17,6 +17,15 @@ case class Tetrics(
     publish(f(this))
     this
   }
+  def field(fieldType: FieldType): Field = fieldType match {
+    case FieldLeft => leftField
+    case FieldRight => rightField
+    case FieldTop => topField
+    case FieldBottom => bottomField
+    case FieldCentral => centralField
+  }
+  def fields: Seq[Field] = Seq(leftField, rightField, topField, bottomField)
+  def deactivedFields: Seq[Field] = fields.filterNot(_.active)
   def centralField: Field = emptyField.put(block, offset.x, offset.y)
   def put(block: Block, offset: Offset = Offset()): Tetrics = copy(block = block, offset = offset)
     .publishAndReturn(_ => BlockAdded(block))
@@ -60,7 +69,7 @@ case class Tetrics(
     .publishAndReturn(t => FieldNormalized(FieldBottom, t.bottomField.numRows))
 }
 object Tetrics {
-  def apply(fieldSize: Int)(implicit eventBus: EventBus): Tetrics = new Tetrics(
+  def apply(fieldSize: Int = 10)(implicit eventBus: EventBus): Tetrics = new Tetrics(
     fieldSize,
     Block.empty,
     Offset(),
@@ -78,9 +87,9 @@ case class Offset(x: Int = 0, y: Int = 0) {
   def moveDown: Offset = copy(y = y + 1)
 }
 sealed trait MoveType
-case object MoveUp extends MoveType
 case object MoveLeft extends MoveType
 case object MoveRight extends MoveType
+case object MoveUp extends MoveType
 case object MoveDown extends MoveType
 sealed trait RotationType
 case object RotationLeft extends RotationType
@@ -111,17 +120,28 @@ case object Rotation3 extends Rotation {
   def round(d: Double): Int = Math.floor(d).toInt
 }
 sealed trait FieldType
-case object FieldTop extends FieldType
 case object FieldLeft extends FieldType
-case object FieldCentral extends FieldType
 case object FieldRight extends FieldType
+case object FieldTop extends FieldType
 case object FieldBottom extends FieldType
-case class Field(rows: List[Row], width: Int) {
+case object FieldCentral extends FieldType
+sealed trait FieldStatus
+case object FieldStatusActive extends FieldStatus
+case object FieldStatusFrozen extends FieldStatus
+case class Field(rows: List[Row], width: Int, status: FieldStatus = FieldStatusActive) {
   import RowsOps._
   require(!rows.exists(_.width != width), "Field contains different width rows.")
   lazy val height: Int = rows.length
   lazy val numRows: Int = rows.count(_.nonEmpty)
-  def drop(block: Block, offset: Int): Field = put(block, offset, slice(offset, block.width).dropPos(block))
+  def active: Boolean = status == FieldStatusActive
+  def freeze: Field = copy(status = FieldStatusFrozen)
+  def drop(block: Block, offset: Int): Field = {
+    require(active, "Field is not active")
+    val sliced = slice(offset, block.width)
+    val dropPos = sliced.dropPos(block)
+    val dropped = put(block, offset, dropPos)
+    if (sliced.hitTest(block, dropPos)) dropped.freeze else dropped
+  }
   def put(block: Block, x: Int, y: Int): Field = copy(put(rows, block.rows, x, y))
   protected def put(baseRows: List[Row], putRows: List[Row], x: Int, y: Int, resultRows: List[Row] = Nil): List[Row] =
     putRows match {

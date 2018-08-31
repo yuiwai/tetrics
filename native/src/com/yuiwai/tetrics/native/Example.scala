@@ -2,6 +2,7 @@ package com.yuiwai.tetrics.native
 
 import com.yuiwai.tetrics.core._
 
+import scala.scalanative.native
 import scala.scalanative.native._
 
 object Example {
@@ -30,7 +31,7 @@ object Example {
   }
 }
 
-trait NativeView extends TetricsView[NativeContext] {
+trait NativeView extends LabeledFieldView[NativeContext] {
   import Ncurses._
   override def offset: CInt = 1
   override def tileWidth: CInt = 2
@@ -54,6 +55,10 @@ trait NativeView extends TetricsView[NativeContext] {
         }
       }
     }
+  }
+  override def drawLabel(label: Label, offsetX: CInt, offsetY: CInt)(implicit ctx: NativeContext): Unit = Zone {
+    implicit z =>
+      mvprintw(offsetY, offsetX, native.toCString(label.text))
   }
 }
 
