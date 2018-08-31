@@ -7,6 +7,7 @@
 <body>
 <iframe src="index.html" id="child" style="border: 0" width="520" height="520"></iframe>
 <button onclick="start()" id="startBtn">Start</button>
+<iframe src="index.html" id="slave" style="border: 0" width="520" height="520"></iframe>
 <script>
     function start() {
         window.top.child.focus();
@@ -16,12 +17,15 @@
         document.getElementById("startBtn").disabled = true;
         // TODO ここでゲーム開始に必要な情報を設定
         window.top.child.contentWindow.postMessage("start", "https://lab.yuiwai.com");
+        window.top.slave.contentWindow.postMessage("readOnly", "https://lab.yuiwai.com");
     }
     window.addEventListener("message", function(e) {
         if (e.origin != "https://lab.yuiwai.com") {
             return;
         }
-        console.log(e.data);
+        if (e.source == window.top.child.contentWindow) {
+            window.top.slave.contentWindow.postMessage(e.data, "https://lab.yuiwai.com");
+        }
     });
 </script>
 </body>

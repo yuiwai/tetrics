@@ -26,34 +26,47 @@ trait TetricsGame[E, C]
     unsubscribe()
     publish(GameEnded(gameType))
   }
+  def readOnly()(implicit ctx: C, setting: TetricsSetting): Unit = {
+    status = GameStatusPlaying
+    drawAll(tetrics)
+  }
   def randPut()(implicit setting: TetricsSetting): Tetrics = {
     import setting.blocks
     modify(_.putCenter(blocks((Math.random() * blocks.size).toInt)))
   }
   def input(event: E)(implicit ctx: C, setting: TetricsSetting): Unit =
     status match {
-      case GameStatusPlaying =>
-        eventToAction(event) foreach {
-          case MoveLeftAction => drawCentral(modify(_.moveLeft))
-          case MoveRightAction => drawCentral(modify(_.moveRight))
-          case MoveUpAction => drawCentral(modify(_.moveUp))
-          case MoveDownAction => drawCentral(modify(_.moveDown))
-          case DropLeftAction =>
-            drawLeft(modify(_.dropLeft.normalizeLeft))
-            drawCentral(randPut())
-          case DropRightAction =>
-            drawRight(modify(_.dropRight.normalizeRight))
-            drawCentral(randPut())
-          case DropTopAction =>
-            drawTop(modify(_.dropTop.normalizeTop))
-            drawCentral(randPut())
-          case DropBottomAction =>
-            drawBottom(modify(_.dropBottom.normalizeBottom))
-            drawCentral(randPut())
-          case TurnLeftAction => drawCentral(modify(_.turnLeft))
-          case TurnRightAction => drawCentral(modify(_.turnRight))
-        }
+      case GameStatusPlaying => eventToAction(event) foreach act
       case _ => ()
+    }
+  def act(event: TetricsEvent)(implicit ctx: C, setting: TetricsSetting): Unit = event match {
+    case BlockAdded(block: Block) => drawCentral(modify(_.putCenter(block)))
+    case BlockRotated(rotationType: RotationType) => act(rotationType match {
+      case RotationLeft => TurnLeftAction
+      case RotationRight => TurnRightAction
+    })
+    case _ => ()
+  }
+  def act(action: TetricsAction)(implicit ctx: C, setting: TetricsSetting): Unit =
+    action match {
+      case MoveLeftAction => drawCentral(modify(_.moveLeft))
+      case MoveRightAction => drawCentral(modify(_.moveRight))
+      case MoveUpAction => drawCentral(modify(_.moveUp))
+      case MoveDownAction => drawCentral(modify(_.moveDown))
+      case DropLeftAction =>
+        drawLeft(modify(_.dropLeft.normalizeLeft))
+        drawCentral(randPut())
+      case DropRightAction =>
+        drawRight(modify(_.dropRight.normalizeRight))
+        drawCentral(randPut())
+      case DropTopAction =>
+        drawTop(modify(_.dropTop.normalizeTop))
+        drawCentral(randPut())
+      case DropBottomAction =>
+        drawBottom(modify(_.dropBottom.normalizeBottom))
+        drawCentral(randPut())
+      case TurnLeftAction => drawCentral(modify(_.turnLeft))
+      case TurnRightAction => drawCentral(modify(_.turnRight))
     }
 }
 sealed trait GameStatus
