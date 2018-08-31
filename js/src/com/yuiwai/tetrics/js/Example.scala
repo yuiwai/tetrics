@@ -7,9 +7,9 @@ import org.scalajs.dom.ext.KeyCode
 import org.scalajs.dom.html.Canvas
 import org.scalajs.dom.raw.KeyboardEvent
 import org.scalajs.dom.raw.MessageEvent
+import scalajs.js.typedarray._
 
-object Example extends Subscriber {
-  import DefaultSettings._
+object Example extends Subscriber with DefaultSettings { self =>
   import dom.window
   import window.document
   private var keyDown = false
@@ -18,6 +18,9 @@ object Example extends Subscriber {
   private implicit val ctx: Context2D =
     canvas.asInstanceOf[Canvas].getContext("2d").asInstanceOf[Context2D]
   private var game = new TenTen[KeyboardEvent, Context2D] with JsController with JsView
+  private val serializer = new ByteEventSerializer {
+    val setting: TetricsSetting = self.setting
+  }
   def main(args: Array[String]): Unit = {
     if (window == window.parent) {
       init()
@@ -32,7 +35,10 @@ object Example extends Subscriber {
           case "start" =>
             subscribe(gameEvent => {
               // FIXME イベントをシリアライズ
-              messageEvent.source.postMessage(gameEvent.toString, messageEvent.origin)
+              messageEvent.source.postMessage(
+                byteArray2Int8Array(serializer.serialize(gameEvent)),
+                messageEvent.origin
+              )
             })
             init()
         }
