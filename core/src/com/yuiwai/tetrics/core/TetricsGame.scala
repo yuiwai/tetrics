@@ -45,6 +45,18 @@ trait TetricsGame[E, C]
       case RotationLeft => TurnLeftAction
       case RotationRight => TurnRightAction
     })
+    case BlockMoved(moveType) => act(moveType match {
+      case MoveLeft => MoveLeftAction
+      case MoveRight => MoveRightAction
+      case MoveUp => MoveUpAction
+      case MoveDown => MoveDownAction
+    })
+    case BlockDropped(fieldType, _) => act(fieldType match {
+      case FieldLeft => DropLeftAction
+      case FieldRight => DropRightAction
+      case FieldTop => DropTopAction
+      case FieldBottom => DropBottomAction
+    })
     case _ => ()
   }
   def act(action: TetricsAction)(implicit ctx: C, setting: TetricsSetting): Unit =
@@ -82,11 +94,11 @@ abstract class TenTen[E, C](implicit val eventBus: EventBus, ctx: C)
   val gameType: GameType = GameTypeTenTen
   override protected var tetrics: Tetrics = Tetrics()
   private var stats: TetricsStats = TetricsStats()
-  protected val handler: TetricsEvent => Unit =  { e =>
-      stats = stats(e)
-      judge(stats, tetrics)
-      drawLabels(stats)
-    }
+  protected val handler: TetricsEvent => Unit = { e =>
+    stats = stats(e)
+    judge(stats, tetrics)
+    drawLabels(stats)
+  }
   private def judge(s: TetricsStats, t: Tetrics): Unit = {
     import TenTen._
     if (s.achieved || t.deactivedFields.size > 2) {
