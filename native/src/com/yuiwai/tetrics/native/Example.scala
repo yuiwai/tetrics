@@ -9,6 +9,7 @@ object Example {
   import DefaultSettings._
   import Ncurses._
   implicit val ctx: NativeContext = new NativeContext
+  implicit val eventBus = EventBus()
   private var game = new TenTen[CInt, NativeContext] with NativeView with NativeController
   def main(args: Array[String]): Unit = {
     val screen: Ptr[Window] = initscr()
