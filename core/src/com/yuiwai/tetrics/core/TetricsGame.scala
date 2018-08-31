@@ -26,34 +26,59 @@ trait TetricsGame[E, C]
     unsubscribe()
     publish(GameEnded(gameType))
   }
+  def readOnly()(implicit ctx: C, setting: TetricsSetting): Unit = {
+    status = GameStatusPlaying
+    drawAll(tetrics)
+  }
   def randPut()(implicit setting: TetricsSetting): Tetrics = {
     import setting.blocks
     modify(_.putCenter(blocks((Math.random() * blocks.size).toInt)))
   }
   def input(event: E)(implicit ctx: C, setting: TetricsSetting): Unit =
     status match {
-      case GameStatusPlaying =>
-        eventToAction(event) foreach {
-          case MoveLeftAction => drawCentral(modify(_.moveLeft))
-          case MoveRightAction => drawCentral(modify(_.moveRight))
-          case MoveUpAction => drawCentral(modify(_.moveUp))
-          case MoveDownAction => drawCentral(modify(_.moveDown))
-          case DropLeftAction =>
-            drawLeft(modify(_.dropLeft.normalizeLeft))
-            drawCentral(randPut())
-          case DropRightAction =>
-            drawRight(modify(_.dropRight.normalizeRight))
-            drawCentral(randPut())
-          case DropTopAction =>
-            drawTop(modify(_.dropTop.normalizeTop))
-            drawCentral(randPut())
-          case DropBottomAction =>
-            drawBottom(modify(_.dropBottom.normalizeBottom))
-            drawCentral(randPut())
-          case TurnLeftAction => drawCentral(modify(_.turnLeft))
-          case TurnRightAction => drawCentral(modify(_.turnRight))
-        }
+      case GameStatusPlaying => eventToAction(event) foreach act
       case _ => ()
+    }
+  def act(event: TetricsEvent)(implicit ctx: C, setting: TetricsSetting): Unit = event match {
+    case BlockAdded(block: Block) => drawCentral(modify(_.putCenter(block)))
+    case BlockRotated(rotationType: RotationType) => act(rotationType match {
+      case RotationLeft => TurnLeftAction
+      case RotationRight => TurnRightAction
+    })
+    case BlockMoved(moveType) => act(moveType match {
+      case MoveLeft => MoveLeftAction
+      case MoveRight => MoveRightAction
+      case MoveUp => MoveUpAction
+      case MoveDown => MoveDownAction
+    })
+    case BlockDropped(fieldType, _) => act(fieldType match {
+      case FieldLeft => DropLeftAction
+      case FieldRight => DropRightAction
+      case FieldTop => DropTopAction
+      case FieldBottom => DropBottomAction
+    })
+    case _ => ()
+  }
+  def act(action: TetricsAction)(implicit ctx: C, setting: TetricsSetting): Unit =
+    action match {
+      case MoveLeftAction => drawCentral(modify(_.moveLeft))
+      case MoveRightAction => drawCentral(modify(_.moveRight))
+      case MoveUpAction => drawCentral(modify(_.moveUp))
+      case MoveDownAction => drawCentral(modify(_.moveDown))
+      case DropLeftAction =>
+        drawLeft(modify(_.dropLeft.normalizeLeft))
+        drawCentral(randPut())
+      case DropRightAction =>
+        drawRight(modify(_.dropRight.normalizeRight))
+        drawCentral(randPut())
+      case DropTopAction =>
+        drawTop(modify(_.dropTop.normalizeTop))
+        drawCentral(randPut())
+      case DropBottomAction =>
+        drawBottom(modify(_.dropBottom.normalizeBottom))
+        drawCentral(randPut())
+      case TurnLeftAction => drawCentral(modify(_.turnLeft))
+      case TurnRightAction => drawCentral(modify(_.turnRight))
     }
 }
 sealed trait GameStatus
@@ -69,11 +94,11 @@ abstract class TenTen[E, C](implicit val eventBus: EventBus, ctx: C)
   val gameType: GameType = GameTypeTenTen
   override protected var tetrics: Tetrics = Tetrics()
   private var stats: TetricsStats = TetricsStats()
-  protected val handler: TetricsEvent => Unit =  { e =>
-      stats = stats(e)
-      judge(stats, tetrics)
-      drawLabels(stats)
-    }
+  protected val handler: TetricsEvent => Unit = { e =>
+    stats = stats(e)
+    judge(stats, tetrics)
+    drawLabels(stats)
+  }
   private def judge(s: TetricsStats, t: Tetrics): Unit = {
     import TenTen._
     if (s.achieved || t.deactivedFields.size > 2) {
