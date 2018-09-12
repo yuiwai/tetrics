@@ -46,7 +46,7 @@ object Example extends Subscriber with DefaultSettings { self =>
           case "autoPlay" =>
             val game = init()
             game.autoPlay()
-            dom.window.setInterval(() => game.act(DefaultAutoPlayer), 1000)
+            dom.window.setInterval(() => game.act(DefaultAutoPlayer()), 1000)
         }
       }
     }

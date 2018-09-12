@@ -42,7 +42,7 @@ trait TetricsGame[E, C]
     status match {
       case GameStatusPlaying => eventToAction(event) foreach act
       case _ => ()
-  }
+    }
   def act(event: TetricsEvent)(implicit ctx: C, setting: TetricsSetting): Unit = event match {
     case BlockAdded(block: Block) => drawCentral(modify(_.putCenter(block)))
     case BlockRotated(rotationType: RotationType) => act(rotationType match {
@@ -84,8 +84,8 @@ trait TetricsGame[E, C]
       case TurnLeftAction => drawCentral(modify(_.turnLeft))
       case TurnRightAction => drawCentral(modify(_.turnRight))
     }
-    def act(autoPlayer: AutoPlayer)
-      (implicit ctx: C, setting: TetricsSetting): Unit = act(autoPlayer.act(tetrics))
+  def act(autoPlayer: AutoPlayer)
+    (implicit ctx: C, setting: TetricsSetting): Unit = act(autoPlayer.act(tetrics))
 }
 sealed trait GameStatus
 case object GameStatusReady extends GameStatus
@@ -152,8 +152,10 @@ object DefaultSettings extends DefaultSettings
 trait AutoPlayer {
   def act(tetrics: Tetrics): TetricsAction
 }
-object DefaultAutoPlayer extends AutoPlayer {
+trait DefaultAutoPlayer extends AutoPlayer {
   import scala.math.random
+  import scala.collection.mutable
+  private var queue = mutable.Queue()
   val allActions = Seq(
     MoveLeftAction,
     MoveRightAction,
@@ -166,6 +168,8 @@ object DefaultAutoPlayer extends AutoPlayer {
     TurnLeftAction,
     TurnRightAction
   )
-  def act(tetrics: Tetrics): TetricsAction =
-    allActions((allActions.length * random).toInt)
+  def act(tetrics: Tetrics): TetricsAction = allActions((allActions.length * random).toInt)
+}
+object DefaultAutoPlayer {
+  def apply(): DefaultAutoPlayer = new DefaultAutoPlayer {}
 }
