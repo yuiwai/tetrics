@@ -30,6 +30,10 @@ trait TetricsGame[E, C]
     status = GameStatusPlaying
     drawAll(tetrics)
   }
+  def autoPlay()(implicit ctx: C, setting: TetricsSetting): Unit = {
+    status = GameStatusAutoPlay
+    drawAll(randPut())
+  }
   def randPut()(implicit setting: TetricsSetting): Tetrics = {
     import setting.blocks
     modify(_.putCenter(blocks((Math.random() * blocks.size).toInt)))
@@ -38,7 +42,7 @@ trait TetricsGame[E, C]
     status match {
       case GameStatusPlaying => eventToAction(event) foreach act
       case _ => ()
-    }
+  }
   def act(event: TetricsEvent)(implicit ctx: C, setting: TetricsSetting): Unit = event match {
     case BlockAdded(block: Block) => drawCentral(modify(_.putCenter(block)))
     case BlockRotated(rotationType: RotationType) => act(rotationType match {
@@ -80,11 +84,14 @@ trait TetricsGame[E, C]
       case TurnLeftAction => drawCentral(modify(_.turnLeft))
       case TurnRightAction => drawCentral(modify(_.turnRight))
     }
+    def act(autoPlayer: AutoPlayer)
+      (implicit ctx: C, setting: TetricsSetting): Unit = act(autoPlayer.act(tetrics))
 }
 sealed trait GameStatus
 case object GameStatusReady extends GameStatus
 case object GameStatusPlaying extends GameStatus
 case object GameStatusFinished extends GameStatus
+case object GameStatusAutoPlay extends GameStatus
 
 sealed trait GameType
 case object GameTypeTenTen extends GameType
@@ -142,3 +149,23 @@ trait DefaultSettings {
 }
 object DefaultSettings extends DefaultSettings
 
+trait AutoPlayer {
+  def act(tetrics: Tetrics): TetricsAction
+}
+object DefaultAutoPlayer extends AutoPlayer {
+  import scala.math.random
+  val allActions = Seq(
+    MoveLeftAction,
+    MoveRightAction,
+    MoveUpAction,
+    MoveDownAction,
+    DropLeftAction,
+    DropRightAction,
+    DropTopAction,
+    DropBottomAction,
+    TurnLeftAction,
+    TurnRightAction
+  )
+  def act(tetrics: Tetrics): TetricsAction =
+    allActions((allActions.length * random).toInt)
+}
