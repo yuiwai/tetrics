@@ -67,6 +67,18 @@ case class Tetrics(
     .publishAndReturn(t => FieldNormalized(FieldTop, t.topField.numRows))
   def normalizeBottom: Tetrics = copy(bottomField = bottomField.normalized)
     .publishAndReturn(t => FieldNormalized(FieldBottom, t.bottomField.numRows))
+  def act(action: TetricsAction): Tetrics = action match {
+    case MoveLeftAction => moveLeft
+    case MoveRightAction => moveRight
+    case MoveUpAction => moveUp
+    case MoveDownAction => moveDown
+    case DropLeftAction => dropLeft.normalizeLeft
+    case DropRightAction => dropRight.normalizeRight
+    case DropTopAction => dropTop.normalizeTop
+    case DropBottomAction => dropBottom.normalizeBottom
+    case TurnLeftAction => turnLeft
+    case TurnRightAction => turnRight
+  }
 }
 object Tetrics {
   def apply(fieldSize: Int = 10)(implicit eventBus: EventBus): Tetrics = new Tetrics(
@@ -120,11 +132,21 @@ case object Rotation3 extends Rotation {
   def round(d: Double): Int = Math.floor(d).toInt
 }
 sealed trait FieldType
-sealed trait DroppableField extends FieldType
-case object FieldLeft extends FieldType with DroppableField
-case object FieldRight extends FieldType with DroppableField
-case object FieldTop extends FieldType with DroppableField
-case object FieldBottom extends FieldType with DroppableField
+sealed trait DroppableField extends FieldType {
+  val action: DropAction
+}
+case object FieldLeft extends FieldType with DroppableField {
+  override val action: DropAction = DropLeftAction
+}
+case object FieldRight extends FieldType with DroppableField {
+  override val action: DropAction = DropRightAction
+}
+case object FieldTop extends FieldType with DroppableField {
+  override val action: DropAction = DropTopAction
+}
+case object FieldBottom extends FieldType with DroppableField {
+  override val action: DropAction = DropBottomAction
+}
 case object FieldCentral extends FieldType
 sealed trait FieldStatus
 case object FieldStatusActive extends FieldStatus
