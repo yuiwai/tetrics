@@ -5,7 +5,7 @@ import com.yuiwai.tetrics.core._
 object Main {
   def main(args: Array[String]): Unit = {
     import DefaultSettings._
-    Evaluator.run(DefaultAutoPlayer(), 1000)
+    Evaluator.run(DefaultAutoPlayer(), 200)
   }
 }
 object Evaluator extends Subscriber {
@@ -28,20 +28,8 @@ object Evaluator extends Subscriber {
   }
   def act(tetrics: Tetrics, action: TetricsAction)(implicit setting: TetricsSetting): Tetrics =
     action match {
-      case MoveLeftAction => tetrics.moveLeft
-      case MoveRightAction => tetrics.moveRight
-      case MoveUpAction => tetrics.moveUp
-      case MoveDownAction => tetrics.moveDown
-      case DropLeftAction =>
-        randPut(tetrics.dropLeft.normalizeLeft)
-      case DropRightAction =>
-        randPut(tetrics.dropRight.normalizeRight)
-      case DropTopAction =>
-        randPut(tetrics.dropTop.normalizeTop)
-      case DropBottomAction =>
-        randPut(tetrics.dropBottom.normalizeBottom)
-      case TurnLeftAction => tetrics.turnLeft
-      case TurnRightAction => tetrics.turnRight
+      case d: DropAction => randPut(tetrics.act(d))
+      case a => tetrics.act(a)
     }
   def randPut(tetrics: Tetrics)(implicit setting: TetricsSetting): Tetrics = {
     import setting.blocks
