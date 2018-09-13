@@ -155,7 +155,7 @@ trait AutoPlayer {
 trait DefaultAutoPlayer extends AutoPlayer {
   import scala.math.random
   import scala.collection.mutable
-  private var queue: mutable.Queue[TetricsAction] = mutable.Queue()
+  private val queue: mutable.Queue[TetricsAction] = mutable.Queue()
   val allActions = Seq(
     MoveLeftAction,
     MoveRightAction,
@@ -171,6 +171,9 @@ trait DefaultAutoPlayer extends AutoPlayer {
   def act(tetrics: Tetrics): TetricsAction =
     if (queue.nonEmpty) queue.dequeue()
     else allActions((allActions.length * random).toInt)
+  def evalField(tetrics: Tetrics, fieldType: FieldType, block: Block): (Seq[TetricsAction], Int) = {
+    (Seq.empty, 0)
+  }
 }
 object DefaultAutoPlayer {
   def apply(): DefaultAutoPlayer = new DefaultAutoPlayer {}
