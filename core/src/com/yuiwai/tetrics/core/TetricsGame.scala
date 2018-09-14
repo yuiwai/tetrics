@@ -1,5 +1,7 @@
 package com.yuiwai.tetrics.core
 
+import scala.util.{Success, Try}
+
 trait TetricsGame[E, C]
   extends AnyRef
     with TetricsController[E, C]
@@ -29,6 +31,10 @@ trait TetricsGame[E, C]
   def readOnly()(implicit ctx: C, setting: TetricsSetting): Unit = {
     status = GameStatusPlaying
     drawAll(tetrics)
+  }
+  def autoPlay()(implicit ctx: C, setting: TetricsSetting): Unit = {
+    status = GameStatusAutoPlay
+    drawAll(randPut())
   }
   def randPut()(implicit setting: TetricsSetting): Tetrics = {
     import setting.blocks
@@ -80,11 +86,14 @@ trait TetricsGame[E, C]
       case TurnLeftAction => drawCentral(modify(_.turnLeft))
       case TurnRightAction => drawCentral(modify(_.turnRight))
     }
+  def act(autoPlayer: AutoPlayer)
+    (implicit ctx: C, setting: TetricsSetting): Unit = act(autoPlayer.act(tetrics))
 }
 sealed trait GameStatus
 case object GameStatusReady extends GameStatus
 case object GameStatusPlaying extends GameStatus
 case object GameStatusFinished extends GameStatus
+case object GameStatusAutoPlay extends GameStatus
 
 sealed trait GameType
 case object GameTypeTenTen extends GameType
@@ -142,3 +151,83 @@ trait DefaultSettings {
 }
 object DefaultSettings extends DefaultSettings
 
+trait AutoPlayer {
+  def act(tetrics: Tetrics): TetricsAction
+}
+trait DefaultAutoPlayer extends AutoPlayer {
+  import scala.collection.mutable
+  case class Eval(actions: List[TetricsAction], points: Int) {
+    def total: Int = points - actions.size
+    def >>(eval: Eval): Eval = if (total > eval.total) this else eval
+    def moved(moveAction: MoveAction): Eval = copy(moveAction :: actions)
+    def dropped(point: Int)(implicit droppableField: DroppableField): Eval = {
+      copy(droppableField.action :: actions, points + point)
+    }
+  }
+  object Eval {
+    def failed: Eval = Eval(Nil, Int.MinValue)
+    def empty: Eval = Eval(Nil)
+    def apply(actions: List[TetricsAction]): Eval = Eval(actions, 0)
+    def apply(action: TetricsAction): Eval = Eval(action :: Nil)
+  }
+  private val queue: mutable.Queue[TetricsAction] = mutable.Queue()
+  val allActions = Seq(
+    MoveLeftAction,
+    MoveRightAction,
+    MoveUpAction,
+    MoveDownAction,
+    DropLeftAction,
+    DropRightAction,
+    DropTopAction,
+    DropBottomAction,
+    TurnLeftAction,
+    TurnRightAction
+  )
+  def act(tetrics: Tetrics): TetricsAction =
+    if (queue.nonEmpty) queue.dequeue()
+    else {
+      (evalRotate(tetrics)(FieldLeft) >>
+        evalRotate(tetrics)(FieldRight) >>
+        evalRotate(tetrics)(FieldTop) >>
+        evalRotate(tetrics)(FieldBottom))
+        .actions.reverse.foreach(a => queue.enqueue(a))
+      queue.dequeue()
+    }
+  def evalRotate(tetrics: Tetrics)(implicit droppableField: DroppableField): Eval = {
+    evalField(tetrics, Eval.empty) >>
+      evalField(tetrics.turnLeft, Eval(TurnLeftAction)) >>
+      evalField(tetrics.turnRight, Eval(TurnRightAction)) >>
+      evalField(tetrics.turnLeft.turnLeft, Eval(TurnLeftAction :: TurnLeftAction :: Nil))
+  }
+  def evalField(tetrics: Tetrics, eval: Eval)(implicit droppableField: DroppableField): Eval = {
+    evalDrop(tetrics, eval) >> evalMove(tetrics, eval)
+  }
+  def evalMove(tetrics: Tetrics, eval: Eval)(implicit droppableField: DroppableField): Eval = droppableField match {
+    case FieldTop | FieldBottom => evalMove(tetrics, MoveRightAction, eval) >> evalMove(tetrics, MoveLeftAction, eval)
+    case _ => evalMove(tetrics, MoveUpAction, eval) >> evalMove(tetrics, MoveDownAction, eval)
+  }
+  def evalMove(tetrics: Tetrics, moveAction: MoveAction, eval: Eval)(implicit droppableField: DroppableField): Eval =
+    Try(tetrics.act(moveAction)) match {
+      case Success(newTetrics) =>
+        evalDrop(newTetrics, eval.moved(moveAction)) >>
+          evalMove(newTetrics, moveAction, eval.moved(moveAction))
+      case _ => Eval.failed
+    }
+  def evalDrop(tetrics: Tetrics, eval: Eval)(implicit droppableField: DroppableField): Eval =
+    try {
+      eval.dropped(evalAction(tetrics, tetrics.act(droppableField.action)))
+    } catch {
+      case _: Throwable => Eval.failed
+    }
+  def evalAction(oldTetrics: Tetrics, newTetrics: Tetrics)(implicit droppableField: DroppableField): Int = {
+    val (offset, width) = droppableField match {
+      case FieldTop | FieldBottom => (oldTetrics.offset.x, oldTetrics.block.width)
+      case _ => (oldTetrics.offset.y, oldTetrics.block.height)
+    }
+    (oldTetrics.field(droppableField).slice(offset, width).spaces - newTetrics.field(droppableField).slice(offset, width).spaces * 2) +
+    (oldTetrics.field(droppableField).numRows - newTetrics.field(droppableField).numRows * 5)
+  }
+}
+object DefaultAutoPlayer {
+  def apply(): DefaultAutoPlayer = new DefaultAutoPlayer {}
+}

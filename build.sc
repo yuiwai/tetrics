@@ -15,6 +15,10 @@ trait TetricsModule extends CrossScalaModule with Base {
 object tetricsJvm extends Cross[TetricsJvmModule]("2.11.12", "2.12.6")
 class TetricsJvmModule(val crossScalaVersion: String) extends TetricsModule {
 }
+object auto extends ScalaModule with Base {
+  override def moduleDeps: Seq[JavaModule] = Seq(tetricsJvm("2.12.6"))
+  override def scalaVersion = "2.12.6"
+}
 
 object tetricsJs extends Cross[TetricsJsModule]("2.11.12", "2.12.6")
 class TetricsJsModule(val crossScalaVersion: String) extends TetricsModule with ScalaJSModule {

@@ -17,14 +17,15 @@
         document.getElementById("startBtn").disabled = true;
         // TODO ここでゲーム開始に必要な情報を設定
         window.top.child.contentWindow.postMessage("start", "https://lab.yuiwai.com");
-        window.top.slave.contentWindow.postMessage("readOnly", "https://lab.yuiwai.com");
+        // window.top.slave.contentWindow.postMessage("readOnly", "https://lab.yuiwai.com");
+        window.top.slave.contentWindow.postMessage("autoPlay", "https://lab.yuiwai.com");
     }
     window.addEventListener("message", function(e) {
         if (e.origin != "https://lab.yuiwai.com") {
             return;
         }
         if (e.source == window.top.child.contentWindow) {
-            window.top.slave.contentWindow.postMessage(e.data, "https://lab.yuiwai.com");
+            // window.top.slave.contentWindow.postMessage(e.data, "https://lab.yuiwai.com");
         }
     });
 </script>

@@ -8,8 +8,8 @@ final case class GameEnded(gameType: GameType) extends TetricsEvent
 final case class BlockAdded(block: Block) extends TetricsEvent
 final case class BlockRotated(rotationType: RotationType) extends TetricsEvent
 final case class BlockMoved(moveType: MoveType) extends TetricsEvent
-final case class BlockDropped(fieldType: FieldType, numRows: Int) extends TetricsEvent
-final case class FieldNormalized(fieldType: FieldType, numRows: Int) extends TetricsEvent
+final case class BlockDropped(fieldType: DroppableField, numRows: Int) extends TetricsEvent
+final case class FieldNormalized(fieldType: DroppableField, numRows: Int) extends TetricsEvent
 
 trait EventSerializer[T] {
   val setting: TetricsSetting
@@ -61,8 +61,8 @@ trait ByteEventSerializer extends EventSerializer[Array[Byte]] {
     case 3 => BlockAdded(a2bl(data.tail))
     case 4 => BlockRotated(a2rt(data.tail))
     case 5 => BlockMoved(a2mt(data.tail))
-    case 6 => BlockDropped(a2ft(data.tail), data.drop(2).head.toInt)
-    case 7 => FieldNormalized(a2ft(data.tail), data.drop(2).head.toInt)
+    case 6 => BlockDropped(a2df(data.tail), data.drop(2).head.toInt)
+    case 7 => FieldNormalized(a2df(data.tail), data.drop(2).head.toInt)
   }
   private def a2gt(a: Array[Byte]): GameType = a.head.toInt match {
     case 1 => GameTypeTenTen
@@ -77,6 +77,12 @@ trait ByteEventSerializer extends EventSerializer[Array[Byte]] {
     case 2 => MoveRight
     case 3 => MoveUp
     case 4 => MoveDown
+  }
+  private def a2df(a: Array[Byte]): DroppableField = a.head.toInt match {
+    case 1 => FieldLeft
+    case 2 => FieldRight
+    case 3 => FieldTop
+    case 4 => FieldBottom
   }
   private def a2ft(a: Array[Byte]): FieldType = a.head.toInt match {
     case 1 => FieldLeft
