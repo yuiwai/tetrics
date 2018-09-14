@@ -219,8 +219,14 @@ trait DefaultAutoPlayer extends AutoPlayer {
     } catch {
       case _: Throwable => Eval.failed
     }
-  def evalAction(oldTetrics: Tetrics, newTetrics: Tetrics)(implicit droppableField: DroppableField): Int =
-    oldTetrics.field(droppableField).numRows - newTetrics.field(droppableField).numRows * 5
+  def evalAction(oldTetrics: Tetrics, newTetrics: Tetrics)(implicit droppableField: DroppableField): Int = {
+    val (offset, width) = droppableField match {
+      case FieldTop | FieldBottom => (oldTetrics.offset.x, oldTetrics.block.width)
+      case _ => (oldTetrics.offset.y, oldTetrics.block.height)
+    }
+    (oldTetrics.field(droppableField).slice(offset, width).spaces - newTetrics.field(droppableField).slice(offset, width).spaces * 2) +
+    (oldTetrics.field(droppableField).numRows - newTetrics.field(droppableField).numRows * 5)
+  }
 }
 object DefaultAutoPlayer {
   def apply(): DefaultAutoPlayer = new DefaultAutoPlayer {}
