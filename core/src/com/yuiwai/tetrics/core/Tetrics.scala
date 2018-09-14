@@ -67,6 +67,18 @@ case class Tetrics(
     .publishAndReturn(t => FieldNormalized(FieldTop, t.topField.numRows))
   def normalizeBottom: Tetrics = copy(bottomField = bottomField.normalized)
     .publishAndReturn(t => FieldNormalized(FieldBottom, t.bottomField.numRows))
+  def act(action: TetricsAction): Tetrics = action match {
+    case MoveLeftAction => moveLeft
+    case MoveRightAction => moveRight
+    case MoveUpAction => moveUp
+    case MoveDownAction => moveDown
+    case DropLeftAction => dropLeft.normalizeLeft
+    case DropRightAction => dropRight.normalizeRight
+    case DropTopAction => dropTop.normalizeTop
+    case DropBottomAction => dropBottom.normalizeBottom
+    case TurnLeftAction => turnLeft
+    case TurnRightAction => turnRight
+  }
 }
 object Tetrics {
   def apply(fieldSize: Int = 10)(implicit eventBus: EventBus): Tetrics = new Tetrics(
@@ -120,10 +132,21 @@ case object Rotation3 extends Rotation {
   def round(d: Double): Int = Math.floor(d).toInt
 }
 sealed trait FieldType
-case object FieldLeft extends FieldType
-case object FieldRight extends FieldType
-case object FieldTop extends FieldType
-case object FieldBottom extends FieldType
+sealed trait DroppableField extends FieldType {
+  val action: DropAction
+}
+case object FieldLeft extends FieldType with DroppableField {
+  override val action: DropAction = DropLeftAction
+}
+case object FieldRight extends FieldType with DroppableField {
+  override val action: DropAction = DropRightAction
+}
+case object FieldTop extends FieldType with DroppableField {
+  override val action: DropAction = DropTopAction
+}
+case object FieldBottom extends FieldType with DroppableField {
+  override val action: DropAction = DropBottomAction
+}
 case object FieldCentral extends FieldType
 sealed trait FieldStatus
 case object FieldStatusActive extends FieldStatus
@@ -167,6 +190,7 @@ object Field {
   def apply(width: Int, height: Int): Field = Field(List.fill(height)(Row(0, width)), width)
 }
 case class Slice(rows: List[Row]) {
+  def spaces: Int = rows.tail.map(_.spaces).sum
   def dropPos(block: Block, y: Int = 0): Int = if (hitTest(block, y + 1)) y else dropPos(block, y + 1)
   def hitTest(block: Block, y: Int): Boolean = block.rows.zipWithIndex.exists {
     case (row, i) => if (rows.length <= y + i) true else row.hitTest(rows(y + i))
@@ -213,6 +237,15 @@ case class Row(cols: Int, width: Int) {
     (0 until width).foldLeft("") { (acc, i) =>
       acc + (cols >> i & 1)
     }
+  }
+  def count: Int = {
+    (0 until width).foldLeft(0) { (acc, i) =>
+      acc + (cols >> i & 1)
+    }
+  }
+  def spaces: Int = count match {
+    case 0 => 0
+    case i => width - i
   }
 }
 object Row {
