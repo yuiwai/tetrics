@@ -9,7 +9,8 @@ import org.scalajs.dom.raw.KeyboardEvent
 import org.scalajs.dom.raw.MessageEvent
 import scalajs.js.typedarray._
 
-object Example extends Subscriber with DefaultSettings { self =>
+object Example extends Subscriber with DefaultSettings {
+  self =>
   import dom.window
   import window.document
   private var keyDown = false
@@ -42,7 +43,7 @@ object Example extends Subscriber with DefaultSettings { self =>
             init().start()
           case "readOnly" =>
             init().readOnly()
-            window.onmessage = handleEvent
+            window.onmessage = handleMessageEvent
           case "autoPlay" =>
             val game = init()
             val autoPlayer = DefaultAutoPlayer()
@@ -71,8 +72,8 @@ object Example extends Subscriber with DefaultSettings { self =>
     canvas.setAttribute("height", (game.offset * 2 + game.tileHeight * 32).toString)
     game
   }
-  val handleEvent = (messageEvent: MessageEvent) => {
-    game.act( 
+  val handleMessageEvent = (messageEvent: MessageEvent) => {
+    game.act(
       serializer.deserialize(int8Array2ByteArray(messageEvent.data.asInstanceOf[Int8Array]))
     )
   }
@@ -137,6 +138,21 @@ trait JsController extends TetricsController[KeyboardEvent, Context2D] {
     }
   }
 }
+
+trait AnimationModule[E, C] {
+  private var animation: Option[Animation[C]] = None
+  def input(event: E, game:TetricsGame[E, C])(implicit setting: TetricsSetting): Unit = game.input(event)
+  def draw()(implicit ctx: C): Unit = {
+    drawBackground()
+    drawAnimation()
+    drawForeground()
+  }
+  def drawBackground()(implicit ctx: C): Unit
+  def drawAnimation()(implicit ctx: C): Unit
+  def drawForeground()(implicit ctx: C): Unit
+}
+trait Animation[C]
+trait BlockingAnimation[C] extends Animation[C]
 
 trait JsMatchConnector {
 
