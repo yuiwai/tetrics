@@ -224,8 +224,9 @@ trait DefaultAutoPlayer extends AutoPlayer {
       case FieldTop | FieldBottom => (oldTetrics.offset.x, oldTetrics.block.width)
       case _ => (oldTetrics.offset.y, oldTetrics.block.height)
     }
-    (oldTetrics.field(droppableField).slice(offset, width).spaces - newTetrics.field(droppableField).slice(offset, width).spaces * 2) +
-    (oldTetrics.field(droppableField).numRows - newTetrics.field(droppableField).numRows * 5)
+    ((oldTetrics.field(droppableField).slice(offset, width).spaces - newTetrics.field(droppableField).slice(offset, width).spaces) * 20) +
+      (oldTetrics.field(droppableField).numRows - newTetrics.field(droppableField).numRows * 10) +
+      oldTetrics.field(droppableField).numRows * 5
   }
 }
 object DefaultAutoPlayer {
