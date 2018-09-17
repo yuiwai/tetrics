@@ -4,6 +4,7 @@ import com.yuiwai.tetrics.core._
 
 import scala.scalanative.native
 import scala.scalanative.native._
+import scala.scalanative.posix.unistd
 
 object Example {
   import DefaultSettings._
@@ -16,9 +17,20 @@ object Example {
     cbreak()
     noecho()
     curs_set(0)
+    args.headOption match {
+      case Some("autoPlay") => autoPlay()
+      case _ => start()
+    }
+    endwin()
+  }
+  def start(): Unit = {
     game.start()
     loop()
-    endwin()
+  }
+  def autoPlay(): Unit = {
+    val autoPlayer = DefaultAutoPlayer()
+    game.autoPlay()
+    loopAutoPlay(autoPlayer)
   }
   def loop(): Unit = {
     val char = getch
@@ -29,6 +41,12 @@ object Example {
       case e => throw e
     }
     loop()
+  }
+  def loopAutoPlay(autoPlayer: AutoPlayer): Unit = {
+    unistd.usleep(200000.toUInt)
+    game.act(autoPlayer)
+    refresh()
+    loopAutoPlay(autoPlayer)
   }
 }
 
@@ -109,6 +127,7 @@ object Ncurses {
   def mvprintw(y: CInt, x: CInt, fmt: CString, args: CVararg*): CInt = extern
   def mvaddch(y: CInt, x: CInt, ch: CChar): CInt = extern
   def curs_set(visibility: CInt): CInt = extern
+  def refresh(): CInt = extern
 }
 
 object Colors {
