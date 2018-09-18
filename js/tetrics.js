@@ -1258,6 +1258,18 @@ function $f_Lcom_yuiwai_tetrics_core_EventSerializer__block2Int__Lcom_yuiwai_tet
 function $f_Lcom_yuiwai_tetrics_core_EventSerializer__$$init$__V($thiz) {
   /*<skip>*/
 }
+function $is_Lcom_yuiwai_tetrics_core_GameStatus(obj) {
+  return (!(!((obj && obj.$classData) && obj.$classData.ancestors.Lcom_yuiwai_tetrics_core_GameStatus)))
+}
+function $as_Lcom_yuiwai_tetrics_core_GameStatus(obj) {
+  return (($is_Lcom_yuiwai_tetrics_core_GameStatus(obj) || (obj === null)) ? obj : $throwClassCastException(obj, "com.yuiwai.tetrics.core.GameStatus"))
+}
+function $isArrayOf_Lcom_yuiwai_tetrics_core_GameStatus(obj, depth) {
+  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.Lcom_yuiwai_tetrics_core_GameStatus)))
+}
+function $asArrayOf_Lcom_yuiwai_tetrics_core_GameStatus(obj, depth) {
+  return (($isArrayOf_Lcom_yuiwai_tetrics_core_GameStatus(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lcom.yuiwai.tetrics.core.GameStatus;", depth))
+}
 function $f_Lcom_yuiwai_tetrics_core_Publisher__publish__Lcom_yuiwai_tetrics_core_TetricsEvent__Lcom_yuiwai_tetrics_core_EventBus__V($thiz, tetricsEvent, eventBus) {
   eventBus.publish__Lcom_yuiwai_tetrics_core_TetricsEvent__V(tetricsEvent)
 }
@@ -1912,60 +1924,36 @@ function $f_Lcom_yuiwai_tetrics_core_ByteEventSerializer__serialize__Lcom_yuiwai
     var x2 = $as_Lcom_yuiwai_tetrics_core_GameStarted(x1);
     var gameType = x2.gameType__Lcom_yuiwai_tetrics_core_GameType();
     return $asArrayOf_B(new $c_scm_ArrayOps$ofByte().init___AB($m_s_Predef$().byteArrayOps__AB__AB($thiz.s__pLcom_yuiwai_tetrics_core_ByteEventSerializer__I__AB(1))).$$plus$plus__sc_GenTraversableOnce__scg_CanBuildFrom__O(new $c_scm_ArrayOps$ofByte().init___AB($m_s_Predef$().byteArrayOps__AB__AB($thiz.s__pLcom_yuiwai_tetrics_core_ByteEventSerializer__Lcom_yuiwai_tetrics_core_GameType__AB(gameType))), $m_s_Array$().canBuildFrom__s_reflect_ClassTag__scg_CanBuildFrom($m_s_reflect_ClassTag$().Byte__s_reflect_ClassTag())), 1)
-  };
-  if ($is_Lcom_yuiwai_tetrics_core_GameEnded(x1)) {
+  } else if ($is_Lcom_yuiwai_tetrics_core_GameEnded(x1)) {
     var x3 = $as_Lcom_yuiwai_tetrics_core_GameEnded(x1);
     var gameType$2 = x3.gameType__Lcom_yuiwai_tetrics_core_GameType();
-    if ((gameType$2 !== null)) {
-      var x9 = gameType$2;
-      return $asArrayOf_B(new $c_scm_ArrayOps$ofByte().init___AB($m_s_Predef$().byteArrayOps__AB__AB($thiz.s__pLcom_yuiwai_tetrics_core_ByteEventSerializer__I__AB(2))).$$plus$plus__sc_GenTraversableOnce__scg_CanBuildFrom__O(new $c_scm_ArrayOps$ofByte().init___AB($m_s_Predef$().byteArrayOps__AB__AB($thiz.s__pLcom_yuiwai_tetrics_core_ByteEventSerializer__Lcom_yuiwai_tetrics_core_GameType__AB(x9))), $m_s_Array$().canBuildFrom__s_reflect_ClassTag__scg_CanBuildFrom($m_s_reflect_ClassTag$().Byte__s_reflect_ClassTag())), 1)
-    }
-  };
-  if ($is_Lcom_yuiwai_tetrics_core_BlockAdded(x1)) {
+    return $asArrayOf_B(new $c_scm_ArrayOps$ofByte().init___AB($m_s_Predef$().byteArrayOps__AB__AB($thiz.s__pLcom_yuiwai_tetrics_core_ByteEventSerializer__I__AB(2))).$$plus$plus__sc_GenTraversableOnce__scg_CanBuildFrom__O(new $c_scm_ArrayOps$ofByte().init___AB($m_s_Predef$().byteArrayOps__AB__AB($thiz.s__pLcom_yuiwai_tetrics_core_ByteEventSerializer__Lcom_yuiwai_tetrics_core_GameType__AB(gameType$2))), $m_s_Array$().canBuildFrom__s_reflect_ClassTag__scg_CanBuildFrom($m_s_reflect_ClassTag$().Byte__s_reflect_ClassTag())), 1)
+  } else if ($is_Lcom_yuiwai_tetrics_core_BlockAdded(x1)) {
     var x4 = $as_Lcom_yuiwai_tetrics_core_BlockAdded(x1);
     var block = x4.block__Lcom_yuiwai_tetrics_core_Block();
-    if ((block !== null)) {
-      var x10 = block;
-      return $asArrayOf_B(new $c_scm_ArrayOps$ofByte().init___AB($m_s_Predef$().byteArrayOps__AB__AB($thiz.s__pLcom_yuiwai_tetrics_core_ByteEventSerializer__I__AB(3))).$$plus$plus__sc_GenTraversableOnce__scg_CanBuildFrom__O(new $c_scm_ArrayOps$ofByte().init___AB($m_s_Predef$().byteArrayOps__AB__AB($thiz.s__pLcom_yuiwai_tetrics_core_ByteEventSerializer__Lcom_yuiwai_tetrics_core_Block__AB(x10))), $m_s_Array$().canBuildFrom__s_reflect_ClassTag__scg_CanBuildFrom($m_s_reflect_ClassTag$().Byte__s_reflect_ClassTag())), 1)
-    }
-  };
-  if ($is_Lcom_yuiwai_tetrics_core_BlockRotated(x1)) {
+    return $asArrayOf_B(new $c_scm_ArrayOps$ofByte().init___AB($m_s_Predef$().byteArrayOps__AB__AB($thiz.s__pLcom_yuiwai_tetrics_core_ByteEventSerializer__I__AB(3))).$$plus$plus__sc_GenTraversableOnce__scg_CanBuildFrom__O(new $c_scm_ArrayOps$ofByte().init___AB($m_s_Predef$().byteArrayOps__AB__AB($thiz.s__pLcom_yuiwai_tetrics_core_ByteEventSerializer__Lcom_yuiwai_tetrics_core_Block__AB(block))), $m_s_Array$().canBuildFrom__s_reflect_ClassTag__scg_CanBuildFrom($m_s_reflect_ClassTag$().Byte__s_reflect_ClassTag())), 1)
+  } else if ($is_Lcom_yuiwai_tetrics_core_BlockRotated(x1)) {
     var x5 = $as_Lcom_yuiwai_tetrics_core_BlockRotated(x1);
     var rotationType = x5.rotationType__Lcom_yuiwai_tetrics_core_RotationType();
-    if ((rotationType !== null)) {
-      var x11 = rotationType;
-      return $asArrayOf_B(new $c_scm_ArrayOps$ofByte().init___AB($m_s_Predef$().byteArrayOps__AB__AB($thiz.s__pLcom_yuiwai_tetrics_core_ByteEventSerializer__I__AB(4))).$$plus$plus__sc_GenTraversableOnce__scg_CanBuildFrom__O(new $c_scm_ArrayOps$ofByte().init___AB($m_s_Predef$().byteArrayOps__AB__AB($thiz.s__pLcom_yuiwai_tetrics_core_ByteEventSerializer__Lcom_yuiwai_tetrics_core_RotationType__AB(x11))), $m_s_Array$().canBuildFrom__s_reflect_ClassTag__scg_CanBuildFrom($m_s_reflect_ClassTag$().Byte__s_reflect_ClassTag())), 1)
-    }
-  };
-  if ($is_Lcom_yuiwai_tetrics_core_BlockMoved(x1)) {
+    return $asArrayOf_B(new $c_scm_ArrayOps$ofByte().init___AB($m_s_Predef$().byteArrayOps__AB__AB($thiz.s__pLcom_yuiwai_tetrics_core_ByteEventSerializer__I__AB(4))).$$plus$plus__sc_GenTraversableOnce__scg_CanBuildFrom__O(new $c_scm_ArrayOps$ofByte().init___AB($m_s_Predef$().byteArrayOps__AB__AB($thiz.s__pLcom_yuiwai_tetrics_core_ByteEventSerializer__Lcom_yuiwai_tetrics_core_RotationType__AB(rotationType))), $m_s_Array$().canBuildFrom__s_reflect_ClassTag__scg_CanBuildFrom($m_s_reflect_ClassTag$().Byte__s_reflect_ClassTag())), 1)
+  } else if ($is_Lcom_yuiwai_tetrics_core_BlockMoved(x1)) {
     var x6 = $as_Lcom_yuiwai_tetrics_core_BlockMoved(x1);
     var moveType = x6.moveType__Lcom_yuiwai_tetrics_core_MoveType();
-    if ((moveType !== null)) {
-      var x12 = moveType;
-      return $asArrayOf_B(new $c_scm_ArrayOps$ofByte().init___AB($m_s_Predef$().byteArrayOps__AB__AB($thiz.s__pLcom_yuiwai_tetrics_core_ByteEventSerializer__I__AB(5))).$$plus$plus__sc_GenTraversableOnce__scg_CanBuildFrom__O(new $c_scm_ArrayOps$ofByte().init___AB($m_s_Predef$().byteArrayOps__AB__AB($thiz.s__pLcom_yuiwai_tetrics_core_ByteEventSerializer__Lcom_yuiwai_tetrics_core_MoveType__AB(x12))), $m_s_Array$().canBuildFrom__s_reflect_ClassTag__scg_CanBuildFrom($m_s_reflect_ClassTag$().Byte__s_reflect_ClassTag())), 1)
-    }
-  };
-  if ($is_Lcom_yuiwai_tetrics_core_BlockDropped(x1)) {
+    return $asArrayOf_B(new $c_scm_ArrayOps$ofByte().init___AB($m_s_Predef$().byteArrayOps__AB__AB($thiz.s__pLcom_yuiwai_tetrics_core_ByteEventSerializer__I__AB(5))).$$plus$plus__sc_GenTraversableOnce__scg_CanBuildFrom__O(new $c_scm_ArrayOps$ofByte().init___AB($m_s_Predef$().byteArrayOps__AB__AB($thiz.s__pLcom_yuiwai_tetrics_core_ByteEventSerializer__Lcom_yuiwai_tetrics_core_MoveType__AB(moveType))), $m_s_Array$().canBuildFrom__s_reflect_ClassTag__scg_CanBuildFrom($m_s_reflect_ClassTag$().Byte__s_reflect_ClassTag())), 1)
+  } else if ($is_Lcom_yuiwai_tetrics_core_BlockDropped(x1)) {
     var x7 = $as_Lcom_yuiwai_tetrics_core_BlockDropped(x1);
     var fieldType = x7.fieldType__Lcom_yuiwai_tetrics_core_DroppableField();
     var numRows = x7.numRows__I();
-    if ((fieldType !== null)) {
-      var x13 = fieldType;
-      var x14 = numRows;
-      return $asArrayOf_B(new $c_scm_ArrayOps$ofByte().init___AB($m_s_Predef$().byteArrayOps__AB__AB($asArrayOf_B(new $c_scm_ArrayOps$ofByte().init___AB($m_s_Predef$().byteArrayOps__AB__AB($thiz.s__pLcom_yuiwai_tetrics_core_ByteEventSerializer__I__AB(6))).$$plus$plus__sc_GenTraversableOnce__scg_CanBuildFrom__O(new $c_scm_ArrayOps$ofByte().init___AB($m_s_Predef$().byteArrayOps__AB__AB($thiz.s__pLcom_yuiwai_tetrics_core_ByteEventSerializer__Lcom_yuiwai_tetrics_core_FieldType__AB(x13))), $m_s_Array$().canBuildFrom__s_reflect_ClassTag__scg_CanBuildFrom($m_s_reflect_ClassTag$().Byte__s_reflect_ClassTag())), 1))).$$plus$plus__sc_GenTraversableOnce__scg_CanBuildFrom__O(new $c_scm_ArrayOps$ofByte().init___AB($m_s_Predef$().byteArrayOps__AB__AB($thiz.s__pLcom_yuiwai_tetrics_core_ByteEventSerializer__I__AB(x14))), $m_s_Array$().canBuildFrom__s_reflect_ClassTag__scg_CanBuildFrom($m_s_reflect_ClassTag$().Byte__s_reflect_ClassTag())), 1)
-    }
-  };
-  if ($is_Lcom_yuiwai_tetrics_core_FieldNormalized(x1)) {
+    var filledRows = x7.filledRows__sc_Seq();
+    return $asArrayOf_B(new $c_scm_ArrayOps$ofByte().init___AB($m_s_Predef$().byteArrayOps__AB__AB($asArrayOf_B(new $c_scm_ArrayOps$ofByte().init___AB($m_s_Predef$().byteArrayOps__AB__AB($asArrayOf_B(new $c_scm_ArrayOps$ofByte().init___AB($m_s_Predef$().byteArrayOps__AB__AB($thiz.s__pLcom_yuiwai_tetrics_core_ByteEventSerializer__I__AB(6))).$$plus$plus__sc_GenTraversableOnce__scg_CanBuildFrom__O(new $c_scm_ArrayOps$ofByte().init___AB($m_s_Predef$().byteArrayOps__AB__AB($thiz.s__pLcom_yuiwai_tetrics_core_ByteEventSerializer__Lcom_yuiwai_tetrics_core_FieldType__AB(fieldType))), $m_s_Array$().canBuildFrom__s_reflect_ClassTag__scg_CanBuildFrom($m_s_reflect_ClassTag$().Byte__s_reflect_ClassTag())), 1))).$$plus$plus__sc_GenTraversableOnce__scg_CanBuildFrom__O(new $c_scm_ArrayOps$ofByte().init___AB($m_s_Predef$().byteArrayOps__AB__AB($thiz.s__pLcom_yuiwai_tetrics_core_ByteEventSerializer__I__AB(numRows))), $m_s_Array$().canBuildFrom__s_reflect_ClassTag__scg_CanBuildFrom($m_s_reflect_ClassTag$().Byte__s_reflect_ClassTag())), 1))).$$plus$plus__sc_GenTraversableOnce__scg_CanBuildFrom__O(new $c_scm_ArrayOps$ofByte().init___AB($m_s_Predef$().byteArrayOps__AB__AB($thiz.s__pLcom_yuiwai_tetrics_core_ByteEventSerializer__sc_Seq__AB(filledRows))), $m_s_Array$().canBuildFrom__s_reflect_ClassTag__scg_CanBuildFrom($m_s_reflect_ClassTag$().Byte__s_reflect_ClassTag())), 1)
+  } else if ($is_Lcom_yuiwai_tetrics_core_FieldNormalized(x1)) {
     var x8 = $as_Lcom_yuiwai_tetrics_core_FieldNormalized(x1);
     var fieldType$2 = x8.fieldType__Lcom_yuiwai_tetrics_core_DroppableField();
     var numRows$2 = x8.numRows__I();
-    if ((fieldType$2 !== null)) {
-      var x15 = fieldType$2;
-      var x16 = numRows$2;
-      return $asArrayOf_B(new $c_scm_ArrayOps$ofByte().init___AB($m_s_Predef$().byteArrayOps__AB__AB($asArrayOf_B(new $c_scm_ArrayOps$ofByte().init___AB($m_s_Predef$().byteArrayOps__AB__AB($thiz.s__pLcom_yuiwai_tetrics_core_ByteEventSerializer__I__AB(7))).$$plus$plus__sc_GenTraversableOnce__scg_CanBuildFrom__O(new $c_scm_ArrayOps$ofByte().init___AB($m_s_Predef$().byteArrayOps__AB__AB($thiz.s__pLcom_yuiwai_tetrics_core_ByteEventSerializer__Lcom_yuiwai_tetrics_core_FieldType__AB(x15))), $m_s_Array$().canBuildFrom__s_reflect_ClassTag__scg_CanBuildFrom($m_s_reflect_ClassTag$().Byte__s_reflect_ClassTag())), 1))).$$plus$plus__sc_GenTraversableOnce__scg_CanBuildFrom__O(new $c_scm_ArrayOps$ofByte().init___AB($m_s_Predef$().byteArrayOps__AB__AB($thiz.s__pLcom_yuiwai_tetrics_core_ByteEventSerializer__I__AB(x16))), $m_s_Array$().canBuildFrom__s_reflect_ClassTag__scg_CanBuildFrom($m_s_reflect_ClassTag$().Byte__s_reflect_ClassTag())), 1)
-    }
-  };
-  throw new $c_s_MatchError().init___O(x1)
+    return $asArrayOf_B(new $c_scm_ArrayOps$ofByte().init___AB($m_s_Predef$().byteArrayOps__AB__AB($asArrayOf_B(new $c_scm_ArrayOps$ofByte().init___AB($m_s_Predef$().byteArrayOps__AB__AB($thiz.s__pLcom_yuiwai_tetrics_core_ByteEventSerializer__I__AB(7))).$$plus$plus__sc_GenTraversableOnce__scg_CanBuildFrom__O(new $c_scm_ArrayOps$ofByte().init___AB($m_s_Predef$().byteArrayOps__AB__AB($thiz.s__pLcom_yuiwai_tetrics_core_ByteEventSerializer__Lcom_yuiwai_tetrics_core_FieldType__AB(fieldType$2))), $m_s_Array$().canBuildFrom__s_reflect_ClassTag__scg_CanBuildFrom($m_s_reflect_ClassTag$().Byte__s_reflect_ClassTag())), 1))).$$plus$plus__sc_GenTraversableOnce__scg_CanBuildFrom__O(new $c_scm_ArrayOps$ofByte().init___AB($m_s_Predef$().byteArrayOps__AB__AB($thiz.s__pLcom_yuiwai_tetrics_core_ByteEventSerializer__I__AB(numRows$2))), $m_s_Array$().canBuildFrom__s_reflect_ClassTag__scg_CanBuildFrom($m_s_reflect_ClassTag$().Byte__s_reflect_ClassTag())), 1)
+  } else {
+    throw new $c_s_MatchError().init___O(x1)
+  }
 }
 function $f_Lcom_yuiwai_tetrics_core_ByteEventSerializer__s__pLcom_yuiwai_tetrics_core_ByteEventSerializer__I__AB($thiz, intVal) {
   return $m_s_Array$().apply__B__sc_Seq__AB(((intVal << 24) >> 24), $m_sjsr_package$().toScalaVarArgs__sjs_js_Array__sc_Seq([]))
@@ -1984,6 +1972,20 @@ function $f_Lcom_yuiwai_tetrics_core_ByteEventSerializer__s__pLcom_yuiwai_tetric
 }
 function $f_Lcom_yuiwai_tetrics_core_ByteEventSerializer__s__pLcom_yuiwai_tetrics_core_ByteEventSerializer__Lcom_yuiwai_tetrics_core_Block__AB($thiz, block) {
   return $thiz.s__pLcom_yuiwai_tetrics_core_ByteEventSerializer__I__AB($thiz.block2Int__Lcom_yuiwai_tetrics_core_Block__I(block))
+}
+function $f_Lcom_yuiwai_tetrics_core_ByteEventSerializer__s__pLcom_yuiwai_tetrics_core_ByteEventSerializer__sc_Seq__AB($thiz, filledRows) {
+  var x1 = filledRows;
+  var o7 = $m_sc_Seq$().unapplySeq__sc_Seq__s_Some(x1);
+  if (((!o7.isEmpty__Z()) && ((o7.get__O() !== null) && ($as_sc_SeqLike(o7.get__O()).lengthCompare__I__I(0) === 0)))) {
+    return $thiz.s__pLcom_yuiwai_tetrics_core_ByteEventSerializer__I__AB(0)
+  };
+  return $thiz.s__pLcom_yuiwai_tetrics_core_ByteEventSerializer__I__AB($uI($as_sc_TraversableOnce(x1.tail__O()).foldLeft__O__F2__O(x1.head__O(), new $c_sjsr_AnonFunction2().init___sjs_js_Function2((function($this, x1) {
+    return (function(acc$2, i$2) {
+      var acc = $uI(acc$2);
+      var i = $uI(i$2);
+      return $this.$$anonfun$s$1__pLcom_yuiwai_tetrics_core_ByteEventSerializer__sc_Seq__I__I__I(x1, acc, i)
+    })
+  })($thiz, x1)))))
 }
 function $f_Lcom_yuiwai_tetrics_core_ByteEventSerializer__deserialize__AB__Lcom_yuiwai_tetrics_core_TetricsEvent($thiz, data) {
   var x1 = $uB(new $c_scm_ArrayOps$ofByte().init___AB($m_s_Predef$().byteArrayOps__AB__AB(data)).head__O());
@@ -2009,7 +2011,7 @@ function $f_Lcom_yuiwai_tetrics_core_ByteEventSerializer__deserialize__AB__Lcom_
       break
     }
     case 6: {
-      return new $c_Lcom_yuiwai_tetrics_core_BlockDropped().init___Lcom_yuiwai_tetrics_core_DroppableField__I($thiz.a2df__pLcom_yuiwai_tetrics_core_ByteEventSerializer__AB__Lcom_yuiwai_tetrics_core_DroppableField($asArrayOf_B(new $c_scm_ArrayOps$ofByte().init___AB($m_s_Predef$().byteArrayOps__AB__AB(data)).tail__O(), 1)), $uB(new $c_scm_ArrayOps$ofByte().init___AB($m_s_Predef$().byteArrayOps__AB__AB($asArrayOf_B(new $c_scm_ArrayOps$ofByte().init___AB($m_s_Predef$().byteArrayOps__AB__AB(data)).drop__I__O(2), 1))).head__O()));
+      return new $c_Lcom_yuiwai_tetrics_core_BlockDropped().init___Lcom_yuiwai_tetrics_core_DroppableField__I__sc_Seq($thiz.a2df__pLcom_yuiwai_tetrics_core_ByteEventSerializer__AB__Lcom_yuiwai_tetrics_core_DroppableField($asArrayOf_B(new $c_scm_ArrayOps$ofByte().init___AB($m_s_Predef$().byteArrayOps__AB__AB(data)).tail__O(), 1)), $uB(new $c_scm_ArrayOps$ofByte().init___AB($m_s_Predef$().byteArrayOps__AB__AB($asArrayOf_B(new $c_scm_ArrayOps$ofByte().init___AB($m_s_Predef$().byteArrayOps__AB__AB(data)).drop__I__O(2), 1))).head__O()), $thiz.i2sq__pLcom_yuiwai_tetrics_core_ByteEventSerializer__I__sc_Seq($uB(new $c_scm_ArrayOps$ofByte().init___AB($m_s_Predef$().byteArrayOps__AB__AB($asArrayOf_B(new $c_scm_ArrayOps$ofByte().init___AB($m_s_Predef$().byteArrayOps__AB__AB(data)).drop__I__O(3), 1))).head__O())));
       break
     }
     case 7: {
@@ -2020,6 +2022,15 @@ function $f_Lcom_yuiwai_tetrics_core_ByteEventSerializer__deserialize__AB__Lcom_
       throw new $c_s_MatchError().init___O(x1)
     }
   }
+}
+function $f_Lcom_yuiwai_tetrics_core_ByteEventSerializer__i2sq__pLcom_yuiwai_tetrics_core_ByteEventSerializer__I__sc_Seq($thiz, i) {
+  return $as_sc_Seq($m_sr_RichInt$().to$extension0__I__I__sci_Range$Inclusive($m_s_Predef$().intWrapper__I__I(1), 4).foldLeft__O__F2__O($m_sc_Seq$().apply__sc_Seq__sc_GenTraversable($m_sjsr_package$().toScalaVarArgs__sjs_js_Array__sc_Seq([(i & 15)])), new $c_sjsr_AnonFunction2().init___sjs_js_Function2((function($this, i) {
+    return (function(acc$2, j$2) {
+      var acc = $as_sc_Seq(acc$2);
+      var j = $uI(j$2);
+      return $this.$$anonfun$i2sq$1__pLcom_yuiwai_tetrics_core_ByteEventSerializer__I__sc_Seq__I__sc_Seq(i, acc, j)
+    })
+  })($thiz, i))))
 }
 function $f_Lcom_yuiwai_tetrics_core_ByteEventSerializer__a2gt__pLcom_yuiwai_tetrics_core_ByteEventSerializer__AB__Lcom_yuiwai_tetrics_core_GameType($thiz, a) {
   var x1 = $uB(new $c_scm_ArrayOps$ofByte().init___AB($m_s_Predef$().byteArrayOps__AB__AB(a)).head__O());
@@ -2096,6 +2107,12 @@ function $f_Lcom_yuiwai_tetrics_core_ByteEventSerializer__a2df__pLcom_yuiwai_tet
     }
   }
 }
+function $f_Lcom_yuiwai_tetrics_core_ByteEventSerializer__$$anonfun$s$1__pLcom_yuiwai_tetrics_core_ByteEventSerializer__sc_Seq__I__I__I($thiz, x1$1, acc, i) {
+  return (acc | (1 << ((((i - $uI(x1$1.head__O())) | 0) + 3) | 0)))
+}
+function $f_Lcom_yuiwai_tetrics_core_ByteEventSerializer__$$anonfun$i2sq$1__pLcom_yuiwai_tetrics_core_ByteEventSerializer__I__sc_Seq__I__sc_Seq($thiz, i$1, acc, j) {
+  return ((((i$1 >> ((j + 3) | 0)) & 1) === 1) ? $as_sc_Seq(acc.$$colon$plus__O__scg_CanBuildFrom__O((($uI(acc.head__O()) + j) | 0), $m_sc_Seq$().canBuildFrom__scg_CanBuildFrom())) : acc)
+}
 function $f_Lcom_yuiwai_tetrics_core_ByteEventSerializer__$$init$__V($thiz) {
   /*<skip>*/
 }
@@ -2103,7 +2120,7 @@ function $f_Lcom_yuiwai_tetrics_core_DefaultAutoPlayer__act__Lcom_yuiwai_tetrics
   return ($thiz.com$yuiwai$tetrics$core$DefaultAutoPlayer$$queue__scm_Queue().nonEmpty__Z() ? $as_Lcom_yuiwai_tetrics_core_TetricsAction($thiz.com$yuiwai$tetrics$core$DefaultAutoPlayer$$queue__scm_Queue().dequeue__O()) : ($thiz.evalRotate__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_DroppableField__Lcom_yuiwai_tetrics_core_DefaultAutoPlayer$Eval(tetrics, $m_Lcom_yuiwai_tetrics_core_FieldLeft$()).$$greater$greater__Lcom_yuiwai_tetrics_core_DefaultAutoPlayer$Eval__Lcom_yuiwai_tetrics_core_DefaultAutoPlayer$Eval($thiz.evalRotate__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_DroppableField__Lcom_yuiwai_tetrics_core_DefaultAutoPlayer$Eval(tetrics, $m_Lcom_yuiwai_tetrics_core_FieldRight$())).$$greater$greater__Lcom_yuiwai_tetrics_core_DefaultAutoPlayer$Eval__Lcom_yuiwai_tetrics_core_DefaultAutoPlayer$Eval($thiz.evalRotate__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_DroppableField__Lcom_yuiwai_tetrics_core_DefaultAutoPlayer$Eval(tetrics, $m_Lcom_yuiwai_tetrics_core_FieldTop$())).$$greater$greater__Lcom_yuiwai_tetrics_core_DefaultAutoPlayer$Eval__Lcom_yuiwai_tetrics_core_DefaultAutoPlayer$Eval($thiz.evalRotate__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_DroppableField__Lcom_yuiwai_tetrics_core_DefaultAutoPlayer$Eval(tetrics, $m_Lcom_yuiwai_tetrics_core_FieldBottom$())).actions__sci_List().reverse__sci_List().foreach__F1__V(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function($this) {
     return (function(a$2) {
       var a = $as_Lcom_yuiwai_tetrics_core_TetricsAction(a$2);
-      $this.$$anonfun$act$12__pLcom_yuiwai_tetrics_core_DefaultAutoPlayer__Lcom_yuiwai_tetrics_core_TetricsAction__V(a)
+      $this.$$anonfun$act$8__pLcom_yuiwai_tetrics_core_DefaultAutoPlayer__Lcom_yuiwai_tetrics_core_TetricsAction__V(a)
     })
   })($thiz))), $as_Lcom_yuiwai_tetrics_core_TetricsAction($thiz.com$yuiwai$tetrics$core$DefaultAutoPlayer$$queue__scm_Queue().dequeue__O())))
 }
@@ -2111,9 +2128,9 @@ function $f_Lcom_yuiwai_tetrics_core_DefaultAutoPlayer__evalRotate__Lcom_yuiwai_
   var jsx$3 = $thiz.evalField__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_DefaultAutoPlayer$Eval__Lcom_yuiwai_tetrics_core_DroppableField__Lcom_yuiwai_tetrics_core_DefaultAutoPlayer$Eval(tetrics, $thiz.Eval__Lcom_yuiwai_tetrics_core_DefaultAutoPlayer$Eval$().empty__Lcom_yuiwai_tetrics_core_DefaultAutoPlayer$Eval(), droppableField).$$greater$greater__Lcom_yuiwai_tetrics_core_DefaultAutoPlayer$Eval__Lcom_yuiwai_tetrics_core_DefaultAutoPlayer$Eval($thiz.evalField__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_DefaultAutoPlayer$Eval__Lcom_yuiwai_tetrics_core_DroppableField__Lcom_yuiwai_tetrics_core_DefaultAutoPlayer$Eval(tetrics.turnLeft__Lcom_yuiwai_tetrics_core_Tetrics(), $thiz.Eval__Lcom_yuiwai_tetrics_core_DefaultAutoPlayer$Eval$().apply__Lcom_yuiwai_tetrics_core_TetricsAction__Lcom_yuiwai_tetrics_core_DefaultAutoPlayer$Eval($m_Lcom_yuiwai_tetrics_core_TurnLeftAction$()), droppableField)).$$greater$greater__Lcom_yuiwai_tetrics_core_DefaultAutoPlayer$Eval__Lcom_yuiwai_tetrics_core_DefaultAutoPlayer$Eval($thiz.evalField__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_DefaultAutoPlayer$Eval__Lcom_yuiwai_tetrics_core_DroppableField__Lcom_yuiwai_tetrics_core_DefaultAutoPlayer$Eval(tetrics.turnRight__Lcom_yuiwai_tetrics_core_Tetrics(), $thiz.Eval__Lcom_yuiwai_tetrics_core_DefaultAutoPlayer$Eval$().apply__Lcom_yuiwai_tetrics_core_TetricsAction__Lcom_yuiwai_tetrics_core_DefaultAutoPlayer$Eval($m_Lcom_yuiwai_tetrics_core_TurnRightAction$()), droppableField));
   var jsx$2 = tetrics.turnLeft__Lcom_yuiwai_tetrics_core_Tetrics().turnLeft__Lcom_yuiwai_tetrics_core_Tetrics();
   var jsx$1 = $thiz.Eval__Lcom_yuiwai_tetrics_core_DefaultAutoPlayer$Eval$();
-  var x$18 = $m_Lcom_yuiwai_tetrics_core_TurnLeftAction$();
-  var x$17 = $m_Lcom_yuiwai_tetrics_core_TurnLeftAction$();
-  return jsx$3.$$greater$greater__Lcom_yuiwai_tetrics_core_DefaultAutoPlayer$Eval__Lcom_yuiwai_tetrics_core_DefaultAutoPlayer$Eval($thiz.evalField__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_DefaultAutoPlayer$Eval__Lcom_yuiwai_tetrics_core_DroppableField__Lcom_yuiwai_tetrics_core_DefaultAutoPlayer$Eval(jsx$2, jsx$1.apply__sci_List__Lcom_yuiwai_tetrics_core_DefaultAutoPlayer$Eval($m_sci_Nil$().$$colon$colon__O__sci_List(x$17).$$colon$colon__O__sci_List(x$18)), droppableField))
+  var x$14 = $m_Lcom_yuiwai_tetrics_core_TurnLeftAction$();
+  var x$13 = $m_Lcom_yuiwai_tetrics_core_TurnLeftAction$();
+  return jsx$3.$$greater$greater__Lcom_yuiwai_tetrics_core_DefaultAutoPlayer$Eval__Lcom_yuiwai_tetrics_core_DefaultAutoPlayer$Eval($thiz.evalField__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_DefaultAutoPlayer$Eval__Lcom_yuiwai_tetrics_core_DroppableField__Lcom_yuiwai_tetrics_core_DefaultAutoPlayer$Eval(jsx$2, jsx$1.apply__sci_List__Lcom_yuiwai_tetrics_core_DefaultAutoPlayer$Eval($m_sci_Nil$().$$colon$colon__O__sci_List(x$13).$$colon$colon__O__sci_List(x$14)), droppableField))
 }
 function $f_Lcom_yuiwai_tetrics_core_DefaultAutoPlayer__evalField__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_DefaultAutoPlayer$Eval__Lcom_yuiwai_tetrics_core_DroppableField__Lcom_yuiwai_tetrics_core_DefaultAutoPlayer$Eval($thiz, tetrics, eval$2, droppableField) {
   return $thiz.evalDrop__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_DefaultAutoPlayer$Eval__Lcom_yuiwai_tetrics_core_DroppableField__Lcom_yuiwai_tetrics_core_DefaultAutoPlayer$Eval(tetrics, eval$2, droppableField).$$greater$greater__Lcom_yuiwai_tetrics_core_DefaultAutoPlayer$Eval__Lcom_yuiwai_tetrics_core_DefaultAutoPlayer$Eval($thiz.evalMove__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_DefaultAutoPlayer$Eval__Lcom_yuiwai_tetrics_core_DroppableField__Lcom_yuiwai_tetrics_core_DefaultAutoPlayer$Eval(tetrics, eval$2, droppableField))
@@ -2188,16 +2205,16 @@ function $f_Lcom_yuiwai_tetrics_core_DefaultAutoPlayer__evalAction__Lcom_yuiwai_
   if ((x1$2 !== null)) {
     var offset = x1$2.$$und1$mcI$sp__I();
     var width = x1$2.$$und2$mcI$sp__I();
-    var x$19 = new $c_s_Tuple2$mcII$sp().init___I__I(offset, width)
+    var x$15 = new $c_s_Tuple2$mcII$sp().init___I__I(offset, width)
   } else {
-    var x$19;
+    var x$15;
     throw new $c_s_MatchError().init___O(x1$2)
   };
-  var offset$2 = x$19.$$und1$mcI$sp__I();
-  var width$2 = x$19.$$und2$mcI$sp__I();
-  return (((($imul(((oldTetrics.field__Lcom_yuiwai_tetrics_core_FieldType__Lcom_yuiwai_tetrics_core_Field(droppableField).slice__I__I__Lcom_yuiwai_tetrics_core_Slice(offset$2, width$2).spaces__I() - newTetrics.field__Lcom_yuiwai_tetrics_core_FieldType__Lcom_yuiwai_tetrics_core_Field(droppableField).slice__I__I__Lcom_yuiwai_tetrics_core_Slice(offset$2, width$2).spaces__I()) | 0), 20) + ((oldTetrics.field__Lcom_yuiwai_tetrics_core_FieldType__Lcom_yuiwai_tetrics_core_Field(droppableField).numRows__I() - $imul(newTetrics.field__Lcom_yuiwai_tetrics_core_FieldType__Lcom_yuiwai_tetrics_core_Field(droppableField).numRows__I(), 10)) | 0)) | 0) + $imul(oldTetrics.field__Lcom_yuiwai_tetrics_core_FieldType__Lcom_yuiwai_tetrics_core_Field(droppableField).numRows__I(), 5)) | 0)
+  var offset$2 = x$15.$$und1$mcI$sp__I();
+  var width$2 = x$15.$$und2$mcI$sp__I();
+  return ((((oldTetrics.field__Lcom_yuiwai_tetrics_core_FieldType__Lcom_yuiwai_tetrics_core_Field(droppableField).slice__I__I__Lcom_yuiwai_tetrics_core_Slice(offset$2, width$2).spaces__I() - $imul(newTetrics.field__Lcom_yuiwai_tetrics_core_FieldType__Lcom_yuiwai_tetrics_core_Field(droppableField).slice__I__I__Lcom_yuiwai_tetrics_core_Slice(offset$2, width$2).spaces__I(), 2)) | 0) + ((oldTetrics.field__Lcom_yuiwai_tetrics_core_FieldType__Lcom_yuiwai_tetrics_core_Field(droppableField).numRows__I() - $imul(newTetrics.field__Lcom_yuiwai_tetrics_core_FieldType__Lcom_yuiwai_tetrics_core_Field(droppableField).numRows__I(), 5)) | 0)) | 0)
 }
-function $f_Lcom_yuiwai_tetrics_core_DefaultAutoPlayer__$$anonfun$act$12__pLcom_yuiwai_tetrics_core_DefaultAutoPlayer__Lcom_yuiwai_tetrics_core_TetricsAction__V($thiz, a) {
+function $f_Lcom_yuiwai_tetrics_core_DefaultAutoPlayer__$$anonfun$act$8__pLcom_yuiwai_tetrics_core_DefaultAutoPlayer__Lcom_yuiwai_tetrics_core_TetricsAction__V($thiz, a) {
   $thiz.com$yuiwai$tetrics$core$DefaultAutoPlayer$$queue__scm_Queue().enqueue__sc_Seq__V($m_sjsr_package$().toScalaVarArgs__sjs_js_Array__sc_Seq([a]))
 }
 function $f_Lcom_yuiwai_tetrics_core_DefaultAutoPlayer__$$anonfun$evalMove$1__pLcom_yuiwai_tetrics_core_DefaultAutoPlayer__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_MoveAction__Lcom_yuiwai_tetrics_core_Tetrics($thiz, tetrics$1, moveAction$1) {
@@ -2239,6 +2256,18 @@ function $m_Lcom_yuiwai_tetrics_core_DefaultAutoPlayer$() {
     $n_Lcom_yuiwai_tetrics_core_DefaultAutoPlayer$ = new $c_Lcom_yuiwai_tetrics_core_DefaultAutoPlayer$().init___()
   };
   return $n_Lcom_yuiwai_tetrics_core_DefaultAutoPlayer$
+}
+function $is_Lcom_yuiwai_tetrics_core_DropAction(obj) {
+  return (!(!((obj && obj.$classData) && obj.$classData.ancestors.Lcom_yuiwai_tetrics_core_DropAction)))
+}
+function $as_Lcom_yuiwai_tetrics_core_DropAction(obj) {
+  return (($is_Lcom_yuiwai_tetrics_core_DropAction(obj) || (obj === null)) ? obj : $throwClassCastException(obj, "com.yuiwai.tetrics.core.DropAction"))
+}
+function $isArrayOf_Lcom_yuiwai_tetrics_core_DropAction(obj, depth) {
+  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.Lcom_yuiwai_tetrics_core_DropAction)))
+}
+function $asArrayOf_Lcom_yuiwai_tetrics_core_DropAction(obj, depth) {
+  return (($isArrayOf_Lcom_yuiwai_tetrics_core_DropAction(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lcom.yuiwai.tetrics.core.DropAction;", depth))
 }
 /** @constructor */
 function $c_Lcom_yuiwai_tetrics_core_EventBus$() {
@@ -2287,6 +2316,30 @@ function $f_Lcom_yuiwai_tetrics_core_LabeledFieldView__drawBottomLabel__Lcom_yui
 }
 function $f_Lcom_yuiwai_tetrics_core_LabeledFieldView__$$init$__V($thiz) {
   /*<skip>*/
+}
+function $is_Lcom_yuiwai_tetrics_core_MoveAction(obj) {
+  return (!(!((obj && obj.$classData) && obj.$classData.ancestors.Lcom_yuiwai_tetrics_core_MoveAction)))
+}
+function $as_Lcom_yuiwai_tetrics_core_MoveAction(obj) {
+  return (($is_Lcom_yuiwai_tetrics_core_MoveAction(obj) || (obj === null)) ? obj : $throwClassCastException(obj, "com.yuiwai.tetrics.core.MoveAction"))
+}
+function $isArrayOf_Lcom_yuiwai_tetrics_core_MoveAction(obj, depth) {
+  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.Lcom_yuiwai_tetrics_core_MoveAction)))
+}
+function $asArrayOf_Lcom_yuiwai_tetrics_core_MoveAction(obj, depth) {
+  return (($isArrayOf_Lcom_yuiwai_tetrics_core_MoveAction(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lcom.yuiwai.tetrics.core.MoveAction;", depth))
+}
+function $is_Lcom_yuiwai_tetrics_core_RotateAction(obj) {
+  return (!(!((obj && obj.$classData) && obj.$classData.ancestors.Lcom_yuiwai_tetrics_core_RotateAction)))
+}
+function $as_Lcom_yuiwai_tetrics_core_RotateAction(obj) {
+  return (($is_Lcom_yuiwai_tetrics_core_RotateAction(obj) || (obj === null)) ? obj : $throwClassCastException(obj, "com.yuiwai.tetrics.core.RotateAction"))
+}
+function $isArrayOf_Lcom_yuiwai_tetrics_core_RotateAction(obj, depth) {
+  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.Lcom_yuiwai_tetrics_core_RotateAction)))
+}
+function $asArrayOf_Lcom_yuiwai_tetrics_core_RotateAction(obj, depth) {
+  return (($isArrayOf_Lcom_yuiwai_tetrics_core_RotateAction(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lcom.yuiwai.tetrics.core.RotateAction;", depth))
 }
 /** @constructor */
 function $c_Lcom_yuiwai_tetrics_core_RowsOps$() {
@@ -2451,14 +2504,14 @@ $c_Lcom_yuiwai_tetrics_core_TenTen$StatsWrap.prototype.achieved__Z = (function()
 });
 $c_Lcom_yuiwai_tetrics_core_TenTen$StatsWrap.prototype.achievedFields__sci_Map = (function() {
   return $as_sci_Map(this.fields__sci_Map().filter__F1__O(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function($this) {
-    return (function(x$13$2) {
-      var x$13 = $as_T2(x$13$2);
-      return $this.$$anonfun$achievedFields$1__p1__T2__Z(x$13)
+    return (function(x$9$2) {
+      var x$9 = $as_T2(x$9$2);
+      return $this.$$anonfun$achievedFields$1__p1__T2__Z(x$9)
     })
   })(this))))
 });
-$c_Lcom_yuiwai_tetrics_core_TenTen$StatsWrap.prototype.$$anonfun$achievedFields$1__p1__T2__Z = (function(x$13) {
-  return ($as_Lcom_yuiwai_tetrics_core_FieldStats(x$13.$$und2__O()).deletedRows__I() >= $m_Lcom_yuiwai_tetrics_core_TenTen$().goalRowCount__I())
+$c_Lcom_yuiwai_tetrics_core_TenTen$StatsWrap.prototype.$$anonfun$achievedFields$1__p1__T2__Z = (function(x$9) {
+  return ($as_Lcom_yuiwai_tetrics_core_FieldStats(x$9.$$und2__O()).deletedRows__I() >= $m_Lcom_yuiwai_tetrics_core_TenTen$().goalRowCount__I())
 });
 $c_Lcom_yuiwai_tetrics_core_TenTen$StatsWrap.prototype.init___Lcom_yuiwai_tetrics_core_TetricsStats = (function(stats) {
   this.stats$1 = stats;
@@ -3463,8 +3516,76 @@ $c_s_LowPriorityImplicits.prototype.init___ = (function() {
   $c_O.prototype.init___.call(this);
   return this
 });
+function $f_s_PartialFunction__applyOrElse__O__F1__O($thiz, x, $default) {
+  return ($thiz.isDefinedAt__O__Z(x) ? $thiz.apply__O__O(x) : $default.apply__O__O(x))
+}
+function $f_s_PartialFunction__runWith__F1__F1($thiz, action) {
+  return new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function($this, action) {
+    return (function(x$2) {
+      var x = x$2;
+      return $this.$$anonfun$runWith$1__ps_PartialFunction__F1__O__Z(action, x)
+    })
+  })($thiz, action))
+}
+function $f_s_PartialFunction__$$anonfun$runWith$1__ps_PartialFunction__F1__O__Z($thiz, action$1, x) {
+  var z = $thiz.applyOrElse__O__F1__O(x, $m_s_PartialFunction$().scala$PartialFunction$$checkFallback__s_PartialFunction());
+  return ((!$m_s_PartialFunction$().scala$PartialFunction$$fallbackOccurred__O__Z(z)) && (action$1.apply__O__O(z), true))
+}
 function $f_s_PartialFunction__$$init$__V($thiz) {
   /*<skip>*/
+}
+/** @constructor */
+function $c_s_PartialFunction$() {
+  $c_O.call(this);
+  this.scala$PartialFunction$$fallback$undpf$f = null;
+  this.scala$PartialFunction$$constFalse$f = null;
+  this.empty$undpf$1 = null
+}
+$c_s_PartialFunction$.prototype = new $h_O();
+$c_s_PartialFunction$.prototype.constructor = $c_s_PartialFunction$;
+/** @constructor */
+function $h_s_PartialFunction$() {
+  /*<skip>*/
+}
+$h_s_PartialFunction$.prototype = $c_s_PartialFunction$.prototype;
+$c_s_PartialFunction$.prototype.scala$PartialFunction$$checkFallback__s_PartialFunction = (function() {
+  return this.scala$PartialFunction$$fallback$undpf$f
+});
+$c_s_PartialFunction$.prototype.scala$PartialFunction$$fallbackOccurred__O__Z = (function(x) {
+  return (this.scala$PartialFunction$$fallback$undpf$f === x)
+});
+$c_s_PartialFunction$.prototype.empty__s_PartialFunction = (function() {
+  return this.empty$undpf$1
+});
+$c_s_PartialFunction$.prototype.$$anonfun$constFalse$1__p1__O__Z = (function(x$1) {
+  return false
+});
+$c_s_PartialFunction$.prototype.init___ = (function() {
+  $c_O.prototype.init___.call(this);
+  $n_s_PartialFunction$ = this;
+  this.scala$PartialFunction$$fallback$undpf$f = new $c_s_PartialFunction$$anonfun$1().init___();
+  this.scala$PartialFunction$$constFalse$f = new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function($this) {
+    return (function(x$1$2) {
+      var x$1 = x$1$2;
+      return $this.$$anonfun$constFalse$1__p1__O__Z(x$1)
+    })
+  })(this));
+  this.empty$undpf$1 = new $c_s_PartialFunction$$anon$1().init___();
+  return this
+});
+var $d_s_PartialFunction$ = new $TypeData().initClass({
+  s_PartialFunction$: 0
+}, false, "scala.PartialFunction$", {
+  s_PartialFunction$: 1,
+  O: 1
+});
+$c_s_PartialFunction$.prototype.$classData = $d_s_PartialFunction$;
+var $n_s_PartialFunction$ = (void 0);
+function $m_s_PartialFunction$() {
+  if ((!$n_s_PartialFunction$)) {
+    $n_s_PartialFunction$ = new $c_s_PartialFunction$().init___()
+  };
+  return $n_s_PartialFunction$
 }
 /** @constructor */
 function $c_s_Predef$ArrowAssoc$() {
@@ -6011,6 +6132,9 @@ $c_sjsr_RuntimeString$.prototype.valueOf__Z__T = (function(b) {
 $c_sjsr_RuntimeString$.prototype.valueOf__I__T = (function(i) {
   return $objectToString(i)
 });
+$c_sjsr_RuntimeString$.prototype.valueOf__D__T = (function(d) {
+  return $objectToString(d)
+});
 $c_sjsr_RuntimeString$.prototype.valueOf__O__T = (function(obj) {
   return ("" + obj)
 });
@@ -7619,6 +7743,37 @@ var $d_sr_BoxedUnit = new $TypeData().initClass({
   return (x === (void 0))
 }));
 /** @constructor */
+function $c_sr_DoubleRef() {
+  $c_O.call(this);
+  this.elem$1 = 0.0
+}
+$c_sr_DoubleRef.prototype = new $h_O();
+$c_sr_DoubleRef.prototype.constructor = $c_sr_DoubleRef;
+/** @constructor */
+function $h_sr_DoubleRef() {
+  /*<skip>*/
+}
+$h_sr_DoubleRef.prototype = $c_sr_DoubleRef.prototype;
+$c_sr_DoubleRef.prototype.elem__D = (function() {
+  return this.elem$1
+});
+$c_sr_DoubleRef.prototype.toString__T = (function() {
+  return $m_sjsr_RuntimeString$().valueOf__D__T(this.elem__D())
+});
+$c_sr_DoubleRef.prototype.init___D = (function(elem) {
+  this.elem$1 = elem;
+  $c_O.prototype.init___.call(this);
+  return this
+});
+var $d_sr_DoubleRef = new $TypeData().initClass({
+  sr_DoubleRef: 0
+}, false, "scala.runtime.DoubleRef", {
+  sr_DoubleRef: 1,
+  O: 1,
+  Ljava_io_Serializable: 1
+});
+$c_sr_DoubleRef.prototype.$classData = $d_sr_DoubleRef;
+/** @constructor */
 function $c_sr_IntRef() {
   $c_O.call(this);
   this.elem$1 = 0
@@ -7786,8 +7941,8 @@ $c_Lcom_yuiwai_tetrics_core_DefaultAutoPlayer$$anon$1.prototype.init___ = (funct
   $f_Lcom_yuiwai_tetrics_core_DefaultAutoPlayer__$$init$__V(this);
   return this
 });
-$c_Lcom_yuiwai_tetrics_core_DefaultAutoPlayer$$anon$1.prototype.$$anonfun$act$12__pLcom_yuiwai_tetrics_core_DefaultAutoPlayer__Lcom_yuiwai_tetrics_core_TetricsAction__V = (function(a) {
-  $f_Lcom_yuiwai_tetrics_core_DefaultAutoPlayer__$$anonfun$act$12__pLcom_yuiwai_tetrics_core_DefaultAutoPlayer__Lcom_yuiwai_tetrics_core_TetricsAction__V(this, a)
+$c_Lcom_yuiwai_tetrics_core_DefaultAutoPlayer$$anon$1.prototype.$$anonfun$act$8__pLcom_yuiwai_tetrics_core_DefaultAutoPlayer__Lcom_yuiwai_tetrics_core_TetricsAction__V = (function(a) {
+  $f_Lcom_yuiwai_tetrics_core_DefaultAutoPlayer__$$anonfun$act$8__pLcom_yuiwai_tetrics_core_DefaultAutoPlayer__Lcom_yuiwai_tetrics_core_TetricsAction__V(this, a)
 });
 $c_Lcom_yuiwai_tetrics_core_DefaultAutoPlayer$$anon$1.prototype.$$anonfun$evalMove$1__pLcom_yuiwai_tetrics_core_DefaultAutoPlayer__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_MoveAction__Lcom_yuiwai_tetrics_core_Tetrics = (function(tetrics$1, moveAction$1) {
   return $f_Lcom_yuiwai_tetrics_core_DefaultAutoPlayer__$$anonfun$evalMove$1__pLcom_yuiwai_tetrics_core_DefaultAutoPlayer__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_MoveAction__Lcom_yuiwai_tetrics_core_Tetrics(this, tetrics$1, moveAction$1)
@@ -7824,8 +7979,8 @@ $c_Lcom_yuiwai_tetrics_core_DefaultAutoPlayer$Eval$.prototype.apply__sci_List__L
 });
 $c_Lcom_yuiwai_tetrics_core_DefaultAutoPlayer$Eval$.prototype.apply__Lcom_yuiwai_tetrics_core_TetricsAction__Lcom_yuiwai_tetrics_core_DefaultAutoPlayer$Eval = (function(action) {
   var jsx$1 = this.$$outer$1.Eval__Lcom_yuiwai_tetrics_core_DefaultAutoPlayer$Eval$();
-  var x$16 = action;
-  return jsx$1.apply__sci_List__Lcom_yuiwai_tetrics_core_DefaultAutoPlayer$Eval($m_sci_Nil$().$$colon$colon__O__sci_List(x$16))
+  var x$12 = action;
+  return jsx$1.apply__sci_List__Lcom_yuiwai_tetrics_core_DefaultAutoPlayer$Eval($m_sci_Nil$().$$colon$colon__O__sci_List(x$12))
 });
 $c_Lcom_yuiwai_tetrics_core_DefaultAutoPlayer$Eval$.prototype.init___Lcom_yuiwai_tetrics_core_DefaultAutoPlayer = (function($$outer) {
   if (($$outer === null)) {
@@ -8038,7 +8193,7 @@ function $c_Lcom_yuiwai_tetrics_js_Example$() {
   this.com$yuiwai$tetrics$js$Example$$ctx$1 = null;
   this.game$1 = null;
   this.serializer$1 = null;
-  this.handleEvent$1 = null;
+  this.handleMessageEvent$1 = null;
   this.setting$1 = null
 }
 $c_Lcom_yuiwai_tetrics_js_Example$.prototype = new $h_O();
@@ -8092,17 +8247,24 @@ $c_Lcom_yuiwai_tetrics_js_Example$.prototype.initWithParent__V = (function() {
   })
 });
 $c_Lcom_yuiwai_tetrics_js_Example$.prototype.init__Lcom_yuiwai_tetrics_core_TetricsGame = (function() {
+  var updater$lzy = new $c_sr_LazyRef().init___();
+  var lastUpdated = $m_sr_DoubleRef$().create__D__sr_DoubleRef(0.0);
   $m_Lorg_scalajs_dom_package$().window__Lorg_scalajs_dom_raw_Window().document.body.appendChild(this.canvas__p1__Lorg_scalajs_dom_raw_Element());
   $m_Lorg_scalajs_dom_package$().window__Lorg_scalajs_dom_raw_Window().onkeydown = (function(arg1$2) {
     var arg1 = arg1$2;
-    $m_Lcom_yuiwai_tetrics_js_Example$().com$yuiwai$tetrics$js$Example$$$anonfun$init$1__Lorg_scalajs_dom_raw_KeyboardEvent__V(arg1)
+    $m_Lcom_yuiwai_tetrics_js_Example$().com$yuiwai$tetrics$js$Example$$$anonfun$init$2__Lorg_scalajs_dom_raw_KeyboardEvent__V(arg1)
   });
+  $m_Lorg_scalajs_dom_package$().window__Lorg_scalajs_dom_raw_Window().requestAnimationFrame((function(f) {
+    return (function(arg1) {
+      return f.apply__O__O(arg1)
+    })
+  })(this.updater$1__p1__sr_DoubleRef__sr_LazyRef__F1(lastUpdated, updater$lzy)));
   this.canvas__p1__Lorg_scalajs_dom_raw_Element().setAttribute("width", $objectToString((($imul($as_Lcom_yuiwai_tetrics_js_JsView(this.game__p1__Lcom_yuiwai_tetrics_core_TenTen()).offset__I(), 2) + $imul($as_Lcom_yuiwai_tetrics_js_JsView(this.game__p1__Lcom_yuiwai_tetrics_core_TenTen()).tileWidth__I(), 32)) | 0)));
   this.canvas__p1__Lorg_scalajs_dom_raw_Element().setAttribute("height", $objectToString((($imul($as_Lcom_yuiwai_tetrics_js_JsView(this.game__p1__Lcom_yuiwai_tetrics_core_TenTen()).offset__I(), 2) + $imul($as_Lcom_yuiwai_tetrics_js_JsView(this.game__p1__Lcom_yuiwai_tetrics_core_TenTen()).tileHeight__I(), 32)) | 0)));
   return this.game__p1__Lcom_yuiwai_tetrics_core_TenTen()
 });
-$c_Lcom_yuiwai_tetrics_js_Example$.prototype.handleEvent__F1 = (function() {
-  return this.handleEvent$1
+$c_Lcom_yuiwai_tetrics_js_Example$.prototype.handleMessageEvent__F1 = (function() {
+  return this.handleMessageEvent$1
 });
 $c_Lcom_yuiwai_tetrics_js_Example$.prototype.$$anonfun$initWithParent$2__p1__Lorg_scalajs_dom_raw_MessageEvent__Lcom_yuiwai_tetrics_core_TetricsEvent__V = (function(messageEvent$1, gameEvent) {
   var qual$1 = messageEvent$1.source;
@@ -8131,7 +8293,7 @@ $c_Lcom_yuiwai_tetrics_js_Example$.prototype.com$yuiwai$tetrics$js$Example$$$ano
         return (function(arg1) {
           return f.apply__O__O(arg1)
         })
-      })($m_Lcom_yuiwai_tetrics_js_Example$().handleEvent__F1());
+      })($m_Lcom_yuiwai_tetrics_js_Example$().handleMessageEvent__F1());
       return (void 0)
     } else if (("autoPlay" === x1)) {
       var game = $m_Lcom_yuiwai_tetrics_js_Example$().init__Lcom_yuiwai_tetrics_core_TetricsGame();
@@ -8149,10 +8311,33 @@ $c_Lcom_yuiwai_tetrics_js_Example$.prototype.com$yuiwai$tetrics$js$Example$$$ano
     return (void 0)
   }
 });
-$c_Lcom_yuiwai_tetrics_js_Example$.prototype.com$yuiwai$tetrics$js$Example$$$anonfun$init$2__Lorg_scalajs_dom_raw_KeyboardEvent__V = (function(x$1) {
+$c_Lcom_yuiwai_tetrics_js_Example$.prototype.$$anonfun$init$1__p1__sr_DoubleRef__sr_LazyRef__D__V = (function(lastUpdated$1, updater$lzy$1, timestamp) {
+  $as_Lcom_yuiwai_tetrics_js_AnimationModule($m_Lcom_yuiwai_tetrics_js_Example$().game__p1__Lcom_yuiwai_tetrics_core_TenTen()).update__D__O__V((timestamp - lastUpdated$1.elem$1), $m_Lcom_yuiwai_tetrics_js_Example$().com$yuiwai$tetrics$js$Example$$ctx__Lorg_scalajs_dom_raw_CanvasRenderingContext2D());
+  lastUpdated$1.elem$1 = timestamp;
+  $m_Lorg_scalajs_dom_package$().window__Lorg_scalajs_dom_raw_Window().requestAnimationFrame((function(f) {
+    return (function(arg1) {
+      return f.apply__O__O(arg1)
+    })
+  })(this.updater$1__p1__sr_DoubleRef__sr_LazyRef__F1(lastUpdated$1, updater$lzy$1)))
+});
+$c_Lcom_yuiwai_tetrics_js_Example$.prototype.updater$lzycompute$1__p1__sr_DoubleRef__sr_LazyRef__F1 = (function(lastUpdated$1, updater$lzy$1) {
+  if ((updater$lzy$1 === null)) {
+    throw new $c_jl_NullPointerException().init___()
+  };
+  return (updater$lzy$1.initialized__Z() ? $as_F1(updater$lzy$1.value__O()) : $as_F1(updater$lzy$1.initialize__O__O(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function($this, lastUpdated$1, updater$lzy$1) {
+    return (function(timestamp$2) {
+      var timestamp = $uD(timestamp$2);
+      $this.$$anonfun$init$1__p1__sr_DoubleRef__sr_LazyRef__D__V(lastUpdated$1, updater$lzy$1, timestamp)
+    })
+  })(this, lastUpdated$1, updater$lzy$1)))))
+});
+$c_Lcom_yuiwai_tetrics_js_Example$.prototype.updater$1__p1__sr_DoubleRef__sr_LazyRef__F1 = (function(lastUpdated$1, updater$lzy$1) {
+  return (updater$lzy$1.initialized__Z() ? $as_F1(updater$lzy$1.value__O()) : this.updater$lzycompute$1__p1__sr_DoubleRef__sr_LazyRef__F1(lastUpdated$1, updater$lzy$1))
+});
+$c_Lcom_yuiwai_tetrics_js_Example$.prototype.com$yuiwai$tetrics$js$Example$$$anonfun$init$3__Lorg_scalajs_dom_raw_KeyboardEvent__V = (function(x$1) {
   $m_Lcom_yuiwai_tetrics_js_Example$().keyDown$und$eq__p1__Z__V(false)
 });
-$c_Lcom_yuiwai_tetrics_js_Example$.prototype.com$yuiwai$tetrics$js$Example$$$anonfun$init$1__Lorg_scalajs_dom_raw_KeyboardEvent__V = (function(e) {
+$c_Lcom_yuiwai_tetrics_js_Example$.prototype.com$yuiwai$tetrics$js$Example$$$anonfun$init$2__Lorg_scalajs_dom_raw_KeyboardEvent__V = (function(e) {
   if ((!$m_Lcom_yuiwai_tetrics_js_Example$().keyDown__p1__Z())) {
     $m_Lcom_yuiwai_tetrics_js_Example$().keyDown$und$eq__p1__Z__V(true);
     var x1 = $uI(e.keyCode);
@@ -8168,10 +8353,10 @@ $c_Lcom_yuiwai_tetrics_js_Example$.prototype.com$yuiwai$tetrics$js$Example$$$ano
   };
   $m_Lorg_scalajs_dom_package$().window__Lorg_scalajs_dom_raw_Window().onkeyup = (function(arg1$2) {
     var arg1 = arg1$2;
-    $m_Lcom_yuiwai_tetrics_js_Example$().com$yuiwai$tetrics$js$Example$$$anonfun$init$2__Lorg_scalajs_dom_raw_KeyboardEvent__V(arg1)
+    $m_Lcom_yuiwai_tetrics_js_Example$().com$yuiwai$tetrics$js$Example$$$anonfun$init$3__Lorg_scalajs_dom_raw_KeyboardEvent__V(arg1)
   })
 });
-$c_Lcom_yuiwai_tetrics_js_Example$.prototype.$$anonfun$handleEvent$1__p1__Lorg_scalajs_dom_raw_MessageEvent__V = (function(messageEvent) {
+$c_Lcom_yuiwai_tetrics_js_Example$.prototype.$$anonfun$handleMessageEvent$1__p1__Lorg_scalajs_dom_raw_MessageEvent__V = (function(messageEvent) {
   $m_Lcom_yuiwai_tetrics_js_Example$().game__p1__Lcom_yuiwai_tetrics_core_TenTen().act__Lcom_yuiwai_tetrics_core_TetricsEvent__O__Lcom_yuiwai_tetrics_core_TetricsSetting__V($m_Lcom_yuiwai_tetrics_js_Example$().serializer__p1__Lcom_yuiwai_tetrics_core_ByteEventSerializer().deserialize__AB__Lcom_yuiwai_tetrics_core_TetricsEvent($m_sjs_js_typedarray_package$().int8Array2ByteArray__sjs_js_typedarray_Int8Array__AB(messageEvent.data)), $m_Lcom_yuiwai_tetrics_js_Example$().com$yuiwai$tetrics$js$Example$$ctx__Lorg_scalajs_dom_raw_CanvasRenderingContext2D(), $m_Lcom_yuiwai_tetrics_js_Example$().setting__Lcom_yuiwai_tetrics_core_TetricsSetting())
 });
 $c_Lcom_yuiwai_tetrics_js_Example$.prototype.init___ = (function() {
@@ -8185,10 +8370,10 @@ $c_Lcom_yuiwai_tetrics_js_Example$.prototype.init___ = (function() {
   this.com$yuiwai$tetrics$js$Example$$ctx$1 = this.canvas__p1__Lorg_scalajs_dom_raw_Element().getContext("2d");
   this.game$1 = new $c_Lcom_yuiwai_tetrics_js_Example$$anon$1().init___();
   this.serializer$1 = new $c_Lcom_yuiwai_tetrics_js_Example$$anon$2().init___();
-  this.handleEvent$1 = new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function($this) {
+  this.handleMessageEvent$1 = new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function($this) {
     return (function(messageEvent$2) {
       var messageEvent = messageEvent$2;
-      $this.$$anonfun$handleEvent$1__p1__Lorg_scalajs_dom_raw_MessageEvent__V(messageEvent)
+      $this.$$anonfun$handleMessageEvent$1__p1__Lorg_scalajs_dom_raw_MessageEvent__V(messageEvent)
     })
   })(this));
   return this
@@ -8255,14 +8440,26 @@ $c_Lcom_yuiwai_tetrics_js_Example$$anon$2.prototype.init___ = (function() {
 $c_Lcom_yuiwai_tetrics_js_Example$$anon$2.prototype.s__pLcom_yuiwai_tetrics_core_ByteEventSerializer__Lcom_yuiwai_tetrics_core_GameType__AB = (function(gameType) {
   return $f_Lcom_yuiwai_tetrics_core_ByteEventSerializer__s__pLcom_yuiwai_tetrics_core_ByteEventSerializer__Lcom_yuiwai_tetrics_core_GameType__AB(this, gameType)
 });
+$c_Lcom_yuiwai_tetrics_js_Example$$anon$2.prototype.$$anonfun$s$1__pLcom_yuiwai_tetrics_core_ByteEventSerializer__sc_Seq__I__I__I = (function(x1$1, acc, i) {
+  return $f_Lcom_yuiwai_tetrics_core_ByteEventSerializer__$$anonfun$s$1__pLcom_yuiwai_tetrics_core_ByteEventSerializer__sc_Seq__I__I__I(this, x1$1, acc, i)
+});
 $c_Lcom_yuiwai_tetrics_js_Example$$anon$2.prototype.s__pLcom_yuiwai_tetrics_core_ByteEventSerializer__Lcom_yuiwai_tetrics_core_Block__AB = (function(block) {
   return $f_Lcom_yuiwai_tetrics_core_ByteEventSerializer__s__pLcom_yuiwai_tetrics_core_ByteEventSerializer__Lcom_yuiwai_tetrics_core_Block__AB(this, block)
 });
 $c_Lcom_yuiwai_tetrics_js_Example$$anon$2.prototype.a2bl__pLcom_yuiwai_tetrics_core_ByteEventSerializer__AB__Lcom_yuiwai_tetrics_core_Block = (function(a) {
   return $f_Lcom_yuiwai_tetrics_core_ByteEventSerializer__a2bl__pLcom_yuiwai_tetrics_core_ByteEventSerializer__AB__Lcom_yuiwai_tetrics_core_Block(this, a)
 });
+$c_Lcom_yuiwai_tetrics_js_Example$$anon$2.prototype.$$anonfun$i2sq$1__pLcom_yuiwai_tetrics_core_ByteEventSerializer__I__sc_Seq__I__sc_Seq = (function(i$1, acc, j) {
+  return $f_Lcom_yuiwai_tetrics_core_ByteEventSerializer__$$anonfun$i2sq$1__pLcom_yuiwai_tetrics_core_ByteEventSerializer__I__sc_Seq__I__sc_Seq(this, i$1, acc, j)
+});
 $c_Lcom_yuiwai_tetrics_js_Example$$anon$2.prototype.a2rt__pLcom_yuiwai_tetrics_core_ByteEventSerializer__AB__Lcom_yuiwai_tetrics_core_RotationType = (function(a) {
   return $f_Lcom_yuiwai_tetrics_core_ByteEventSerializer__a2rt__pLcom_yuiwai_tetrics_core_ByteEventSerializer__AB__Lcom_yuiwai_tetrics_core_RotationType(this, a)
+});
+$c_Lcom_yuiwai_tetrics_js_Example$$anon$2.prototype.i2sq__pLcom_yuiwai_tetrics_core_ByteEventSerializer__I__sc_Seq = (function(i) {
+  return $f_Lcom_yuiwai_tetrics_core_ByteEventSerializer__i2sq__pLcom_yuiwai_tetrics_core_ByteEventSerializer__I__sc_Seq(this, i)
+});
+$c_Lcom_yuiwai_tetrics_js_Example$$anon$2.prototype.s__pLcom_yuiwai_tetrics_core_ByteEventSerializer__sc_Seq__AB = (function(filledRows) {
+  return $f_Lcom_yuiwai_tetrics_core_ByteEventSerializer__s__pLcom_yuiwai_tetrics_core_ByteEventSerializer__sc_Seq__AB(this, filledRows)
 });
 $c_Lcom_yuiwai_tetrics_js_Example$$anon$2.prototype.s__pLcom_yuiwai_tetrics_core_ByteEventSerializer__I__AB = (function(intVal) {
   return $f_Lcom_yuiwai_tetrics_core_ByteEventSerializer__s__pLcom_yuiwai_tetrics_core_ByteEventSerializer__I__AB(this, intVal)
@@ -8276,11 +8473,11 @@ $c_Lcom_yuiwai_tetrics_js_Example$$anon$2.prototype.s__pLcom_yuiwai_tetrics_core
 $c_Lcom_yuiwai_tetrics_js_Example$$anon$2.prototype.a2df__pLcom_yuiwai_tetrics_core_ByteEventSerializer__AB__Lcom_yuiwai_tetrics_core_DroppableField = (function(a) {
   return $f_Lcom_yuiwai_tetrics_core_ByteEventSerializer__a2df__pLcom_yuiwai_tetrics_core_ByteEventSerializer__AB__Lcom_yuiwai_tetrics_core_DroppableField(this, a)
 });
-$c_Lcom_yuiwai_tetrics_js_Example$$anon$2.prototype.s__pLcom_yuiwai_tetrics_core_ByteEventSerializer__Lcom_yuiwai_tetrics_core_FieldType__AB = (function(fieldType) {
-  return $f_Lcom_yuiwai_tetrics_core_ByteEventSerializer__s__pLcom_yuiwai_tetrics_core_ByteEventSerializer__Lcom_yuiwai_tetrics_core_FieldType__AB(this, fieldType)
-});
 $c_Lcom_yuiwai_tetrics_js_Example$$anon$2.prototype.s__pLcom_yuiwai_tetrics_core_ByteEventSerializer__Lcom_yuiwai_tetrics_core_MoveType__AB = (function(moveType) {
   return $f_Lcom_yuiwai_tetrics_core_ByteEventSerializer__s__pLcom_yuiwai_tetrics_core_ByteEventSerializer__Lcom_yuiwai_tetrics_core_MoveType__AB(this, moveType)
+});
+$c_Lcom_yuiwai_tetrics_js_Example$$anon$2.prototype.s__pLcom_yuiwai_tetrics_core_ByteEventSerializer__Lcom_yuiwai_tetrics_core_FieldType__AB = (function(fieldType) {
+  return $f_Lcom_yuiwai_tetrics_core_ByteEventSerializer__s__pLcom_yuiwai_tetrics_core_ByteEventSerializer__Lcom_yuiwai_tetrics_core_FieldType__AB(this, fieldType)
 });
 $c_Lcom_yuiwai_tetrics_js_Example$$anon$2.prototype.a2mt__pLcom_yuiwai_tetrics_core_ByteEventSerializer__AB__Lcom_yuiwai_tetrics_core_MoveType = (function(a) {
   return $f_Lcom_yuiwai_tetrics_core_ByteEventSerializer__a2mt__pLcom_yuiwai_tetrics_core_ByteEventSerializer__AB__Lcom_yuiwai_tetrics_core_MoveType(this, a)
@@ -10330,6 +10527,35 @@ function $m_sjsr_RuntimeLong$() {
   return $n_sjsr_RuntimeLong$
 }
 /** @constructor */
+function $c_sr_AbstractPartialFunction() {
+  $c_O.call(this)
+}
+$c_sr_AbstractPartialFunction.prototype = new $h_O();
+$c_sr_AbstractPartialFunction.prototype.constructor = $c_sr_AbstractPartialFunction;
+/** @constructor */
+function $h_sr_AbstractPartialFunction() {
+  /*<skip>*/
+}
+$h_sr_AbstractPartialFunction.prototype = $c_sr_AbstractPartialFunction.prototype;
+$c_sr_AbstractPartialFunction.prototype.runWith__F1__F1 = (function(action) {
+  return $f_s_PartialFunction__runWith__F1__F1(this, action)
+});
+$c_sr_AbstractPartialFunction.prototype.toString__T = (function() {
+  return $f_F1__toString__T(this)
+});
+$c_sr_AbstractPartialFunction.prototype.apply__O__O = (function(x) {
+  return this.applyOrElse__O__F1__O(x, $m_s_PartialFunction$().empty__s_PartialFunction())
+});
+$c_sr_AbstractPartialFunction.prototype.apply$mcVI$sp__I__V = (function(x) {
+  this.apply__O__O(x)
+});
+$c_sr_AbstractPartialFunction.prototype.init___ = (function() {
+  $c_O.prototype.init___.call(this);
+  $f_F1__$$init$__V(this);
+  $f_s_PartialFunction__$$init$__V(this);
+  return this
+});
+/** @constructor */
 function $c_sr_BooleanRef$() {
   $c_O.call(this)
 }
@@ -10363,6 +10589,41 @@ function $m_sr_BooleanRef$() {
     $n_sr_BooleanRef$ = new $c_sr_BooleanRef$().init___()
   };
   return $n_sr_BooleanRef$
+}
+/** @constructor */
+function $c_sr_DoubleRef$() {
+  $c_O.call(this)
+}
+$c_sr_DoubleRef$.prototype = new $h_O();
+$c_sr_DoubleRef$.prototype.constructor = $c_sr_DoubleRef$;
+/** @constructor */
+function $h_sr_DoubleRef$() {
+  /*<skip>*/
+}
+$h_sr_DoubleRef$.prototype = $c_sr_DoubleRef$.prototype;
+$c_sr_DoubleRef$.prototype.create__D__sr_DoubleRef = (function(elem) {
+  return new $c_sr_DoubleRef().init___D(elem)
+});
+$c_sr_DoubleRef$.prototype.init___ = (function() {
+  $c_O.prototype.init___.call(this);
+  $n_sr_DoubleRef$ = this;
+  return this
+});
+var $d_sr_DoubleRef$ = new $TypeData().initClass({
+  sr_DoubleRef$: 0
+}, false, "scala.runtime.DoubleRef$", {
+  sr_DoubleRef$: 1,
+  O: 1,
+  s_Serializable: 1,
+  Ljava_io_Serializable: 1
+});
+$c_sr_DoubleRef$.prototype.$classData = $d_sr_DoubleRef$;
+var $n_sr_DoubleRef$ = (void 0);
+function $m_sr_DoubleRef$() {
+  if ((!$n_sr_DoubleRef$)) {
+    $n_sr_DoubleRef$ = new $c_sr_DoubleRef$().init___()
+  };
+  return $n_sr_DoubleRef$
 }
 /** @constructor */
 function $c_sr_IntRef$() {
@@ -10479,6 +10740,46 @@ var $d_sr_LazyInt = new $TypeData().initClass({
   Ljava_io_Serializable: 1
 });
 $c_sr_LazyInt.prototype.$classData = $d_sr_LazyInt;
+/** @constructor */
+function $c_sr_LazyRef() {
+  $c_O.call(this);
+  this.$$undinitialized$1 = false;
+  this.$$undvalue$1 = null
+}
+$c_sr_LazyRef.prototype = new $h_O();
+$c_sr_LazyRef.prototype.constructor = $c_sr_LazyRef;
+/** @constructor */
+function $h_sr_LazyRef() {
+  /*<skip>*/
+}
+$h_sr_LazyRef.prototype = $c_sr_LazyRef.prototype;
+$c_sr_LazyRef.prototype.initialized__Z = (function() {
+  return this.$$undinitialized$1
+});
+$c_sr_LazyRef.prototype.value__O = (function() {
+  return this.$$undvalue$1
+});
+$c_sr_LazyRef.prototype.initialize__O__O = (function(value) {
+  this.$$undvalue$1 = value;
+  this.$$undinitialized$1 = true;
+  return value
+});
+$c_sr_LazyRef.prototype.toString__T = (function() {
+  return ("LazyRef " + (this.$$undinitialized$1 ? ("of: " + this.$$undvalue$1) : "thunk"))
+});
+$c_sr_LazyRef.prototype.init___ = (function() {
+  $c_O.prototype.init___.call(this);
+  return this
+});
+var $d_sr_LazyRef = new $TypeData().initClass({
+  sr_LazyRef: 0
+}, false, "scala.runtime.LazyRef", {
+  sr_LazyRef: 1,
+  O: 1,
+  s_Serializable: 1,
+  Ljava_io_Serializable: 1
+});
+$c_sr_LazyRef.prototype.$classData = $d_sr_LazyRef;
 var $d_sr_Nothing$ = new $TypeData().initClass({
   sr_Nothing$: 0
 }, false, "scala.runtime.Nothing$", {
@@ -10522,31 +10823,43 @@ function $m_sr_ObjectRef$() {
   };
   return $n_sr_ObjectRef$
 }
-function $f_Lcom_yuiwai_tetrics_core_TetricsGame__modify__pLcom_yuiwai_tetrics_core_TetricsGame__F1__Lcom_yuiwai_tetrics_core_Tetrics($thiz, f) {
+function $f_Lcom_yuiwai_tetrics_core_TetricsGame__beforeAction__Lcom_yuiwai_tetrics_core_TetricsAction__Lcom_yuiwai_tetrics_core_TetricsAction($thiz, action) {
+  return action
+}
+function $f_Lcom_yuiwai_tetrics_core_TetricsGame__afterAction__Lcom_yuiwai_tetrics_core_TetricsAction__V($thiz, action) {
+  /*<skip>*/
+}
+function $f_Lcom_yuiwai_tetrics_core_TetricsGame__modify__F1__Lcom_yuiwai_tetrics_core_Tetrics($thiz, f) {
   $thiz.tetrics$und$eq__Lcom_yuiwai_tetrics_core_Tetrics__V($as_Lcom_yuiwai_tetrics_core_Tetrics(f.apply__O__O($thiz.tetrics__Lcom_yuiwai_tetrics_core_Tetrics())));
   return $thiz.tetrics__Lcom_yuiwai_tetrics_core_Tetrics()
 }
+function $f_Lcom_yuiwai_tetrics_core_TetricsGame__block__V($thiz) {
+  $thiz.com$yuiwai$tetrics$core$TetricsGame$$status$und$eq__Lcom_yuiwai_tetrics_core_GameStatus__V(new $c_Lcom_yuiwai_tetrics_core_GameStatusBlocking().init___Lcom_yuiwai_tetrics_core_GameStatus__s_Option($thiz.com$yuiwai$tetrics$core$TetricsGame$$status__Lcom_yuiwai_tetrics_core_GameStatus(), $m_Lcom_yuiwai_tetrics_core_GameStatusBlocking$().apply$default$2__s_Option()))
+}
+function $f_Lcom_yuiwai_tetrics_core_TetricsGame__update__D__O__V($thiz, delta, ctx) {
+  /*<skip>*/
+}
 function $f_Lcom_yuiwai_tetrics_core_TetricsGame__start__O__Lcom_yuiwai_tetrics_core_TetricsSetting__V($thiz, ctx, setting) {
-  $thiz.status$und$eq__Lcom_yuiwai_tetrics_core_GameStatus__V($m_Lcom_yuiwai_tetrics_core_GameStatusPlaying$());
+  $thiz.com$yuiwai$tetrics$core$TetricsGame$$status$und$eq__Lcom_yuiwai_tetrics_core_GameStatus__V($m_Lcom_yuiwai_tetrics_core_GameStatusPlaying$());
   $thiz.publish__Lcom_yuiwai_tetrics_core_TetricsEvent__Lcom_yuiwai_tetrics_core_EventBus__V(new $c_Lcom_yuiwai_tetrics_core_GameStarted().init___Lcom_yuiwai_tetrics_core_GameType($thiz.gameType__Lcom_yuiwai_tetrics_core_GameType()), $thiz.eventBus__Lcom_yuiwai_tetrics_core_EventBus());
   $thiz.subscribe__F1__Lcom_yuiwai_tetrics_core_EventBus__V($thiz.handler__F1(), $thiz.eventBus__Lcom_yuiwai_tetrics_core_EventBus());
   $thiz.drawAll__Lcom_yuiwai_tetrics_core_Tetrics__O__V($thiz.randPut__Lcom_yuiwai_tetrics_core_TetricsSetting__Lcom_yuiwai_tetrics_core_Tetrics(setting), ctx)
 }
 function $f_Lcom_yuiwai_tetrics_core_TetricsGame__end__V($thiz) {
-  $thiz.status$und$eq__Lcom_yuiwai_tetrics_core_GameStatus__V($m_Lcom_yuiwai_tetrics_core_GameStatusFinished$());
+  $thiz.com$yuiwai$tetrics$core$TetricsGame$$status$und$eq__Lcom_yuiwai_tetrics_core_GameStatus__V($m_Lcom_yuiwai_tetrics_core_GameStatusFinished$());
   $thiz.unsubscribe__Lcom_yuiwai_tetrics_core_EventBus__V($thiz.eventBus__Lcom_yuiwai_tetrics_core_EventBus());
   $thiz.publish__Lcom_yuiwai_tetrics_core_TetricsEvent__Lcom_yuiwai_tetrics_core_EventBus__V(new $c_Lcom_yuiwai_tetrics_core_GameEnded().init___Lcom_yuiwai_tetrics_core_GameType($thiz.gameType__Lcom_yuiwai_tetrics_core_GameType()), $thiz.eventBus__Lcom_yuiwai_tetrics_core_EventBus())
 }
 function $f_Lcom_yuiwai_tetrics_core_TetricsGame__readOnly__O__Lcom_yuiwai_tetrics_core_TetricsSetting__V($thiz, ctx, setting) {
-  $thiz.status$und$eq__Lcom_yuiwai_tetrics_core_GameStatus__V($m_Lcom_yuiwai_tetrics_core_GameStatusPlaying$());
+  $thiz.com$yuiwai$tetrics$core$TetricsGame$$status$und$eq__Lcom_yuiwai_tetrics_core_GameStatus__V($m_Lcom_yuiwai_tetrics_core_GameStatusPlaying$());
   $thiz.drawAll__Lcom_yuiwai_tetrics_core_Tetrics__O__V($thiz.tetrics__Lcom_yuiwai_tetrics_core_Tetrics(), ctx)
 }
 function $f_Lcom_yuiwai_tetrics_core_TetricsGame__autoPlay__O__Lcom_yuiwai_tetrics_core_TetricsSetting__V($thiz, ctx, setting) {
-  $thiz.status$und$eq__Lcom_yuiwai_tetrics_core_GameStatus__V($m_Lcom_yuiwai_tetrics_core_GameStatusAutoPlay$());
+  $thiz.com$yuiwai$tetrics$core$TetricsGame$$status$und$eq__Lcom_yuiwai_tetrics_core_GameStatus__V($m_Lcom_yuiwai_tetrics_core_GameStatusAutoPlay$());
   $thiz.drawAll__Lcom_yuiwai_tetrics_core_Tetrics__O__V($thiz.randPut__Lcom_yuiwai_tetrics_core_TetricsSetting__Lcom_yuiwai_tetrics_core_Tetrics(setting), ctx)
 }
 function $f_Lcom_yuiwai_tetrics_core_TetricsGame__randPut__Lcom_yuiwai_tetrics_core_TetricsSetting__Lcom_yuiwai_tetrics_core_Tetrics($thiz, setting) {
-  return $thiz.modify__pLcom_yuiwai_tetrics_core_TetricsGame__F1__Lcom_yuiwai_tetrics_core_Tetrics(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function($this, setting) {
+  return $thiz.modify__F1__Lcom_yuiwai_tetrics_core_Tetrics(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function($this, setting) {
     return (function(x$1$2) {
       var x$1 = $as_Lcom_yuiwai_tetrics_core_Tetrics(x$1$2);
       return $this.$$anonfun$randPut$1__pLcom_yuiwai_tetrics_core_TetricsGame__Lcom_yuiwai_tetrics_core_TetricsSetting__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_Tetrics(setting, x$1)
@@ -10554,7 +10867,7 @@ function $f_Lcom_yuiwai_tetrics_core_TetricsGame__randPut__Lcom_yuiwai_tetrics_c
   })($thiz, setting)))
 }
 function $f_Lcom_yuiwai_tetrics_core_TetricsGame__input__O__O__Lcom_yuiwai_tetrics_core_TetricsSetting__V($thiz, event, ctx, setting) {
-  var x1 = $thiz.status__Lcom_yuiwai_tetrics_core_GameStatus();
+  var x1 = $thiz.com$yuiwai$tetrics$core$TetricsGame$$status__Lcom_yuiwai_tetrics_core_GameStatus();
   var x = $m_Lcom_yuiwai_tetrics_core_GameStatusPlaying$();
   var x$2 = x1;
   if (((x === null) ? (x$2 === null) : x.equals__O__Z(x$2))) {
@@ -10568,27 +10881,27 @@ function $f_Lcom_yuiwai_tetrics_core_TetricsGame__input__O__O__Lcom_yuiwai_tetri
 }
 function $f_Lcom_yuiwai_tetrics_core_TetricsGame__act__Lcom_yuiwai_tetrics_core_TetricsEvent__O__Lcom_yuiwai_tetrics_core_TetricsSetting__V($thiz, event, ctx, setting) {
   var x1 = event;
-  matchEnd10: {
+  matchEnd11: {
     if ($is_Lcom_yuiwai_tetrics_core_BlockAdded(x1)) {
       var x2 = $as_Lcom_yuiwai_tetrics_core_BlockAdded(x1);
       var block = x2.block__Lcom_yuiwai_tetrics_core_Block();
       if ((block !== null)) {
-        var x7 = block;
-        $thiz.drawCentral__Lcom_yuiwai_tetrics_core_Tetrics__O__V($thiz.modify__pLcom_yuiwai_tetrics_core_TetricsGame__F1__Lcom_yuiwai_tetrics_core_Tetrics(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function($this, x7) {
+        var x8 = block;
+        $thiz.drawCentral__Lcom_yuiwai_tetrics_core_Tetrics__O__V($thiz.modify__F1__Lcom_yuiwai_tetrics_core_Tetrics(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function($this, x8) {
           return (function(x$2$2) {
             var x$2 = $as_Lcom_yuiwai_tetrics_core_Tetrics(x$2$2);
-            return $this.$$anonfun$act$1__pLcom_yuiwai_tetrics_core_TetricsGame__Lcom_yuiwai_tetrics_core_Block__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_Tetrics(x7, x$2)
+            return $this.$$anonfun$act$1__pLcom_yuiwai_tetrics_core_TetricsGame__Lcom_yuiwai_tetrics_core_Block__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_Tetrics(x8, x$2)
           })
-        })($thiz, x7))), ctx);
-        break matchEnd10
+        })($thiz, x8))), ctx);
+        break matchEnd11
       }
     };
     if ($is_Lcom_yuiwai_tetrics_core_BlockRotated(x1)) {
       var x3 = $as_Lcom_yuiwai_tetrics_core_BlockRotated(x1);
       var rotationType = x3.rotationType__Lcom_yuiwai_tetrics_core_RotationType();
       if ((rotationType !== null)) {
-        var x8 = rotationType;
-        var x1$2 = x8;
+        var x9 = rotationType;
+        var x1$2 = x9;
         var x = $m_Lcom_yuiwai_tetrics_core_RotationLeft$();
         var x$3 = x1$2;
         if (((x === null) ? (x$3 === null) : x.equals__O__Z(x$3))) {
@@ -10604,7 +10917,7 @@ function $f_Lcom_yuiwai_tetrics_core_TetricsGame__act__Lcom_yuiwai_tetrics_core_
           }
         };
         $thiz.act__Lcom_yuiwai_tetrics_core_TetricsAction__O__Lcom_yuiwai_tetrics_core_TetricsSetting__V(jsx$1, ctx, setting);
-        break matchEnd10
+        break matchEnd11
       }
     };
     if ($is_Lcom_yuiwai_tetrics_core_BlockMoved(x1)) {
@@ -10638,7 +10951,7 @@ function $f_Lcom_yuiwai_tetrics_core_TetricsGame__act__Lcom_yuiwai_tetrics_core_
         }
       };
       $thiz.act__Lcom_yuiwai_tetrics_core_TetricsAction__O__Lcom_yuiwai_tetrics_core_TetricsSetting__V(jsx$2, ctx, setting);
-      break matchEnd10
+      break matchEnd11
     };
     if ($is_Lcom_yuiwai_tetrics_core_BlockDropped(x1)) {
       var x5 = $as_Lcom_yuiwai_tetrics_core_BlockDropped(x1);
@@ -10671,127 +10984,78 @@ function $f_Lcom_yuiwai_tetrics_core_TetricsGame__act__Lcom_yuiwai_tetrics_core_
         }
       };
       $thiz.act__Lcom_yuiwai_tetrics_core_TetricsAction__O__Lcom_yuiwai_tetrics_core_TetricsSetting__V(jsx$3, ctx, setting);
-      break matchEnd10
+      break matchEnd11
     }
   }
 }
 function $f_Lcom_yuiwai_tetrics_core_TetricsGame__act__Lcom_yuiwai_tetrics_core_TetricsAction__O__Lcom_yuiwai_tetrics_core_TetricsSetting__V($thiz, action, ctx, setting) {
-  var x1 = action;
-  var x = $m_Lcom_yuiwai_tetrics_core_MoveLeftAction$();
-  var x$2 = x1;
-  if (((x === null) ? (x$2 === null) : x.equals__O__Z(x$2))) {
-    $thiz.drawCentral__Lcom_yuiwai_tetrics_core_Tetrics__O__V($thiz.modify__pLcom_yuiwai_tetrics_core_TetricsGame__F1__Lcom_yuiwai_tetrics_core_Tetrics(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function($this) {
+  var x1 = $thiz.beforeAction__Lcom_yuiwai_tetrics_core_TetricsAction__Lcom_yuiwai_tetrics_core_TetricsAction(action);
+  if ($is_Lcom_yuiwai_tetrics_core_MoveAction(x1)) {
+    var x2 = $as_Lcom_yuiwai_tetrics_core_MoveAction(x1);
+    $thiz.drawCentral__Lcom_yuiwai_tetrics_core_Tetrics__O__V($thiz.modify__F1__Lcom_yuiwai_tetrics_core_Tetrics(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function($this, x2) {
       return (function(x$3$2) {
         var x$3 = $as_Lcom_yuiwai_tetrics_core_Tetrics(x$3$2);
-        return $this.$$anonfun$act$2__pLcom_yuiwai_tetrics_core_TetricsGame__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_Tetrics(x$3)
+        return $this.$$anonfun$act$2__pLcom_yuiwai_tetrics_core_TetricsGame__Lcom_yuiwai_tetrics_core_MoveAction__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_Tetrics(x2, x$3)
       })
-    })($thiz))), ctx)
+    })($thiz, x2))), ctx)
+  } else if ($is_Lcom_yuiwai_tetrics_core_RotateAction(x1)) {
+    var x3 = $as_Lcom_yuiwai_tetrics_core_RotateAction(x1);
+    $thiz.drawCentral__Lcom_yuiwai_tetrics_core_Tetrics__O__V($thiz.modify__F1__Lcom_yuiwai_tetrics_core_Tetrics(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function(this$2, x3) {
+      return (function(x$4$2) {
+        var x$4 = $as_Lcom_yuiwai_tetrics_core_Tetrics(x$4$2);
+        return this$2.$$anonfun$act$3__pLcom_yuiwai_tetrics_core_TetricsGame__Lcom_yuiwai_tetrics_core_RotateAction__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_Tetrics(x3, x$4)
+      })
+    })($thiz, x3))), ctx)
   } else {
-    var x$4 = $m_Lcom_yuiwai_tetrics_core_MoveRightAction$();
-    var x$5 = x1;
-    if (((x$4 === null) ? (x$5 === null) : x$4.equals__O__Z(x$5))) {
-      $thiz.drawCentral__Lcom_yuiwai_tetrics_core_Tetrics__O__V($thiz.modify__pLcom_yuiwai_tetrics_core_TetricsGame__F1__Lcom_yuiwai_tetrics_core_Tetrics(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function(this$2) {
-        return (function(x$4$2$2) {
-          var x$4$2 = $as_Lcom_yuiwai_tetrics_core_Tetrics(x$4$2$2);
-          return this$2.$$anonfun$act$3__pLcom_yuiwai_tetrics_core_TetricsGame__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_Tetrics(x$4$2)
+    var x = $m_Lcom_yuiwai_tetrics_core_DropLeftAction$();
+    var x$2 = x1;
+    if (((x === null) ? (x$2 === null) : x.equals__O__Z(x$2))) {
+      $thiz.drawLeft__Lcom_yuiwai_tetrics_core_Tetrics__O__V($thiz.modify__F1__Lcom_yuiwai_tetrics_core_Tetrics(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function(this$3) {
+        return (function(x$5$2) {
+          var x$5 = $as_Lcom_yuiwai_tetrics_core_Tetrics(x$5$2);
+          return this$3.$$anonfun$act$4__pLcom_yuiwai_tetrics_core_TetricsGame__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_Tetrics(x$5)
         })
-      })($thiz))), ctx)
+      })($thiz))), ctx);
+      $thiz.drawCentral__Lcom_yuiwai_tetrics_core_Tetrics__O__V($thiz.randPut__Lcom_yuiwai_tetrics_core_TetricsSetting__Lcom_yuiwai_tetrics_core_Tetrics(setting), ctx)
     } else {
-      var x$6 = $m_Lcom_yuiwai_tetrics_core_MoveUpAction$();
+      var x$6 = $m_Lcom_yuiwai_tetrics_core_DropRightAction$();
       var x$7 = x1;
       if (((x$6 === null) ? (x$7 === null) : x$6.equals__O__Z(x$7))) {
-        $thiz.drawCentral__Lcom_yuiwai_tetrics_core_Tetrics__O__V($thiz.modify__pLcom_yuiwai_tetrics_core_TetricsGame__F1__Lcom_yuiwai_tetrics_core_Tetrics(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function(this$3) {
-          return (function(x$5$2$2) {
-            var x$5$2 = $as_Lcom_yuiwai_tetrics_core_Tetrics(x$5$2$2);
-            return this$3.$$anonfun$act$4__pLcom_yuiwai_tetrics_core_TetricsGame__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_Tetrics(x$5$2)
+        $thiz.drawRight__Lcom_yuiwai_tetrics_core_Tetrics__O__V($thiz.modify__F1__Lcom_yuiwai_tetrics_core_Tetrics(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function(this$4) {
+          return (function(x$6$2$2) {
+            var x$6$2 = $as_Lcom_yuiwai_tetrics_core_Tetrics(x$6$2$2);
+            return this$4.$$anonfun$act$5__pLcom_yuiwai_tetrics_core_TetricsGame__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_Tetrics(x$6$2)
           })
-        })($thiz))), ctx)
+        })($thiz))), ctx);
+        $thiz.drawCentral__Lcom_yuiwai_tetrics_core_Tetrics__O__V($thiz.randPut__Lcom_yuiwai_tetrics_core_TetricsSetting__Lcom_yuiwai_tetrics_core_Tetrics(setting), ctx)
       } else {
-        var x$8 = $m_Lcom_yuiwai_tetrics_core_MoveDownAction$();
+        var x$8 = $m_Lcom_yuiwai_tetrics_core_DropTopAction$();
         var x$9 = x1;
         if (((x$8 === null) ? (x$9 === null) : x$8.equals__O__Z(x$9))) {
-          $thiz.drawCentral__Lcom_yuiwai_tetrics_core_Tetrics__O__V($thiz.modify__pLcom_yuiwai_tetrics_core_TetricsGame__F1__Lcom_yuiwai_tetrics_core_Tetrics(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function(this$4) {
-            return (function(x$6$2$2) {
-              var x$6$2 = $as_Lcom_yuiwai_tetrics_core_Tetrics(x$6$2$2);
-              return this$4.$$anonfun$act$5__pLcom_yuiwai_tetrics_core_TetricsGame__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_Tetrics(x$6$2)
+          $thiz.drawTop__Lcom_yuiwai_tetrics_core_Tetrics__O__V($thiz.modify__F1__Lcom_yuiwai_tetrics_core_Tetrics(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function(this$5) {
+            return (function(x$7$2$2) {
+              var x$7$2 = $as_Lcom_yuiwai_tetrics_core_Tetrics(x$7$2$2);
+              return this$5.$$anonfun$act$6__pLcom_yuiwai_tetrics_core_TetricsGame__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_Tetrics(x$7$2)
             })
-          })($thiz))), ctx)
+          })($thiz))), ctx);
+          $thiz.drawCentral__Lcom_yuiwai_tetrics_core_Tetrics__O__V($thiz.randPut__Lcom_yuiwai_tetrics_core_TetricsSetting__Lcom_yuiwai_tetrics_core_Tetrics(setting), ctx)
         } else {
-          var x$10 = $m_Lcom_yuiwai_tetrics_core_DropLeftAction$();
+          var x$10 = $m_Lcom_yuiwai_tetrics_core_DropBottomAction$();
           var x$11 = x1;
           if (((x$10 === null) ? (x$11 === null) : x$10.equals__O__Z(x$11))) {
-            $thiz.drawLeft__Lcom_yuiwai_tetrics_core_Tetrics__O__V($thiz.modify__pLcom_yuiwai_tetrics_core_TetricsGame__F1__Lcom_yuiwai_tetrics_core_Tetrics(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function(this$5) {
-              return (function(x$7$2$2) {
-                var x$7$2 = $as_Lcom_yuiwai_tetrics_core_Tetrics(x$7$2$2);
-                return this$5.$$anonfun$act$6__pLcom_yuiwai_tetrics_core_TetricsGame__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_Tetrics(x$7$2)
+            $thiz.drawBottom__Lcom_yuiwai_tetrics_core_Tetrics__O__V($thiz.modify__F1__Lcom_yuiwai_tetrics_core_Tetrics(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function(this$6) {
+              return (function(x$8$2$2) {
+                var x$8$2 = $as_Lcom_yuiwai_tetrics_core_Tetrics(x$8$2$2);
+                return this$6.$$anonfun$act$7__pLcom_yuiwai_tetrics_core_TetricsGame__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_Tetrics(x$8$2)
               })
             })($thiz))), ctx);
             $thiz.drawCentral__Lcom_yuiwai_tetrics_core_Tetrics__O__V($thiz.randPut__Lcom_yuiwai_tetrics_core_TetricsSetting__Lcom_yuiwai_tetrics_core_Tetrics(setting), ctx)
-          } else {
-            var x$12 = $m_Lcom_yuiwai_tetrics_core_DropRightAction$();
-            var x$13 = x1;
-            if (((x$12 === null) ? (x$13 === null) : x$12.equals__O__Z(x$13))) {
-              $thiz.drawRight__Lcom_yuiwai_tetrics_core_Tetrics__O__V($thiz.modify__pLcom_yuiwai_tetrics_core_TetricsGame__F1__Lcom_yuiwai_tetrics_core_Tetrics(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function(this$6) {
-                return (function(x$8$2$2) {
-                  var x$8$2 = $as_Lcom_yuiwai_tetrics_core_Tetrics(x$8$2$2);
-                  return this$6.$$anonfun$act$7__pLcom_yuiwai_tetrics_core_TetricsGame__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_Tetrics(x$8$2)
-                })
-              })($thiz))), ctx);
-              $thiz.drawCentral__Lcom_yuiwai_tetrics_core_Tetrics__O__V($thiz.randPut__Lcom_yuiwai_tetrics_core_TetricsSetting__Lcom_yuiwai_tetrics_core_Tetrics(setting), ctx)
-            } else {
-              var x$14 = $m_Lcom_yuiwai_tetrics_core_DropTopAction$();
-              var x$15 = x1;
-              if (((x$14 === null) ? (x$15 === null) : x$14.equals__O__Z(x$15))) {
-                $thiz.drawTop__Lcom_yuiwai_tetrics_core_Tetrics__O__V($thiz.modify__pLcom_yuiwai_tetrics_core_TetricsGame__F1__Lcom_yuiwai_tetrics_core_Tetrics(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function(this$7) {
-                  return (function(x$9$2$2) {
-                    var x$9$2 = $as_Lcom_yuiwai_tetrics_core_Tetrics(x$9$2$2);
-                    return this$7.$$anonfun$act$8__pLcom_yuiwai_tetrics_core_TetricsGame__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_Tetrics(x$9$2)
-                  })
-                })($thiz))), ctx);
-                $thiz.drawCentral__Lcom_yuiwai_tetrics_core_Tetrics__O__V($thiz.randPut__Lcom_yuiwai_tetrics_core_TetricsSetting__Lcom_yuiwai_tetrics_core_Tetrics(setting), ctx)
-              } else {
-                var x$16 = $m_Lcom_yuiwai_tetrics_core_DropBottomAction$();
-                var x$17 = x1;
-                if (((x$16 === null) ? (x$17 === null) : x$16.equals__O__Z(x$17))) {
-                  $thiz.drawBottom__Lcom_yuiwai_tetrics_core_Tetrics__O__V($thiz.modify__pLcom_yuiwai_tetrics_core_TetricsGame__F1__Lcom_yuiwai_tetrics_core_Tetrics(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function(this$8) {
-                    return (function(x$10$2$2) {
-                      var x$10$2 = $as_Lcom_yuiwai_tetrics_core_Tetrics(x$10$2$2);
-                      return this$8.$$anonfun$act$9__pLcom_yuiwai_tetrics_core_TetricsGame__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_Tetrics(x$10$2)
-                    })
-                  })($thiz))), ctx);
-                  $thiz.drawCentral__Lcom_yuiwai_tetrics_core_Tetrics__O__V($thiz.randPut__Lcom_yuiwai_tetrics_core_TetricsSetting__Lcom_yuiwai_tetrics_core_Tetrics(setting), ctx)
-                } else {
-                  var x$18 = $m_Lcom_yuiwai_tetrics_core_TurnLeftAction$();
-                  var x$19 = x1;
-                  if (((x$18 === null) ? (x$19 === null) : x$18.equals__O__Z(x$19))) {
-                    $thiz.drawCentral__Lcom_yuiwai_tetrics_core_Tetrics__O__V($thiz.modify__pLcom_yuiwai_tetrics_core_TetricsGame__F1__Lcom_yuiwai_tetrics_core_Tetrics(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function(this$9) {
-                      return (function(x$11$2$2) {
-                        var x$11$2 = $as_Lcom_yuiwai_tetrics_core_Tetrics(x$11$2$2);
-                        return this$9.$$anonfun$act$10__pLcom_yuiwai_tetrics_core_TetricsGame__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_Tetrics(x$11$2)
-                      })
-                    })($thiz))), ctx)
-                  } else {
-                    var x$20 = $m_Lcom_yuiwai_tetrics_core_TurnRightAction$();
-                    var x$21 = x1;
-                    if (((x$20 === null) ? (x$21 === null) : x$20.equals__O__Z(x$21))) {
-                      $thiz.drawCentral__Lcom_yuiwai_tetrics_core_Tetrics__O__V($thiz.modify__pLcom_yuiwai_tetrics_core_TetricsGame__F1__Lcom_yuiwai_tetrics_core_Tetrics(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function(this$10) {
-                        return (function(x$12$2$2) {
-                          var x$12$2 = $as_Lcom_yuiwai_tetrics_core_Tetrics(x$12$2$2);
-                          return this$10.$$anonfun$act$11__pLcom_yuiwai_tetrics_core_TetricsGame__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_Tetrics(x$12$2)
-                        })
-                      })($thiz))), ctx)
-                    } else {
-                      throw new $c_s_MatchError().init___O(x1)
-                    }
-                  }
-                }
-              }
-            }
           }
         }
       }
     }
-  }
+  };
+  $thiz.afterAction__Lcom_yuiwai_tetrics_core_TetricsAction__V(action)
 }
 function $f_Lcom_yuiwai_tetrics_core_TetricsGame__act__Lcom_yuiwai_tetrics_core_AutoPlayer__O__Lcom_yuiwai_tetrics_core_TetricsSetting__V($thiz, autoPlayer, ctx, setting) {
   $thiz.act__Lcom_yuiwai_tetrics_core_TetricsAction__O__Lcom_yuiwai_tetrics_core_TetricsSetting__V(autoPlayer.act__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_TetricsAction($thiz.tetrics__Lcom_yuiwai_tetrics_core_Tetrics()), ctx, setting)
@@ -10802,41 +11066,29 @@ function $f_Lcom_yuiwai_tetrics_core_TetricsGame__$$anonfun$randPut$1__pLcom_yui
 function $f_Lcom_yuiwai_tetrics_core_TetricsGame__$$anonfun$input$1__pLcom_yuiwai_tetrics_core_TetricsGame__O__Lcom_yuiwai_tetrics_core_TetricsSetting__Lcom_yuiwai_tetrics_core_TetricsAction__V($thiz, ctx$1, setting$2, action) {
   $thiz.act__Lcom_yuiwai_tetrics_core_TetricsAction__O__Lcom_yuiwai_tetrics_core_TetricsSetting__V(action, ctx$1, setting$2)
 }
-function $f_Lcom_yuiwai_tetrics_core_TetricsGame__$$anonfun$act$1__pLcom_yuiwai_tetrics_core_TetricsGame__Lcom_yuiwai_tetrics_core_Block__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_Tetrics($thiz, x7$1, x$2) {
-  return x$2.putCenter__Lcom_yuiwai_tetrics_core_Block__Lcom_yuiwai_tetrics_core_Tetrics(x7$1)
+function $f_Lcom_yuiwai_tetrics_core_TetricsGame__$$anonfun$act$1__pLcom_yuiwai_tetrics_core_TetricsGame__Lcom_yuiwai_tetrics_core_Block__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_Tetrics($thiz, x8$1, x$2) {
+  return x$2.putCenter__Lcom_yuiwai_tetrics_core_Block__Lcom_yuiwai_tetrics_core_Tetrics(x8$1)
 }
-function $f_Lcom_yuiwai_tetrics_core_TetricsGame__$$anonfun$act$2__pLcom_yuiwai_tetrics_core_TetricsGame__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_Tetrics($thiz, x$3) {
-  return x$3.moveLeft__Lcom_yuiwai_tetrics_core_Tetrics()
+function $f_Lcom_yuiwai_tetrics_core_TetricsGame__$$anonfun$act$2__pLcom_yuiwai_tetrics_core_TetricsGame__Lcom_yuiwai_tetrics_core_MoveAction__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_Tetrics($thiz, x2$1, x$3) {
+  return x$3.act__Lcom_yuiwai_tetrics_core_TetricsAction__Lcom_yuiwai_tetrics_core_Tetrics(x2$1)
 }
-function $f_Lcom_yuiwai_tetrics_core_TetricsGame__$$anonfun$act$3__pLcom_yuiwai_tetrics_core_TetricsGame__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_Tetrics($thiz, x$4) {
-  return x$4.moveRight__Lcom_yuiwai_tetrics_core_Tetrics()
+function $f_Lcom_yuiwai_tetrics_core_TetricsGame__$$anonfun$act$3__pLcom_yuiwai_tetrics_core_TetricsGame__Lcom_yuiwai_tetrics_core_RotateAction__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_Tetrics($thiz, x3$1, x$4) {
+  return x$4.act__Lcom_yuiwai_tetrics_core_TetricsAction__Lcom_yuiwai_tetrics_core_Tetrics(x3$1)
 }
 function $f_Lcom_yuiwai_tetrics_core_TetricsGame__$$anonfun$act$4__pLcom_yuiwai_tetrics_core_TetricsGame__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_Tetrics($thiz, x$5) {
-  return x$5.moveUp__Lcom_yuiwai_tetrics_core_Tetrics()
+  return x$5.dropLeft__Lcom_yuiwai_tetrics_core_Tetrics().normalizeLeft__Lcom_yuiwai_tetrics_core_Tetrics()
 }
 function $f_Lcom_yuiwai_tetrics_core_TetricsGame__$$anonfun$act$5__pLcom_yuiwai_tetrics_core_TetricsGame__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_Tetrics($thiz, x$6) {
-  return x$6.moveDown__Lcom_yuiwai_tetrics_core_Tetrics()
+  return x$6.dropRight__Lcom_yuiwai_tetrics_core_Tetrics().normalizeRight__Lcom_yuiwai_tetrics_core_Tetrics()
 }
 function $f_Lcom_yuiwai_tetrics_core_TetricsGame__$$anonfun$act$6__pLcom_yuiwai_tetrics_core_TetricsGame__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_Tetrics($thiz, x$7) {
-  return x$7.dropLeft__Lcom_yuiwai_tetrics_core_Tetrics().normalizeLeft__Lcom_yuiwai_tetrics_core_Tetrics()
+  return x$7.dropTop__Lcom_yuiwai_tetrics_core_Tetrics().normalizeTop__Lcom_yuiwai_tetrics_core_Tetrics()
 }
 function $f_Lcom_yuiwai_tetrics_core_TetricsGame__$$anonfun$act$7__pLcom_yuiwai_tetrics_core_TetricsGame__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_Tetrics($thiz, x$8) {
-  return x$8.dropRight__Lcom_yuiwai_tetrics_core_Tetrics().normalizeRight__Lcom_yuiwai_tetrics_core_Tetrics()
-}
-function $f_Lcom_yuiwai_tetrics_core_TetricsGame__$$anonfun$act$8__pLcom_yuiwai_tetrics_core_TetricsGame__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_Tetrics($thiz, x$9) {
-  return x$9.dropTop__Lcom_yuiwai_tetrics_core_Tetrics().normalizeTop__Lcom_yuiwai_tetrics_core_Tetrics()
-}
-function $f_Lcom_yuiwai_tetrics_core_TetricsGame__$$anonfun$act$9__pLcom_yuiwai_tetrics_core_TetricsGame__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_Tetrics($thiz, x$10) {
-  return x$10.dropBottom__Lcom_yuiwai_tetrics_core_Tetrics().normalizeBottom__Lcom_yuiwai_tetrics_core_Tetrics()
-}
-function $f_Lcom_yuiwai_tetrics_core_TetricsGame__$$anonfun$act$10__pLcom_yuiwai_tetrics_core_TetricsGame__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_Tetrics($thiz, x$11) {
-  return x$11.turnLeft__Lcom_yuiwai_tetrics_core_Tetrics()
-}
-function $f_Lcom_yuiwai_tetrics_core_TetricsGame__$$anonfun$act$11__pLcom_yuiwai_tetrics_core_TetricsGame__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_Tetrics($thiz, x$12) {
-  return x$12.turnRight__Lcom_yuiwai_tetrics_core_Tetrics()
+  return x$8.dropBottom__Lcom_yuiwai_tetrics_core_Tetrics().normalizeBottom__Lcom_yuiwai_tetrics_core_Tetrics()
 }
 function $f_Lcom_yuiwai_tetrics_core_TetricsGame__$$init$__V($thiz) {
-  $thiz.status$und$eq__Lcom_yuiwai_tetrics_core_GameStatus__V($m_Lcom_yuiwai_tetrics_core_GameStatusReady$())
+  $thiz.com$yuiwai$tetrics$core$TetricsGame$$status$und$eq__Lcom_yuiwai_tetrics_core_GameStatus__V($m_Lcom_yuiwai_tetrics_core_GameStatusReady$())
 }
 function $is_Ljava_io_IOException(obj) {
   return (!(!((obj && obj.$classData) && obj.$classData.ancestors.Ljava_io_IOException)))
@@ -12489,8 +12741,8 @@ $c_Lcom_yuiwai_tetrics_core_Block.prototype.equals__O__Z = (function(x$1) {
     }
   }
 });
-$c_Lcom_yuiwai_tetrics_core_Block.prototype.$$anonfun$new$6__p1__Lcom_yuiwai_tetrics_core_Row__Z = (function(x$14) {
-  return (x$14.width__I() === this.width__I())
+$c_Lcom_yuiwai_tetrics_core_Block.prototype.$$anonfun$new$6__p1__Lcom_yuiwai_tetrics_core_Row__Z = (function(x$13) {
+  return (x$13.width__I() === this.width__I())
 });
 $c_Lcom_yuiwai_tetrics_core_Block.prototype.$$anonfun$new$5__p1__T = (function() {
   return "Block contains different width rows."
@@ -12501,9 +12753,9 @@ $c_Lcom_yuiwai_tetrics_core_Block.prototype.init___sci_List__I = (function(rows,
   $c_O.prototype.init___.call(this);
   $f_s_Product__$$init$__V(this);
   $m_s_Predef$().require__Z__F0__V(rows.forall__F1__Z(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function($this) {
-    return (function(x$14$2) {
-      var x$14 = $as_Lcom_yuiwai_tetrics_core_Row(x$14$2);
-      return $this.$$anonfun$new$6__p1__Lcom_yuiwai_tetrics_core_Row__Z(x$14)
+    return (function(x$13$2) {
+      var x$13 = $as_Lcom_yuiwai_tetrics_core_Row(x$13$2);
+      return $this.$$anonfun$new$6__p1__Lcom_yuiwai_tetrics_core_Row__Z(x$13)
     })
   })(this))), new $c_sjsr_AnonFunction0().init___sjs_js_Function0((function(this$2) {
     return (function() {
@@ -12562,12 +12814,12 @@ $c_Lcom_yuiwai_tetrics_core_DefaultAutoPlayer$Eval.prototype.$$greater$greater__
   return ((this.total__I() > eval$2.total__I()) ? this : eval$2)
 });
 $c_Lcom_yuiwai_tetrics_core_DefaultAutoPlayer$Eval.prototype.moved__Lcom_yuiwai_tetrics_core_MoveAction__Lcom_yuiwai_tetrics_core_DefaultAutoPlayer$Eval = (function(moveAction) {
-  var x$14 = moveAction;
-  return this.copy__sci_List__I__Lcom_yuiwai_tetrics_core_DefaultAutoPlayer$Eval(this.actions__sci_List().$$colon$colon__O__sci_List(x$14), this.copy$default$2__I())
+  var x$10 = moveAction;
+  return this.copy__sci_List__I__Lcom_yuiwai_tetrics_core_DefaultAutoPlayer$Eval(this.actions__sci_List().$$colon$colon__O__sci_List(x$10), this.copy$default$2__I())
 });
 $c_Lcom_yuiwai_tetrics_core_DefaultAutoPlayer$Eval.prototype.dropped__I__Lcom_yuiwai_tetrics_core_DroppableField__Lcom_yuiwai_tetrics_core_DefaultAutoPlayer$Eval = (function(point, droppableField) {
-  var x$15 = droppableField.action__Lcom_yuiwai_tetrics_core_DropAction();
-  return this.copy__sci_List__I__Lcom_yuiwai_tetrics_core_DefaultAutoPlayer$Eval(this.actions__sci_List().$$colon$colon__O__sci_List(x$15), ((this.points__I() + point) | 0))
+  var x$11 = droppableField.action__Lcom_yuiwai_tetrics_core_DropAction();
+  return this.copy__sci_List__I__Lcom_yuiwai_tetrics_core_DefaultAutoPlayer$Eval(this.actions__sci_List().$$colon$colon__O__sci_List(x$11), ((this.points__I() + point) | 0))
 });
 $c_Lcom_yuiwai_tetrics_core_DefaultAutoPlayer$Eval.prototype.copy__sci_List__I__Lcom_yuiwai_tetrics_core_DefaultAutoPlayer$Eval = (function(actions, points) {
   return new $c_Lcom_yuiwai_tetrics_core_DefaultAutoPlayer$Eval().init___Lcom_yuiwai_tetrics_core_DefaultAutoPlayer__sci_List__I(this.com$yuiwai$tetrics$core$DefaultAutoPlayer$Eval$$$outer__Lcom_yuiwai_tetrics_core_DefaultAutoPlayer(), actions, points)
@@ -12726,10 +12978,10 @@ $c_Lcom_yuiwai_tetrics_core_Field.prototype.active__Z = (function() {
   return ((x === null) ? (x$2 === null) : x.equals__O__Z(x$2))
 });
 $c_Lcom_yuiwai_tetrics_core_Field.prototype.freeze__Lcom_yuiwai_tetrics_core_Field = (function() {
-  var x$131 = $m_Lcom_yuiwai_tetrics_core_FieldStatusFrozen$();
-  var x$132 = this.copy$default$1__sci_List();
-  var x$133 = this.copy$default$2__I();
-  return this.copy__sci_List__I__Lcom_yuiwai_tetrics_core_FieldStatus__Lcom_yuiwai_tetrics_core_Field(x$132, x$133, x$131)
+  var x$130 = $m_Lcom_yuiwai_tetrics_core_FieldStatusFrozen$();
+  var x$131 = this.copy$default$1__sci_List();
+  var x$132 = this.copy$default$2__I();
+  return this.copy__sci_List__I__Lcom_yuiwai_tetrics_core_FieldStatus__Lcom_yuiwai_tetrics_core_Field(x$131, x$132, x$130)
 });
 $c_Lcom_yuiwai_tetrics_core_Field.prototype.drop__Lcom_yuiwai_tetrics_core_Block__I__Lcom_yuiwai_tetrics_core_Field = (function(block, offset) {
   $m_s_Predef$().require__Z__F0__V(this.active__Z(), new $c_sjsr_AnonFunction0().init___sjs_js_Function0((function($this) {
@@ -12764,6 +13016,9 @@ $c_Lcom_yuiwai_tetrics_core_Field.prototype.put__sci_List__sci_List__I__I__sci_L
 });
 $c_Lcom_yuiwai_tetrics_core_Field.prototype.put$default$5__sci_List = (function() {
   return $m_sci_Nil$()
+});
+$c_Lcom_yuiwai_tetrics_core_Field.prototype.filledRows__sc_Seq = (function() {
+  return $as_sc_Seq($as_sci_List(this.rows__sci_List().zipWithIndex__scg_CanBuildFrom__O($m_sci_List$().canBuildFrom__scg_CanBuildFrom())).collect__s_PartialFunction__scg_CanBuildFrom__O(new $c_Lcom_yuiwai_tetrics_core_Field$$anonfun$filledRows$1().init___Lcom_yuiwai_tetrics_core_Field(this), $m_sci_List$().canBuildFrom__scg_CanBuildFrom()))
 });
 $c_Lcom_yuiwai_tetrics_core_Field.prototype.slice__I__I__Lcom_yuiwai_tetrics_core_Slice = (function(offset, width) {
   return new $c_Lcom_yuiwai_tetrics_core_Slice().init___sci_List($as_sci_List(this.rows__sci_List().map__F1__scg_CanBuildFrom__O(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function($this, offset, width) {
@@ -12956,8 +13211,8 @@ $c_Lcom_yuiwai_tetrics_core_FieldStats.prototype.apply__Lcom_yuiwai_tetrics_core
     var newNumRows = x2.numRows__I();
     return this.copy__I__I__I__Lcom_yuiwai_tetrics_core_FieldStats(newNumRows, ((this.droppedBlocks__I() + 1) | 0), this.copy$default$3__I())
   } else if ($is_Lcom_yuiwai_tetrics_core_FieldNormalized(x1)) {
-    var x4 = $as_Lcom_yuiwai_tetrics_core_FieldNormalized(x1);
-    var newNumRows$2 = x4.numRows__I();
+    var x5 = $as_Lcom_yuiwai_tetrics_core_FieldNormalized(x1);
+    var newNumRows$2 = x5.numRows__I();
     var x$71 = newNumRows$2;
     var x$72 = ((((this.deletedRows__I() + this.numRows__I()) | 0) - newNumRows$2) | 0);
     var x$73 = this.copy$default$2__I();
@@ -13114,6 +13369,52 @@ function $m_Lcom_yuiwai_tetrics_core_FieldStats$() {
   return $n_Lcom_yuiwai_tetrics_core_FieldStats$
 }
 /** @constructor */
+function $c_Lcom_yuiwai_tetrics_core_GameStatusBlocking$() {
+  $c_sr_AbstractFunction2.call(this)
+}
+$c_Lcom_yuiwai_tetrics_core_GameStatusBlocking$.prototype = new $h_sr_AbstractFunction2();
+$c_Lcom_yuiwai_tetrics_core_GameStatusBlocking$.prototype.constructor = $c_Lcom_yuiwai_tetrics_core_GameStatusBlocking$;
+/** @constructor */
+function $h_Lcom_yuiwai_tetrics_core_GameStatusBlocking$() {
+  /*<skip>*/
+}
+$h_Lcom_yuiwai_tetrics_core_GameStatusBlocking$.prototype = $c_Lcom_yuiwai_tetrics_core_GameStatusBlocking$.prototype;
+$c_Lcom_yuiwai_tetrics_core_GameStatusBlocking$.prototype.toString__T = (function() {
+  return "GameStatusBlocking"
+});
+$c_Lcom_yuiwai_tetrics_core_GameStatusBlocking$.prototype.apply__Lcom_yuiwai_tetrics_core_GameStatus__s_Option__Lcom_yuiwai_tetrics_core_GameStatusBlocking = (function(previousStatus, blockedAction) {
+  return new $c_Lcom_yuiwai_tetrics_core_GameStatusBlocking().init___Lcom_yuiwai_tetrics_core_GameStatus__s_Option(previousStatus, blockedAction)
+});
+$c_Lcom_yuiwai_tetrics_core_GameStatusBlocking$.prototype.apply$default$2__s_Option = (function() {
+  return $m_s_None$()
+});
+$c_Lcom_yuiwai_tetrics_core_GameStatusBlocking$.prototype.apply__O__O__O = (function(v1, v2) {
+  return this.apply__Lcom_yuiwai_tetrics_core_GameStatus__s_Option__Lcom_yuiwai_tetrics_core_GameStatusBlocking($as_Lcom_yuiwai_tetrics_core_GameStatus(v1), $as_s_Option(v2))
+});
+$c_Lcom_yuiwai_tetrics_core_GameStatusBlocking$.prototype.init___ = (function() {
+  $c_sr_AbstractFunction2.prototype.init___.call(this);
+  $n_Lcom_yuiwai_tetrics_core_GameStatusBlocking$ = this;
+  return this
+});
+var $d_Lcom_yuiwai_tetrics_core_GameStatusBlocking$ = new $TypeData().initClass({
+  Lcom_yuiwai_tetrics_core_GameStatusBlocking$: 0
+}, false, "com.yuiwai.tetrics.core.GameStatusBlocking$", {
+  Lcom_yuiwai_tetrics_core_GameStatusBlocking$: 1,
+  sr_AbstractFunction2: 1,
+  O: 1,
+  F2: 1,
+  s_Serializable: 1,
+  Ljava_io_Serializable: 1
+});
+$c_Lcom_yuiwai_tetrics_core_GameStatusBlocking$.prototype.$classData = $d_Lcom_yuiwai_tetrics_core_GameStatusBlocking$;
+var $n_Lcom_yuiwai_tetrics_core_GameStatusBlocking$ = (void 0);
+function $m_Lcom_yuiwai_tetrics_core_GameStatusBlocking$() {
+  if ((!$n_Lcom_yuiwai_tetrics_core_GameStatusBlocking$)) {
+    $n_Lcom_yuiwai_tetrics_core_GameStatusBlocking$ = new $c_Lcom_yuiwai_tetrics_core_GameStatusBlocking$().init___()
+  };
+  return $n_Lcom_yuiwai_tetrics_core_GameStatusBlocking$
+}
+/** @constructor */
 function $c_Lcom_yuiwai_tetrics_core_Label() {
   $c_O.call(this);
   this.text$1 = null
@@ -13226,14 +13527,14 @@ $c_Lcom_yuiwai_tetrics_core_Offset.prototype.moveLeft__Lcom_yuiwai_tetrics_core_
   return this.copy__I__I__Lcom_yuiwai_tetrics_core_Offset(((this.x__I() - 1) | 0), this.copy$default$2__I())
 });
 $c_Lcom_yuiwai_tetrics_core_Offset.prototype.moveUp__Lcom_yuiwai_tetrics_core_Offset = (function() {
-  var x$127 = ((this.y__I() - 1) | 0);
-  var x$128 = this.copy$default$1__I();
-  return this.copy__I__I__Lcom_yuiwai_tetrics_core_Offset(x$128, x$127)
+  var x$126 = ((this.y__I() - 1) | 0);
+  var x$127 = this.copy$default$1__I();
+  return this.copy__I__I__Lcom_yuiwai_tetrics_core_Offset(x$127, x$126)
 });
 $c_Lcom_yuiwai_tetrics_core_Offset.prototype.moveDown__Lcom_yuiwai_tetrics_core_Offset = (function() {
-  var x$129 = ((this.y__I() + 1) | 0);
-  var x$130 = this.copy$default$1__I();
-  return this.copy__I__I__Lcom_yuiwai_tetrics_core_Offset(x$130, x$129)
+  var x$128 = ((this.y__I() + 1) | 0);
+  var x$129 = this.copy$default$1__I();
+  return this.copy__I__I__Lcom_yuiwai_tetrics_core_Offset(x$129, x$128)
 });
 $c_Lcom_yuiwai_tetrics_core_Offset.prototype.copy__I__I__Lcom_yuiwai_tetrics_core_Offset = (function(x, y) {
   return new $c_Lcom_yuiwai_tetrics_core_Offset().init___I__I(x, y)
@@ -13427,7 +13728,16 @@ $c_Lcom_yuiwai_tetrics_core_Row.prototype.count__I = (function() {
   })(this))))
 });
 $c_Lcom_yuiwai_tetrics_core_Row.prototype.spaces__I = (function() {
-  return ((this.width__I() - this.count__I()) | 0)
+  var x1 = this.count__I();
+  switch (x1) {
+    case 0: {
+      return 0;
+      break
+    }
+    default: {
+      return ((this.width__I() - x1) | 0)
+    }
+  }
 });
 $c_Lcom_yuiwai_tetrics_core_Row.prototype.copy__I__I__Lcom_yuiwai_tetrics_core_Row = (function(cols, width) {
   return new $c_Lcom_yuiwai_tetrics_core_Row().init___I__I(cols, width)
@@ -13540,24 +13850,12 @@ $c_Lcom_yuiwai_tetrics_core_Slice.prototype.rows__sci_List = (function() {
   return this.rows$1
 });
 $c_Lcom_yuiwai_tetrics_core_Slice.prototype.spaces__I = (function() {
-  var x1 = $as_sci_List(this.rows__sci_List().filter__F1__O(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function($this) {
+  return $uI($as_sc_TraversableOnce($as_sci_List(this.rows__sci_List().tail__O()).map__F1__scg_CanBuildFrom__O(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function($this) {
     return (function(x$12$2) {
       var x$12 = $as_Lcom_yuiwai_tetrics_core_Row(x$12$2);
-      return $this.$$anonfun$spaces$1__p1__Lcom_yuiwai_tetrics_core_Row__Z(x$12)
+      return $this.$$anonfun$spaces$1__p1__Lcom_yuiwai_tetrics_core_Row__I(x$12)
     })
-  })(this))));
-  if ($is_sci_$colon$colon(x1)) {
-    var x2 = $as_sci_$colon$colon(x1);
-    var t = x2.tl$access$1__sci_List();
-    return $uI($as_sc_TraversableOnce(t.map__F1__scg_CanBuildFrom__O(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function(this$2) {
-      return (function(x$13$2) {
-        var x$13 = $as_Lcom_yuiwai_tetrics_core_Row(x$13$2);
-        return this$2.$$anonfun$spaces$2__p1__Lcom_yuiwai_tetrics_core_Row__I(x$13)
-      })
-    })(this)), $m_sci_List$().canBuildFrom__scg_CanBuildFrom())).sum__s_math_Numeric__O($m_s_math_Numeric$IntIsIntegral$()))
-  } else {
-    return 0
-  }
+  })(this)), $m_sci_List$().canBuildFrom__scg_CanBuildFrom())).sum__s_math_Numeric__O($m_s_math_Numeric$IntIsIntegral$()))
 });
 $c_Lcom_yuiwai_tetrics_core_Slice.prototype.dropPos__Lcom_yuiwai_tetrics_core_Block__I__I = (function(block, y) {
   return (this.hitTest__Lcom_yuiwai_tetrics_core_Block__I__Z(block, ((y + 1) | 0)) ? y : this.dropPos__Lcom_yuiwai_tetrics_core_Block__I__I(block, ((y + 1) | 0)))
@@ -13622,11 +13920,8 @@ $c_Lcom_yuiwai_tetrics_core_Slice.prototype.equals__O__Z = (function(x$1) {
     }
   }
 });
-$c_Lcom_yuiwai_tetrics_core_Slice.prototype.$$anonfun$spaces$1__p1__Lcom_yuiwai_tetrics_core_Row__Z = (function(x$12) {
-  return x$12.nonEmpty__Z()
-});
-$c_Lcom_yuiwai_tetrics_core_Slice.prototype.$$anonfun$spaces$2__p1__Lcom_yuiwai_tetrics_core_Row__I = (function(x$13) {
-  return x$13.spaces__I()
+$c_Lcom_yuiwai_tetrics_core_Slice.prototype.$$anonfun$spaces$1__p1__Lcom_yuiwai_tetrics_core_Row__I = (function(x$12) {
+  return x$12.spaces__I()
 });
 $c_Lcom_yuiwai_tetrics_core_Slice.prototype.$$anonfun$hitTest$1__p1__I__T2__Z = (function(y$1, x0$1) {
   var x1 = x0$1;
@@ -13840,8 +14135,8 @@ $c_Lcom_yuiwai_tetrics_core_TetricsStats.prototype.apply__Lcom_yuiwai_tetrics_co
     var x8 = $as_Lcom_yuiwai_tetrics_core_BlockDropped(x1);
     var fieldType = x8.fieldType__Lcom_yuiwai_tetrics_core_DroppableField();
     if ((fieldType !== null)) {
-      var x12 = fieldType;
-      var x1$2 = x12;
+      var x13 = fieldType;
+      var x1$2 = x13;
       var x = $m_Lcom_yuiwai_tetrics_core_FieldLeft$();
       var x$15 = x1$2;
       if (((x === null) ? (x$15 === null) : x.equals__O__Z(x$15))) {
@@ -13898,11 +14193,11 @@ $c_Lcom_yuiwai_tetrics_core_TetricsStats.prototype.apply__Lcom_yuiwai_tetrics_co
     }
   };
   if ($is_Lcom_yuiwai_tetrics_core_FieldNormalized(x1)) {
-    var x10 = $as_Lcom_yuiwai_tetrics_core_FieldNormalized(x1);
-    var fieldType$2 = x10.fieldType__Lcom_yuiwai_tetrics_core_DroppableField();
+    var x11 = $as_Lcom_yuiwai_tetrics_core_FieldNormalized(x1);
+    var fieldType$2 = x11.fieldType__Lcom_yuiwai_tetrics_core_DroppableField();
     if ((fieldType$2 !== null)) {
-      var x13 = fieldType$2;
-      var x1$3 = x13;
+      var x14 = fieldType$2;
+      var x1$3 = x14;
       var x$43 = $m_Lcom_yuiwai_tetrics_core_FieldLeft$();
       var x$44 = x1$3;
       if (((x$43 === null) ? (x$44 === null) : x$43.equals__O__Z(x$44))) {
@@ -14183,6 +14478,42 @@ function $m_Lcom_yuiwai_tetrics_core_TetricsStats$() {
     $n_Lcom_yuiwai_tetrics_core_TetricsStats$ = new $c_Lcom_yuiwai_tetrics_core_TetricsStats$().init___()
   };
   return $n_Lcom_yuiwai_tetrics_core_TetricsStats$
+}
+function $f_Lcom_yuiwai_tetrics_js_AnimationModule__beforeAction__Lcom_yuiwai_tetrics_core_TetricsAction__Lcom_yuiwai_tetrics_core_TetricsAction($thiz, action) {
+  $thiz.com$yuiwai$tetrics$js$AnimationModule$$super$beforeAction__Lcom_yuiwai_tetrics_core_TetricsAction__Lcom_yuiwai_tetrics_core_TetricsAction(action);
+  var x1 = action;
+  if ($is_Lcom_yuiwai_tetrics_core_DropAction(x1)) {
+    var x2 = $as_Lcom_yuiwai_tetrics_core_DropAction(x1);
+    var x1$2 = $thiz.tetrics__Lcom_yuiwai_tetrics_core_Tetrics().act__Lcom_yuiwai_tetrics_core_TetricsAction__Lcom_yuiwai_tetrics_core_Tetrics(x2).field__Lcom_yuiwai_tetrics_core_FieldType__Lcom_yuiwai_tetrics_core_Field(x2.fieldType__Lcom_yuiwai_tetrics_core_FieldType()).filledRows__sc_Seq();
+    if ((x1$2 !== null)) {
+      var x2$2 = x1$2;
+      if (x2$2.nonEmpty__Z()) {
+        $thiz.block__V();
+        return $m_Lcom_yuiwai_tetrics_core_NoAction$()
+      }
+    };
+    return action
+  } else {
+    return action
+  }
+}
+function $f_Lcom_yuiwai_tetrics_js_AnimationModule__update__D__O__V($thiz, delta, ctx) {
+  $thiz.com$yuiwai$tetrics$js$AnimationModule$$super$update__D__O__V(delta, ctx)
+}
+function $f_Lcom_yuiwai_tetrics_js_AnimationModule__$$init$__V($thiz) {
+  $thiz.com$yuiwai$tetrics$js$AnimationModule$$animation$und$eq__s_Option__V($m_s_None$())
+}
+function $is_Lcom_yuiwai_tetrics_js_AnimationModule(obj) {
+  return (!(!((obj && obj.$classData) && obj.$classData.ancestors.Lcom_yuiwai_tetrics_js_AnimationModule)))
+}
+function $as_Lcom_yuiwai_tetrics_js_AnimationModule(obj) {
+  return (($is_Lcom_yuiwai_tetrics_js_AnimationModule(obj) || (obj === null)) ? obj : $throwClassCastException(obj, "com.yuiwai.tetrics.js.AnimationModule"))
+}
+function $isArrayOf_Lcom_yuiwai_tetrics_js_AnimationModule(obj, depth) {
+  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.Lcom_yuiwai_tetrics_js_AnimationModule)))
+}
+function $asArrayOf_Lcom_yuiwai_tetrics_js_AnimationModule(obj, depth) {
+  return (($isArrayOf_Lcom_yuiwai_tetrics_js_AnimationModule(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lcom.yuiwai.tetrics.js.AnimationModule;", depth))
 }
 /** @constructor */
 function $c_Ljava_io_FilterOutputStream() {
@@ -14598,6 +14929,80 @@ $c_s_Option.prototype.init___ = (function() {
   $f_s_Product__$$init$__V(this);
   return this
 });
+function $is_s_Option(obj) {
+  return (!(!((obj && obj.$classData) && obj.$classData.ancestors.s_Option)))
+}
+function $as_s_Option(obj) {
+  return (($is_s_Option(obj) || (obj === null)) ? obj : $throwClassCastException(obj, "scala.Option"))
+}
+function $isArrayOf_s_Option(obj, depth) {
+  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.s_Option)))
+}
+function $asArrayOf_s_Option(obj, depth) {
+  return (($isArrayOf_s_Option(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lscala.Option;", depth))
+}
+/** @constructor */
+function $c_s_PartialFunction$$anon$1() {
+  $c_O.call(this);
+  this.lift$1 = null
+}
+$c_s_PartialFunction$$anon$1.prototype = new $h_O();
+$c_s_PartialFunction$$anon$1.prototype.constructor = $c_s_PartialFunction$$anon$1;
+/** @constructor */
+function $h_s_PartialFunction$$anon$1() {
+  /*<skip>*/
+}
+$h_s_PartialFunction$$anon$1.prototype = $c_s_PartialFunction$$anon$1.prototype;
+$c_s_PartialFunction$$anon$1.prototype.applyOrElse__O__F1__O = (function(x, $default) {
+  return $f_s_PartialFunction__applyOrElse__O__F1__O(this, x, $default)
+});
+$c_s_PartialFunction$$anon$1.prototype.apply$mcVI$sp__I__V = (function(v1) {
+  $f_F1__apply$mcVI$sp__I__V(this, v1)
+});
+$c_s_PartialFunction$$anon$1.prototype.toString__T = (function() {
+  return $f_F1__toString__T(this)
+});
+$c_s_PartialFunction$$anon$1.prototype.isDefinedAt__O__Z = (function(x) {
+  return false
+});
+$c_s_PartialFunction$$anon$1.prototype.apply__O__sr_Nothing$ = (function(x) {
+  throw new $c_s_MatchError().init___O(x)
+});
+$c_s_PartialFunction$$anon$1.prototype.runWith__F1__F1 = (function(action) {
+  return $m_s_PartialFunction$().scala$PartialFunction$$constFalse$f
+});
+$c_s_PartialFunction$$anon$1.prototype.apply__O__O = (function(v1) {
+  this.apply__O__sr_Nothing$(v1)
+});
+$c_s_PartialFunction$$anon$1.prototype.$$anonfun$lift$1__p1__O__s_None$ = (function(x) {
+  return $m_s_None$()
+});
+$c_s_PartialFunction$$anon$1.prototype.init___ = (function() {
+  $c_O.prototype.init___.call(this);
+  $f_F1__$$init$__V(this);
+  $f_s_PartialFunction__$$init$__V(this);
+  this.lift$1 = new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function($this) {
+    return (function(x$2) {
+      var x = x$2;
+      return $this.$$anonfun$lift$1__p1__O__s_None$(x)
+    })
+  })(this));
+  return this
+});
+$c_s_PartialFunction$$anon$1.prototype.$$anonfun$runWith$1__ps_PartialFunction__F1__O__Z = (function(action$1, x) {
+  return $f_s_PartialFunction__$$anonfun$runWith$1__ps_PartialFunction__F1__O__Z(this, action$1, x)
+});
+var $d_s_PartialFunction$$anon$1 = new $TypeData().initClass({
+  s_PartialFunction$$anon$1: 0
+}, false, "scala.PartialFunction$$anon$1", {
+  s_PartialFunction$$anon$1: 1,
+  O: 1,
+  s_PartialFunction: 1,
+  F1: 1,
+  s_Serializable: 1,
+  Ljava_io_Serializable: 1
+});
+$c_s_PartialFunction$$anon$1.prototype.$classData = $d_s_PartialFunction$$anon$1;
 /** @constructor */
 function $c_s_Predef$$anon$1() {
   $c_s_Predef$$less$colon$less.call(this)
@@ -14848,6 +15253,9 @@ function $f_sc_GenMapLike__liftedTree1$1__psc_GenMapLike__sc_GenMap__Z($thiz, x2
 }
 function $f_sc_GenMapLike__$$init$__V($thiz) {
   /*<skip>*/
+}
+function $f_sc_GenSeqLike__isDefinedAt__I__Z($thiz, idx) {
+  return ((idx >= 0) && (idx < $thiz.length__I()))
 }
 function $f_sc_GenSeqLike__indexOf__O__I($thiz, elem) {
   return $thiz.indexOf__O__I__I(elem, 0)
@@ -16558,7 +16966,8 @@ $c_Lcom_yuiwai_tetrics_core_BlockAdded.prototype.$classData = $d_Lcom_yuiwai_tet
 function $c_Lcom_yuiwai_tetrics_core_BlockDropped() {
   $c_O.call(this);
   this.fieldType$1 = null;
-  this.numRows$1 = 0
+  this.numRows$1 = 0;
+  this.filledRows$1 = null
 }
 $c_Lcom_yuiwai_tetrics_core_BlockDropped.prototype = new $h_O();
 $c_Lcom_yuiwai_tetrics_core_BlockDropped.prototype.constructor = $c_Lcom_yuiwai_tetrics_core_BlockDropped;
@@ -16573,11 +16982,14 @@ $c_Lcom_yuiwai_tetrics_core_BlockDropped.prototype.fieldType__Lcom_yuiwai_tetric
 $c_Lcom_yuiwai_tetrics_core_BlockDropped.prototype.numRows__I = (function() {
   return this.numRows$1
 });
+$c_Lcom_yuiwai_tetrics_core_BlockDropped.prototype.filledRows__sc_Seq = (function() {
+  return this.filledRows$1
+});
 $c_Lcom_yuiwai_tetrics_core_BlockDropped.prototype.productPrefix__T = (function() {
   return "BlockDropped"
 });
 $c_Lcom_yuiwai_tetrics_core_BlockDropped.prototype.productArity__I = (function() {
-  return 2
+  return 3
 });
 $c_Lcom_yuiwai_tetrics_core_BlockDropped.prototype.productElement__I__O = (function(x$1) {
   var x1 = x$1;
@@ -16588,6 +17000,10 @@ $c_Lcom_yuiwai_tetrics_core_BlockDropped.prototype.productElement__I__O = (funct
     }
     case 1: {
       return this.numRows__I();
+      break
+    }
+    case 2: {
+      return this.filledRows__sc_Seq();
       break
     }
     default: {
@@ -16602,7 +17018,8 @@ $c_Lcom_yuiwai_tetrics_core_BlockDropped.prototype.hashCode__I = (function() {
   var acc = (-889275714);
   acc = $m_sr_Statics$().mix__I__I__I(acc, $m_sr_Statics$().anyHash__O__I(this.fieldType__Lcom_yuiwai_tetrics_core_DroppableField()));
   acc = $m_sr_Statics$().mix__I__I__I(acc, this.numRows__I());
-  return $m_sr_Statics$().finalizeHash__I__I__I(acc, 2)
+  acc = $m_sr_Statics$().mix__I__I__I(acc, $m_sr_Statics$().anyHash__O__I(this.filledRows__sc_Seq()));
+  return $m_sr_Statics$().finalizeHash__I__I__I(acc, 3)
 });
 $c_Lcom_yuiwai_tetrics_core_BlockDropped.prototype.toString__T = (function() {
   return $m_sr_ScalaRunTime$().$$undtoString__s_Product__T(this)
@@ -16616,8 +17033,10 @@ $c_Lcom_yuiwai_tetrics_core_BlockDropped.prototype.equals__O__Z = (function(x$1)
       var BlockDropped$1 = $as_Lcom_yuiwai_tetrics_core_BlockDropped(x$1);
       var x = this.fieldType__Lcom_yuiwai_tetrics_core_DroppableField();
       var x$2 = BlockDropped$1.fieldType__Lcom_yuiwai_tetrics_core_DroppableField();
-      if (((x === null) ? (x$2 === null) : x.equals__O__Z(x$2))) {
-        return (this.numRows__I() === BlockDropped$1.numRows__I())
+      if ((((x === null) ? (x$2 === null) : x.equals__O__Z(x$2)) && (this.numRows__I() === BlockDropped$1.numRows__I()))) {
+        var x$3 = this.filledRows__sc_Seq();
+        var x$4 = BlockDropped$1.filledRows__sc_Seq();
+        return ((x$3 === null) ? (x$4 === null) : x$3.equals__O__Z(x$4))
       } else {
         return false
       }
@@ -16626,9 +17045,10 @@ $c_Lcom_yuiwai_tetrics_core_BlockDropped.prototype.equals__O__Z = (function(x$1)
     }
   }
 });
-$c_Lcom_yuiwai_tetrics_core_BlockDropped.prototype.init___Lcom_yuiwai_tetrics_core_DroppableField__I = (function(fieldType, numRows) {
+$c_Lcom_yuiwai_tetrics_core_BlockDropped.prototype.init___Lcom_yuiwai_tetrics_core_DroppableField__I__sc_Seq = (function(fieldType, numRows, filledRows) {
   this.fieldType$1 = fieldType;
   this.numRows$1 = numRows;
+  this.filledRows$1 = filledRows;
   $c_O.prototype.init___.call(this);
   $f_s_Product__$$init$__V(this);
   return this
@@ -16831,6 +17251,63 @@ var $d_Lcom_yuiwai_tetrics_core_BlockRotated = new $TypeData().initClass({
   Ljava_io_Serializable: 1
 });
 $c_Lcom_yuiwai_tetrics_core_BlockRotated.prototype.$classData = $d_Lcom_yuiwai_tetrics_core_BlockRotated;
+/** @constructor */
+function $c_Lcom_yuiwai_tetrics_core_Field$$anonfun$filledRows$1() {
+  $c_sr_AbstractPartialFunction.call(this)
+}
+$c_Lcom_yuiwai_tetrics_core_Field$$anonfun$filledRows$1.prototype = new $h_sr_AbstractPartialFunction();
+$c_Lcom_yuiwai_tetrics_core_Field$$anonfun$filledRows$1.prototype.constructor = $c_Lcom_yuiwai_tetrics_core_Field$$anonfun$filledRows$1;
+/** @constructor */
+function $h_Lcom_yuiwai_tetrics_core_Field$$anonfun$filledRows$1() {
+  /*<skip>*/
+}
+$h_Lcom_yuiwai_tetrics_core_Field$$anonfun$filledRows$1.prototype = $c_Lcom_yuiwai_tetrics_core_Field$$anonfun$filledRows$1.prototype;
+$c_Lcom_yuiwai_tetrics_core_Field$$anonfun$filledRows$1.prototype.applyOrElse__T2__F1__O = (function(x1, $default) {
+  var x1$2 = x1;
+  if ((x1$2 !== null)) {
+    var row = $as_Lcom_yuiwai_tetrics_core_Row(x1$2.$$und1__O());
+    var i = x1$2.$$und2$mcI$sp__I();
+    if (row.isFilled__Z()) {
+      return i
+    }
+  };
+  return $default.apply__O__O(x1)
+});
+$c_Lcom_yuiwai_tetrics_core_Field$$anonfun$filledRows$1.prototype.isDefinedAt__T2__Z = (function(x1) {
+  var x1$2 = x1;
+  if ((x1$2 !== null)) {
+    var row = $as_Lcom_yuiwai_tetrics_core_Row(x1$2.$$und1__O());
+    if (row.isFilled__Z()) {
+      return true
+    }
+  };
+  return false
+});
+$c_Lcom_yuiwai_tetrics_core_Field$$anonfun$filledRows$1.prototype.isDefinedAt__O__Z = (function(x) {
+  return this.isDefinedAt__T2__Z($as_T2(x))
+});
+$c_Lcom_yuiwai_tetrics_core_Field$$anonfun$filledRows$1.prototype.applyOrElse__O__F1__O = (function(x, $default) {
+  return this.applyOrElse__T2__F1__O($as_T2(x), $default)
+});
+$c_Lcom_yuiwai_tetrics_core_Field$$anonfun$filledRows$1.prototype.init___Lcom_yuiwai_tetrics_core_Field = (function($$outer) {
+  $c_sr_AbstractPartialFunction.prototype.init___.call(this);
+  return this
+});
+$c_Lcom_yuiwai_tetrics_core_Field$$anonfun$filledRows$1.prototype.$$anonfun$runWith$1__ps_PartialFunction__F1__O__Z = (function(action$1, x) {
+  return $f_s_PartialFunction__$$anonfun$runWith$1__ps_PartialFunction__F1__O__Z(this, action$1, x)
+});
+var $d_Lcom_yuiwai_tetrics_core_Field$$anonfun$filledRows$1 = new $TypeData().initClass({
+  Lcom_yuiwai_tetrics_core_Field$$anonfun$filledRows$1: 0
+}, false, "com.yuiwai.tetrics.core.Field$$anonfun$filledRows$1", {
+  Lcom_yuiwai_tetrics_core_Field$$anonfun$filledRows$1: 1,
+  sr_AbstractPartialFunction: 1,
+  O: 1,
+  F1: 1,
+  s_PartialFunction: 1,
+  s_Serializable: 1,
+  Ljava_io_Serializable: 1
+});
+$c_Lcom_yuiwai_tetrics_core_Field$$anonfun$filledRows$1.prototype.$classData = $d_Lcom_yuiwai_tetrics_core_Field$$anonfun$filledRows$1;
 /** @constructor */
 function $c_Lcom_yuiwai_tetrics_core_FieldCentral$() {
   $c_O.call(this)
@@ -17329,6 +17806,108 @@ function $m_Lcom_yuiwai_tetrics_core_GameStatusAutoPlay$() {
   return $n_Lcom_yuiwai_tetrics_core_GameStatusAutoPlay$
 }
 /** @constructor */
+function $c_Lcom_yuiwai_tetrics_core_GameStatusBlocking() {
+  $c_O.call(this);
+  this.previousStatus$1 = null;
+  this.blockedAction$1 = null
+}
+$c_Lcom_yuiwai_tetrics_core_GameStatusBlocking.prototype = new $h_O();
+$c_Lcom_yuiwai_tetrics_core_GameStatusBlocking.prototype.constructor = $c_Lcom_yuiwai_tetrics_core_GameStatusBlocking;
+/** @constructor */
+function $h_Lcom_yuiwai_tetrics_core_GameStatusBlocking() {
+  /*<skip>*/
+}
+$h_Lcom_yuiwai_tetrics_core_GameStatusBlocking.prototype = $c_Lcom_yuiwai_tetrics_core_GameStatusBlocking.prototype;
+$c_Lcom_yuiwai_tetrics_core_GameStatusBlocking.prototype.previousStatus__Lcom_yuiwai_tetrics_core_GameStatus = (function() {
+  return this.previousStatus$1
+});
+$c_Lcom_yuiwai_tetrics_core_GameStatusBlocking.prototype.blockedAction__s_Option = (function() {
+  return this.blockedAction$1
+});
+$c_Lcom_yuiwai_tetrics_core_GameStatusBlocking.prototype.productPrefix__T = (function() {
+  return "GameStatusBlocking"
+});
+$c_Lcom_yuiwai_tetrics_core_GameStatusBlocking.prototype.productArity__I = (function() {
+  return 2
+});
+$c_Lcom_yuiwai_tetrics_core_GameStatusBlocking.prototype.productElement__I__O = (function(x$1) {
+  var x1 = x$1;
+  switch (x1) {
+    case 0: {
+      return this.previousStatus__Lcom_yuiwai_tetrics_core_GameStatus();
+      break
+    }
+    case 1: {
+      return this.blockedAction__s_Option();
+      break
+    }
+    default: {
+      throw new $c_jl_IndexOutOfBoundsException().init___T($objectToString(x$1))
+    }
+  }
+});
+$c_Lcom_yuiwai_tetrics_core_GameStatusBlocking.prototype.productIterator__sc_Iterator = (function() {
+  return $m_sr_ScalaRunTime$().typedProductIterator__s_Product__sc_Iterator(this)
+});
+$c_Lcom_yuiwai_tetrics_core_GameStatusBlocking.prototype.hashCode__I = (function() {
+  return $m_sr_ScalaRunTime$().$$undhashCode__s_Product__I(this)
+});
+$c_Lcom_yuiwai_tetrics_core_GameStatusBlocking.prototype.toString__T = (function() {
+  return $m_sr_ScalaRunTime$().$$undtoString__s_Product__T(this)
+});
+$c_Lcom_yuiwai_tetrics_core_GameStatusBlocking.prototype.equals__O__Z = (function(x$1) {
+  if ((this === x$1)) {
+    return true
+  } else {
+    var x1 = x$1;
+    if (($is_Lcom_yuiwai_tetrics_core_GameStatusBlocking(x1) || false)) {
+      var GameStatusBlocking$1 = $as_Lcom_yuiwai_tetrics_core_GameStatusBlocking(x$1);
+      var x = this.previousStatus__Lcom_yuiwai_tetrics_core_GameStatus();
+      var x$2 = GameStatusBlocking$1.previousStatus__Lcom_yuiwai_tetrics_core_GameStatus();
+      if (((x === null) ? (x$2 === null) : x.equals__O__Z(x$2))) {
+        var x$3 = this.blockedAction__s_Option();
+        var x$4 = GameStatusBlocking$1.blockedAction__s_Option();
+        return ((x$3 === null) ? (x$4 === null) : x$3.equals__O__Z(x$4))
+      } else {
+        return false
+      }
+    } else {
+      return false
+    }
+  }
+});
+$c_Lcom_yuiwai_tetrics_core_GameStatusBlocking.prototype.init___Lcom_yuiwai_tetrics_core_GameStatus__s_Option = (function(previousStatus, blockedAction) {
+  this.previousStatus$1 = previousStatus;
+  this.blockedAction$1 = blockedAction;
+  $c_O.prototype.init___.call(this);
+  $f_s_Product__$$init$__V(this);
+  return this
+});
+function $is_Lcom_yuiwai_tetrics_core_GameStatusBlocking(obj) {
+  return (!(!((obj && obj.$classData) && obj.$classData.ancestors.Lcom_yuiwai_tetrics_core_GameStatusBlocking)))
+}
+function $as_Lcom_yuiwai_tetrics_core_GameStatusBlocking(obj) {
+  return (($is_Lcom_yuiwai_tetrics_core_GameStatusBlocking(obj) || (obj === null)) ? obj : $throwClassCastException(obj, "com.yuiwai.tetrics.core.GameStatusBlocking"))
+}
+function $isArrayOf_Lcom_yuiwai_tetrics_core_GameStatusBlocking(obj, depth) {
+  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.Lcom_yuiwai_tetrics_core_GameStatusBlocking)))
+}
+function $asArrayOf_Lcom_yuiwai_tetrics_core_GameStatusBlocking(obj, depth) {
+  return (($isArrayOf_Lcom_yuiwai_tetrics_core_GameStatusBlocking(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lcom.yuiwai.tetrics.core.GameStatusBlocking;", depth))
+}
+var $d_Lcom_yuiwai_tetrics_core_GameStatusBlocking = new $TypeData().initClass({
+  Lcom_yuiwai_tetrics_core_GameStatusBlocking: 0
+}, false, "com.yuiwai.tetrics.core.GameStatusBlocking", {
+  Lcom_yuiwai_tetrics_core_GameStatusBlocking: 1,
+  O: 1,
+  Lcom_yuiwai_tetrics_core_GameStatus: 1,
+  s_Product: 1,
+  s_Equals: 1,
+  s_Serializable: 1,
+  Ljava_io_Serializable: 1
+});
+$c_Lcom_yuiwai_tetrics_core_GameStatusBlocking.prototype.$classData = $d_Lcom_yuiwai_tetrics_core_GameStatusBlocking;
+/** @constructor */
 function $c_Lcom_yuiwai_tetrics_core_GameStatusFinished$() {
   $c_O.call(this)
 }
@@ -17767,6 +18346,61 @@ function $m_Lcom_yuiwai_tetrics_core_MoveUp$() {
     $n_Lcom_yuiwai_tetrics_core_MoveUp$ = new $c_Lcom_yuiwai_tetrics_core_MoveUp$().init___()
   };
   return $n_Lcom_yuiwai_tetrics_core_MoveUp$
+}
+/** @constructor */
+function $c_Lcom_yuiwai_tetrics_core_NoAction$() {
+  $c_O.call(this)
+}
+$c_Lcom_yuiwai_tetrics_core_NoAction$.prototype = new $h_O();
+$c_Lcom_yuiwai_tetrics_core_NoAction$.prototype.constructor = $c_Lcom_yuiwai_tetrics_core_NoAction$;
+/** @constructor */
+function $h_Lcom_yuiwai_tetrics_core_NoAction$() {
+  /*<skip>*/
+}
+$h_Lcom_yuiwai_tetrics_core_NoAction$.prototype = $c_Lcom_yuiwai_tetrics_core_NoAction$.prototype;
+$c_Lcom_yuiwai_tetrics_core_NoAction$.prototype.productPrefix__T = (function() {
+  return "NoAction"
+});
+$c_Lcom_yuiwai_tetrics_core_NoAction$.prototype.productArity__I = (function() {
+  return 0
+});
+$c_Lcom_yuiwai_tetrics_core_NoAction$.prototype.productElement__I__O = (function(x$1) {
+  var x1 = x$1;
+  throw new $c_jl_IndexOutOfBoundsException().init___T($objectToString(x$1))
+});
+$c_Lcom_yuiwai_tetrics_core_NoAction$.prototype.productIterator__sc_Iterator = (function() {
+  return $m_sr_ScalaRunTime$().typedProductIterator__s_Product__sc_Iterator(this)
+});
+$c_Lcom_yuiwai_tetrics_core_NoAction$.prototype.hashCode__I = (function() {
+  return 184797047
+});
+$c_Lcom_yuiwai_tetrics_core_NoAction$.prototype.toString__T = (function() {
+  return "NoAction"
+});
+$c_Lcom_yuiwai_tetrics_core_NoAction$.prototype.init___ = (function() {
+  $c_O.prototype.init___.call(this);
+  $n_Lcom_yuiwai_tetrics_core_NoAction$ = this;
+  $f_s_Product__$$init$__V(this);
+  return this
+});
+var $d_Lcom_yuiwai_tetrics_core_NoAction$ = new $TypeData().initClass({
+  Lcom_yuiwai_tetrics_core_NoAction$: 0
+}, false, "com.yuiwai.tetrics.core.NoAction$", {
+  Lcom_yuiwai_tetrics_core_NoAction$: 1,
+  O: 1,
+  Lcom_yuiwai_tetrics_core_TetricsAction: 1,
+  s_Product: 1,
+  s_Equals: 1,
+  s_Serializable: 1,
+  Ljava_io_Serializable: 1
+});
+$c_Lcom_yuiwai_tetrics_core_NoAction$.prototype.$classData = $d_Lcom_yuiwai_tetrics_core_NoAction$;
+var $n_Lcom_yuiwai_tetrics_core_NoAction$ = (void 0);
+function $m_Lcom_yuiwai_tetrics_core_NoAction$() {
+  if ((!$n_Lcom_yuiwai_tetrics_core_NoAction$)) {
+    $n_Lcom_yuiwai_tetrics_core_NoAction$ = new $c_Lcom_yuiwai_tetrics_core_NoAction$().init___()
+  };
+  return $n_Lcom_yuiwai_tetrics_core_NoAction$
 }
 /** @constructor */
 function $c_Lcom_yuiwai_tetrics_core_Rotation0$() {
@@ -18294,11 +18928,11 @@ $c_Lcom_yuiwai_tetrics_core_Tetrics.prototype.field__Lcom_yuiwai_tetrics_core_Fi
 $c_Lcom_yuiwai_tetrics_core_Tetrics.prototype.fields__sc_Seq = (function() {
   return $as_sc_Seq($m_sc_Seq$().apply__sc_Seq__sc_GenTraversable($m_sjsr_package$().toScalaVarArgs__sjs_js_Array__sc_Seq([this.leftField__Lcom_yuiwai_tetrics_core_Field(), this.rightField__Lcom_yuiwai_tetrics_core_Field(), this.topField__Lcom_yuiwai_tetrics_core_Field(), this.bottomField__Lcom_yuiwai_tetrics_core_Field()])))
 });
-$c_Lcom_yuiwai_tetrics_core_Tetrics.prototype.deactivedFields__sc_Seq = (function() {
+$c_Lcom_yuiwai_tetrics_core_Tetrics.prototype.deactivatedFields__sc_Seq = (function() {
   return $as_sc_Seq(this.fields__sc_Seq().filterNot__F1__O(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function($this) {
     return (function(x$1$2) {
       var x$1 = $as_Lcom_yuiwai_tetrics_core_Field(x$1$2);
-      return $this.$$anonfun$deactivedFields$1__p1__Lcom_yuiwai_tetrics_core_Field__Z(x$1)
+      return $this.$$anonfun$deactivatedFields$1__p1__Lcom_yuiwai_tetrics_core_Field__Z(x$1)
     })
   })(this))))
 });
@@ -18306,15 +18940,15 @@ $c_Lcom_yuiwai_tetrics_core_Tetrics.prototype.centralField__Lcom_yuiwai_tetrics_
   return this.emptyField__p1__Lcom_yuiwai_tetrics_core_Field().put__Lcom_yuiwai_tetrics_core_Block__I__I__Lcom_yuiwai_tetrics_core_Field(this.block__Lcom_yuiwai_tetrics_core_Block(), this.offset__Lcom_yuiwai_tetrics_core_Offset().x__I(), this.offset__Lcom_yuiwai_tetrics_core_Offset().y__I())
 });
 $c_Lcom_yuiwai_tetrics_core_Tetrics.prototype.put__Lcom_yuiwai_tetrics_core_Block__Lcom_yuiwai_tetrics_core_Offset__Lcom_yuiwai_tetrics_core_Tetrics = (function(block, offset) {
-  var x$15 = block;
-  var x$16 = offset;
-  var x$17 = this.copy$default$1__I();
-  var x$18 = this.copy$default$4__Lcom_yuiwai_tetrics_core_Rotation();
-  var x$19 = this.copy$default$5__Lcom_yuiwai_tetrics_core_Field();
-  var x$20 = this.copy$default$6__Lcom_yuiwai_tetrics_core_Field();
-  var x$21 = this.copy$default$7__Lcom_yuiwai_tetrics_core_Field();
-  var x$22 = this.copy$default$8__Lcom_yuiwai_tetrics_core_Field();
-  return this.copy__I__Lcom_yuiwai_tetrics_core_Block__Lcom_yuiwai_tetrics_core_Offset__Lcom_yuiwai_tetrics_core_Rotation__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_EventBus__Lcom_yuiwai_tetrics_core_Tetrics(x$17, x$15, x$16, x$18, x$19, x$20, x$21, x$22, this.eventBus$1).publishAndReturn__p1__F1__Lcom_yuiwai_tetrics_core_Tetrics(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function($this, block) {
+  var x$14 = block;
+  var x$15 = offset;
+  var x$16 = this.copy$default$1__I();
+  var x$17 = this.copy$default$4__Lcom_yuiwai_tetrics_core_Rotation();
+  var x$18 = this.copy$default$5__Lcom_yuiwai_tetrics_core_Field();
+  var x$19 = this.copy$default$6__Lcom_yuiwai_tetrics_core_Field();
+  var x$20 = this.copy$default$7__Lcom_yuiwai_tetrics_core_Field();
+  var x$21 = this.copy$default$8__Lcom_yuiwai_tetrics_core_Field();
+  return this.copy__I__Lcom_yuiwai_tetrics_core_Block__Lcom_yuiwai_tetrics_core_Offset__Lcom_yuiwai_tetrics_core_Rotation__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_EventBus__Lcom_yuiwai_tetrics_core_Tetrics(x$16, x$14, x$15, x$17, x$18, x$19, x$20, x$21, this.eventBus$1).publishAndReturn__p1__F1__Lcom_yuiwai_tetrics_core_Tetrics(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function($this, block) {
     return (function(x$2$2) {
       var x$2 = $as_Lcom_yuiwai_tetrics_core_Tetrics(x$2$2);
       return $this.$$anonfun$put$1__p1__Lcom_yuiwai_tetrics_core_Block__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_BlockAdded(block, x$2)
@@ -18325,15 +18959,15 @@ $c_Lcom_yuiwai_tetrics_core_Tetrics.prototype.putCenter__Lcom_yuiwai_tetrics_cor
   return this.put__Lcom_yuiwai_tetrics_core_Block__Lcom_yuiwai_tetrics_core_Offset__Lcom_yuiwai_tetrics_core_Tetrics(block, new $c_Lcom_yuiwai_tetrics_core_Offset().init___I__I($m_jl_Math$().round__D__J((((this.fieldSize__I() - block.width__I()) | 0) / 2.0)).toInt__I(), $m_jl_Math$().round__D__J((((this.fieldSize__I() - block.height__I()) | 0) / 2.0)).toInt__I()))
 });
 $c_Lcom_yuiwai_tetrics_core_Tetrics.prototype.moveRight__Lcom_yuiwai_tetrics_core_Tetrics = (function() {
-  var x$23 = this.offset__Lcom_yuiwai_tetrics_core_Offset().moveRight__Lcom_yuiwai_tetrics_core_Offset();
-  var x$24 = this.copy$default$1__I();
-  var x$25 = this.copy$default$2__Lcom_yuiwai_tetrics_core_Block();
-  var x$26 = this.copy$default$4__Lcom_yuiwai_tetrics_core_Rotation();
-  var x$27 = this.copy$default$5__Lcom_yuiwai_tetrics_core_Field();
-  var x$28 = this.copy$default$6__Lcom_yuiwai_tetrics_core_Field();
-  var x$29 = this.copy$default$7__Lcom_yuiwai_tetrics_core_Field();
-  var x$30 = this.copy$default$8__Lcom_yuiwai_tetrics_core_Field();
-  return this.copy__I__Lcom_yuiwai_tetrics_core_Block__Lcom_yuiwai_tetrics_core_Offset__Lcom_yuiwai_tetrics_core_Rotation__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_EventBus__Lcom_yuiwai_tetrics_core_Tetrics(x$24, x$25, x$23, x$26, x$27, x$28, x$29, x$30, this.eventBus$1).publishAndReturn__p1__F1__Lcom_yuiwai_tetrics_core_Tetrics(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function($this) {
+  var x$22 = this.offset__Lcom_yuiwai_tetrics_core_Offset().moveRight__Lcom_yuiwai_tetrics_core_Offset();
+  var x$23 = this.copy$default$1__I();
+  var x$24 = this.copy$default$2__Lcom_yuiwai_tetrics_core_Block();
+  var x$25 = this.copy$default$4__Lcom_yuiwai_tetrics_core_Rotation();
+  var x$26 = this.copy$default$5__Lcom_yuiwai_tetrics_core_Field();
+  var x$27 = this.copy$default$6__Lcom_yuiwai_tetrics_core_Field();
+  var x$28 = this.copy$default$7__Lcom_yuiwai_tetrics_core_Field();
+  var x$29 = this.copy$default$8__Lcom_yuiwai_tetrics_core_Field();
+  return this.copy__I__Lcom_yuiwai_tetrics_core_Block__Lcom_yuiwai_tetrics_core_Offset__Lcom_yuiwai_tetrics_core_Rotation__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_EventBus__Lcom_yuiwai_tetrics_core_Tetrics(x$23, x$24, x$22, x$25, x$26, x$27, x$28, x$29, this.eventBus$1).publishAndReturn__p1__F1__Lcom_yuiwai_tetrics_core_Tetrics(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function($this) {
     return (function(x$3$2) {
       var x$3 = $as_Lcom_yuiwai_tetrics_core_Tetrics(x$3$2);
       return $this.$$anonfun$moveRight$1__p1__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_BlockMoved(x$3)
@@ -18341,15 +18975,15 @@ $c_Lcom_yuiwai_tetrics_core_Tetrics.prototype.moveRight__Lcom_yuiwai_tetrics_cor
   })(this)))
 });
 $c_Lcom_yuiwai_tetrics_core_Tetrics.prototype.moveLeft__Lcom_yuiwai_tetrics_core_Tetrics = (function() {
-  var x$31 = this.offset__Lcom_yuiwai_tetrics_core_Offset().moveLeft__Lcom_yuiwai_tetrics_core_Offset();
-  var x$32 = this.copy$default$1__I();
-  var x$33 = this.copy$default$2__Lcom_yuiwai_tetrics_core_Block();
-  var x$34 = this.copy$default$4__Lcom_yuiwai_tetrics_core_Rotation();
-  var x$35 = this.copy$default$5__Lcom_yuiwai_tetrics_core_Field();
-  var x$36 = this.copy$default$6__Lcom_yuiwai_tetrics_core_Field();
-  var x$37 = this.copy$default$7__Lcom_yuiwai_tetrics_core_Field();
-  var x$38 = this.copy$default$8__Lcom_yuiwai_tetrics_core_Field();
-  return this.copy__I__Lcom_yuiwai_tetrics_core_Block__Lcom_yuiwai_tetrics_core_Offset__Lcom_yuiwai_tetrics_core_Rotation__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_EventBus__Lcom_yuiwai_tetrics_core_Tetrics(x$32, x$33, x$31, x$34, x$35, x$36, x$37, x$38, this.eventBus$1).publishAndReturn__p1__F1__Lcom_yuiwai_tetrics_core_Tetrics(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function($this) {
+  var x$30 = this.offset__Lcom_yuiwai_tetrics_core_Offset().moveLeft__Lcom_yuiwai_tetrics_core_Offset();
+  var x$31 = this.copy$default$1__I();
+  var x$32 = this.copy$default$2__Lcom_yuiwai_tetrics_core_Block();
+  var x$33 = this.copy$default$4__Lcom_yuiwai_tetrics_core_Rotation();
+  var x$34 = this.copy$default$5__Lcom_yuiwai_tetrics_core_Field();
+  var x$35 = this.copy$default$6__Lcom_yuiwai_tetrics_core_Field();
+  var x$36 = this.copy$default$7__Lcom_yuiwai_tetrics_core_Field();
+  var x$37 = this.copy$default$8__Lcom_yuiwai_tetrics_core_Field();
+  return this.copy__I__Lcom_yuiwai_tetrics_core_Block__Lcom_yuiwai_tetrics_core_Offset__Lcom_yuiwai_tetrics_core_Rotation__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_EventBus__Lcom_yuiwai_tetrics_core_Tetrics(x$31, x$32, x$30, x$33, x$34, x$35, x$36, x$37, this.eventBus$1).publishAndReturn__p1__F1__Lcom_yuiwai_tetrics_core_Tetrics(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function($this) {
     return (function(x$4$2) {
       var x$4 = $as_Lcom_yuiwai_tetrics_core_Tetrics(x$4$2);
       return $this.$$anonfun$moveLeft$1__p1__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_BlockMoved(x$4)
@@ -18357,15 +18991,15 @@ $c_Lcom_yuiwai_tetrics_core_Tetrics.prototype.moveLeft__Lcom_yuiwai_tetrics_core
   })(this)))
 });
 $c_Lcom_yuiwai_tetrics_core_Tetrics.prototype.moveUp__Lcom_yuiwai_tetrics_core_Tetrics = (function() {
-  var x$39 = this.offset__Lcom_yuiwai_tetrics_core_Offset().moveUp__Lcom_yuiwai_tetrics_core_Offset();
-  var x$40 = this.copy$default$1__I();
-  var x$41 = this.copy$default$2__Lcom_yuiwai_tetrics_core_Block();
-  var x$42 = this.copy$default$4__Lcom_yuiwai_tetrics_core_Rotation();
-  var x$43 = this.copy$default$5__Lcom_yuiwai_tetrics_core_Field();
-  var x$44 = this.copy$default$6__Lcom_yuiwai_tetrics_core_Field();
-  var x$45 = this.copy$default$7__Lcom_yuiwai_tetrics_core_Field();
-  var x$46 = this.copy$default$8__Lcom_yuiwai_tetrics_core_Field();
-  return this.copy__I__Lcom_yuiwai_tetrics_core_Block__Lcom_yuiwai_tetrics_core_Offset__Lcom_yuiwai_tetrics_core_Rotation__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_EventBus__Lcom_yuiwai_tetrics_core_Tetrics(x$40, x$41, x$39, x$42, x$43, x$44, x$45, x$46, this.eventBus$1).publishAndReturn__p1__F1__Lcom_yuiwai_tetrics_core_Tetrics(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function($this) {
+  var x$38 = this.offset__Lcom_yuiwai_tetrics_core_Offset().moveUp__Lcom_yuiwai_tetrics_core_Offset();
+  var x$39 = this.copy$default$1__I();
+  var x$40 = this.copy$default$2__Lcom_yuiwai_tetrics_core_Block();
+  var x$41 = this.copy$default$4__Lcom_yuiwai_tetrics_core_Rotation();
+  var x$42 = this.copy$default$5__Lcom_yuiwai_tetrics_core_Field();
+  var x$43 = this.copy$default$6__Lcom_yuiwai_tetrics_core_Field();
+  var x$44 = this.copy$default$7__Lcom_yuiwai_tetrics_core_Field();
+  var x$45 = this.copy$default$8__Lcom_yuiwai_tetrics_core_Field();
+  return this.copy__I__Lcom_yuiwai_tetrics_core_Block__Lcom_yuiwai_tetrics_core_Offset__Lcom_yuiwai_tetrics_core_Rotation__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_EventBus__Lcom_yuiwai_tetrics_core_Tetrics(x$39, x$40, x$38, x$41, x$42, x$43, x$44, x$45, this.eventBus$1).publishAndReturn__p1__F1__Lcom_yuiwai_tetrics_core_Tetrics(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function($this) {
     return (function(x$5$2) {
       var x$5 = $as_Lcom_yuiwai_tetrics_core_Tetrics(x$5$2);
       return $this.$$anonfun$moveUp$1__p1__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_BlockMoved(x$5)
@@ -18373,15 +19007,15 @@ $c_Lcom_yuiwai_tetrics_core_Tetrics.prototype.moveUp__Lcom_yuiwai_tetrics_core_T
   })(this)))
 });
 $c_Lcom_yuiwai_tetrics_core_Tetrics.prototype.moveDown__Lcom_yuiwai_tetrics_core_Tetrics = (function() {
-  var x$47 = this.offset__Lcom_yuiwai_tetrics_core_Offset().moveDown__Lcom_yuiwai_tetrics_core_Offset();
-  var x$48 = this.copy$default$1__I();
-  var x$49 = this.copy$default$2__Lcom_yuiwai_tetrics_core_Block();
-  var x$50 = this.copy$default$4__Lcom_yuiwai_tetrics_core_Rotation();
-  var x$51 = this.copy$default$5__Lcom_yuiwai_tetrics_core_Field();
-  var x$52 = this.copy$default$6__Lcom_yuiwai_tetrics_core_Field();
-  var x$53 = this.copy$default$7__Lcom_yuiwai_tetrics_core_Field();
-  var x$54 = this.copy$default$8__Lcom_yuiwai_tetrics_core_Field();
-  return this.copy__I__Lcom_yuiwai_tetrics_core_Block__Lcom_yuiwai_tetrics_core_Offset__Lcom_yuiwai_tetrics_core_Rotation__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_EventBus__Lcom_yuiwai_tetrics_core_Tetrics(x$48, x$49, x$47, x$50, x$51, x$52, x$53, x$54, this.eventBus$1).publishAndReturn__p1__F1__Lcom_yuiwai_tetrics_core_Tetrics(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function($this) {
+  var x$46 = this.offset__Lcom_yuiwai_tetrics_core_Offset().moveDown__Lcom_yuiwai_tetrics_core_Offset();
+  var x$47 = this.copy$default$1__I();
+  var x$48 = this.copy$default$2__Lcom_yuiwai_tetrics_core_Block();
+  var x$49 = this.copy$default$4__Lcom_yuiwai_tetrics_core_Rotation();
+  var x$50 = this.copy$default$5__Lcom_yuiwai_tetrics_core_Field();
+  var x$51 = this.copy$default$6__Lcom_yuiwai_tetrics_core_Field();
+  var x$52 = this.copy$default$7__Lcom_yuiwai_tetrics_core_Field();
+  var x$53 = this.copy$default$8__Lcom_yuiwai_tetrics_core_Field();
+  return this.copy__I__Lcom_yuiwai_tetrics_core_Block__Lcom_yuiwai_tetrics_core_Offset__Lcom_yuiwai_tetrics_core_Rotation__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_EventBus__Lcom_yuiwai_tetrics_core_Tetrics(x$47, x$48, x$46, x$49, x$50, x$51, x$52, x$53, this.eventBus$1).publishAndReturn__p1__F1__Lcom_yuiwai_tetrics_core_Tetrics(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function($this) {
     return (function(x$6$2) {
       var x$6 = $as_Lcom_yuiwai_tetrics_core_Tetrics(x$6$2);
       return $this.$$anonfun$moveDown$1__p1__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_BlockMoved(x$6)
@@ -18389,109 +19023,109 @@ $c_Lcom_yuiwai_tetrics_core_Tetrics.prototype.moveDown__Lcom_yuiwai_tetrics_core
   })(this)))
 });
 $c_Lcom_yuiwai_tetrics_core_Tetrics.prototype.turn__Lcom_yuiwai_tetrics_core_Block__Lcom_yuiwai_tetrics_core_Rotation__Lcom_yuiwai_tetrics_core_Tetrics = (function(b, r) {
-  var x$55 = b;
-  var x$56 = this.turnedOffset__Lcom_yuiwai_tetrics_core_Block__Lcom_yuiwai_tetrics_core_Rotation__Lcom_yuiwai_tetrics_core_Offset(b, r);
-  var x$57 = r;
-  var x$58 = this.copy$default$1__I();
-  var x$59 = this.copy$default$5__Lcom_yuiwai_tetrics_core_Field();
-  var x$60 = this.copy$default$6__Lcom_yuiwai_tetrics_core_Field();
-  var x$61 = this.copy$default$7__Lcom_yuiwai_tetrics_core_Field();
-  var x$62 = this.copy$default$8__Lcom_yuiwai_tetrics_core_Field();
-  return this.copy__I__Lcom_yuiwai_tetrics_core_Block__Lcom_yuiwai_tetrics_core_Offset__Lcom_yuiwai_tetrics_core_Rotation__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_EventBus__Lcom_yuiwai_tetrics_core_Tetrics(x$58, x$55, x$56, x$57, x$59, x$60, x$61, x$62, this.eventBus$1)
+  var x$54 = b;
+  var x$55 = this.turnedOffset__Lcom_yuiwai_tetrics_core_Block__Lcom_yuiwai_tetrics_core_Rotation__Lcom_yuiwai_tetrics_core_Offset(b, r);
+  var x$56 = r;
+  var x$57 = this.copy$default$1__I();
+  var x$58 = this.copy$default$5__Lcom_yuiwai_tetrics_core_Field();
+  var x$59 = this.copy$default$6__Lcom_yuiwai_tetrics_core_Field();
+  var x$60 = this.copy$default$7__Lcom_yuiwai_tetrics_core_Field();
+  var x$61 = this.copy$default$8__Lcom_yuiwai_tetrics_core_Field();
+  return this.copy__I__Lcom_yuiwai_tetrics_core_Block__Lcom_yuiwai_tetrics_core_Offset__Lcom_yuiwai_tetrics_core_Rotation__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_EventBus__Lcom_yuiwai_tetrics_core_Tetrics(x$57, x$54, x$55, x$56, x$58, x$59, x$60, x$61, this.eventBus$1)
 });
 $c_Lcom_yuiwai_tetrics_core_Tetrics.prototype.turnedOffset__Lcom_yuiwai_tetrics_core_Block__Lcom_yuiwai_tetrics_core_Rotation__Lcom_yuiwai_tetrics_core_Offset = (function(b, r) {
   return new $c_Lcom_yuiwai_tetrics_core_Offset().init___I__I(((this.offset__Lcom_yuiwai_tetrics_core_Offset().x__I() + r.round__D__I((((this.block__Lcom_yuiwai_tetrics_core_Block().width__I() - b.width__I()) | 0) / 2.0))) | 0), ((this.offset__Lcom_yuiwai_tetrics_core_Offset().y__I() + r.round__D__I((((this.block__Lcom_yuiwai_tetrics_core_Block().height__I() - b.height__I()) | 0) / 2.0))) | 0))
 });
-$c_Lcom_yuiwai_tetrics_core_Tetrics.prototype.turnRight__Lcom_yuiwai_tetrics_core_Tetrics = (function() {
-  return this.turn__Lcom_yuiwai_tetrics_core_Block__Lcom_yuiwai_tetrics_core_Rotation__Lcom_yuiwai_tetrics_core_Tetrics(this.block__Lcom_yuiwai_tetrics_core_Block().turnRight__Lcom_yuiwai_tetrics_core_Block(), this.rotation__Lcom_yuiwai_tetrics_core_Rotation().right__Lcom_yuiwai_tetrics_core_Rotation()).publishAndReturn__p1__F1__Lcom_yuiwai_tetrics_core_Tetrics(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function($this) {
-    return (function(x$7$2) {
-      var x$7 = $as_Lcom_yuiwai_tetrics_core_Tetrics(x$7$2);
-      return $this.$$anonfun$turnRight$1__p1__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_BlockRotated(x$7)
-    })
-  })(this)))
-});
 $c_Lcom_yuiwai_tetrics_core_Tetrics.prototype.turnLeft__Lcom_yuiwai_tetrics_core_Tetrics = (function() {
   return this.turn__Lcom_yuiwai_tetrics_core_Block__Lcom_yuiwai_tetrics_core_Rotation__Lcom_yuiwai_tetrics_core_Tetrics(this.block__Lcom_yuiwai_tetrics_core_Block().turnLeft__Lcom_yuiwai_tetrics_core_Block(), this.rotation__Lcom_yuiwai_tetrics_core_Rotation().left__Lcom_yuiwai_tetrics_core_Rotation()).publishAndReturn__p1__F1__Lcom_yuiwai_tetrics_core_Tetrics(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function($this) {
+    return (function(x$7$2) {
+      var x$7 = $as_Lcom_yuiwai_tetrics_core_Tetrics(x$7$2);
+      return $this.$$anonfun$turnLeft$1__p1__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_BlockRotated(x$7)
+    })
+  })(this)))
+});
+$c_Lcom_yuiwai_tetrics_core_Tetrics.prototype.turnRight__Lcom_yuiwai_tetrics_core_Tetrics = (function() {
+  return this.turn__Lcom_yuiwai_tetrics_core_Block__Lcom_yuiwai_tetrics_core_Rotation__Lcom_yuiwai_tetrics_core_Tetrics(this.block__Lcom_yuiwai_tetrics_core_Block().turnRight__Lcom_yuiwai_tetrics_core_Block(), this.rotation__Lcom_yuiwai_tetrics_core_Rotation().right__Lcom_yuiwai_tetrics_core_Rotation()).publishAndReturn__p1__F1__Lcom_yuiwai_tetrics_core_Tetrics(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function($this) {
     return (function(x$8$2) {
       var x$8 = $as_Lcom_yuiwai_tetrics_core_Tetrics(x$8$2);
-      return $this.$$anonfun$turnLeft$1__p1__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_BlockRotated(x$8)
-    })
-  })(this)))
-});
-$c_Lcom_yuiwai_tetrics_core_Tetrics.prototype.dropBottom__Lcom_yuiwai_tetrics_core_Tetrics = (function() {
-  var x$63 = this.bottomField__Lcom_yuiwai_tetrics_core_Field().drop__Lcom_yuiwai_tetrics_core_Block__I__Lcom_yuiwai_tetrics_core_Field(this.block__Lcom_yuiwai_tetrics_core_Block(), this.offset__Lcom_yuiwai_tetrics_core_Offset().x__I());
-  var x$64 = this.copy$default$1__I();
-  var x$65 = this.copy$default$2__Lcom_yuiwai_tetrics_core_Block();
-  var x$66 = this.copy$default$3__Lcom_yuiwai_tetrics_core_Offset();
-  var x$67 = this.copy$default$4__Lcom_yuiwai_tetrics_core_Rotation();
-  var x$68 = this.copy$default$6__Lcom_yuiwai_tetrics_core_Field();
-  var x$69 = this.copy$default$7__Lcom_yuiwai_tetrics_core_Field();
-  var x$70 = this.copy$default$8__Lcom_yuiwai_tetrics_core_Field();
-  return this.copy__I__Lcom_yuiwai_tetrics_core_Block__Lcom_yuiwai_tetrics_core_Offset__Lcom_yuiwai_tetrics_core_Rotation__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_EventBus__Lcom_yuiwai_tetrics_core_Tetrics(x$64, x$65, x$66, x$67, x$63, x$68, x$69, x$70, this.eventBus$1).publishAndReturn__p1__F1__Lcom_yuiwai_tetrics_core_Tetrics(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function($this) {
-    return (function(t$2) {
-      var t = $as_Lcom_yuiwai_tetrics_core_Tetrics(t$2);
-      return $this.$$anonfun$dropBottom$1__p1__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_BlockDropped(t)
-    })
-  })(this)))
-});
-$c_Lcom_yuiwai_tetrics_core_Tetrics.prototype.dropRight__Lcom_yuiwai_tetrics_core_Tetrics = (function() {
-  var x$71 = this.rightField__Lcom_yuiwai_tetrics_core_Field().drop__Lcom_yuiwai_tetrics_core_Block__I__Lcom_yuiwai_tetrics_core_Field(this.block__Lcom_yuiwai_tetrics_core_Block().turnRight__Lcom_yuiwai_tetrics_core_Block(), ((((this.fieldSize__I() - this.offset__Lcom_yuiwai_tetrics_core_Offset().y__I()) | 0) - this.block__Lcom_yuiwai_tetrics_core_Block().height__I()) | 0));
-  var x$72 = this.copy$default$1__I();
-  var x$73 = this.copy$default$2__Lcom_yuiwai_tetrics_core_Block();
-  var x$74 = this.copy$default$3__Lcom_yuiwai_tetrics_core_Offset();
-  var x$75 = this.copy$default$4__Lcom_yuiwai_tetrics_core_Rotation();
-  var x$76 = this.copy$default$5__Lcom_yuiwai_tetrics_core_Field();
-  var x$77 = this.copy$default$7__Lcom_yuiwai_tetrics_core_Field();
-  var x$78 = this.copy$default$8__Lcom_yuiwai_tetrics_core_Field();
-  return this.copy__I__Lcom_yuiwai_tetrics_core_Block__Lcom_yuiwai_tetrics_core_Offset__Lcom_yuiwai_tetrics_core_Rotation__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_EventBus__Lcom_yuiwai_tetrics_core_Tetrics(x$72, x$73, x$74, x$75, x$76, x$71, x$77, x$78, this.eventBus$1).publishAndReturn__p1__F1__Lcom_yuiwai_tetrics_core_Tetrics(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function($this) {
-    return (function(t$2) {
-      var t = $as_Lcom_yuiwai_tetrics_core_Tetrics(t$2);
-      return $this.$$anonfun$dropRight$1__p1__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_BlockDropped(t)
+      return $this.$$anonfun$turnRight$1__p1__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_BlockRotated(x$8)
     })
   })(this)))
 });
 $c_Lcom_yuiwai_tetrics_core_Tetrics.prototype.dropLeft__Lcom_yuiwai_tetrics_core_Tetrics = (function() {
-  var x$79 = this.leftField__Lcom_yuiwai_tetrics_core_Field().drop__Lcom_yuiwai_tetrics_core_Block__I__Lcom_yuiwai_tetrics_core_Field(this.block__Lcom_yuiwai_tetrics_core_Block().turnLeft__Lcom_yuiwai_tetrics_core_Block(), this.offset__Lcom_yuiwai_tetrics_core_Offset().y__I());
-  var x$80 = this.copy$default$1__I();
-  var x$81 = this.copy$default$2__Lcom_yuiwai_tetrics_core_Block();
-  var x$82 = this.copy$default$3__Lcom_yuiwai_tetrics_core_Offset();
-  var x$83 = this.copy$default$4__Lcom_yuiwai_tetrics_core_Rotation();
-  var x$84 = this.copy$default$5__Lcom_yuiwai_tetrics_core_Field();
-  var x$85 = this.copy$default$6__Lcom_yuiwai_tetrics_core_Field();
-  var x$86 = this.copy$default$8__Lcom_yuiwai_tetrics_core_Field();
-  return this.copy__I__Lcom_yuiwai_tetrics_core_Block__Lcom_yuiwai_tetrics_core_Offset__Lcom_yuiwai_tetrics_core_Rotation__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_EventBus__Lcom_yuiwai_tetrics_core_Tetrics(x$80, x$81, x$82, x$83, x$84, x$85, x$79, x$86, this.eventBus$1).publishAndReturn__p1__F1__Lcom_yuiwai_tetrics_core_Tetrics(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function($this) {
+  var x$62 = this.leftField__Lcom_yuiwai_tetrics_core_Field().drop__Lcom_yuiwai_tetrics_core_Block__I__Lcom_yuiwai_tetrics_core_Field(this.block__Lcom_yuiwai_tetrics_core_Block().turnLeft__Lcom_yuiwai_tetrics_core_Block(), this.offset__Lcom_yuiwai_tetrics_core_Offset().y__I());
+  var x$63 = this.copy$default$1__I();
+  var x$64 = this.copy$default$2__Lcom_yuiwai_tetrics_core_Block();
+  var x$65 = this.copy$default$3__Lcom_yuiwai_tetrics_core_Offset();
+  var x$66 = this.copy$default$4__Lcom_yuiwai_tetrics_core_Rotation();
+  var x$67 = this.copy$default$5__Lcom_yuiwai_tetrics_core_Field();
+  var x$68 = this.copy$default$6__Lcom_yuiwai_tetrics_core_Field();
+  var x$69 = this.copy$default$8__Lcom_yuiwai_tetrics_core_Field();
+  return this.copy__I__Lcom_yuiwai_tetrics_core_Block__Lcom_yuiwai_tetrics_core_Offset__Lcom_yuiwai_tetrics_core_Rotation__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_EventBus__Lcom_yuiwai_tetrics_core_Tetrics(x$63, x$64, x$65, x$66, x$67, x$68, x$62, x$69, this.eventBus$1).publishAndReturn__p1__F1__Lcom_yuiwai_tetrics_core_Tetrics(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function($this) {
     return (function(t$2) {
       var t = $as_Lcom_yuiwai_tetrics_core_Tetrics(t$2);
       return $this.$$anonfun$dropLeft$1__p1__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_BlockDropped(t)
     })
   })(this)))
 });
+$c_Lcom_yuiwai_tetrics_core_Tetrics.prototype.dropRight__Lcom_yuiwai_tetrics_core_Tetrics = (function() {
+  var x$70 = this.rightField__Lcom_yuiwai_tetrics_core_Field().drop__Lcom_yuiwai_tetrics_core_Block__I__Lcom_yuiwai_tetrics_core_Field(this.block__Lcom_yuiwai_tetrics_core_Block().turnRight__Lcom_yuiwai_tetrics_core_Block(), ((((this.fieldSize__I() - this.offset__Lcom_yuiwai_tetrics_core_Offset().y__I()) | 0) - this.block__Lcom_yuiwai_tetrics_core_Block().height__I()) | 0));
+  var x$71 = this.copy$default$1__I();
+  var x$72 = this.copy$default$2__Lcom_yuiwai_tetrics_core_Block();
+  var x$73 = this.copy$default$3__Lcom_yuiwai_tetrics_core_Offset();
+  var x$74 = this.copy$default$4__Lcom_yuiwai_tetrics_core_Rotation();
+  var x$75 = this.copy$default$5__Lcom_yuiwai_tetrics_core_Field();
+  var x$76 = this.copy$default$7__Lcom_yuiwai_tetrics_core_Field();
+  var x$77 = this.copy$default$8__Lcom_yuiwai_tetrics_core_Field();
+  return this.copy__I__Lcom_yuiwai_tetrics_core_Block__Lcom_yuiwai_tetrics_core_Offset__Lcom_yuiwai_tetrics_core_Rotation__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_EventBus__Lcom_yuiwai_tetrics_core_Tetrics(x$71, x$72, x$73, x$74, x$75, x$70, x$76, x$77, this.eventBus$1).publishAndReturn__p1__F1__Lcom_yuiwai_tetrics_core_Tetrics(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function($this) {
+    return (function(t$2) {
+      var t = $as_Lcom_yuiwai_tetrics_core_Tetrics(t$2);
+      return $this.$$anonfun$dropRight$1__p1__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_BlockDropped(t)
+    })
+  })(this)))
+});
 $c_Lcom_yuiwai_tetrics_core_Tetrics.prototype.dropTop__Lcom_yuiwai_tetrics_core_Tetrics = (function() {
-  var x$87 = this.topField__Lcom_yuiwai_tetrics_core_Field().drop__Lcom_yuiwai_tetrics_core_Block__I__Lcom_yuiwai_tetrics_core_Field(this.block__Lcom_yuiwai_tetrics_core_Block().turnLeft__Lcom_yuiwai_tetrics_core_Block().turnLeft__Lcom_yuiwai_tetrics_core_Block(), ((((this.fieldSize__I() - this.offset__Lcom_yuiwai_tetrics_core_Offset().x__I()) | 0) - this.block__Lcom_yuiwai_tetrics_core_Block().width__I()) | 0));
-  var x$88 = this.copy$default$1__I();
-  var x$89 = this.copy$default$2__Lcom_yuiwai_tetrics_core_Block();
-  var x$90 = this.copy$default$3__Lcom_yuiwai_tetrics_core_Offset();
-  var x$91 = this.copy$default$4__Lcom_yuiwai_tetrics_core_Rotation();
-  var x$92 = this.copy$default$5__Lcom_yuiwai_tetrics_core_Field();
-  var x$93 = this.copy$default$6__Lcom_yuiwai_tetrics_core_Field();
-  var x$94 = this.copy$default$7__Lcom_yuiwai_tetrics_core_Field();
-  return this.copy__I__Lcom_yuiwai_tetrics_core_Block__Lcom_yuiwai_tetrics_core_Offset__Lcom_yuiwai_tetrics_core_Rotation__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_EventBus__Lcom_yuiwai_tetrics_core_Tetrics(x$88, x$89, x$90, x$91, x$92, x$93, x$94, x$87, this.eventBus$1).publishAndReturn__p1__F1__Lcom_yuiwai_tetrics_core_Tetrics(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function($this) {
+  var x$78 = this.topField__Lcom_yuiwai_tetrics_core_Field().drop__Lcom_yuiwai_tetrics_core_Block__I__Lcom_yuiwai_tetrics_core_Field(this.block__Lcom_yuiwai_tetrics_core_Block().turnLeft__Lcom_yuiwai_tetrics_core_Block().turnLeft__Lcom_yuiwai_tetrics_core_Block(), ((((this.fieldSize__I() - this.offset__Lcom_yuiwai_tetrics_core_Offset().x__I()) | 0) - this.block__Lcom_yuiwai_tetrics_core_Block().width__I()) | 0));
+  var x$79 = this.copy$default$1__I();
+  var x$80 = this.copy$default$2__Lcom_yuiwai_tetrics_core_Block();
+  var x$81 = this.copy$default$3__Lcom_yuiwai_tetrics_core_Offset();
+  var x$82 = this.copy$default$4__Lcom_yuiwai_tetrics_core_Rotation();
+  var x$83 = this.copy$default$5__Lcom_yuiwai_tetrics_core_Field();
+  var x$84 = this.copy$default$6__Lcom_yuiwai_tetrics_core_Field();
+  var x$85 = this.copy$default$7__Lcom_yuiwai_tetrics_core_Field();
+  return this.copy__I__Lcom_yuiwai_tetrics_core_Block__Lcom_yuiwai_tetrics_core_Offset__Lcom_yuiwai_tetrics_core_Rotation__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_EventBus__Lcom_yuiwai_tetrics_core_Tetrics(x$79, x$80, x$81, x$82, x$83, x$84, x$85, x$78, this.eventBus$1).publishAndReturn__p1__F1__Lcom_yuiwai_tetrics_core_Tetrics(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function($this) {
     return (function(t$2) {
       var t = $as_Lcom_yuiwai_tetrics_core_Tetrics(t$2);
       return $this.$$anonfun$dropTop$1__p1__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_BlockDropped(t)
     })
   })(this)))
 });
+$c_Lcom_yuiwai_tetrics_core_Tetrics.prototype.dropBottom__Lcom_yuiwai_tetrics_core_Tetrics = (function() {
+  var x$86 = this.bottomField__Lcom_yuiwai_tetrics_core_Field().drop__Lcom_yuiwai_tetrics_core_Block__I__Lcom_yuiwai_tetrics_core_Field(this.block__Lcom_yuiwai_tetrics_core_Block(), this.offset__Lcom_yuiwai_tetrics_core_Offset().x__I());
+  var x$87 = this.copy$default$1__I();
+  var x$88 = this.copy$default$2__Lcom_yuiwai_tetrics_core_Block();
+  var x$89 = this.copy$default$3__Lcom_yuiwai_tetrics_core_Offset();
+  var x$90 = this.copy$default$4__Lcom_yuiwai_tetrics_core_Rotation();
+  var x$91 = this.copy$default$6__Lcom_yuiwai_tetrics_core_Field();
+  var x$92 = this.copy$default$7__Lcom_yuiwai_tetrics_core_Field();
+  var x$93 = this.copy$default$8__Lcom_yuiwai_tetrics_core_Field();
+  return this.copy__I__Lcom_yuiwai_tetrics_core_Block__Lcom_yuiwai_tetrics_core_Offset__Lcom_yuiwai_tetrics_core_Rotation__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_EventBus__Lcom_yuiwai_tetrics_core_Tetrics(x$87, x$88, x$89, x$90, x$86, x$91, x$92, x$93, this.eventBus$1).publishAndReturn__p1__F1__Lcom_yuiwai_tetrics_core_Tetrics(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function($this) {
+    return (function(t$2) {
+      var t = $as_Lcom_yuiwai_tetrics_core_Tetrics(t$2);
+      return $this.$$anonfun$dropBottom$1__p1__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_BlockDropped(t)
+    })
+  })(this)))
+});
 $c_Lcom_yuiwai_tetrics_core_Tetrics.prototype.normalizeLeft__Lcom_yuiwai_tetrics_core_Tetrics = (function() {
-  var x$95 = this.leftField__Lcom_yuiwai_tetrics_core_Field().normalized__Lcom_yuiwai_tetrics_core_Field();
-  var x$96 = this.copy$default$1__I();
-  var x$97 = this.copy$default$2__Lcom_yuiwai_tetrics_core_Block();
-  var x$98 = this.copy$default$3__Lcom_yuiwai_tetrics_core_Offset();
-  var x$99 = this.copy$default$4__Lcom_yuiwai_tetrics_core_Rotation();
-  var x$100 = this.copy$default$5__Lcom_yuiwai_tetrics_core_Field();
-  var x$101 = this.copy$default$6__Lcom_yuiwai_tetrics_core_Field();
-  var x$102 = this.copy$default$8__Lcom_yuiwai_tetrics_core_Field();
-  return this.copy__I__Lcom_yuiwai_tetrics_core_Block__Lcom_yuiwai_tetrics_core_Offset__Lcom_yuiwai_tetrics_core_Rotation__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_EventBus__Lcom_yuiwai_tetrics_core_Tetrics(x$96, x$97, x$98, x$99, x$100, x$101, x$95, x$102, this.eventBus$1).publishAndReturn__p1__F1__Lcom_yuiwai_tetrics_core_Tetrics(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function($this) {
+  var x$94 = this.leftField__Lcom_yuiwai_tetrics_core_Field().normalized__Lcom_yuiwai_tetrics_core_Field();
+  var x$95 = this.copy$default$1__I();
+  var x$96 = this.copy$default$2__Lcom_yuiwai_tetrics_core_Block();
+  var x$97 = this.copy$default$3__Lcom_yuiwai_tetrics_core_Offset();
+  var x$98 = this.copy$default$4__Lcom_yuiwai_tetrics_core_Rotation();
+  var x$99 = this.copy$default$5__Lcom_yuiwai_tetrics_core_Field();
+  var x$100 = this.copy$default$6__Lcom_yuiwai_tetrics_core_Field();
+  var x$101 = this.copy$default$8__Lcom_yuiwai_tetrics_core_Field();
+  return this.copy__I__Lcom_yuiwai_tetrics_core_Block__Lcom_yuiwai_tetrics_core_Offset__Lcom_yuiwai_tetrics_core_Rotation__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_EventBus__Lcom_yuiwai_tetrics_core_Tetrics(x$95, x$96, x$97, x$98, x$99, x$100, x$94, x$101, this.eventBus$1).publishAndReturn__p1__F1__Lcom_yuiwai_tetrics_core_Tetrics(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function($this) {
     return (function(t$2) {
       var t = $as_Lcom_yuiwai_tetrics_core_Tetrics(t$2);
       return $this.$$anonfun$normalizeLeft$1__p1__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_FieldNormalized(t)
@@ -18499,15 +19133,15 @@ $c_Lcom_yuiwai_tetrics_core_Tetrics.prototype.normalizeLeft__Lcom_yuiwai_tetrics
   })(this)))
 });
 $c_Lcom_yuiwai_tetrics_core_Tetrics.prototype.normalizeRight__Lcom_yuiwai_tetrics_core_Tetrics = (function() {
-  var x$103 = this.rightField__Lcom_yuiwai_tetrics_core_Field().normalized__Lcom_yuiwai_tetrics_core_Field();
-  var x$104 = this.copy$default$1__I();
-  var x$105 = this.copy$default$2__Lcom_yuiwai_tetrics_core_Block();
-  var x$106 = this.copy$default$3__Lcom_yuiwai_tetrics_core_Offset();
-  var x$107 = this.copy$default$4__Lcom_yuiwai_tetrics_core_Rotation();
-  var x$108 = this.copy$default$5__Lcom_yuiwai_tetrics_core_Field();
-  var x$109 = this.copy$default$7__Lcom_yuiwai_tetrics_core_Field();
-  var x$110 = this.copy$default$8__Lcom_yuiwai_tetrics_core_Field();
-  return this.copy__I__Lcom_yuiwai_tetrics_core_Block__Lcom_yuiwai_tetrics_core_Offset__Lcom_yuiwai_tetrics_core_Rotation__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_EventBus__Lcom_yuiwai_tetrics_core_Tetrics(x$104, x$105, x$106, x$107, x$108, x$103, x$109, x$110, this.eventBus$1).publishAndReturn__p1__F1__Lcom_yuiwai_tetrics_core_Tetrics(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function($this) {
+  var x$102 = this.rightField__Lcom_yuiwai_tetrics_core_Field().normalized__Lcom_yuiwai_tetrics_core_Field();
+  var x$103 = this.copy$default$1__I();
+  var x$104 = this.copy$default$2__Lcom_yuiwai_tetrics_core_Block();
+  var x$105 = this.copy$default$3__Lcom_yuiwai_tetrics_core_Offset();
+  var x$106 = this.copy$default$4__Lcom_yuiwai_tetrics_core_Rotation();
+  var x$107 = this.copy$default$5__Lcom_yuiwai_tetrics_core_Field();
+  var x$108 = this.copy$default$7__Lcom_yuiwai_tetrics_core_Field();
+  var x$109 = this.copy$default$8__Lcom_yuiwai_tetrics_core_Field();
+  return this.copy__I__Lcom_yuiwai_tetrics_core_Block__Lcom_yuiwai_tetrics_core_Offset__Lcom_yuiwai_tetrics_core_Rotation__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_EventBus__Lcom_yuiwai_tetrics_core_Tetrics(x$103, x$104, x$105, x$106, x$107, x$102, x$108, x$109, this.eventBus$1).publishAndReturn__p1__F1__Lcom_yuiwai_tetrics_core_Tetrics(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function($this) {
     return (function(t$2) {
       var t = $as_Lcom_yuiwai_tetrics_core_Tetrics(t$2);
       return $this.$$anonfun$normalizeRight$1__p1__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_FieldNormalized(t)
@@ -18515,15 +19149,15 @@ $c_Lcom_yuiwai_tetrics_core_Tetrics.prototype.normalizeRight__Lcom_yuiwai_tetric
   })(this)))
 });
 $c_Lcom_yuiwai_tetrics_core_Tetrics.prototype.normalizeTop__Lcom_yuiwai_tetrics_core_Tetrics = (function() {
-  var x$111 = this.topField__Lcom_yuiwai_tetrics_core_Field().normalized__Lcom_yuiwai_tetrics_core_Field();
-  var x$112 = this.copy$default$1__I();
-  var x$113 = this.copy$default$2__Lcom_yuiwai_tetrics_core_Block();
-  var x$114 = this.copy$default$3__Lcom_yuiwai_tetrics_core_Offset();
-  var x$115 = this.copy$default$4__Lcom_yuiwai_tetrics_core_Rotation();
-  var x$116 = this.copy$default$5__Lcom_yuiwai_tetrics_core_Field();
-  var x$117 = this.copy$default$6__Lcom_yuiwai_tetrics_core_Field();
-  var x$118 = this.copy$default$7__Lcom_yuiwai_tetrics_core_Field();
-  return this.copy__I__Lcom_yuiwai_tetrics_core_Block__Lcom_yuiwai_tetrics_core_Offset__Lcom_yuiwai_tetrics_core_Rotation__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_EventBus__Lcom_yuiwai_tetrics_core_Tetrics(x$112, x$113, x$114, x$115, x$116, x$117, x$118, x$111, this.eventBus$1).publishAndReturn__p1__F1__Lcom_yuiwai_tetrics_core_Tetrics(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function($this) {
+  var x$110 = this.topField__Lcom_yuiwai_tetrics_core_Field().normalized__Lcom_yuiwai_tetrics_core_Field();
+  var x$111 = this.copy$default$1__I();
+  var x$112 = this.copy$default$2__Lcom_yuiwai_tetrics_core_Block();
+  var x$113 = this.copy$default$3__Lcom_yuiwai_tetrics_core_Offset();
+  var x$114 = this.copy$default$4__Lcom_yuiwai_tetrics_core_Rotation();
+  var x$115 = this.copy$default$5__Lcom_yuiwai_tetrics_core_Field();
+  var x$116 = this.copy$default$6__Lcom_yuiwai_tetrics_core_Field();
+  var x$117 = this.copy$default$7__Lcom_yuiwai_tetrics_core_Field();
+  return this.copy__I__Lcom_yuiwai_tetrics_core_Block__Lcom_yuiwai_tetrics_core_Offset__Lcom_yuiwai_tetrics_core_Rotation__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_EventBus__Lcom_yuiwai_tetrics_core_Tetrics(x$111, x$112, x$113, x$114, x$115, x$116, x$117, x$110, this.eventBus$1).publishAndReturn__p1__F1__Lcom_yuiwai_tetrics_core_Tetrics(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function($this) {
     return (function(t$2) {
       var t = $as_Lcom_yuiwai_tetrics_core_Tetrics(t$2);
       return $this.$$anonfun$normalizeTop$1__p1__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_FieldNormalized(t)
@@ -18531,15 +19165,15 @@ $c_Lcom_yuiwai_tetrics_core_Tetrics.prototype.normalizeTop__Lcom_yuiwai_tetrics_
   })(this)))
 });
 $c_Lcom_yuiwai_tetrics_core_Tetrics.prototype.normalizeBottom__Lcom_yuiwai_tetrics_core_Tetrics = (function() {
-  var x$119 = this.bottomField__Lcom_yuiwai_tetrics_core_Field().normalized__Lcom_yuiwai_tetrics_core_Field();
-  var x$120 = this.copy$default$1__I();
-  var x$121 = this.copy$default$2__Lcom_yuiwai_tetrics_core_Block();
-  var x$122 = this.copy$default$3__Lcom_yuiwai_tetrics_core_Offset();
-  var x$123 = this.copy$default$4__Lcom_yuiwai_tetrics_core_Rotation();
-  var x$124 = this.copy$default$6__Lcom_yuiwai_tetrics_core_Field();
-  var x$125 = this.copy$default$7__Lcom_yuiwai_tetrics_core_Field();
-  var x$126 = this.copy$default$8__Lcom_yuiwai_tetrics_core_Field();
-  return this.copy__I__Lcom_yuiwai_tetrics_core_Block__Lcom_yuiwai_tetrics_core_Offset__Lcom_yuiwai_tetrics_core_Rotation__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_EventBus__Lcom_yuiwai_tetrics_core_Tetrics(x$120, x$121, x$122, x$123, x$119, x$124, x$125, x$126, this.eventBus$1).publishAndReturn__p1__F1__Lcom_yuiwai_tetrics_core_Tetrics(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function($this) {
+  var x$118 = this.bottomField__Lcom_yuiwai_tetrics_core_Field().normalized__Lcom_yuiwai_tetrics_core_Field();
+  var x$119 = this.copy$default$1__I();
+  var x$120 = this.copy$default$2__Lcom_yuiwai_tetrics_core_Block();
+  var x$121 = this.copy$default$3__Lcom_yuiwai_tetrics_core_Offset();
+  var x$122 = this.copy$default$4__Lcom_yuiwai_tetrics_core_Rotation();
+  var x$123 = this.copy$default$6__Lcom_yuiwai_tetrics_core_Field();
+  var x$124 = this.copy$default$7__Lcom_yuiwai_tetrics_core_Field();
+  var x$125 = this.copy$default$8__Lcom_yuiwai_tetrics_core_Field();
+  return this.copy__I__Lcom_yuiwai_tetrics_core_Block__Lcom_yuiwai_tetrics_core_Offset__Lcom_yuiwai_tetrics_core_Rotation__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_EventBus__Lcom_yuiwai_tetrics_core_Tetrics(x$119, x$120, x$121, x$122, x$118, x$123, x$124, x$125, this.eventBus$1).publishAndReturn__p1__F1__Lcom_yuiwai_tetrics_core_Tetrics(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function($this) {
     return (function(t$2) {
       var t = $as_Lcom_yuiwai_tetrics_core_Tetrics(t$2);
       return $this.$$anonfun$normalizeBottom$1__p1__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_FieldNormalized(t)
@@ -18571,22 +19205,22 @@ $c_Lcom_yuiwai_tetrics_core_Tetrics.prototype.act__Lcom_yuiwai_tetrics_core_Tetr
           var x$9 = $m_Lcom_yuiwai_tetrics_core_DropLeftAction$();
           var x$10 = x1;
           if (((x$9 === null) ? (x$10 === null) : x$9.equals__O__Z(x$10))) {
-            return this.dropLeft__Lcom_yuiwai_tetrics_core_Tetrics().normalizeLeft__Lcom_yuiwai_tetrics_core_Tetrics()
+            return this.dropLeft__Lcom_yuiwai_tetrics_core_Tetrics()
           } else {
             var x$11 = $m_Lcom_yuiwai_tetrics_core_DropRightAction$();
             var x$12 = x1;
             if (((x$11 === null) ? (x$12 === null) : x$11.equals__O__Z(x$12))) {
-              return this.dropRight__Lcom_yuiwai_tetrics_core_Tetrics().normalizeRight__Lcom_yuiwai_tetrics_core_Tetrics()
+              return this.dropRight__Lcom_yuiwai_tetrics_core_Tetrics()
             } else {
               var x$13 = $m_Lcom_yuiwai_tetrics_core_DropTopAction$();
               var x$14 = x1;
               if (((x$13 === null) ? (x$14 === null) : x$13.equals__O__Z(x$14))) {
-                return this.dropTop__Lcom_yuiwai_tetrics_core_Tetrics().normalizeTop__Lcom_yuiwai_tetrics_core_Tetrics()
+                return this.dropTop__Lcom_yuiwai_tetrics_core_Tetrics()
               } else {
                 var x$15 = $m_Lcom_yuiwai_tetrics_core_DropBottomAction$();
                 var x$16 = x1;
                 if (((x$15 === null) ? (x$16 === null) : x$15.equals__O__Z(x$16))) {
-                  return this.dropBottom__Lcom_yuiwai_tetrics_core_Tetrics().normalizeBottom__Lcom_yuiwai_tetrics_core_Tetrics()
+                  return this.dropBottom__Lcom_yuiwai_tetrics_core_Tetrics()
                 } else {
                   var x$17 = $m_Lcom_yuiwai_tetrics_core_TurnLeftAction$();
                   var x$18 = x1;
@@ -18598,7 +19232,13 @@ $c_Lcom_yuiwai_tetrics_core_Tetrics.prototype.act__Lcom_yuiwai_tetrics_core_Tetr
                     if (((x$19 === null) ? (x$20 === null) : x$19.equals__O__Z(x$20))) {
                       return this.turnRight__Lcom_yuiwai_tetrics_core_Tetrics()
                     } else {
-                      throw new $c_s_MatchError().init___O(x1)
+                      var x$21 = $m_Lcom_yuiwai_tetrics_core_NoAction$();
+                      var x$22 = x1;
+                      if (((x$21 === null) ? (x$22 === null) : x$21.equals__O__Z(x$22))) {
+                        return this
+                      } else {
+                        throw new $c_s_MatchError().init___O(x1)
+                      }
                     }
                   }
                 }
@@ -18776,7 +19416,7 @@ $c_Lcom_yuiwai_tetrics_core_Tetrics.prototype.$$anonfun$new$1__p1__T = (function
 $c_Lcom_yuiwai_tetrics_core_Tetrics.prototype.$$anonfun$new$2__p1__T = (function() {
   return "block is outside of field height"
 });
-$c_Lcom_yuiwai_tetrics_core_Tetrics.prototype.$$anonfun$deactivedFields$1__p1__Lcom_yuiwai_tetrics_core_Field__Z = (function(x$1) {
+$c_Lcom_yuiwai_tetrics_core_Tetrics.prototype.$$anonfun$deactivatedFields$1__p1__Lcom_yuiwai_tetrics_core_Field__Z = (function(x$1) {
   return x$1.active__Z()
 });
 $c_Lcom_yuiwai_tetrics_core_Tetrics.prototype.$$anonfun$put$1__p1__Lcom_yuiwai_tetrics_core_Block__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_BlockAdded = (function(block$1, x$2) {
@@ -18794,23 +19434,23 @@ $c_Lcom_yuiwai_tetrics_core_Tetrics.prototype.$$anonfun$moveUp$1__p1__Lcom_yuiwa
 $c_Lcom_yuiwai_tetrics_core_Tetrics.prototype.$$anonfun$moveDown$1__p1__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_BlockMoved = (function(x$6) {
   return new $c_Lcom_yuiwai_tetrics_core_BlockMoved().init___Lcom_yuiwai_tetrics_core_MoveType($m_Lcom_yuiwai_tetrics_core_MoveDown$())
 });
-$c_Lcom_yuiwai_tetrics_core_Tetrics.prototype.$$anonfun$turnRight$1__p1__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_BlockRotated = (function(x$7) {
-  return new $c_Lcom_yuiwai_tetrics_core_BlockRotated().init___Lcom_yuiwai_tetrics_core_RotationType($m_Lcom_yuiwai_tetrics_core_RotationRight$())
-});
-$c_Lcom_yuiwai_tetrics_core_Tetrics.prototype.$$anonfun$turnLeft$1__p1__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_BlockRotated = (function(x$8) {
+$c_Lcom_yuiwai_tetrics_core_Tetrics.prototype.$$anonfun$turnLeft$1__p1__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_BlockRotated = (function(x$7) {
   return new $c_Lcom_yuiwai_tetrics_core_BlockRotated().init___Lcom_yuiwai_tetrics_core_RotationType($m_Lcom_yuiwai_tetrics_core_RotationLeft$())
 });
-$c_Lcom_yuiwai_tetrics_core_Tetrics.prototype.$$anonfun$dropBottom$1__p1__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_BlockDropped = (function(t) {
-  return new $c_Lcom_yuiwai_tetrics_core_BlockDropped().init___Lcom_yuiwai_tetrics_core_DroppableField__I($m_Lcom_yuiwai_tetrics_core_FieldBottom$(), t.bottomField__Lcom_yuiwai_tetrics_core_Field().numRows__I())
-});
-$c_Lcom_yuiwai_tetrics_core_Tetrics.prototype.$$anonfun$dropRight$1__p1__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_BlockDropped = (function(t) {
-  return new $c_Lcom_yuiwai_tetrics_core_BlockDropped().init___Lcom_yuiwai_tetrics_core_DroppableField__I($m_Lcom_yuiwai_tetrics_core_FieldRight$(), t.rightField__Lcom_yuiwai_tetrics_core_Field().numRows__I())
+$c_Lcom_yuiwai_tetrics_core_Tetrics.prototype.$$anonfun$turnRight$1__p1__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_BlockRotated = (function(x$8) {
+  return new $c_Lcom_yuiwai_tetrics_core_BlockRotated().init___Lcom_yuiwai_tetrics_core_RotationType($m_Lcom_yuiwai_tetrics_core_RotationRight$())
 });
 $c_Lcom_yuiwai_tetrics_core_Tetrics.prototype.$$anonfun$dropLeft$1__p1__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_BlockDropped = (function(t) {
-  return new $c_Lcom_yuiwai_tetrics_core_BlockDropped().init___Lcom_yuiwai_tetrics_core_DroppableField__I($m_Lcom_yuiwai_tetrics_core_FieldLeft$(), t.leftField__Lcom_yuiwai_tetrics_core_Field().numRows__I())
+  return new $c_Lcom_yuiwai_tetrics_core_BlockDropped().init___Lcom_yuiwai_tetrics_core_DroppableField__I__sc_Seq($m_Lcom_yuiwai_tetrics_core_FieldLeft$(), t.leftField__Lcom_yuiwai_tetrics_core_Field().numRows__I(), t.leftField__Lcom_yuiwai_tetrics_core_Field().filledRows__sc_Seq())
+});
+$c_Lcom_yuiwai_tetrics_core_Tetrics.prototype.$$anonfun$dropRight$1__p1__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_BlockDropped = (function(t) {
+  return new $c_Lcom_yuiwai_tetrics_core_BlockDropped().init___Lcom_yuiwai_tetrics_core_DroppableField__I__sc_Seq($m_Lcom_yuiwai_tetrics_core_FieldRight$(), t.rightField__Lcom_yuiwai_tetrics_core_Field().numRows__I(), t.rightField__Lcom_yuiwai_tetrics_core_Field().filledRows__sc_Seq())
 });
 $c_Lcom_yuiwai_tetrics_core_Tetrics.prototype.$$anonfun$dropTop$1__p1__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_BlockDropped = (function(t) {
-  return new $c_Lcom_yuiwai_tetrics_core_BlockDropped().init___Lcom_yuiwai_tetrics_core_DroppableField__I($m_Lcom_yuiwai_tetrics_core_FieldTop$(), t.topField__Lcom_yuiwai_tetrics_core_Field().numRows__I())
+  return new $c_Lcom_yuiwai_tetrics_core_BlockDropped().init___Lcom_yuiwai_tetrics_core_DroppableField__I__sc_Seq($m_Lcom_yuiwai_tetrics_core_FieldTop$(), t.topField__Lcom_yuiwai_tetrics_core_Field().numRows__I(), t.topField__Lcom_yuiwai_tetrics_core_Field().filledRows__sc_Seq())
+});
+$c_Lcom_yuiwai_tetrics_core_Tetrics.prototype.$$anonfun$dropBottom$1__p1__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_BlockDropped = (function(t) {
+  return new $c_Lcom_yuiwai_tetrics_core_BlockDropped().init___Lcom_yuiwai_tetrics_core_DroppableField__I__sc_Seq($m_Lcom_yuiwai_tetrics_core_FieldBottom$(), t.bottomField__Lcom_yuiwai_tetrics_core_Field().numRows__I(), t.bottomField__Lcom_yuiwai_tetrics_core_Field().filledRows__sc_Seq())
 });
 $c_Lcom_yuiwai_tetrics_core_Tetrics.prototype.$$anonfun$normalizeLeft$1__p1__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_FieldNormalized = (function(t) {
   return new $c_Lcom_yuiwai_tetrics_core_FieldNormalized().init___Lcom_yuiwai_tetrics_core_DroppableField__I($m_Lcom_yuiwai_tetrics_core_FieldLeft$(), t.leftField__Lcom_yuiwai_tetrics_core_Field().numRows__I())
@@ -19192,6 +19832,44 @@ function $m_s_None$() {
   return $n_s_None$
 }
 /** @constructor */
+function $c_s_PartialFunction$$anonfun$1() {
+  $c_sr_AbstractPartialFunction.call(this)
+}
+$c_s_PartialFunction$$anonfun$1.prototype = new $h_sr_AbstractPartialFunction();
+$c_s_PartialFunction$$anonfun$1.prototype.constructor = $c_s_PartialFunction$$anonfun$1;
+/** @constructor */
+function $h_s_PartialFunction$$anonfun$1() {
+  /*<skip>*/
+}
+$h_s_PartialFunction$$anonfun$1.prototype = $c_s_PartialFunction$$anonfun$1.prototype;
+$c_s_PartialFunction$$anonfun$1.prototype.applyOrElse__O__F1__O = (function(x1, $default) {
+  var x1$2 = x1;
+  return $m_s_PartialFunction$().scala$PartialFunction$$fallback$undpf$f
+});
+$c_s_PartialFunction$$anonfun$1.prototype.isDefinedAt__O__Z = (function(x1) {
+  var x1$2 = x1;
+  return true
+});
+$c_s_PartialFunction$$anonfun$1.prototype.init___ = (function() {
+  $c_sr_AbstractPartialFunction.prototype.init___.call(this);
+  return this
+});
+$c_s_PartialFunction$$anonfun$1.prototype.$$anonfun$runWith$1__ps_PartialFunction__F1__O__Z = (function(action$1, x) {
+  return $f_s_PartialFunction__$$anonfun$runWith$1__ps_PartialFunction__F1__O__Z(this, action$1, x)
+});
+var $d_s_PartialFunction$$anonfun$1 = new $TypeData().initClass({
+  s_PartialFunction$$anonfun$1: 0
+}, false, "scala.PartialFunction$$anonfun$1", {
+  s_PartialFunction$$anonfun$1: 1,
+  sr_AbstractPartialFunction: 1,
+  O: 1,
+  F1: 1,
+  s_PartialFunction: 1,
+  s_Serializable: 1,
+  Ljava_io_Serializable: 1
+});
+$c_s_PartialFunction$$anonfun$1.prototype.$classData = $d_s_PartialFunction$$anonfun$1;
+/** @constructor */
 function $c_s_Some() {
   $c_s_Option.call(this);
   this.value$2 = null
@@ -19547,6 +20225,16 @@ function $f_sc_TraversableLike__filter__F1__O($thiz, p) {
 function $f_sc_TraversableLike__filterNot__F1__O($thiz, p) {
   return $thiz.filterImpl__F1__Z__O(p, true)
 }
+function $f_sc_TraversableLike__collect__s_PartialFunction__scg_CanBuildFrom__O($thiz, pf, bf) {
+  var b = bf.apply__O__scm_Builder($thiz.repr__O());
+  $thiz.foreach__F1__V(pf.runWith__F1__F1(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function($this, b) {
+    return (function(x$1$2) {
+      var x$1 = x$1$2;
+      return $this.$$anonfun$collect$1__psc_TraversableLike__scm_Builder__O__scm_Builder(b, x$1)
+    })
+  })($thiz, b))));
+  return b.result__O()
+}
 function $f_sc_TraversableLike__tail__O($thiz) {
   if ($thiz.isEmpty__Z()) {
     throw new $c_jl_UnsupportedOperationException().init___T("empty.tail")
@@ -19616,6 +20304,9 @@ function $f_sc_TraversableLike__$$anonfun$flatMap$1__psc_TraversableLike__F1__sc
 function $f_sc_TraversableLike__$$anonfun$filterImpl$1__psc_TraversableLike__F1__Z__scm_Builder__O__O($thiz, p$8, isFlipped$1, b$3, x) {
   return (($uZ(p$8.apply__O__O(x)) !== isFlipped$1) ? b$3.$$plus$eq__O__scm_Builder(x) : (void 0))
 }
+function $f_sc_TraversableLike__$$anonfun$collect$1__psc_TraversableLike__scm_Builder__O__scm_Builder($thiz, b$4, x$1) {
+  return b$4.$$plus$eq__O__scm_Builder(x$1)
+}
 function $f_sc_TraversableLike__isPartLikelySynthetic$1__psc_TraversableLike__T__I__Z($thiz, fqn$1, partStart$1) {
   var firstChar = $m_sjsr_RuntimeString$().charAt__T__I__C(fqn$1, partStart$1);
   return (((firstChar > 90) && (firstChar < 127)) || (firstChar < 65))
@@ -19646,6 +20337,9 @@ function $h_scg_SeqFactory() {
   /*<skip>*/
 }
 $h_scg_SeqFactory.prototype = $c_scg_SeqFactory.prototype;
+$c_scg_SeqFactory.prototype.unapplySeq__sc_Seq__s_Some = (function(x) {
+  return new $c_s_Some().init___O(x)
+});
 $c_scg_SeqFactory.prototype.init___ = (function() {
   $c_scg_GenSeqFactory.prototype.init___.call(this);
   return this
@@ -19728,11 +20422,11 @@ $c_sci_HashSet$HashTrieSet$$anon$1.prototype.$$anonfun$addString$1__psc_Traversa
 $c_sci_HashSet$HashTrieSet$$anon$1.prototype.$$anonfun$sum$1__psc_TraversableOnce__s_math_Numeric__O__O__O = (function(num$1, x, y) {
   return $f_sc_TraversableOnce__$$anonfun$sum$1__psc_TraversableOnce__s_math_Numeric__O__O__O(this, num$1, x, y)
 });
-$c_sci_HashSet$HashTrieSet$$anon$1.prototype.$$anonfun$toStream$1__psc_Iterator__sci_Stream = (function() {
-  return $f_sc_Iterator__$$anonfun$toStream$1__psc_Iterator__sci_Stream(this)
-});
 $c_sci_HashSet$HashTrieSet$$anon$1.prototype.$$anonfun$foldLeft$1__psc_TraversableOnce__F2__sr_ObjectRef__O__V = (function(op$3, result$2, x) {
   $f_sc_TraversableOnce__$$anonfun$foldLeft$1__psc_TraversableOnce__F2__sr_ObjectRef__O__V(this, op$3, result$2, x)
+});
+$c_sci_HashSet$HashTrieSet$$anon$1.prototype.$$anonfun$toStream$1__psc_Iterator__sci_Stream = (function() {
+  return $f_sc_Iterator__$$anonfun$toStream$1__psc_Iterator__sci_Stream(this)
 });
 $c_sci_HashSet$HashTrieSet$$anon$1.prototype.$$anonfun$size$1__psc_TraversableOnce__sr_IntRef__O__V = (function(result$1, x) {
   $f_sc_TraversableOnce__$$anonfun$size$1__psc_TraversableOnce__sr_IntRef__O__V(this, result$1, x)
@@ -20285,7 +20979,8 @@ var $d_sjsr_UndefinedBehaviorError = new $TypeData().initClass({
 $c_sjsr_UndefinedBehaviorError.prototype.$classData = $d_sjsr_UndefinedBehaviorError;
 /** @constructor */
 function $c_Lcom_yuiwai_tetrics_core_DropBottomAction$() {
-  $c_O.call(this)
+  $c_O.call(this);
+  this.fieldType$1 = null
 }
 $c_Lcom_yuiwai_tetrics_core_DropBottomAction$.prototype = new $h_O();
 $c_Lcom_yuiwai_tetrics_core_DropBottomAction$.prototype.constructor = $c_Lcom_yuiwai_tetrics_core_DropBottomAction$;
@@ -20294,6 +20989,9 @@ function $h_Lcom_yuiwai_tetrics_core_DropBottomAction$() {
   /*<skip>*/
 }
 $h_Lcom_yuiwai_tetrics_core_DropBottomAction$.prototype = $c_Lcom_yuiwai_tetrics_core_DropBottomAction$.prototype;
+$c_Lcom_yuiwai_tetrics_core_DropBottomAction$.prototype.fieldType__Lcom_yuiwai_tetrics_core_FieldType = (function() {
+  return this.fieldType$1
+});
 $c_Lcom_yuiwai_tetrics_core_DropBottomAction$.prototype.productPrefix__T = (function() {
   return "DropBottomAction"
 });
@@ -20317,6 +21015,7 @@ $c_Lcom_yuiwai_tetrics_core_DropBottomAction$.prototype.init___ = (function() {
   $c_O.prototype.init___.call(this);
   $n_Lcom_yuiwai_tetrics_core_DropBottomAction$ = this;
   $f_s_Product__$$init$__V(this);
+  this.fieldType$1 = $m_Lcom_yuiwai_tetrics_core_FieldBottom$();
   return this
 });
 var $d_Lcom_yuiwai_tetrics_core_DropBottomAction$ = new $TypeData().initClass({
@@ -20341,7 +21040,8 @@ function $m_Lcom_yuiwai_tetrics_core_DropBottomAction$() {
 }
 /** @constructor */
 function $c_Lcom_yuiwai_tetrics_core_DropLeftAction$() {
-  $c_O.call(this)
+  $c_O.call(this);
+  this.fieldType$1 = null
 }
 $c_Lcom_yuiwai_tetrics_core_DropLeftAction$.prototype = new $h_O();
 $c_Lcom_yuiwai_tetrics_core_DropLeftAction$.prototype.constructor = $c_Lcom_yuiwai_tetrics_core_DropLeftAction$;
@@ -20350,6 +21050,9 @@ function $h_Lcom_yuiwai_tetrics_core_DropLeftAction$() {
   /*<skip>*/
 }
 $h_Lcom_yuiwai_tetrics_core_DropLeftAction$.prototype = $c_Lcom_yuiwai_tetrics_core_DropLeftAction$.prototype;
+$c_Lcom_yuiwai_tetrics_core_DropLeftAction$.prototype.fieldType__Lcom_yuiwai_tetrics_core_FieldType = (function() {
+  return this.fieldType$1
+});
 $c_Lcom_yuiwai_tetrics_core_DropLeftAction$.prototype.productPrefix__T = (function() {
   return "DropLeftAction"
 });
@@ -20373,6 +21076,7 @@ $c_Lcom_yuiwai_tetrics_core_DropLeftAction$.prototype.init___ = (function() {
   $c_O.prototype.init___.call(this);
   $n_Lcom_yuiwai_tetrics_core_DropLeftAction$ = this;
   $f_s_Product__$$init$__V(this);
+  this.fieldType$1 = $m_Lcom_yuiwai_tetrics_core_FieldLeft$();
   return this
 });
 var $d_Lcom_yuiwai_tetrics_core_DropLeftAction$ = new $TypeData().initClass({
@@ -20397,7 +21101,8 @@ function $m_Lcom_yuiwai_tetrics_core_DropLeftAction$() {
 }
 /** @constructor */
 function $c_Lcom_yuiwai_tetrics_core_DropRightAction$() {
-  $c_O.call(this)
+  $c_O.call(this);
+  this.fieldType$1 = null
 }
 $c_Lcom_yuiwai_tetrics_core_DropRightAction$.prototype = new $h_O();
 $c_Lcom_yuiwai_tetrics_core_DropRightAction$.prototype.constructor = $c_Lcom_yuiwai_tetrics_core_DropRightAction$;
@@ -20406,6 +21111,9 @@ function $h_Lcom_yuiwai_tetrics_core_DropRightAction$() {
   /*<skip>*/
 }
 $h_Lcom_yuiwai_tetrics_core_DropRightAction$.prototype = $c_Lcom_yuiwai_tetrics_core_DropRightAction$.prototype;
+$c_Lcom_yuiwai_tetrics_core_DropRightAction$.prototype.fieldType__Lcom_yuiwai_tetrics_core_FieldType = (function() {
+  return this.fieldType$1
+});
 $c_Lcom_yuiwai_tetrics_core_DropRightAction$.prototype.productPrefix__T = (function() {
   return "DropRightAction"
 });
@@ -20429,6 +21137,7 @@ $c_Lcom_yuiwai_tetrics_core_DropRightAction$.prototype.init___ = (function() {
   $c_O.prototype.init___.call(this);
   $n_Lcom_yuiwai_tetrics_core_DropRightAction$ = this;
   $f_s_Product__$$init$__V(this);
+  this.fieldType$1 = $m_Lcom_yuiwai_tetrics_core_FieldRight$();
   return this
 });
 var $d_Lcom_yuiwai_tetrics_core_DropRightAction$ = new $TypeData().initClass({
@@ -20453,7 +21162,8 @@ function $m_Lcom_yuiwai_tetrics_core_DropRightAction$() {
 }
 /** @constructor */
 function $c_Lcom_yuiwai_tetrics_core_DropTopAction$() {
-  $c_O.call(this)
+  $c_O.call(this);
+  this.fieldType$1 = null
 }
 $c_Lcom_yuiwai_tetrics_core_DropTopAction$.prototype = new $h_O();
 $c_Lcom_yuiwai_tetrics_core_DropTopAction$.prototype.constructor = $c_Lcom_yuiwai_tetrics_core_DropTopAction$;
@@ -20462,6 +21172,9 @@ function $h_Lcom_yuiwai_tetrics_core_DropTopAction$() {
   /*<skip>*/
 }
 $h_Lcom_yuiwai_tetrics_core_DropTopAction$.prototype = $c_Lcom_yuiwai_tetrics_core_DropTopAction$.prototype;
+$c_Lcom_yuiwai_tetrics_core_DropTopAction$.prototype.fieldType__Lcom_yuiwai_tetrics_core_FieldType = (function() {
+  return this.fieldType$1
+});
 $c_Lcom_yuiwai_tetrics_core_DropTopAction$.prototype.productPrefix__T = (function() {
   return "DropTopAction"
 });
@@ -20485,6 +21198,7 @@ $c_Lcom_yuiwai_tetrics_core_DropTopAction$.prototype.init___ = (function() {
   $c_O.prototype.init___.call(this);
   $n_Lcom_yuiwai_tetrics_core_DropTopAction$ = this;
   $f_s_Product__$$init$__V(this);
+  this.fieldType$1 = $m_Lcom_yuiwai_tetrics_core_FieldTop$();
   return this
 });
 var $d_Lcom_yuiwai_tetrics_core_DropTopAction$ = new $TypeData().initClass({
@@ -20984,7 +21698,7 @@ function $c_Lcom_yuiwai_tetrics_core_TenTen() {
   this.tetrics$1 = null;
   this.stats$1 = null;
   this.handler$1 = null;
-  this.status$1 = null
+  this.com$yuiwai$tetrics$core$TetricsGame$$status$1 = null
 }
 $c_Lcom_yuiwai_tetrics_core_TenTen.prototype = new $h_O();
 $c_Lcom_yuiwai_tetrics_core_TenTen.prototype.constructor = $c_Lcom_yuiwai_tetrics_core_TenTen;
@@ -21004,6 +21718,15 @@ $c_Lcom_yuiwai_tetrics_core_TenTen.prototype.drawTopLabel__Lcom_yuiwai_tetrics_c
 });
 $c_Lcom_yuiwai_tetrics_core_TenTen.prototype.drawBottomLabel__Lcom_yuiwai_tetrics_core_Label__O__V = (function(label, ctx) {
   $f_Lcom_yuiwai_tetrics_core_LabeledFieldView__drawBottomLabel__Lcom_yuiwai_tetrics_core_Label__O__V(this, label, ctx)
+});
+$c_Lcom_yuiwai_tetrics_core_TenTen.prototype.afterAction__Lcom_yuiwai_tetrics_core_TetricsAction__V = (function(action) {
+  $f_Lcom_yuiwai_tetrics_core_TetricsGame__afterAction__Lcom_yuiwai_tetrics_core_TetricsAction__V(this, action)
+});
+$c_Lcom_yuiwai_tetrics_core_TenTen.prototype.modify__F1__Lcom_yuiwai_tetrics_core_Tetrics = (function(f) {
+  return $f_Lcom_yuiwai_tetrics_core_TetricsGame__modify__F1__Lcom_yuiwai_tetrics_core_Tetrics(this, f)
+});
+$c_Lcom_yuiwai_tetrics_core_TenTen.prototype.block__V = (function() {
+  $f_Lcom_yuiwai_tetrics_core_TetricsGame__block__V(this)
 });
 $c_Lcom_yuiwai_tetrics_core_TenTen.prototype.start__O__Lcom_yuiwai_tetrics_core_TetricsSetting__V = (function(ctx, setting) {
   $f_Lcom_yuiwai_tetrics_core_TetricsGame__start__O__Lcom_yuiwai_tetrics_core_TetricsSetting__V(this, ctx, setting)
@@ -21062,11 +21785,11 @@ $c_Lcom_yuiwai_tetrics_core_TenTen.prototype.drawRight__Lcom_yuiwai_tetrics_core
 $c_Lcom_yuiwai_tetrics_core_TenTen.prototype.drawBottom__Lcom_yuiwai_tetrics_core_Tetrics__O__V = (function(tetrics, ctx) {
   $f_Lcom_yuiwai_tetrics_core_TetricsView__drawBottom__Lcom_yuiwai_tetrics_core_Tetrics__O__V(this, tetrics, ctx)
 });
-$c_Lcom_yuiwai_tetrics_core_TenTen.prototype.status__Lcom_yuiwai_tetrics_core_GameStatus = (function() {
-  return this.status$1
+$c_Lcom_yuiwai_tetrics_core_TenTen.prototype.com$yuiwai$tetrics$core$TetricsGame$$status__Lcom_yuiwai_tetrics_core_GameStatus = (function() {
+  return this.com$yuiwai$tetrics$core$TetricsGame$$status$1
 });
-$c_Lcom_yuiwai_tetrics_core_TenTen.prototype.status$und$eq__Lcom_yuiwai_tetrics_core_GameStatus__V = (function(x$1) {
-  this.status$1 = x$1
+$c_Lcom_yuiwai_tetrics_core_TenTen.prototype.com$yuiwai$tetrics$core$TetricsGame$$status$und$eq__Lcom_yuiwai_tetrics_core_GameStatus__V = (function(x$1) {
+  this.com$yuiwai$tetrics$core$TetricsGame$$status$1 = x$1
 });
 $c_Lcom_yuiwai_tetrics_core_TenTen.prototype.eventBus__Lcom_yuiwai_tetrics_core_EventBus = (function() {
   return this.eventBus$1
@@ -21090,7 +21813,7 @@ $c_Lcom_yuiwai_tetrics_core_TenTen.prototype.handler__F1 = (function() {
   return this.handler$1
 });
 $c_Lcom_yuiwai_tetrics_core_TenTen.prototype.judge__p1__Lcom_yuiwai_tetrics_core_TetricsStats__Lcom_yuiwai_tetrics_core_Tetrics__V = (function(s, t) {
-  if (($m_Lcom_yuiwai_tetrics_core_TenTen$().StatsWrap__Lcom_yuiwai_tetrics_core_TetricsStats__Lcom_yuiwai_tetrics_core_TenTen$StatsWrap(s).achieved__Z() || (t.deactivedFields__sc_Seq().size__I() > 2))) {
+  if (($m_Lcom_yuiwai_tetrics_core_TenTen$().StatsWrap__Lcom_yuiwai_tetrics_core_TetricsStats__Lcom_yuiwai_tetrics_core_TenTen$StatsWrap(s).achieved__Z() || (t.deactivatedFields__sc_Seq().size__I() > 2))) {
     this.end__V()
   }
 });
@@ -24619,6 +25342,9 @@ $c_sci_List$.prototype.empty__sci_List = (function() {
 $c_sci_List$.prototype.apply__sc_Seq__sci_List = (function(xs) {
   return xs.toList__sci_List()
 });
+$c_sci_List$.prototype.partialNotApplied__F1 = (function() {
+  return this.partialNotApplied$5
+});
 $c_sci_List$.prototype.empty__sc_GenTraversable = (function() {
   return this.empty__sci_List()
 });
@@ -24941,140 +25667,6 @@ function $m_scm_Queue$() {
   return $n_scm_Queue$
 }
 /** @constructor */
-function $c_Lcom_yuiwai_tetrics_js_Example$$anon$1() {
-  $c_Lcom_yuiwai_tetrics_core_TenTen.call(this);
-  this.offset$2 = 0;
-  this.labelHeight$2 = 0;
-  this.labelMargin$2 = 0;
-  this.tileWidth$2 = 0;
-  this.tileHeight$2 = 0
-}
-$c_Lcom_yuiwai_tetrics_js_Example$$anon$1.prototype = new $h_Lcom_yuiwai_tetrics_core_TenTen();
-$c_Lcom_yuiwai_tetrics_js_Example$$anon$1.prototype.constructor = $c_Lcom_yuiwai_tetrics_js_Example$$anon$1;
-/** @constructor */
-function $h_Lcom_yuiwai_tetrics_js_Example$$anon$1() {
-  /*<skip>*/
-}
-$h_Lcom_yuiwai_tetrics_js_Example$$anon$1.prototype = $c_Lcom_yuiwai_tetrics_js_Example$$anon$1.prototype;
-$c_Lcom_yuiwai_tetrics_js_Example$$anon$1.prototype.drawField__Lcom_yuiwai_tetrics_core_Field__I__I__Lorg_scalajs_dom_raw_CanvasRenderingContext2D__V = (function(field, offsetX, offsetY, ctx) {
-  $f_Lcom_yuiwai_tetrics_js_JsView__drawField__Lcom_yuiwai_tetrics_core_Field__I__I__Lorg_scalajs_dom_raw_CanvasRenderingContext2D__V(this, field, offsetX, offsetY, ctx)
-});
-$c_Lcom_yuiwai_tetrics_js_Example$$anon$1.prototype.drawLabel__Lcom_yuiwai_tetrics_core_Label__I__I__Lorg_scalajs_dom_raw_CanvasRenderingContext2D__V = (function(label, offsetX, offsetY, ctx) {
-  $f_Lcom_yuiwai_tetrics_js_JsView__drawLabel__Lcom_yuiwai_tetrics_core_Label__I__I__Lorg_scalajs_dom_raw_CanvasRenderingContext2D__V(this, label, offsetX, offsetY, ctx)
-});
-$c_Lcom_yuiwai_tetrics_js_Example$$anon$1.prototype.eventToAction__Lorg_scalajs_dom_raw_KeyboardEvent__s_Option = (function(event) {
-  return $f_Lcom_yuiwai_tetrics_js_JsController__eventToAction__Lorg_scalajs_dom_raw_KeyboardEvent__s_Option(this, event)
-});
-$c_Lcom_yuiwai_tetrics_js_Example$$anon$1.prototype.offset__I = (function() {
-  return this.offset$2
-});
-$c_Lcom_yuiwai_tetrics_js_Example$$anon$1.prototype.labelHeight__I = (function() {
-  return this.labelHeight$2
-});
-$c_Lcom_yuiwai_tetrics_js_Example$$anon$1.prototype.labelMargin__I = (function() {
-  return this.labelMargin$2
-});
-$c_Lcom_yuiwai_tetrics_js_Example$$anon$1.prototype.tileWidth__I = (function() {
-  return this.tileWidth$2
-});
-$c_Lcom_yuiwai_tetrics_js_Example$$anon$1.prototype.tileHeight__I = (function() {
-  return this.tileHeight$2
-});
-$c_Lcom_yuiwai_tetrics_js_Example$$anon$1.prototype.com$yuiwai$tetrics$js$JsView$$undsetter$und$offset$und$eq__I__V = (function(x$1) {
-  this.offset$2 = x$1
-});
-$c_Lcom_yuiwai_tetrics_js_Example$$anon$1.prototype.com$yuiwai$tetrics$js$JsView$$undsetter$und$labelHeight$und$eq__I__V = (function(x$1) {
-  this.labelHeight$2 = x$1
-});
-$c_Lcom_yuiwai_tetrics_js_Example$$anon$1.prototype.com$yuiwai$tetrics$js$JsView$$undsetter$und$labelMargin$und$eq__I__V = (function(x$1) {
-  this.labelMargin$2 = x$1
-});
-$c_Lcom_yuiwai_tetrics_js_Example$$anon$1.prototype.com$yuiwai$tetrics$js$JsView$$undsetter$und$tileWidth$und$eq__I__V = (function(x$1) {
-  this.tileWidth$2 = x$1
-});
-$c_Lcom_yuiwai_tetrics_js_Example$$anon$1.prototype.com$yuiwai$tetrics$js$JsView$$undsetter$und$tileHeight$und$eq__I__V = (function(x$1) {
-  this.tileHeight$2 = x$1
-});
-$c_Lcom_yuiwai_tetrics_js_Example$$anon$1.prototype.eventToAction__O__s_Option = (function(event) {
-  return this.eventToAction__Lorg_scalajs_dom_raw_KeyboardEvent__s_Option(event)
-});
-$c_Lcom_yuiwai_tetrics_js_Example$$anon$1.prototype.drawLabel__Lcom_yuiwai_tetrics_core_Label__I__I__O__V = (function(label, offsetX, offsetY, ctx) {
-  this.drawLabel__Lcom_yuiwai_tetrics_core_Label__I__I__Lorg_scalajs_dom_raw_CanvasRenderingContext2D__V(label, offsetX, offsetY, ctx)
-});
-$c_Lcom_yuiwai_tetrics_js_Example$$anon$1.prototype.drawField__Lcom_yuiwai_tetrics_core_Field__I__I__O__V = (function(field, offsetX, offsetY, ctx) {
-  this.drawField__Lcom_yuiwai_tetrics_core_Field__I__I__Lorg_scalajs_dom_raw_CanvasRenderingContext2D__V(field, offsetX, offsetY, ctx)
-});
-$c_Lcom_yuiwai_tetrics_js_Example$$anon$1.prototype.init___ = (function() {
-  $c_Lcom_yuiwai_tetrics_core_TenTen.prototype.init___Lcom_yuiwai_tetrics_core_EventBus__O.call(this, $m_Lcom_yuiwai_tetrics_js_Example$().com$yuiwai$tetrics$js$Example$$eventBus__Lcom_yuiwai_tetrics_core_EventBus(), $m_Lcom_yuiwai_tetrics_js_Example$().com$yuiwai$tetrics$js$Example$$ctx__Lorg_scalajs_dom_raw_CanvasRenderingContext2D());
-  $f_Lcom_yuiwai_tetrics_js_JsController__$$init$__V(this);
-  $f_Lcom_yuiwai_tetrics_js_JsView__$$init$__V(this);
-  return this
-});
-$c_Lcom_yuiwai_tetrics_js_Example$$anon$1.prototype.$$anonfun$act$10__pLcom_yuiwai_tetrics_core_TetricsGame__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_Tetrics = (function(x$11) {
-  return $f_Lcom_yuiwai_tetrics_core_TetricsGame__$$anonfun$act$10__pLcom_yuiwai_tetrics_core_TetricsGame__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_Tetrics(this, x$11)
-});
-$c_Lcom_yuiwai_tetrics_js_Example$$anon$1.prototype.$$anonfun$drawField$1__pLcom_yuiwai_tetrics_js_JsView__I__I__Lorg_scalajs_dom_raw_CanvasRenderingContext2D__T2__V = (function(offsetX$1, offsetY$1, ctx$1, x0$1) {
-  $f_Lcom_yuiwai_tetrics_js_JsView__$$anonfun$drawField$1__pLcom_yuiwai_tetrics_js_JsView__I__I__Lorg_scalajs_dom_raw_CanvasRenderingContext2D__T2__V(this, offsetX$1, offsetY$1, ctx$1, x0$1)
-});
-$c_Lcom_yuiwai_tetrics_js_Example$$anon$1.prototype.$$anonfun$act$6__pLcom_yuiwai_tetrics_core_TetricsGame__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_Tetrics = (function(x$7) {
-  return $f_Lcom_yuiwai_tetrics_core_TetricsGame__$$anonfun$act$6__pLcom_yuiwai_tetrics_core_TetricsGame__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_Tetrics(this, x$7)
-});
-$c_Lcom_yuiwai_tetrics_js_Example$$anon$1.prototype.$$anonfun$input$1__pLcom_yuiwai_tetrics_core_TetricsGame__O__Lcom_yuiwai_tetrics_core_TetricsSetting__Lcom_yuiwai_tetrics_core_TetricsAction__V = (function(ctx$1, setting$2, action) {
-  $f_Lcom_yuiwai_tetrics_core_TetricsGame__$$anonfun$input$1__pLcom_yuiwai_tetrics_core_TetricsGame__O__Lcom_yuiwai_tetrics_core_TetricsSetting__Lcom_yuiwai_tetrics_core_TetricsAction__V(this, ctx$1, setting$2, action)
-});
-$c_Lcom_yuiwai_tetrics_js_Example$$anon$1.prototype.$$anonfun$drawField$2__pLcom_yuiwai_tetrics_js_JsView__I__I__Lorg_scalajs_dom_raw_CanvasRenderingContext2D__Lcom_yuiwai_tetrics_core_Row__I__I__V = (function(offsetX$1, offsetY$1, ctx$1, row$1, y$1, x) {
-  $f_Lcom_yuiwai_tetrics_js_JsView__$$anonfun$drawField$2__pLcom_yuiwai_tetrics_js_JsView__I__I__Lorg_scalajs_dom_raw_CanvasRenderingContext2D__Lcom_yuiwai_tetrics_core_Row__I__I__V(this, offsetX$1, offsetY$1, ctx$1, row$1, y$1, x)
-});
-$c_Lcom_yuiwai_tetrics_js_Example$$anon$1.prototype.$$anonfun$act$5__pLcom_yuiwai_tetrics_core_TetricsGame__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_Tetrics = (function(x$6) {
-  return $f_Lcom_yuiwai_tetrics_core_TetricsGame__$$anonfun$act$5__pLcom_yuiwai_tetrics_core_TetricsGame__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_Tetrics(this, x$6)
-});
-$c_Lcom_yuiwai_tetrics_js_Example$$anon$1.prototype.$$anonfun$act$4__pLcom_yuiwai_tetrics_core_TetricsGame__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_Tetrics = (function(x$5) {
-  return $f_Lcom_yuiwai_tetrics_core_TetricsGame__$$anonfun$act$4__pLcom_yuiwai_tetrics_core_TetricsGame__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_Tetrics(this, x$5)
-});
-$c_Lcom_yuiwai_tetrics_js_Example$$anon$1.prototype.$$anonfun$act$1__pLcom_yuiwai_tetrics_core_TetricsGame__Lcom_yuiwai_tetrics_core_Block__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_Tetrics = (function(x7$1, x$2) {
-  return $f_Lcom_yuiwai_tetrics_core_TetricsGame__$$anonfun$act$1__pLcom_yuiwai_tetrics_core_TetricsGame__Lcom_yuiwai_tetrics_core_Block__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_Tetrics(this, x7$1, x$2)
-});
-$c_Lcom_yuiwai_tetrics_js_Example$$anon$1.prototype.$$anonfun$act$9__pLcom_yuiwai_tetrics_core_TetricsGame__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_Tetrics = (function(x$10) {
-  return $f_Lcom_yuiwai_tetrics_core_TetricsGame__$$anonfun$act$9__pLcom_yuiwai_tetrics_core_TetricsGame__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_Tetrics(this, x$10)
-});
-$c_Lcom_yuiwai_tetrics_js_Example$$anon$1.prototype.$$anonfun$act$11__pLcom_yuiwai_tetrics_core_TetricsGame__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_Tetrics = (function(x$12) {
-  return $f_Lcom_yuiwai_tetrics_core_TetricsGame__$$anonfun$act$11__pLcom_yuiwai_tetrics_core_TetricsGame__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_Tetrics(this, x$12)
-});
-$c_Lcom_yuiwai_tetrics_js_Example$$anon$1.prototype.$$anonfun$act$3__pLcom_yuiwai_tetrics_core_TetricsGame__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_Tetrics = (function(x$4) {
-  return $f_Lcom_yuiwai_tetrics_core_TetricsGame__$$anonfun$act$3__pLcom_yuiwai_tetrics_core_TetricsGame__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_Tetrics(this, x$4)
-});
-$c_Lcom_yuiwai_tetrics_js_Example$$anon$1.prototype.$$anonfun$act$8__pLcom_yuiwai_tetrics_core_TetricsGame__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_Tetrics = (function(x$9) {
-  return $f_Lcom_yuiwai_tetrics_core_TetricsGame__$$anonfun$act$8__pLcom_yuiwai_tetrics_core_TetricsGame__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_Tetrics(this, x$9)
-});
-$c_Lcom_yuiwai_tetrics_js_Example$$anon$1.prototype.modify__pLcom_yuiwai_tetrics_core_TetricsGame__F1__Lcom_yuiwai_tetrics_core_Tetrics = (function(f) {
-  return $f_Lcom_yuiwai_tetrics_core_TetricsGame__modify__pLcom_yuiwai_tetrics_core_TetricsGame__F1__Lcom_yuiwai_tetrics_core_Tetrics(this, f)
-});
-$c_Lcom_yuiwai_tetrics_js_Example$$anon$1.prototype.$$anonfun$randPut$1__pLcom_yuiwai_tetrics_core_TetricsGame__Lcom_yuiwai_tetrics_core_TetricsSetting__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_Tetrics = (function(setting$1, x$1) {
-  return $f_Lcom_yuiwai_tetrics_core_TetricsGame__$$anonfun$randPut$1__pLcom_yuiwai_tetrics_core_TetricsGame__Lcom_yuiwai_tetrics_core_TetricsSetting__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_Tetrics(this, setting$1, x$1)
-});
-$c_Lcom_yuiwai_tetrics_js_Example$$anon$1.prototype.$$anonfun$act$7__pLcom_yuiwai_tetrics_core_TetricsGame__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_Tetrics = (function(x$8) {
-  return $f_Lcom_yuiwai_tetrics_core_TetricsGame__$$anonfun$act$7__pLcom_yuiwai_tetrics_core_TetricsGame__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_Tetrics(this, x$8)
-});
-$c_Lcom_yuiwai_tetrics_js_Example$$anon$1.prototype.$$anonfun$act$2__pLcom_yuiwai_tetrics_core_TetricsGame__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_Tetrics = (function(x$3) {
-  return $f_Lcom_yuiwai_tetrics_core_TetricsGame__$$anonfun$act$2__pLcom_yuiwai_tetrics_core_TetricsGame__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_Tetrics(this, x$3)
-});
-var $d_Lcom_yuiwai_tetrics_js_Example$$anon$1 = new $TypeData().initClass({
-  Lcom_yuiwai_tetrics_js_Example$$anon$1: 0
-}, false, "com.yuiwai.tetrics.js.Example$$anon$1", {
-  Lcom_yuiwai_tetrics_js_Example$$anon$1: 1,
-  Lcom_yuiwai_tetrics_core_TenTen: 1,
-  O: 1,
-  Lcom_yuiwai_tetrics_core_TetricsGame: 1,
-  Lcom_yuiwai_tetrics_core_TetricsController: 1,
-  Lcom_yuiwai_tetrics_core_TetricsView: 1,
-  Lcom_yuiwai_tetrics_core_Publisher: 1,
-  Lcom_yuiwai_tetrics_core_Subscriber: 1,
-  Lcom_yuiwai_tetrics_core_LabeledFieldView: 1,
-  Lcom_yuiwai_tetrics_js_JsController: 1,
-  Lcom_yuiwai_tetrics_js_JsView: 1
-});
-$c_Lcom_yuiwai_tetrics_js_Example$$anon$1.prototype.$classData = $d_Lcom_yuiwai_tetrics_js_Example$$anon$1;
-/** @constructor */
 function $c_s_reflect_ManifestFactory$AnyManifest$() {
   $c_s_reflect_ManifestFactory$PhantomManifest.call(this)
 }
@@ -25365,6 +25957,9 @@ function $f_scg_TraversableForwarder__foldLeft__O__F2__O($thiz, z, op) {
 function $f_scg_TraversableForwarder__sum__s_math_Numeric__O($thiz, num) {
   return $thiz.underlying__sc_Traversable().sum__s_math_Numeric__O(num)
 }
+function $f_scg_TraversableForwarder__head__O($thiz) {
+  return $thiz.underlying__sc_Traversable().head__O()
+}
 function $f_scg_TraversableForwarder__copyToArray__O__I__I__V($thiz, xs, start, len) {
   $thiz.underlying__sc_Traversable().copyToArray__O__I__I__V(xs, start, len)
 }
@@ -25445,6 +26040,143 @@ function $m_sci_Vector$() {
   };
   return $n_sci_Vector$
 }
+/** @constructor */
+function $c_Lcom_yuiwai_tetrics_js_Example$$anon$1() {
+  $c_Lcom_yuiwai_tetrics_core_TenTen.call(this);
+  this.com$yuiwai$tetrics$js$AnimationModule$$animation$2 = null;
+  this.offset$2 = 0;
+  this.labelHeight$2 = 0;
+  this.labelMargin$2 = 0;
+  this.tileWidth$2 = 0;
+  this.tileHeight$2 = 0
+}
+$c_Lcom_yuiwai_tetrics_js_Example$$anon$1.prototype = new $h_Lcom_yuiwai_tetrics_core_TenTen();
+$c_Lcom_yuiwai_tetrics_js_Example$$anon$1.prototype.constructor = $c_Lcom_yuiwai_tetrics_js_Example$$anon$1;
+/** @constructor */
+function $h_Lcom_yuiwai_tetrics_js_Example$$anon$1() {
+  /*<skip>*/
+}
+$h_Lcom_yuiwai_tetrics_js_Example$$anon$1.prototype = $c_Lcom_yuiwai_tetrics_js_Example$$anon$1.prototype;
+$c_Lcom_yuiwai_tetrics_js_Example$$anon$1.prototype.com$yuiwai$tetrics$js$AnimationModule$$super$beforeAction__Lcom_yuiwai_tetrics_core_TetricsAction__Lcom_yuiwai_tetrics_core_TetricsAction = (function(action) {
+  return $f_Lcom_yuiwai_tetrics_core_TetricsGame__beforeAction__Lcom_yuiwai_tetrics_core_TetricsAction__Lcom_yuiwai_tetrics_core_TetricsAction(this, action)
+});
+$c_Lcom_yuiwai_tetrics_js_Example$$anon$1.prototype.com$yuiwai$tetrics$js$AnimationModule$$super$update__D__O__V = (function(delta, ctx) {
+  $f_Lcom_yuiwai_tetrics_core_TetricsGame__update__D__O__V(this, delta, ctx)
+});
+$c_Lcom_yuiwai_tetrics_js_Example$$anon$1.prototype.beforeAction__Lcom_yuiwai_tetrics_core_TetricsAction__Lcom_yuiwai_tetrics_core_TetricsAction = (function(action) {
+  return $f_Lcom_yuiwai_tetrics_js_AnimationModule__beforeAction__Lcom_yuiwai_tetrics_core_TetricsAction__Lcom_yuiwai_tetrics_core_TetricsAction(this, action)
+});
+$c_Lcom_yuiwai_tetrics_js_Example$$anon$1.prototype.update__D__O__V = (function(delta, ctx) {
+  $f_Lcom_yuiwai_tetrics_js_AnimationModule__update__D__O__V(this, delta, ctx)
+});
+$c_Lcom_yuiwai_tetrics_js_Example$$anon$1.prototype.drawField__Lcom_yuiwai_tetrics_core_Field__I__I__Lorg_scalajs_dom_raw_CanvasRenderingContext2D__V = (function(field, offsetX, offsetY, ctx) {
+  $f_Lcom_yuiwai_tetrics_js_JsView__drawField__Lcom_yuiwai_tetrics_core_Field__I__I__Lorg_scalajs_dom_raw_CanvasRenderingContext2D__V(this, field, offsetX, offsetY, ctx)
+});
+$c_Lcom_yuiwai_tetrics_js_Example$$anon$1.prototype.drawLabel__Lcom_yuiwai_tetrics_core_Label__I__I__Lorg_scalajs_dom_raw_CanvasRenderingContext2D__V = (function(label, offsetX, offsetY, ctx) {
+  $f_Lcom_yuiwai_tetrics_js_JsView__drawLabel__Lcom_yuiwai_tetrics_core_Label__I__I__Lorg_scalajs_dom_raw_CanvasRenderingContext2D__V(this, label, offsetX, offsetY, ctx)
+});
+$c_Lcom_yuiwai_tetrics_js_Example$$anon$1.prototype.eventToAction__Lorg_scalajs_dom_raw_KeyboardEvent__s_Option = (function(event) {
+  return $f_Lcom_yuiwai_tetrics_js_JsController__eventToAction__Lorg_scalajs_dom_raw_KeyboardEvent__s_Option(this, event)
+});
+$c_Lcom_yuiwai_tetrics_js_Example$$anon$1.prototype.com$yuiwai$tetrics$js$AnimationModule$$animation$und$eq__s_Option__V = (function(x$1) {
+  this.com$yuiwai$tetrics$js$AnimationModule$$animation$2 = x$1
+});
+$c_Lcom_yuiwai_tetrics_js_Example$$anon$1.prototype.offset__I = (function() {
+  return this.offset$2
+});
+$c_Lcom_yuiwai_tetrics_js_Example$$anon$1.prototype.labelHeight__I = (function() {
+  return this.labelHeight$2
+});
+$c_Lcom_yuiwai_tetrics_js_Example$$anon$1.prototype.labelMargin__I = (function() {
+  return this.labelMargin$2
+});
+$c_Lcom_yuiwai_tetrics_js_Example$$anon$1.prototype.tileWidth__I = (function() {
+  return this.tileWidth$2
+});
+$c_Lcom_yuiwai_tetrics_js_Example$$anon$1.prototype.tileHeight__I = (function() {
+  return this.tileHeight$2
+});
+$c_Lcom_yuiwai_tetrics_js_Example$$anon$1.prototype.com$yuiwai$tetrics$js$JsView$$undsetter$und$offset$und$eq__I__V = (function(x$1) {
+  this.offset$2 = x$1
+});
+$c_Lcom_yuiwai_tetrics_js_Example$$anon$1.prototype.com$yuiwai$tetrics$js$JsView$$undsetter$und$labelHeight$und$eq__I__V = (function(x$1) {
+  this.labelHeight$2 = x$1
+});
+$c_Lcom_yuiwai_tetrics_js_Example$$anon$1.prototype.com$yuiwai$tetrics$js$JsView$$undsetter$und$labelMargin$und$eq__I__V = (function(x$1) {
+  this.labelMargin$2 = x$1
+});
+$c_Lcom_yuiwai_tetrics_js_Example$$anon$1.prototype.com$yuiwai$tetrics$js$JsView$$undsetter$und$tileWidth$und$eq__I__V = (function(x$1) {
+  this.tileWidth$2 = x$1
+});
+$c_Lcom_yuiwai_tetrics_js_Example$$anon$1.prototype.com$yuiwai$tetrics$js$JsView$$undsetter$und$tileHeight$und$eq__I__V = (function(x$1) {
+  this.tileHeight$2 = x$1
+});
+$c_Lcom_yuiwai_tetrics_js_Example$$anon$1.prototype.eventToAction__O__s_Option = (function(event) {
+  return this.eventToAction__Lorg_scalajs_dom_raw_KeyboardEvent__s_Option(event)
+});
+$c_Lcom_yuiwai_tetrics_js_Example$$anon$1.prototype.drawLabel__Lcom_yuiwai_tetrics_core_Label__I__I__O__V = (function(label, offsetX, offsetY, ctx) {
+  this.drawLabel__Lcom_yuiwai_tetrics_core_Label__I__I__Lorg_scalajs_dom_raw_CanvasRenderingContext2D__V(label, offsetX, offsetY, ctx)
+});
+$c_Lcom_yuiwai_tetrics_js_Example$$anon$1.prototype.drawField__Lcom_yuiwai_tetrics_core_Field__I__I__O__V = (function(field, offsetX, offsetY, ctx) {
+  this.drawField__Lcom_yuiwai_tetrics_core_Field__I__I__Lorg_scalajs_dom_raw_CanvasRenderingContext2D__V(field, offsetX, offsetY, ctx)
+});
+$c_Lcom_yuiwai_tetrics_js_Example$$anon$1.prototype.init___ = (function() {
+  $c_Lcom_yuiwai_tetrics_core_TenTen.prototype.init___Lcom_yuiwai_tetrics_core_EventBus__O.call(this, $m_Lcom_yuiwai_tetrics_js_Example$().com$yuiwai$tetrics$js$Example$$eventBus__Lcom_yuiwai_tetrics_core_EventBus(), $m_Lcom_yuiwai_tetrics_js_Example$().com$yuiwai$tetrics$js$Example$$ctx__Lorg_scalajs_dom_raw_CanvasRenderingContext2D());
+  $f_Lcom_yuiwai_tetrics_js_JsController__$$init$__V(this);
+  $f_Lcom_yuiwai_tetrics_js_JsView__$$init$__V(this);
+  $f_Lcom_yuiwai_tetrics_js_AnimationModule__$$init$__V(this);
+  return this
+});
+$c_Lcom_yuiwai_tetrics_js_Example$$anon$1.prototype.$$anonfun$act$3__pLcom_yuiwai_tetrics_core_TetricsGame__Lcom_yuiwai_tetrics_core_RotateAction__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_Tetrics = (function(x3$1, x$4) {
+  return $f_Lcom_yuiwai_tetrics_core_TetricsGame__$$anonfun$act$3__pLcom_yuiwai_tetrics_core_TetricsGame__Lcom_yuiwai_tetrics_core_RotateAction__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_Tetrics(this, x3$1, x$4)
+});
+$c_Lcom_yuiwai_tetrics_js_Example$$anon$1.prototype.$$anonfun$drawField$1__pLcom_yuiwai_tetrics_js_JsView__I__I__Lorg_scalajs_dom_raw_CanvasRenderingContext2D__T2__V = (function(offsetX$1, offsetY$1, ctx$1, x0$1) {
+  $f_Lcom_yuiwai_tetrics_js_JsView__$$anonfun$drawField$1__pLcom_yuiwai_tetrics_js_JsView__I__I__Lorg_scalajs_dom_raw_CanvasRenderingContext2D__T2__V(this, offsetX$1, offsetY$1, ctx$1, x0$1)
+});
+$c_Lcom_yuiwai_tetrics_js_Example$$anon$1.prototype.$$anonfun$act$6__pLcom_yuiwai_tetrics_core_TetricsGame__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_Tetrics = (function(x$7) {
+  return $f_Lcom_yuiwai_tetrics_core_TetricsGame__$$anonfun$act$6__pLcom_yuiwai_tetrics_core_TetricsGame__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_Tetrics(this, x$7)
+});
+$c_Lcom_yuiwai_tetrics_js_Example$$anon$1.prototype.$$anonfun$input$1__pLcom_yuiwai_tetrics_core_TetricsGame__O__Lcom_yuiwai_tetrics_core_TetricsSetting__Lcom_yuiwai_tetrics_core_TetricsAction__V = (function(ctx$1, setting$2, action) {
+  $f_Lcom_yuiwai_tetrics_core_TetricsGame__$$anonfun$input$1__pLcom_yuiwai_tetrics_core_TetricsGame__O__Lcom_yuiwai_tetrics_core_TetricsSetting__Lcom_yuiwai_tetrics_core_TetricsAction__V(this, ctx$1, setting$2, action)
+});
+$c_Lcom_yuiwai_tetrics_js_Example$$anon$1.prototype.$$anonfun$act$2__pLcom_yuiwai_tetrics_core_TetricsGame__Lcom_yuiwai_tetrics_core_MoveAction__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_Tetrics = (function(x2$1, x$3) {
+  return $f_Lcom_yuiwai_tetrics_core_TetricsGame__$$anonfun$act$2__pLcom_yuiwai_tetrics_core_TetricsGame__Lcom_yuiwai_tetrics_core_MoveAction__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_Tetrics(this, x2$1, x$3)
+});
+$c_Lcom_yuiwai_tetrics_js_Example$$anon$1.prototype.$$anonfun$drawField$2__pLcom_yuiwai_tetrics_js_JsView__I__I__Lorg_scalajs_dom_raw_CanvasRenderingContext2D__Lcom_yuiwai_tetrics_core_Row__I__I__V = (function(offsetX$1, offsetY$1, ctx$1, row$1, y$1, x) {
+  $f_Lcom_yuiwai_tetrics_js_JsView__$$anonfun$drawField$2__pLcom_yuiwai_tetrics_js_JsView__I__I__Lorg_scalajs_dom_raw_CanvasRenderingContext2D__Lcom_yuiwai_tetrics_core_Row__I__I__V(this, offsetX$1, offsetY$1, ctx$1, row$1, y$1, x)
+});
+$c_Lcom_yuiwai_tetrics_js_Example$$anon$1.prototype.$$anonfun$act$5__pLcom_yuiwai_tetrics_core_TetricsGame__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_Tetrics = (function(x$6) {
+  return $f_Lcom_yuiwai_tetrics_core_TetricsGame__$$anonfun$act$5__pLcom_yuiwai_tetrics_core_TetricsGame__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_Tetrics(this, x$6)
+});
+$c_Lcom_yuiwai_tetrics_js_Example$$anon$1.prototype.$$anonfun$act$4__pLcom_yuiwai_tetrics_core_TetricsGame__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_Tetrics = (function(x$5) {
+  return $f_Lcom_yuiwai_tetrics_core_TetricsGame__$$anonfun$act$4__pLcom_yuiwai_tetrics_core_TetricsGame__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_Tetrics(this, x$5)
+});
+$c_Lcom_yuiwai_tetrics_js_Example$$anon$1.prototype.$$anonfun$act$1__pLcom_yuiwai_tetrics_core_TetricsGame__Lcom_yuiwai_tetrics_core_Block__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_Tetrics = (function(x8$1, x$2) {
+  return $f_Lcom_yuiwai_tetrics_core_TetricsGame__$$anonfun$act$1__pLcom_yuiwai_tetrics_core_TetricsGame__Lcom_yuiwai_tetrics_core_Block__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_Tetrics(this, x8$1, x$2)
+});
+$c_Lcom_yuiwai_tetrics_js_Example$$anon$1.prototype.$$anonfun$randPut$1__pLcom_yuiwai_tetrics_core_TetricsGame__Lcom_yuiwai_tetrics_core_TetricsSetting__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_Tetrics = (function(setting$1, x$1) {
+  return $f_Lcom_yuiwai_tetrics_core_TetricsGame__$$anonfun$randPut$1__pLcom_yuiwai_tetrics_core_TetricsGame__Lcom_yuiwai_tetrics_core_TetricsSetting__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_Tetrics(this, setting$1, x$1)
+});
+$c_Lcom_yuiwai_tetrics_js_Example$$anon$1.prototype.$$anonfun$act$7__pLcom_yuiwai_tetrics_core_TetricsGame__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_Tetrics = (function(x$8) {
+  return $f_Lcom_yuiwai_tetrics_core_TetricsGame__$$anonfun$act$7__pLcom_yuiwai_tetrics_core_TetricsGame__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_Tetrics(this, x$8)
+});
+var $d_Lcom_yuiwai_tetrics_js_Example$$anon$1 = new $TypeData().initClass({
+  Lcom_yuiwai_tetrics_js_Example$$anon$1: 0
+}, false, "com.yuiwai.tetrics.js.Example$$anon$1", {
+  Lcom_yuiwai_tetrics_js_Example$$anon$1: 1,
+  Lcom_yuiwai_tetrics_core_TenTen: 1,
+  O: 1,
+  Lcom_yuiwai_tetrics_core_TetricsGame: 1,
+  Lcom_yuiwai_tetrics_core_TetricsController: 1,
+  Lcom_yuiwai_tetrics_core_TetricsView: 1,
+  Lcom_yuiwai_tetrics_core_Publisher: 1,
+  Lcom_yuiwai_tetrics_core_Subscriber: 1,
+  Lcom_yuiwai_tetrics_core_LabeledFieldView: 1,
+  Lcom_yuiwai_tetrics_js_JsController: 1,
+  Lcom_yuiwai_tetrics_js_JsView: 1,
+  Lcom_yuiwai_tetrics_js_AnimationModule: 1
+});
+$c_Lcom_yuiwai_tetrics_js_Example$$anon$1.prototype.$classData = $d_Lcom_yuiwai_tetrics_js_Example$$anon$1;
 /** @constructor */
 function $c_s_math_Numeric$IntIsIntegral$() {
   $c_O.call(this)
@@ -25672,6 +26404,18 @@ function $f_sc_SeqLike__toString__T($thiz) {
 }
 function $f_sc_SeqLike__$$init$__V($thiz) {
   /*<skip>*/
+}
+function $is_sc_SeqLike(obj) {
+  return (!(!((obj && obj.$classData) && obj.$classData.ancestors.sc_SeqLike)))
+}
+function $as_sc_SeqLike(obj) {
+  return (($is_sc_SeqLike(obj) || (obj === null)) ? obj : $throwClassCastException(obj, "scala.collection.SeqLike"))
+}
+function $isArrayOf_sc_SeqLike(obj, depth) {
+  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.sc_SeqLike)))
+}
+function $asArrayOf_sc_SeqLike(obj, depth) {
+  return (($isArrayOf_sc_SeqLike(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lscala.collection.SeqLike;", depth))
 }
 function $f_sci_Traversable__$$init$__V($thiz) {
   /*<skip>*/
@@ -25977,6 +26721,9 @@ function $f_sc_LinearSeqOptimized__sameElements__sc_GenIterable__Z($thiz, that) 
 function $f_sc_LinearSeqOptimized__lengthCompare__I__I($thiz, len) {
   return ((len < 0) ? 1 : $thiz.loop$1__psc_LinearSeqOptimized__I__sc_LinearSeqOptimized__I__I(0, $thiz, len))
 }
+function $f_sc_LinearSeqOptimized__isDefinedAt__I__Z($thiz, x) {
+  return ((x >= 0) && ($thiz.lengthCompare__I__I(x) > 0))
+}
 function $f_sc_LinearSeqOptimized__indexWhere__F1__I__I($thiz, p, from) {
   var i = $m_s_math_package$().max__I__I__I(from, 0);
   var these = $thiz.drop__I__sc_LinearSeqOptimized(from);
@@ -26081,6 +26828,22 @@ function $f_sc_MapLike__newBuilder__scm_Builder($thiz) {
 function $f_sc_MapLike__isEmpty__Z($thiz) {
   return ($thiz.size__I() === 0)
 }
+function $f_sc_MapLike__getOrElse__O__F0__O($thiz, key, $default) {
+  var x1 = $thiz.get__O__s_Option(key);
+  if ($is_s_Some(x1)) {
+    var x2 = $as_s_Some(x1);
+    var v = x2.value__O();
+    return v
+  } else {
+    var x = $m_s_None$();
+    var x$2 = x1;
+    if (((x === null) ? (x$2 === null) : x.equals__O__Z(x$2))) {
+      return $default.apply__O()
+    } else {
+      throw new $c_s_MatchError().init___O(x1)
+    }
+  }
+}
 function $f_sc_MapLike__apply__O__O($thiz, key) {
   var x1 = $thiz.get__O__s_Option(key);
   var x = $m_s_None$();
@@ -26097,6 +26860,16 @@ function $f_sc_MapLike__apply__O__O($thiz, key) {
 }
 function $f_sc_MapLike__contains__O__Z($thiz, key) {
   return $thiz.get__O__s_Option(key).isDefined__Z()
+}
+function $f_sc_MapLike__isDefinedAt__O__Z($thiz, key) {
+  return $thiz.contains__O__Z(key)
+}
+function $f_sc_MapLike__applyOrElse__O__F1__O($thiz, x, $default) {
+  return $thiz.getOrElse__O__F0__O(x, new $c_sjsr_AnonFunction0().init___sjs_js_Function0((function($this, x, $default) {
+    return (function() {
+      return $this.$$anonfun$applyOrElse$1__psc_MapLike__O__F1__O(x, $default)
+    })
+  })($thiz, x, $default)))
 }
 function $f_sc_MapLike__values__sc_Iterable($thiz) {
   return new $c_sc_MapLike$DefaultValuesIterable().init___sc_MapLike($thiz)
@@ -26140,6 +26913,9 @@ function $f_sc_MapLike__stringPrefix__T($thiz) {
 }
 function $f_sc_MapLike__toString__T($thiz) {
   return $f_sc_TraversableLike__toString__T($thiz)
+}
+function $f_sc_MapLike__$$anonfun$applyOrElse$1__psc_MapLike__O__F1__O($thiz, x$8, default$1) {
+  return default$1.apply__O__O(x$8)
 }
 function $f_sc_MapLike__$$anonfun$filterNot$1__psc_MapLike__F1__sr_ObjectRef__T2__V($thiz, p$1, res$1, kv) {
   if ($uZ(p$1.apply__O__O(kv))) {
@@ -26634,6 +27410,9 @@ $c_sci_StringOps.prototype.$$anonfun$indexOf$1__psc_GenSeqLike__O__O__Z = (funct
 $c_sci_StringOps.prototype.$$anonfun$grouped$1__psc_IterableLike__sc_Seq__O = (function(xs) {
   return $f_sc_IterableLike__$$anonfun$grouped$1__psc_IterableLike__sc_Seq__O(this, xs)
 });
+$c_sci_StringOps.prototype.$$anonfun$collect$1__psc_TraversableLike__scm_Builder__O__scm_Builder = (function(b$4, x$1) {
+  return $f_sc_TraversableLike__$$anonfun$collect$1__psc_TraversableLike__scm_Builder__O__scm_Builder(this, b$4, x$1)
+});
 $c_sci_StringOps.prototype.$$anonfun$format$1__psci_StringLike__O__O = (function(arg) {
   return $f_sci_StringLike__$$anonfun$format$1__psci_StringLike__O__O(this, arg)
 });
@@ -26795,6 +27574,9 @@ $c_sc_MapLike$DefaultValuesIterable.prototype.$$anonfun$filterImpl$1__psc_Traver
 });
 $c_sc_MapLike$DefaultValuesIterable.prototype.$$anonfun$grouped$1__psc_IterableLike__sc_Seq__O = (function(xs) {
   return $f_sc_IterableLike__$$anonfun$grouped$1__psc_IterableLike__sc_Seq__O(this, xs)
+});
+$c_sc_MapLike$DefaultValuesIterable.prototype.$$anonfun$collect$1__psc_TraversableLike__scm_Builder__O__scm_Builder = (function(b$4, x$1) {
+  return $f_sc_TraversableLike__$$anonfun$collect$1__psc_TraversableLike__scm_Builder__O__scm_Builder(this, b$4, x$1)
 });
 $c_sc_MapLike$DefaultValuesIterable.prototype.$$anonfun$size$1__psc_TraversableOnce__sr_IntRef__O__V = (function(result$1, x) {
   $f_sc_TraversableOnce__$$anonfun$size$1__psc_TraversableOnce__sr_IntRef__O__V(this, result$1, x)
@@ -27058,6 +27840,9 @@ $c_scm_ArrayOps$ofBoolean.prototype.$$anonfun$indexOf$1__psc_GenSeqLike__O__O__Z
 });
 $c_scm_ArrayOps$ofBoolean.prototype.$$anonfun$grouped$1__psc_IterableLike__sc_Seq__O = (function(xs) {
   return $f_sc_IterableLike__$$anonfun$grouped$1__psc_IterableLike__sc_Seq__O(this, xs)
+});
+$c_scm_ArrayOps$ofBoolean.prototype.$$anonfun$collect$1__psc_TraversableLike__scm_Builder__O__scm_Builder = (function(b$4, x$1) {
+  return $f_sc_TraversableLike__$$anonfun$collect$1__psc_TraversableLike__scm_Builder__O__scm_Builder(this, b$4, x$1)
 });
 $c_scm_ArrayOps$ofBoolean.prototype.foldl__psc_IndexedSeqOptimized__I__I__O__F2__O = (function(start, end, z, op) {
   return $f_sc_IndexedSeqOptimized__foldl__psc_IndexedSeqOptimized__I__I__O__F2__O(this, start, end, z, op)
@@ -27334,6 +28119,9 @@ $c_scm_ArrayOps$ofByte.prototype.$$anonfun$indexOf$1__psc_GenSeqLike__O__O__Z = 
 $c_scm_ArrayOps$ofByte.prototype.$$anonfun$grouped$1__psc_IterableLike__sc_Seq__O = (function(xs) {
   return $f_sc_IterableLike__$$anonfun$grouped$1__psc_IterableLike__sc_Seq__O(this, xs)
 });
+$c_scm_ArrayOps$ofByte.prototype.$$anonfun$collect$1__psc_TraversableLike__scm_Builder__O__scm_Builder = (function(b$4, x$1) {
+  return $f_sc_TraversableLike__$$anonfun$collect$1__psc_TraversableLike__scm_Builder__O__scm_Builder(this, b$4, x$1)
+});
 $c_scm_ArrayOps$ofByte.prototype.foldl__psc_IndexedSeqOptimized__I__I__O__F2__O = (function(start, end, z, op) {
   return $f_sc_IndexedSeqOptimized__foldl__psc_IndexedSeqOptimized__I__I__O__F2__O(this, start, end, z, op)
 });
@@ -27602,6 +28390,9 @@ $c_scm_ArrayOps$ofChar.prototype.$$anonfun$indexOf$1__psc_GenSeqLike__O__O__Z = 
 });
 $c_scm_ArrayOps$ofChar.prototype.$$anonfun$grouped$1__psc_IterableLike__sc_Seq__O = (function(xs) {
   return $f_sc_IterableLike__$$anonfun$grouped$1__psc_IterableLike__sc_Seq__O(this, xs)
+});
+$c_scm_ArrayOps$ofChar.prototype.$$anonfun$collect$1__psc_TraversableLike__scm_Builder__O__scm_Builder = (function(b$4, x$1) {
+  return $f_sc_TraversableLike__$$anonfun$collect$1__psc_TraversableLike__scm_Builder__O__scm_Builder(this, b$4, x$1)
 });
 $c_scm_ArrayOps$ofChar.prototype.foldl__psc_IndexedSeqOptimized__I__I__O__F2__O = (function(start, end, z, op) {
   return $f_sc_IndexedSeqOptimized__foldl__psc_IndexedSeqOptimized__I__I__O__F2__O(this, start, end, z, op)
@@ -27872,6 +28663,9 @@ $c_scm_ArrayOps$ofDouble.prototype.$$anonfun$indexOf$1__psc_GenSeqLike__O__O__Z 
 $c_scm_ArrayOps$ofDouble.prototype.$$anonfun$grouped$1__psc_IterableLike__sc_Seq__O = (function(xs) {
   return $f_sc_IterableLike__$$anonfun$grouped$1__psc_IterableLike__sc_Seq__O(this, xs)
 });
+$c_scm_ArrayOps$ofDouble.prototype.$$anonfun$collect$1__psc_TraversableLike__scm_Builder__O__scm_Builder = (function(b$4, x$1) {
+  return $f_sc_TraversableLike__$$anonfun$collect$1__psc_TraversableLike__scm_Builder__O__scm_Builder(this, b$4, x$1)
+});
 $c_scm_ArrayOps$ofDouble.prototype.foldl__psc_IndexedSeqOptimized__I__I__O__F2__O = (function(start, end, z, op) {
   return $f_sc_IndexedSeqOptimized__foldl__psc_IndexedSeqOptimized__I__I__O__F2__O(this, start, end, z, op)
 });
@@ -28140,6 +28934,9 @@ $c_scm_ArrayOps$ofFloat.prototype.$$anonfun$indexOf$1__psc_GenSeqLike__O__O__Z =
 });
 $c_scm_ArrayOps$ofFloat.prototype.$$anonfun$grouped$1__psc_IterableLike__sc_Seq__O = (function(xs) {
   return $f_sc_IterableLike__$$anonfun$grouped$1__psc_IterableLike__sc_Seq__O(this, xs)
+});
+$c_scm_ArrayOps$ofFloat.prototype.$$anonfun$collect$1__psc_TraversableLike__scm_Builder__O__scm_Builder = (function(b$4, x$1) {
+  return $f_sc_TraversableLike__$$anonfun$collect$1__psc_TraversableLike__scm_Builder__O__scm_Builder(this, b$4, x$1)
 });
 $c_scm_ArrayOps$ofFloat.prototype.foldl__psc_IndexedSeqOptimized__I__I__O__F2__O = (function(start, end, z, op) {
   return $f_sc_IndexedSeqOptimized__foldl__psc_IndexedSeqOptimized__I__I__O__F2__O(this, start, end, z, op)
@@ -28410,6 +29207,9 @@ $c_scm_ArrayOps$ofInt.prototype.$$anonfun$indexOf$1__psc_GenSeqLike__O__O__Z = (
 $c_scm_ArrayOps$ofInt.prototype.$$anonfun$grouped$1__psc_IterableLike__sc_Seq__O = (function(xs) {
   return $f_sc_IterableLike__$$anonfun$grouped$1__psc_IterableLike__sc_Seq__O(this, xs)
 });
+$c_scm_ArrayOps$ofInt.prototype.$$anonfun$collect$1__psc_TraversableLike__scm_Builder__O__scm_Builder = (function(b$4, x$1) {
+  return $f_sc_TraversableLike__$$anonfun$collect$1__psc_TraversableLike__scm_Builder__O__scm_Builder(this, b$4, x$1)
+});
 $c_scm_ArrayOps$ofInt.prototype.foldl__psc_IndexedSeqOptimized__I__I__O__F2__O = (function(start, end, z, op) {
   return $f_sc_IndexedSeqOptimized__foldl__psc_IndexedSeqOptimized__I__I__O__F2__O(this, start, end, z, op)
 });
@@ -28678,6 +29478,9 @@ $c_scm_ArrayOps$ofLong.prototype.$$anonfun$indexOf$1__psc_GenSeqLike__O__O__Z = 
 });
 $c_scm_ArrayOps$ofLong.prototype.$$anonfun$grouped$1__psc_IterableLike__sc_Seq__O = (function(xs) {
   return $f_sc_IterableLike__$$anonfun$grouped$1__psc_IterableLike__sc_Seq__O(this, xs)
+});
+$c_scm_ArrayOps$ofLong.prototype.$$anonfun$collect$1__psc_TraversableLike__scm_Builder__O__scm_Builder = (function(b$4, x$1) {
+  return $f_sc_TraversableLike__$$anonfun$collect$1__psc_TraversableLike__scm_Builder__O__scm_Builder(this, b$4, x$1)
 });
 $c_scm_ArrayOps$ofLong.prototype.foldl__psc_IndexedSeqOptimized__I__I__O__F2__O = (function(start, end, z, op) {
   return $f_sc_IndexedSeqOptimized__foldl__psc_IndexedSeqOptimized__I__I__O__F2__O(this, start, end, z, op)
@@ -28948,6 +29751,9 @@ $c_scm_ArrayOps$ofRef.prototype.$$anonfun$indexOf$1__psc_GenSeqLike__O__O__Z = (
 $c_scm_ArrayOps$ofRef.prototype.$$anonfun$grouped$1__psc_IterableLike__sc_Seq__O = (function(xs) {
   return $f_sc_IterableLike__$$anonfun$grouped$1__psc_IterableLike__sc_Seq__O(this, xs)
 });
+$c_scm_ArrayOps$ofRef.prototype.$$anonfun$collect$1__psc_TraversableLike__scm_Builder__O__scm_Builder = (function(b$4, x$1) {
+  return $f_sc_TraversableLike__$$anonfun$collect$1__psc_TraversableLike__scm_Builder__O__scm_Builder(this, b$4, x$1)
+});
 $c_scm_ArrayOps$ofRef.prototype.foldl__psc_IndexedSeqOptimized__I__I__O__F2__O = (function(start, end, z, op) {
   return $f_sc_IndexedSeqOptimized__foldl__psc_IndexedSeqOptimized__I__I__O__F2__O(this, start, end, z, op)
 });
@@ -29217,6 +30023,9 @@ $c_scm_ArrayOps$ofShort.prototype.$$anonfun$indexOf$1__psc_GenSeqLike__O__O__Z =
 $c_scm_ArrayOps$ofShort.prototype.$$anonfun$grouped$1__psc_IterableLike__sc_Seq__O = (function(xs) {
   return $f_sc_IterableLike__$$anonfun$grouped$1__psc_IterableLike__sc_Seq__O(this, xs)
 });
+$c_scm_ArrayOps$ofShort.prototype.$$anonfun$collect$1__psc_TraversableLike__scm_Builder__O__scm_Builder = (function(b$4, x$1) {
+  return $f_sc_TraversableLike__$$anonfun$collect$1__psc_TraversableLike__scm_Builder__O__scm_Builder(this, b$4, x$1)
+});
 $c_scm_ArrayOps$ofShort.prototype.foldl__psc_IndexedSeqOptimized__I__I__O__F2__O = (function(start, end, z, op) {
   return $f_sc_IndexedSeqOptimized__foldl__psc_IndexedSeqOptimized__I__I__O__F2__O(this, start, end, z, op)
 });
@@ -29485,6 +30294,9 @@ $c_scm_ArrayOps$ofUnit.prototype.$$anonfun$indexOf$1__psc_GenSeqLike__O__O__Z = 
 });
 $c_scm_ArrayOps$ofUnit.prototype.$$anonfun$grouped$1__psc_IterableLike__sc_Seq__O = (function(xs) {
   return $f_sc_IterableLike__$$anonfun$grouped$1__psc_IterableLike__sc_Seq__O(this, xs)
+});
+$c_scm_ArrayOps$ofUnit.prototype.$$anonfun$collect$1__psc_TraversableLike__scm_Builder__O__scm_Builder = (function(b$4, x$1) {
+  return $f_sc_TraversableLike__$$anonfun$collect$1__psc_TraversableLike__scm_Builder__O__scm_Builder(this, b$4, x$1)
 });
 $c_scm_ArrayOps$ofUnit.prototype.foldl__psc_IndexedSeqOptimized__I__I__O__F2__O = (function(start, end, z, op) {
   return $f_sc_IndexedSeqOptimized__foldl__psc_IndexedSeqOptimized__I__I__O__F2__O(this, start, end, z, op)
@@ -29820,6 +30632,9 @@ $c_sjs_js_ArrayOps.prototype.$$anonfun$indexOf$1__psc_GenSeqLike__O__O__Z = (fun
 $c_sjs_js_ArrayOps.prototype.$$anonfun$grouped$1__psc_IterableLike__sc_Seq__O = (function(xs) {
   return $f_sc_IterableLike__$$anonfun$grouped$1__psc_IterableLike__sc_Seq__O(this, xs)
 });
+$c_sjs_js_ArrayOps.prototype.$$anonfun$collect$1__psc_TraversableLike__scm_Builder__O__scm_Builder = (function(b$4, x$1) {
+  return $f_sc_TraversableLike__$$anonfun$collect$1__psc_TraversableLike__scm_Builder__O__scm_Builder(this, b$4, x$1)
+});
 $c_sjs_js_ArrayOps.prototype.foldl__psc_IndexedSeqOptimized__I__I__O__F2__O = (function(start, end, z, op) {
   return $f_sc_IndexedSeqOptimized__foldl__psc_IndexedSeqOptimized__I__I__O__F2__O(this, start, end, z, op)
 });
@@ -29904,6 +30719,9 @@ function $f_scg_SeqForwarder__apply__I__O($thiz, idx) {
 function $f_scg_SeqForwarder__lengthCompare__I__I($thiz, len) {
   return $thiz.underlying__sc_Seq().lengthCompare__I__I(len)
 }
+function $f_scg_SeqForwarder__isDefinedAt__I__Z($thiz, x) {
+  return $thiz.underlying__sc_Seq().isDefinedAt__I__Z(x)
+}
 function $f_scg_SeqForwarder__indexWhere__F1__I__I($thiz, p, from) {
   return $thiz.underlying__sc_Seq().indexWhere__F1__I__I(p, from)
 }
@@ -29948,6 +30766,9 @@ $c_sc_AbstractSeq.prototype.$$colon$plus__O__scg_CanBuildFrom__O = (function(ele
 $c_sc_AbstractSeq.prototype.toString__T = (function() {
   return $f_sc_SeqLike__toString__T(this)
 });
+$c_sc_AbstractSeq.prototype.isDefinedAt__I__Z = (function(idx) {
+  return $f_sc_GenSeqLike__isDefinedAt__I__Z(this, idx)
+});
 $c_sc_AbstractSeq.prototype.indexOf__O__I = (function(elem) {
   return $f_sc_GenSeqLike__indexOf__O__I(this, elem)
 });
@@ -29959,6 +30780,12 @@ $c_sc_AbstractSeq.prototype.hashCode__I = (function() {
 });
 $c_sc_AbstractSeq.prototype.equals__O__Z = (function(that) {
   return $f_sc_GenSeqLike__equals__O__Z(this, that)
+});
+$c_sc_AbstractSeq.prototype.applyOrElse__O__F1__O = (function(x, $default) {
+  return $f_s_PartialFunction__applyOrElse__O__F1__O(this, x, $default)
+});
+$c_sc_AbstractSeq.prototype.runWith__F1__F1 = (function(action) {
+  return $f_s_PartialFunction__runWith__F1__F1(this, action)
 });
 $c_sc_AbstractSeq.prototype.apply$mcVI$sp__I__V = (function(v1) {
   $f_F1__apply$mcVI$sp__I__V(this, v1)
@@ -29993,11 +30820,20 @@ $c_sc_AbstractMap.prototype.newBuilder__scm_Builder = (function() {
 $c_sc_AbstractMap.prototype.isEmpty__Z = (function() {
   return $f_sc_MapLike__isEmpty__Z(this)
 });
+$c_sc_AbstractMap.prototype.getOrElse__O__F0__O = (function(key, $default) {
+  return $f_sc_MapLike__getOrElse__O__F0__O(this, key, $default)
+});
 $c_sc_AbstractMap.prototype.apply__O__O = (function(key) {
   return $f_sc_MapLike__apply__O__O(this, key)
 });
 $c_sc_AbstractMap.prototype.contains__O__Z = (function(key) {
   return $f_sc_MapLike__contains__O__Z(this, key)
+});
+$c_sc_AbstractMap.prototype.isDefinedAt__O__Z = (function(key) {
+  return $f_sc_MapLike__isDefinedAt__O__Z(this, key)
+});
+$c_sc_AbstractMap.prototype.applyOrElse__O__F1__O = (function(x, $default) {
+  return $f_sc_MapLike__applyOrElse__O__F1__O(this, x, $default)
 });
 $c_sc_AbstractMap.prototype.values__sc_Iterable = (function() {
   return $f_sc_MapLike__values__sc_Iterable(this)
@@ -30022,6 +30858,9 @@ $c_sc_AbstractMap.prototype.stringPrefix__T = (function() {
 });
 $c_sc_AbstractMap.prototype.toString__T = (function() {
   return $f_sc_MapLike__toString__T(this)
+});
+$c_sc_AbstractMap.prototype.runWith__F1__F1 = (function(action) {
+  return $f_s_PartialFunction__runWith__F1__F1(this, action)
 });
 $c_sc_AbstractMap.prototype.apply$mcVI$sp__I__V = (function(v1) {
   $f_F1__apply$mcVI$sp__I__V(this, v1)
@@ -30400,6 +31239,9 @@ $c_sci_Set$EmptySet$.prototype.$$anonfun$grouped$1__psc_IterableLike__sc_Seq__O 
 $c_sci_Set$EmptySet$.prototype.liftedTree1$1__psc_GenSetLike__sc_GenSet__Z = (function(x2$1) {
   return $f_sc_GenSetLike__liftedTree1$1__psc_GenSetLike__sc_GenSet__Z(this, x2$1)
 });
+$c_sci_Set$EmptySet$.prototype.$$anonfun$collect$1__psc_TraversableLike__scm_Builder__O__scm_Builder = (function(b$4, x$1) {
+  return $f_sc_TraversableLike__$$anonfun$collect$1__psc_TraversableLike__scm_Builder__O__scm_Builder(this, b$4, x$1)
+});
 $c_sci_Set$EmptySet$.prototype.$$anonfun$size$1__psc_TraversableOnce__sr_IntRef__O__V = (function(result$1, x) {
   $f_sc_TraversableOnce__$$anonfun$size$1__psc_TraversableOnce__sr_IntRef__O__V(this, result$1, x)
 });
@@ -30490,6 +31332,9 @@ $c_sci_Set$Set1.prototype.foreach__F1__V = (function(f) {
 $c_sci_Set$Set1.prototype.forall__F1__Z = (function(p) {
   return $uZ(p.apply__O__O(this.elem1$4))
 });
+$c_sci_Set$Set1.prototype.head__O = (function() {
+  return this.elem1$4
+});
 $c_sci_Set$Set1.prototype.tail__sci_Set = (function() {
   return $m_sci_Set$().empty__sci_Set()
 });
@@ -30560,6 +31405,9 @@ $c_sci_Set$Set1.prototype.$$anonfun$grouped$1__psc_IterableLike__sc_Seq__O = (fu
 });
 $c_sci_Set$Set1.prototype.liftedTree1$1__psc_GenSetLike__sc_GenSet__Z = (function(x2$1) {
   return $f_sc_GenSetLike__liftedTree1$1__psc_GenSetLike__sc_GenSet__Z(this, x2$1)
+});
+$c_sci_Set$Set1.prototype.$$anonfun$collect$1__psc_TraversableLike__scm_Builder__O__scm_Builder = (function(b$4, x$1) {
+  return $f_sc_TraversableLike__$$anonfun$collect$1__psc_TraversableLike__scm_Builder__O__scm_Builder(this, b$4, x$1)
 });
 $c_sci_Set$Set1.prototype.$$anonfun$size$1__psc_TraversableOnce__sr_IntRef__O__V = (function(result$1, x) {
   $f_sc_TraversableOnce__$$anonfun$size$1__psc_TraversableOnce__sr_IntRef__O__V(this, result$1, x)
@@ -30646,6 +31494,9 @@ $c_sci_Set$Set2.prototype.foreach__F1__V = (function(f) {
 $c_sci_Set$Set2.prototype.forall__F1__Z = (function(p) {
   return ($uZ(p.apply__O__O(this.elem1$4)) && $uZ(p.apply__O__O(this.elem2$4)))
 });
+$c_sci_Set$Set2.prototype.head__O = (function() {
+  return this.elem1$4
+});
 $c_sci_Set$Set2.prototype.tail__sci_Set = (function() {
   return new $c_sci_Set$Set1().init___O(this.elem2$4)
 });
@@ -30717,6 +31568,9 @@ $c_sci_Set$Set2.prototype.$$anonfun$grouped$1__psc_IterableLike__sc_Seq__O = (fu
 });
 $c_sci_Set$Set2.prototype.liftedTree1$1__psc_GenSetLike__sc_GenSet__Z = (function(x2$1) {
   return $f_sc_GenSetLike__liftedTree1$1__psc_GenSetLike__sc_GenSet__Z(this, x2$1)
+});
+$c_sci_Set$Set2.prototype.$$anonfun$collect$1__psc_TraversableLike__scm_Builder__O__scm_Builder = (function(b$4, x$1) {
+  return $f_sc_TraversableLike__$$anonfun$collect$1__psc_TraversableLike__scm_Builder__O__scm_Builder(this, b$4, x$1)
 });
 $c_sci_Set$Set2.prototype.$$anonfun$size$1__psc_TraversableOnce__sr_IntRef__O__V = (function(result$1, x) {
   $f_sc_TraversableOnce__$$anonfun$size$1__psc_TraversableOnce__sr_IntRef__O__V(this, result$1, x)
@@ -30805,6 +31659,9 @@ $c_sci_Set$Set3.prototype.foreach__F1__V = (function(f) {
 $c_sci_Set$Set3.prototype.forall__F1__Z = (function(p) {
   return (($uZ(p.apply__O__O(this.elem1$4)) && $uZ(p.apply__O__O(this.elem2$4))) && $uZ(p.apply__O__O(this.elem3$4)))
 });
+$c_sci_Set$Set3.prototype.head__O = (function() {
+  return this.elem1$4
+});
 $c_sci_Set$Set3.prototype.tail__sci_Set = (function() {
   return new $c_sci_Set$Set2().init___O__O(this.elem2$4, this.elem3$4)
 });
@@ -30877,6 +31734,9 @@ $c_sci_Set$Set3.prototype.$$anonfun$grouped$1__psc_IterableLike__sc_Seq__O = (fu
 });
 $c_sci_Set$Set3.prototype.liftedTree1$1__psc_GenSetLike__sc_GenSet__Z = (function(x2$1) {
   return $f_sc_GenSetLike__liftedTree1$1__psc_GenSetLike__sc_GenSet__Z(this, x2$1)
+});
+$c_sci_Set$Set3.prototype.$$anonfun$collect$1__psc_TraversableLike__scm_Builder__O__scm_Builder = (function(b$4, x$1) {
+  return $f_sc_TraversableLike__$$anonfun$collect$1__psc_TraversableLike__scm_Builder__O__scm_Builder(this, b$4, x$1)
 });
 $c_sci_Set$Set3.prototype.$$anonfun$size$1__psc_TraversableOnce__sr_IntRef__O__V = (function(result$1, x) {
   $f_sc_TraversableOnce__$$anonfun$size$1__psc_TraversableOnce__sr_IntRef__O__V(this, result$1, x)
@@ -30967,6 +31827,9 @@ $c_sci_Set$Set4.prototype.foreach__F1__V = (function(f) {
 $c_sci_Set$Set4.prototype.forall__F1__Z = (function(p) {
   return ((($uZ(p.apply__O__O(this.elem1$4)) && $uZ(p.apply__O__O(this.elem2$4))) && $uZ(p.apply__O__O(this.elem3$4))) && $uZ(p.apply__O__O(this.elem4$4)))
 });
+$c_sci_Set$Set4.prototype.head__O = (function() {
+  return this.elem1$4
+});
 $c_sci_Set$Set4.prototype.tail__sci_Set = (function() {
   return new $c_sci_Set$Set3().init___O__O__O(this.elem2$4, this.elem3$4, this.elem4$4)
 });
@@ -31040,6 +31903,9 @@ $c_sci_Set$Set4.prototype.$$anonfun$grouped$1__psc_IterableLike__sc_Seq__O = (fu
 });
 $c_sci_Set$Set4.prototype.liftedTree1$1__psc_GenSetLike__sc_GenSet__Z = (function(x2$1) {
   return $f_sc_GenSetLike__liftedTree1$1__psc_GenSetLike__sc_GenSet__Z(this, x2$1)
+});
+$c_sci_Set$Set4.prototype.$$anonfun$collect$1__psc_TraversableLike__scm_Builder__O__scm_Builder = (function(b$4, x$1) {
+  return $f_sc_TraversableLike__$$anonfun$collect$1__psc_TraversableLike__scm_Builder__O__scm_Builder(this, b$4, x$1)
 });
 $c_sci_Set$Set4.prototype.$$anonfun$size$1__psc_TraversableOnce__sr_IntRef__O__V = (function(result$1, x) {
   $f_sc_TraversableOnce__$$anonfun$size$1__psc_TraversableOnce__sr_IntRef__O__V(this, result$1, x)
@@ -31251,6 +32117,9 @@ $c_sci_HashSet.prototype.$$anonfun$grouped$1__psc_IterableLike__sc_Seq__O = (fun
 $c_sci_HashSet.prototype.liftedTree1$1__psc_GenSetLike__sc_GenSet__Z = (function(x2$1) {
   return $f_sc_GenSetLike__liftedTree1$1__psc_GenSetLike__sc_GenSet__Z(this, x2$1)
 });
+$c_sci_HashSet.prototype.$$anonfun$collect$1__psc_TraversableLike__scm_Builder__O__scm_Builder = (function(b$4, x$1) {
+  return $f_sc_TraversableLike__$$anonfun$collect$1__psc_TraversableLike__scm_Builder__O__scm_Builder(this, b$4, x$1)
+});
 $c_sci_HashSet.prototype.$$anonfun$size$1__psc_TraversableOnce__sr_IntRef__O__V = (function(result$1, x) {
   $f_sc_TraversableOnce__$$anonfun$size$1__psc_TraversableOnce__sr_IntRef__O__V(this, result$1, x)
 });
@@ -31362,6 +32231,9 @@ $c_sci_ListSet$EmptyListSet$.prototype.$$anonfun$grouped$1__psc_IterableLike__sc
 });
 $c_sci_ListSet$EmptyListSet$.prototype.liftedTree1$1__psc_GenSetLike__sc_GenSet__Z = (function(x2$1) {
   return $f_sc_GenSetLike__liftedTree1$1__psc_GenSetLike__sc_GenSet__Z(this, x2$1)
+});
+$c_sci_ListSet$EmptyListSet$.prototype.$$anonfun$collect$1__psc_TraversableLike__scm_Builder__O__scm_Builder = (function(b$4, x$1) {
+  return $f_sc_TraversableLike__$$anonfun$collect$1__psc_TraversableLike__scm_Builder__O__scm_Builder(this, b$4, x$1)
 });
 $c_sci_ListSet$EmptyListSet$.prototype.$$anonfun$size$1__psc_TraversableOnce__sr_IntRef__O__V = (function(result$1, x) {
   $f_sc_TraversableOnce__$$anonfun$size$1__psc_TraversableOnce__sr_IntRef__O__V(this, result$1, x)
@@ -31567,6 +32439,9 @@ $c_sci_ListSet$Node.prototype.$$anonfun$grouped$1__psc_IterableLike__sc_Seq__O =
 $c_sci_ListSet$Node.prototype.liftedTree1$1__psc_GenSetLike__sc_GenSet__Z = (function(x2$1) {
   return $f_sc_GenSetLike__liftedTree1$1__psc_GenSetLike__sc_GenSet__Z(this, x2$1)
 });
+$c_sci_ListSet$Node.prototype.$$anonfun$collect$1__psc_TraversableLike__scm_Builder__O__scm_Builder = (function(b$4, x$1) {
+  return $f_sc_TraversableLike__$$anonfun$collect$1__psc_TraversableLike__scm_Builder__O__scm_Builder(this, b$4, x$1)
+});
 $c_sci_ListSet$Node.prototype.$$anonfun$size$1__psc_TraversableOnce__sr_IntRef__O__V = (function(result$1, x) {
   $f_sc_TraversableOnce__$$anonfun$size$1__psc_TraversableOnce__sr_IntRef__O__V(this, result$1, x)
 });
@@ -31677,9 +32552,6 @@ $c_sci_HashSet$EmptyHashSet$.prototype.$$anonfun$foldLeft$1__psc_TraversableOnce
 });
 $c_sci_HashSet$EmptyHashSet$.prototype.liftedTree1$1__psc_GenSetLike__sc_GenSet__Z = (function(x2$1) {
   return $f_sc_GenSetLike__liftedTree1$1__psc_GenSetLike__sc_GenSet__Z(this, x2$1)
-});
-$c_sci_HashSet$EmptyHashSet$.prototype.$$anonfun$size$1__psc_TraversableOnce__sr_IntRef__O__V = (function(result$1, x) {
-  $f_sc_TraversableOnce__$$anonfun$size$1__psc_TraversableOnce__sr_IntRef__O__V(this, result$1, x)
 });
 var $d_sci_HashSet$EmptyHashSet$ = new $TypeData().initClass({
   sci_HashSet$EmptyHashSet$: 0
@@ -31890,9 +32762,6 @@ $c_sci_HashSet$HashTrieSet.prototype.$$anonfun$foldLeft$1__psc_TraversableOnce__
 $c_sci_HashSet$HashTrieSet.prototype.liftedTree1$1__psc_GenSetLike__sc_GenSet__Z = (function(x2$1) {
   return $f_sc_GenSetLike__liftedTree1$1__psc_GenSetLike__sc_GenSet__Z(this, x2$1)
 });
-$c_sci_HashSet$HashTrieSet.prototype.$$anonfun$size$1__psc_TraversableOnce__sr_IntRef__O__V = (function(result$1, x) {
-  $f_sc_TraversableOnce__$$anonfun$size$1__psc_TraversableOnce__sr_IntRef__O__V(this, result$1, x)
-});
 function $is_sci_HashSet$HashTrieSet(obj) {
   return (!(!((obj && obj.$classData) && obj.$classData.ancestors.sci_HashSet$HashTrieSet)))
 }
@@ -32071,8 +32940,14 @@ $c_sci_Map$EmptyMap$.prototype.size__I = (function() {
 $c_sci_Map$EmptyMap$.prototype.apply__O__sr_Nothing$ = (function(key) {
   throw new $c_ju_NoSuchElementException().init___T(("key not found: " + key))
 });
+$c_sci_Map$EmptyMap$.prototype.contains__O__Z = (function(key) {
+  return false
+});
 $c_sci_Map$EmptyMap$.prototype.get__O__s_Option = (function(key) {
   return $m_s_None$()
+});
+$c_sci_Map$EmptyMap$.prototype.getOrElse__O__F0__O = (function(key, $default) {
+  return $default.apply__O()
 });
 $c_sci_Map$EmptyMap$.prototype.iterator__sc_Iterator = (function() {
   return $m_sc_Iterator$().empty__sc_Iterator()
@@ -32127,6 +33002,12 @@ $c_sci_Map$EmptyMap$.prototype.$$anonfun$sum$1__psc_TraversableOnce__s_math_Nume
 $c_sci_Map$EmptyMap$.prototype.$$anonfun$foldLeft$1__psc_TraversableOnce__F2__sr_ObjectRef__O__V = (function(op$3, result$2, x) {
   $f_sc_TraversableOnce__$$anonfun$foldLeft$1__psc_TraversableOnce__F2__sr_ObjectRef__O__V(this, op$3, result$2, x)
 });
+$c_sci_Map$EmptyMap$.prototype.$$anonfun$runWith$1__ps_PartialFunction__F1__O__Z = (function(action$1, x) {
+  return $f_s_PartialFunction__$$anonfun$runWith$1__ps_PartialFunction__F1__O__Z(this, action$1, x)
+});
+$c_sci_Map$EmptyMap$.prototype.$$anonfun$applyOrElse$1__psc_MapLike__O__F1__O = (function(x$8, default$1) {
+  return $f_sc_MapLike__$$anonfun$applyOrElse$1__psc_MapLike__O__F1__O(this, x$8, default$1)
+});
 $c_sci_Map$EmptyMap$.prototype.$$anonfun$addString$1__psc_MapLike__T2__T = (function(x0$1) {
   return $f_sc_MapLike__$$anonfun$addString$1__psc_MapLike__T2__T(this, x0$1)
 });
@@ -32135,6 +33016,9 @@ $c_sci_Map$EmptyMap$.prototype.$$anonfun$filterImpl$1__psc_TraversableLike__F1__
 });
 $c_sci_Map$EmptyMap$.prototype.$$anonfun$grouped$1__psc_IterableLike__sc_Seq__O = (function(xs) {
   return $f_sc_IterableLike__$$anonfun$grouped$1__psc_IterableLike__sc_Seq__O(this, xs)
+});
+$c_sci_Map$EmptyMap$.prototype.$$anonfun$collect$1__psc_TraversableLike__scm_Builder__O__scm_Builder = (function(b$4, x$1) {
+  return $f_sc_TraversableLike__$$anonfun$collect$1__psc_TraversableLike__scm_Builder__O__scm_Builder(this, b$4, x$1)
 });
 $c_sci_Map$EmptyMap$.prototype.$$anonfun$equals$1__psc_GenMapLike__sc_GenMap__T2__Z = (function(x2$1, x0$1) {
   return $f_sc_GenMapLike__$$anonfun$equals$1__psc_GenMapLike__sc_GenMap__T2__Z(this, x2$1, x0$1)
@@ -32224,8 +33108,14 @@ $c_sci_Map$Map1.prototype.apply__O__O = (function(key) {
     throw new $c_ju_NoSuchElementException().init___T(("key not found: " + key))
   }
 });
+$c_sci_Map$Map1.prototype.contains__O__Z = (function(key) {
+  return $m_sr_BoxesRunTime$().equals__O__O__Z(key, this.key1$5)
+});
 $c_sci_Map$Map1.prototype.get__O__s_Option = (function(key) {
   return ($m_sr_BoxesRunTime$().equals__O__O__Z(key, this.key1$5) ? new $c_s_Some().init___O(this.value1$5) : $m_s_None$())
+});
+$c_sci_Map$Map1.prototype.getOrElse__O__F0__O = (function(key, $default) {
+  return ($m_sr_BoxesRunTime$().equals__O__O__Z(key, this.key1$5) ? this.value1$5 : $default.apply__O())
 });
 $c_sci_Map$Map1.prototype.iterator__sc_Iterator = (function() {
   return $m_sc_Iterator$().apply__sc_Seq__sc_Iterator($m_sjsr_package$().toScalaVarArgs__sjs_js_Array__sc_Seq([new $c_T2().init___O__O(this.key1$5, this.value1$5)]))
@@ -32281,6 +33171,12 @@ $c_sci_Map$Map1.prototype.$$anonfun$sum$1__psc_TraversableOnce__s_math_Numeric__
 $c_sci_Map$Map1.prototype.$$anonfun$foldLeft$1__psc_TraversableOnce__F2__sr_ObjectRef__O__V = (function(op$3, result$2, x) {
   $f_sc_TraversableOnce__$$anonfun$foldLeft$1__psc_TraversableOnce__F2__sr_ObjectRef__O__V(this, op$3, result$2, x)
 });
+$c_sci_Map$Map1.prototype.$$anonfun$runWith$1__ps_PartialFunction__F1__O__Z = (function(action$1, x) {
+  return $f_s_PartialFunction__$$anonfun$runWith$1__ps_PartialFunction__F1__O__Z(this, action$1, x)
+});
+$c_sci_Map$Map1.prototype.$$anonfun$applyOrElse$1__psc_MapLike__O__F1__O = (function(x$8, default$1) {
+  return $f_sc_MapLike__$$anonfun$applyOrElse$1__psc_MapLike__O__F1__O(this, x$8, default$1)
+});
 $c_sci_Map$Map1.prototype.$$anonfun$addString$1__psc_MapLike__T2__T = (function(x0$1) {
   return $f_sc_MapLike__$$anonfun$addString$1__psc_MapLike__T2__T(this, x0$1)
 });
@@ -32289,6 +33185,9 @@ $c_sci_Map$Map1.prototype.$$anonfun$filterImpl$1__psc_TraversableLike__F1__Z__sc
 });
 $c_sci_Map$Map1.prototype.$$anonfun$grouped$1__psc_IterableLike__sc_Seq__O = (function(xs) {
   return $f_sc_IterableLike__$$anonfun$grouped$1__psc_IterableLike__sc_Seq__O(this, xs)
+});
+$c_sci_Map$Map1.prototype.$$anonfun$collect$1__psc_TraversableLike__scm_Builder__O__scm_Builder = (function(b$4, x$1) {
+  return $f_sc_TraversableLike__$$anonfun$collect$1__psc_TraversableLike__scm_Builder__O__scm_Builder(this, b$4, x$1)
 });
 $c_sci_Map$Map1.prototype.$$anonfun$equals$1__psc_GenMapLike__sc_GenMap__T2__Z = (function(x2$1, x0$1) {
   return $f_sc_GenMapLike__$$anonfun$equals$1__psc_GenMapLike__sc_GenMap__T2__Z(this, x2$1, x0$1)
@@ -32375,8 +33274,14 @@ $c_sci_Map$Map2.prototype.apply__O__O = (function(key) {
     throw new $c_ju_NoSuchElementException().init___T(("key not found: " + key))
   }
 });
+$c_sci_Map$Map2.prototype.contains__O__Z = (function(key) {
+  return ($m_sr_BoxesRunTime$().equals__O__O__Z(key, this.key1$5) || $m_sr_BoxesRunTime$().equals__O__O__Z(key, this.key2$5))
+});
 $c_sci_Map$Map2.prototype.get__O__s_Option = (function(key) {
   return ($m_sr_BoxesRunTime$().equals__O__O__Z(key, this.key1$5) ? new $c_s_Some().init___O(this.value1$5) : ($m_sr_BoxesRunTime$().equals__O__O__Z(key, this.key2$5) ? new $c_s_Some().init___O(this.value2$5) : $m_s_None$()))
+});
+$c_sci_Map$Map2.prototype.getOrElse__O__F0__O = (function(key, $default) {
+  return ($m_sr_BoxesRunTime$().equals__O__O__Z(key, this.key1$5) ? this.value1$5 : ($m_sr_BoxesRunTime$().equals__O__O__Z(key, this.key2$5) ? this.value2$5 : $default.apply__O()))
 });
 $c_sci_Map$Map2.prototype.iterator__sc_Iterator = (function() {
   return $m_sc_Iterator$().apply__sc_Seq__sc_Iterator($m_sjsr_package$().toScalaVarArgs__sjs_js_Array__sc_Seq([new $c_T2().init___O__O(this.key1$5, this.value1$5), new $c_T2().init___O__O(this.key2$5, this.value2$5)]))
@@ -32435,6 +33340,12 @@ $c_sci_Map$Map2.prototype.$$anonfun$sum$1__psc_TraversableOnce__s_math_Numeric__
 $c_sci_Map$Map2.prototype.$$anonfun$foldLeft$1__psc_TraversableOnce__F2__sr_ObjectRef__O__V = (function(op$3, result$2, x) {
   $f_sc_TraversableOnce__$$anonfun$foldLeft$1__psc_TraversableOnce__F2__sr_ObjectRef__O__V(this, op$3, result$2, x)
 });
+$c_sci_Map$Map2.prototype.$$anonfun$runWith$1__ps_PartialFunction__F1__O__Z = (function(action$1, x) {
+  return $f_s_PartialFunction__$$anonfun$runWith$1__ps_PartialFunction__F1__O__Z(this, action$1, x)
+});
+$c_sci_Map$Map2.prototype.$$anonfun$applyOrElse$1__psc_MapLike__O__F1__O = (function(x$8, default$1) {
+  return $f_sc_MapLike__$$anonfun$applyOrElse$1__psc_MapLike__O__F1__O(this, x$8, default$1)
+});
 $c_sci_Map$Map2.prototype.$$anonfun$addString$1__psc_MapLike__T2__T = (function(x0$1) {
   return $f_sc_MapLike__$$anonfun$addString$1__psc_MapLike__T2__T(this, x0$1)
 });
@@ -32443,6 +33354,9 @@ $c_sci_Map$Map2.prototype.$$anonfun$filterImpl$1__psc_TraversableLike__F1__Z__sc
 });
 $c_sci_Map$Map2.prototype.$$anonfun$grouped$1__psc_IterableLike__sc_Seq__O = (function(xs) {
   return $f_sc_IterableLike__$$anonfun$grouped$1__psc_IterableLike__sc_Seq__O(this, xs)
+});
+$c_sci_Map$Map2.prototype.$$anonfun$collect$1__psc_TraversableLike__scm_Builder__O__scm_Builder = (function(b$4, x$1) {
+  return $f_sc_TraversableLike__$$anonfun$collect$1__psc_TraversableLike__scm_Builder__O__scm_Builder(this, b$4, x$1)
 });
 $c_sci_Map$Map2.prototype.$$anonfun$equals$1__psc_GenMapLike__sc_GenMap__T2__Z = (function(x2$1, x0$1) {
   return $f_sc_GenMapLike__$$anonfun$equals$1__psc_GenMapLike__sc_GenMap__T2__Z(this, x2$1, x0$1)
@@ -32533,8 +33447,14 @@ $c_sci_Map$Map3.prototype.apply__O__O = (function(key) {
     throw new $c_ju_NoSuchElementException().init___T(("key not found: " + key))
   }
 });
+$c_sci_Map$Map3.prototype.contains__O__Z = (function(key) {
+  return (($m_sr_BoxesRunTime$().equals__O__O__Z(key, this.key1$5) || $m_sr_BoxesRunTime$().equals__O__O__Z(key, this.key2$5)) || $m_sr_BoxesRunTime$().equals__O__O__Z(key, this.key3$5))
+});
 $c_sci_Map$Map3.prototype.get__O__s_Option = (function(key) {
   return ($m_sr_BoxesRunTime$().equals__O__O__Z(key, this.key1$5) ? new $c_s_Some().init___O(this.value1$5) : ($m_sr_BoxesRunTime$().equals__O__O__Z(key, this.key2$5) ? new $c_s_Some().init___O(this.value2$5) : ($m_sr_BoxesRunTime$().equals__O__O__Z(key, this.key3$5) ? new $c_s_Some().init___O(this.value3$5) : $m_s_None$())))
+});
+$c_sci_Map$Map3.prototype.getOrElse__O__F0__O = (function(key, $default) {
+  return ($m_sr_BoxesRunTime$().equals__O__O__Z(key, this.key1$5) ? this.value1$5 : ($m_sr_BoxesRunTime$().equals__O__O__Z(key, this.key2$5) ? this.value2$5 : ($m_sr_BoxesRunTime$().equals__O__O__Z(key, this.key3$5) ? this.value3$5 : $default.apply__O())))
 });
 $c_sci_Map$Map3.prototype.iterator__sc_Iterator = (function() {
   return $m_sc_Iterator$().apply__sc_Seq__sc_Iterator($m_sjsr_package$().toScalaVarArgs__sjs_js_Array__sc_Seq([new $c_T2().init___O__O(this.key1$5, this.value1$5), new $c_T2().init___O__O(this.key2$5, this.value2$5), new $c_T2().init___O__O(this.key3$5, this.value3$5)]))
@@ -32596,6 +33516,12 @@ $c_sci_Map$Map3.prototype.$$anonfun$sum$1__psc_TraversableOnce__s_math_Numeric__
 $c_sci_Map$Map3.prototype.$$anonfun$foldLeft$1__psc_TraversableOnce__F2__sr_ObjectRef__O__V = (function(op$3, result$2, x) {
   $f_sc_TraversableOnce__$$anonfun$foldLeft$1__psc_TraversableOnce__F2__sr_ObjectRef__O__V(this, op$3, result$2, x)
 });
+$c_sci_Map$Map3.prototype.$$anonfun$runWith$1__ps_PartialFunction__F1__O__Z = (function(action$1, x) {
+  return $f_s_PartialFunction__$$anonfun$runWith$1__ps_PartialFunction__F1__O__Z(this, action$1, x)
+});
+$c_sci_Map$Map3.prototype.$$anonfun$applyOrElse$1__psc_MapLike__O__F1__O = (function(x$8, default$1) {
+  return $f_sc_MapLike__$$anonfun$applyOrElse$1__psc_MapLike__O__F1__O(this, x$8, default$1)
+});
 $c_sci_Map$Map3.prototype.$$anonfun$addString$1__psc_MapLike__T2__T = (function(x0$1) {
   return $f_sc_MapLike__$$anonfun$addString$1__psc_MapLike__T2__T(this, x0$1)
 });
@@ -32604,6 +33530,9 @@ $c_sci_Map$Map3.prototype.$$anonfun$filterImpl$1__psc_TraversableLike__F1__Z__sc
 });
 $c_sci_Map$Map3.prototype.$$anonfun$grouped$1__psc_IterableLike__sc_Seq__O = (function(xs) {
   return $f_sc_IterableLike__$$anonfun$grouped$1__psc_IterableLike__sc_Seq__O(this, xs)
+});
+$c_sci_Map$Map3.prototype.$$anonfun$collect$1__psc_TraversableLike__scm_Builder__O__scm_Builder = (function(b$4, x$1) {
+  return $f_sc_TraversableLike__$$anonfun$collect$1__psc_TraversableLike__scm_Builder__O__scm_Builder(this, b$4, x$1)
 });
 $c_sci_Map$Map3.prototype.$$anonfun$equals$1__psc_GenMapLike__sc_GenMap__T2__Z = (function(x2$1, x0$1) {
   return $f_sc_GenMapLike__$$anonfun$equals$1__psc_GenMapLike__sc_GenMap__T2__Z(this, x2$1, x0$1)
@@ -32698,8 +33627,14 @@ $c_sci_Map$Map4.prototype.apply__O__O = (function(key) {
     throw new $c_ju_NoSuchElementException().init___T(("key not found: " + key))
   }
 });
+$c_sci_Map$Map4.prototype.contains__O__Z = (function(key) {
+  return ((($m_sr_BoxesRunTime$().equals__O__O__Z(key, this.key1$5) || $m_sr_BoxesRunTime$().equals__O__O__Z(key, this.key2$5)) || $m_sr_BoxesRunTime$().equals__O__O__Z(key, this.key3$5)) || $m_sr_BoxesRunTime$().equals__O__O__Z(key, this.key4$5))
+});
 $c_sci_Map$Map4.prototype.get__O__s_Option = (function(key) {
   return ($m_sr_BoxesRunTime$().equals__O__O__Z(key, this.key1$5) ? new $c_s_Some().init___O(this.value1$5) : ($m_sr_BoxesRunTime$().equals__O__O__Z(key, this.key2$5) ? new $c_s_Some().init___O(this.value2$5) : ($m_sr_BoxesRunTime$().equals__O__O__Z(key, this.key3$5) ? new $c_s_Some().init___O(this.value3$5) : ($m_sr_BoxesRunTime$().equals__O__O__Z(key, this.key4$5) ? new $c_s_Some().init___O(this.value4$5) : $m_s_None$()))))
+});
+$c_sci_Map$Map4.prototype.getOrElse__O__F0__O = (function(key, $default) {
+  return ($m_sr_BoxesRunTime$().equals__O__O__Z(key, this.key1$5) ? this.value1$5 : ($m_sr_BoxesRunTime$().equals__O__O__Z(key, this.key2$5) ? this.value2$5 : ($m_sr_BoxesRunTime$().equals__O__O__Z(key, this.key3$5) ? this.value3$5 : ($m_sr_BoxesRunTime$().equals__O__O__Z(key, this.key4$5) ? this.value4$5 : $default.apply__O()))))
 });
 $c_sci_Map$Map4.prototype.iterator__sc_Iterator = (function() {
   return $m_sc_Iterator$().apply__sc_Seq__sc_Iterator($m_sjsr_package$().toScalaVarArgs__sjs_js_Array__sc_Seq([new $c_T2().init___O__O(this.key1$5, this.value1$5), new $c_T2().init___O__O(this.key2$5, this.value2$5), new $c_T2().init___O__O(this.key3$5, this.value3$5), new $c_T2().init___O__O(this.key4$5, this.value4$5)]))
@@ -32764,6 +33699,12 @@ $c_sci_Map$Map4.prototype.$$anonfun$sum$1__psc_TraversableOnce__s_math_Numeric__
 $c_sci_Map$Map4.prototype.$$anonfun$foldLeft$1__psc_TraversableOnce__F2__sr_ObjectRef__O__V = (function(op$3, result$2, x) {
   $f_sc_TraversableOnce__$$anonfun$foldLeft$1__psc_TraversableOnce__F2__sr_ObjectRef__O__V(this, op$3, result$2, x)
 });
+$c_sci_Map$Map4.prototype.$$anonfun$runWith$1__ps_PartialFunction__F1__O__Z = (function(action$1, x) {
+  return $f_s_PartialFunction__$$anonfun$runWith$1__ps_PartialFunction__F1__O__Z(this, action$1, x)
+});
+$c_sci_Map$Map4.prototype.$$anonfun$applyOrElse$1__psc_MapLike__O__F1__O = (function(x$8, default$1) {
+  return $f_sc_MapLike__$$anonfun$applyOrElse$1__psc_MapLike__O__F1__O(this, x$8, default$1)
+});
 $c_sci_Map$Map4.prototype.$$anonfun$addString$1__psc_MapLike__T2__T = (function(x0$1) {
   return $f_sc_MapLike__$$anonfun$addString$1__psc_MapLike__T2__T(this, x0$1)
 });
@@ -32772,6 +33713,9 @@ $c_sci_Map$Map4.prototype.$$anonfun$filterImpl$1__psc_TraversableLike__F1__Z__sc
 });
 $c_sci_Map$Map4.prototype.$$anonfun$grouped$1__psc_IterableLike__sc_Seq__O = (function(xs) {
   return $f_sc_IterableLike__$$anonfun$grouped$1__psc_IterableLike__sc_Seq__O(this, xs)
+});
+$c_sci_Map$Map4.prototype.$$anonfun$collect$1__psc_TraversableLike__scm_Builder__O__scm_Builder = (function(b$4, x$1) {
+  return $f_sc_TraversableLike__$$anonfun$collect$1__psc_TraversableLike__scm_Builder__O__scm_Builder(this, b$4, x$1)
 });
 $c_sci_Map$Map4.prototype.$$anonfun$equals$1__psc_GenMapLike__sc_GenMap__T2__Z = (function(x2$1, x0$1) {
   return $f_sc_GenMapLike__$$anonfun$equals$1__psc_GenMapLike__sc_GenMap__T2__Z(this, x2$1, x0$1)
@@ -32857,6 +33801,9 @@ $c_sci_HashMap.prototype.foreach__F1__V = (function(f) {
 $c_sci_HashMap.prototype.get__O__s_Option = (function(key) {
   return this.get0__O__I__I__s_Option(key, this.computeHash__O__I(key), 0)
 });
+$c_sci_HashMap.prototype.contains__O__Z = (function(key) {
+  return this.contains0__O__I__I__Z(key, this.computeHash__O__I(key), 0)
+});
 $c_sci_HashMap.prototype.updated__O__O__sci_HashMap = (function(key, value) {
   return this.updated0__O__I__I__O__T2__sci_HashMap$Merger__sci_HashMap(key, this.computeHash__O__I(key), 0, value, null, null)
 });
@@ -32890,6 +33837,9 @@ $c_sci_HashMap.prototype.computeHash__O__I = (function(key) {
 });
 $c_sci_HashMap.prototype.get0__O__I__I__s_Option = (function(key, hash, level) {
   return $m_s_None$()
+});
+$c_sci_HashMap.prototype.contains0__O__I__I__Z = (function(key, hash, level) {
+  return false
 });
 $c_sci_HashMap.prototype.updated0__O__I__I__O__T2__sci_HashMap$Merger__sci_HashMap = (function(key, hash, level, value, kv, merger) {
   return new $c_sci_HashMap$HashMap1().init___O__I__O__T2(key, hash, value, kv)
@@ -32959,6 +33909,12 @@ $c_sci_HashMap.prototype.$$anonfun$sum$1__psc_TraversableOnce__s_math_Numeric__O
 $c_sci_HashMap.prototype.$$anonfun$foldLeft$1__psc_TraversableOnce__F2__sr_ObjectRef__O__V = (function(op$3, result$2, x) {
   $f_sc_TraversableOnce__$$anonfun$foldLeft$1__psc_TraversableOnce__F2__sr_ObjectRef__O__V(this, op$3, result$2, x)
 });
+$c_sci_HashMap.prototype.$$anonfun$runWith$1__ps_PartialFunction__F1__O__Z = (function(action$1, x) {
+  return $f_s_PartialFunction__$$anonfun$runWith$1__ps_PartialFunction__F1__O__Z(this, action$1, x)
+});
+$c_sci_HashMap.prototype.$$anonfun$applyOrElse$1__psc_MapLike__O__F1__O = (function(x$8, default$1) {
+  return $f_sc_MapLike__$$anonfun$applyOrElse$1__psc_MapLike__O__F1__O(this, x$8, default$1)
+});
 $c_sci_HashMap.prototype.$$anonfun$addString$1__psc_MapLike__T2__T = (function(x0$1) {
   return $f_sc_MapLike__$$anonfun$addString$1__psc_MapLike__T2__T(this, x0$1)
 });
@@ -32967,6 +33923,9 @@ $c_sci_HashMap.prototype.$$anonfun$filterImpl$1__psc_TraversableLike__F1__Z__scm
 });
 $c_sci_HashMap.prototype.$$anonfun$grouped$1__psc_IterableLike__sc_Seq__O = (function(xs) {
   return $f_sc_IterableLike__$$anonfun$grouped$1__psc_IterableLike__sc_Seq__O(this, xs)
+});
+$c_sci_HashMap.prototype.$$anonfun$collect$1__psc_TraversableLike__scm_Builder__O__scm_Builder = (function(b$4, x$1) {
+  return $f_sc_TraversableLike__$$anonfun$collect$1__psc_TraversableLike__scm_Builder__O__scm_Builder(this, b$4, x$1)
 });
 $c_sci_HashMap.prototype.$$anonfun$equals$1__psc_GenMapLike__sc_GenMap__T2__Z = (function(x2$1, x0$1) {
   return $f_sc_GenMapLike__$$anonfun$equals$1__psc_GenMapLike__sc_GenMap__T2__Z(this, x2$1, x0$1)
@@ -33081,9 +34040,6 @@ $c_sci_HashSet$HashSet1.prototype.$$anonfun$foldLeft$1__psc_TraversableOnce__F2_
 });
 $c_sci_HashSet$HashSet1.prototype.liftedTree1$1__psc_GenSetLike__sc_GenSet__Z = (function(x2$1) {
   return $f_sc_GenSetLike__liftedTree1$1__psc_GenSetLike__sc_GenSet__Z(this, x2$1)
-});
-$c_sci_HashSet$HashSet1.prototype.$$anonfun$size$1__psc_TraversableOnce__sr_IntRef__O__V = (function(result$1, x) {
-  $f_sc_TraversableOnce__$$anonfun$size$1__psc_TraversableOnce__sr_IntRef__O__V(this, result$1, x)
 });
 function $is_sci_HashSet$HashSet1(obj) {
   return (!(!((obj && obj.$classData) && obj.$classData.ancestors.sci_HashSet$HashSet1)))
@@ -33219,9 +34175,6 @@ $c_sci_HashSet$HashSetCollision1.prototype.$$anonfun$foldLeft$1__psc_Traversable
 $c_sci_HashSet$HashSetCollision1.prototype.liftedTree1$1__psc_GenSetLike__sc_GenSet__Z = (function(x2$1) {
   return $f_sc_GenSetLike__liftedTree1$1__psc_GenSetLike__sc_GenSet__Z(this, x2$1)
 });
-$c_sci_HashSet$HashSetCollision1.prototype.$$anonfun$size$1__psc_TraversableOnce__sr_IntRef__O__V = (function(result$1, x) {
-  $f_sc_TraversableOnce__$$anonfun$size$1__psc_TraversableOnce__sr_IntRef__O__V(this, result$1, x)
-});
 var $d_sci_HashSet$HashSetCollision1 = new $TypeData().initClass({
   sci_HashSet$HashSetCollision1: 0
 }, false, "scala.collection.immutable.HashSet$HashSetCollision1", {
@@ -33306,6 +34259,12 @@ $c_sci_ListMap$EmptyListMap$.prototype.$$anonfun$sum$1__psc_TraversableOnce__s_m
 $c_sci_ListMap$EmptyListMap$.prototype.$$anonfun$foldLeft$1__psc_TraversableOnce__F2__sr_ObjectRef__O__V = (function(op$3, result$2, x) {
   $f_sc_TraversableOnce__$$anonfun$foldLeft$1__psc_TraversableOnce__F2__sr_ObjectRef__O__V(this, op$3, result$2, x)
 });
+$c_sci_ListMap$EmptyListMap$.prototype.$$anonfun$runWith$1__ps_PartialFunction__F1__O__Z = (function(action$1, x) {
+  return $f_s_PartialFunction__$$anonfun$runWith$1__ps_PartialFunction__F1__O__Z(this, action$1, x)
+});
+$c_sci_ListMap$EmptyListMap$.prototype.$$anonfun$applyOrElse$1__psc_MapLike__O__F1__O = (function(x$8, default$1) {
+  return $f_sc_MapLike__$$anonfun$applyOrElse$1__psc_MapLike__O__F1__O(this, x$8, default$1)
+});
 $c_sci_ListMap$EmptyListMap$.prototype.$$anonfun$addString$1__psc_MapLike__T2__T = (function(x0$1) {
   return $f_sc_MapLike__$$anonfun$addString$1__psc_MapLike__T2__T(this, x0$1)
 });
@@ -33314,6 +34273,9 @@ $c_sci_ListMap$EmptyListMap$.prototype.$$anonfun$filterImpl$1__psc_TraversableLi
 });
 $c_sci_ListMap$EmptyListMap$.prototype.$$anonfun$grouped$1__psc_IterableLike__sc_Seq__O = (function(xs) {
   return $f_sc_IterableLike__$$anonfun$grouped$1__psc_IterableLike__sc_Seq__O(this, xs)
+});
+$c_sci_ListMap$EmptyListMap$.prototype.$$anonfun$collect$1__psc_TraversableLike__scm_Builder__O__scm_Builder = (function(b$4, x$1) {
+  return $f_sc_TraversableLike__$$anonfun$collect$1__psc_TraversableLike__scm_Builder__O__scm_Builder(this, b$4, x$1)
 });
 $c_sci_ListMap$EmptyListMap$.prototype.$$anonfun$equals$1__psc_GenMapLike__sc_GenMap__T2__Z = (function(x2$1, x0$1) {
   return $f_sc_GenMapLike__$$anonfun$equals$1__psc_GenMapLike__sc_GenMap__T2__Z(this, x2$1, x0$1)
@@ -33567,6 +34529,12 @@ $c_sci_ListMap$Node.prototype.$$anonfun$sum$1__psc_TraversableOnce__s_math_Numer
 $c_sci_ListMap$Node.prototype.$$anonfun$foldLeft$1__psc_TraversableOnce__F2__sr_ObjectRef__O__V = (function(op$3, result$2, x) {
   $f_sc_TraversableOnce__$$anonfun$foldLeft$1__psc_TraversableOnce__F2__sr_ObjectRef__O__V(this, op$3, result$2, x)
 });
+$c_sci_ListMap$Node.prototype.$$anonfun$runWith$1__ps_PartialFunction__F1__O__Z = (function(action$1, x) {
+  return $f_s_PartialFunction__$$anonfun$runWith$1__ps_PartialFunction__F1__O__Z(this, action$1, x)
+});
+$c_sci_ListMap$Node.prototype.$$anonfun$applyOrElse$1__psc_MapLike__O__F1__O = (function(x$8, default$1) {
+  return $f_sc_MapLike__$$anonfun$applyOrElse$1__psc_MapLike__O__F1__O(this, x$8, default$1)
+});
 $c_sci_ListMap$Node.prototype.$$anonfun$addString$1__psc_MapLike__T2__T = (function(x0$1) {
   return $f_sc_MapLike__$$anonfun$addString$1__psc_MapLike__T2__T(this, x0$1)
 });
@@ -33575,6 +34543,9 @@ $c_sci_ListMap$Node.prototype.$$anonfun$filterImpl$1__psc_TraversableLike__F1__Z
 });
 $c_sci_ListMap$Node.prototype.$$anonfun$grouped$1__psc_IterableLike__sc_Seq__O = (function(xs) {
   return $f_sc_IterableLike__$$anonfun$grouped$1__psc_IterableLike__sc_Seq__O(this, xs)
+});
+$c_sci_ListMap$Node.prototype.$$anonfun$collect$1__psc_TraversableLike__scm_Builder__O__scm_Builder = (function(b$4, x$1) {
+  return $f_sc_TraversableLike__$$anonfun$collect$1__psc_TraversableLike__scm_Builder__O__scm_Builder(this, b$4, x$1)
 });
 $c_sci_ListMap$Node.prototype.$$anonfun$equals$1__psc_GenMapLike__sc_GenMap__T2__Z = (function(x2$1, x0$1) {
   return $f_sc_GenMapLike__$$anonfun$equals$1__psc_GenMapLike__sc_GenMap__T2__Z(this, x2$1, x0$1)
@@ -33836,6 +34807,9 @@ $c_sci_Range.prototype.apply$mcII$sp__I__I = (function(idx) {
     return ((this.start__I() + $imul(this.step__I(), idx)) | 0)
   }
 });
+$c_sci_Range.prototype.isDefinedAt__O__Z = (function(x) {
+  return this.isDefinedAt__I__Z($uI(x))
+});
 $c_sci_Range.prototype.thisCollection__sc_Traversable = (function() {
   return this.thisCollection__sc_IndexedSeq()
 });
@@ -33874,6 +34848,9 @@ $c_sci_Range.prototype.apply__O__O = (function(v1) {
 });
 $c_sci_Range.prototype.apply__I__O = (function(idx) {
   return this.apply__I__I(idx)
+});
+$c_sci_Range.prototype.head__O = (function() {
+  return this.head__I()
 });
 $c_sci_Range.prototype.init___I__I__I = (function(start, end, step) {
   this.start$4 = start;
@@ -33940,6 +34917,9 @@ $c_sci_Range.prototype.$$anonfun$sum$1__psc_TraversableOnce__s_math_Numeric__O__
 $c_sci_Range.prototype.$$anonfun$foldLeft$1__psc_TraversableOnce__F2__sr_ObjectRef__O__V = (function(op$3, result$2, x) {
   $f_sc_TraversableOnce__$$anonfun$foldLeft$1__psc_TraversableOnce__F2__sr_ObjectRef__O__V(this, op$3, result$2, x)
 });
+$c_sci_Range.prototype.$$anonfun$runWith$1__ps_PartialFunction__F1__O__Z = (function(action$1, x) {
+  return $f_s_PartialFunction__$$anonfun$runWith$1__ps_PartialFunction__F1__O__Z(this, action$1, x)
+});
 $c_sci_Range.prototype.$$anonfun$filterImpl$1__psc_TraversableLike__F1__Z__scm_Builder__O__O = (function(p$8, isFlipped$1, b$3, x) {
   return $f_sc_TraversableLike__$$anonfun$filterImpl$1__psc_TraversableLike__F1__Z__scm_Builder__O__O(this, p$8, isFlipped$1, b$3, x)
 });
@@ -33948,6 +34928,9 @@ $c_sci_Range.prototype.$$anonfun$indexOf$1__psc_GenSeqLike__O__O__Z = (function(
 });
 $c_sci_Range.prototype.$$anonfun$grouped$1__psc_IterableLike__sc_Seq__O = (function(xs) {
   return $f_sc_IterableLike__$$anonfun$grouped$1__psc_IterableLike__sc_Seq__O(this, xs)
+});
+$c_sci_Range.prototype.$$anonfun$collect$1__psc_TraversableLike__scm_Builder__O__scm_Builder = (function(b$4, x$1) {
+  return $f_sc_TraversableLike__$$anonfun$collect$1__psc_TraversableLike__scm_Builder__O__scm_Builder(this, b$4, x$1)
 });
 $c_sci_Range.prototype.$$anonfun$size$1__psc_TraversableOnce__sr_IntRef__O__V = (function(result$1, x) {
   $f_sc_TraversableOnce__$$anonfun$size$1__psc_TraversableOnce__sr_IntRef__O__V(this, result$1, x)
@@ -34036,6 +35019,9 @@ $c_sci_Stream.prototype.sameElements__sc_GenIterable__Z = (function(that) {
 });
 $c_sci_Stream.prototype.lengthCompare__I__I = (function(len) {
   return $f_sc_LinearSeqOptimized__lengthCompare__I__I(this, len)
+});
+$c_sci_Stream.prototype.isDefinedAt__I__Z = (function(x) {
+  return $f_sc_LinearSeqOptimized__isDefinedAt__I__Z(this, x)
 });
 $c_sci_Stream.prototype.indexWhere__F1__I__I = (function(p, from) {
   return $f_sc_LinearSeqOptimized__indexWhere__F1__I__I(this, p, from)
@@ -34315,6 +35301,9 @@ $c_sci_Stream.prototype.seq__sc_Seq = (function() {
 $c_sci_Stream.prototype.seq__sc_LinearSeq = (function() {
   return this.seq__sci_LinearSeq()
 });
+$c_sci_Stream.prototype.isDefinedAt__O__Z = (function(x) {
+  return this.isDefinedAt__I__Z($uI(x))
+});
 $c_sci_Stream.prototype.apply__O__O = (function(v1) {
   return this.apply__I__O($uI(v1))
 });
@@ -34554,6 +35543,9 @@ $c_sci_HashMap$HashMap1.prototype.size__I = (function() {
 $c_sci_HashMap$HashMap1.prototype.get0__O__I__I__s_Option = (function(key, hash, level) {
   return (((hash === this.hash__I()) && $m_sr_BoxesRunTime$().equals__O__O__Z(key, this.key__O())) ? new $c_s_Some().init___O(this.value__O()) : $m_s_None$())
 });
+$c_sci_HashMap$HashMap1.prototype.contains0__O__I__I__Z = (function(key, hash, level) {
+  return ((hash === this.hash__I()) && $m_sr_BoxesRunTime$().equals__O__O__Z(key, this.key__O()))
+});
 $c_sci_HashMap$HashMap1.prototype.updated0__O__I__I__O__T2__sci_HashMap$Merger__sci_HashMap = (function(key, hash, level, value, kv, merger) {
   if (((hash === this.hash__I()) && $m_sr_BoxesRunTime$().equals__O__O__Z(key, this.key__O()))) {
     if ((merger === null)) {
@@ -34670,6 +35662,9 @@ $c_sci_HashMap$HashMapCollision1.prototype.size__I = (function() {
 });
 $c_sci_HashMap$HashMapCollision1.prototype.get0__O__I__I__s_Option = (function(key, hash, level) {
   return ((hash === this.hash__I()) ? this.kvs__sci_ListMap().get__O__s_Option(key) : $m_s_None$())
+});
+$c_sci_HashMap$HashMapCollision1.prototype.contains0__O__I__I__Z = (function(key, hash, level) {
+  return ((hash === this.hash__I()) && this.kvs__sci_ListMap().contains__O__Z(key))
 });
 $c_sci_HashMap$HashMapCollision1.prototype.updated0__O__I__I__O__T2__sci_HashMap$Merger__sci_HashMap = (function(key, hash, level, value, kv, merger) {
   if ((hash === this.hash__I())) {
@@ -34821,6 +35816,20 @@ $c_sci_HashMap$HashTrieMap.prototype.get0__O__I__I__s_Option = (function(key, ha
       return this.elems__Asci_HashMap().get(offset).get0__O__I__I__s_Option(key, hash, ((level + 5) | 0))
     } else {
       return $m_s_None$()
+    }
+  }
+});
+$c_sci_HashMap$HashTrieMap.prototype.contains0__O__I__I__Z = (function(key, hash, level) {
+  var index = (((hash >>> level) | 0) & 31);
+  if ((this.bitmap__I() === (-1))) {
+    return this.elems__Asci_HashMap().get(index).contains0__O__I__I__Z(key, hash, ((level + 5) | 0))
+  } else {
+    var mask = (1 << index);
+    if (((this.bitmap__I() & mask) !== 0)) {
+      var offset = $m_jl_Integer$().bitCount__I__I((this.bitmap__I() & ((mask - 1) | 0)));
+      return this.elems__Asci_HashMap().get(offset).contains0__O__I__I__Z(key, hash, ((level + 5) | 0))
+    } else {
+      return false
     }
   }
 });
@@ -35018,6 +36027,9 @@ $c_sci_List.prototype.sameElements__sc_GenIterable__Z = (function(that) {
 $c_sci_List.prototype.lengthCompare__I__I = (function(len) {
   return $f_sc_LinearSeqOptimized__lengthCompare__I__I(this, len)
 });
+$c_sci_List.prototype.isDefinedAt__I__Z = (function(x) {
+  return $f_sc_LinearSeqOptimized__isDefinedAt__I__Z(this, x)
+});
 $c_sci_List.prototype.indexWhere__F1__I__I = (function(p, from) {
   return $f_sc_LinearSeqOptimized__indexWhere__F1__I__I(this, p, from)
 });
@@ -35110,6 +36122,39 @@ $c_sci_List.prototype.map__F1__scg_CanBuildFrom__O = (function(f, bf) {
     return $f_sc_TraversableLike__map__F1__scg_CanBuildFrom__O(this, f, bf)
   }
 });
+$c_sci_List.prototype.collect__s_PartialFunction__scg_CanBuildFrom__O = (function(pf, bf) {
+  if ((bf === $m_sci_List$().ReusableCBF__scg_GenTraversableFactory$GenericCanBuildFrom())) {
+    if ((this === $m_sci_Nil$())) {
+      return $m_sci_Nil$()
+    } else {
+      var rest = this;
+      var h = null;
+      do {
+        var x = pf.applyOrElse__O__F1__O(rest.head__O(), $m_sci_List$().partialNotApplied__F1());
+        if ((x !== $m_sci_List$().partialNotApplied__F1())) {
+          h = new $c_sci_$colon$colon().init___O__sci_List(x, $m_sci_Nil$())
+        };
+        rest = $as_sci_List(rest.tail__O());
+        if ((rest === $m_sci_Nil$())) {
+          return ((h === null) ? $m_sci_Nil$() : h)
+        }
+      } while ((h === null));
+      var t = h;
+      do {
+        var x$2 = pf.applyOrElse__O__F1__O(rest.head__O(), $m_sci_List$().partialNotApplied__F1());
+        if ((x$2 !== $m_sci_List$().partialNotApplied__F1())) {
+          var nx = new $c_sci_$colon$colon().init___O__sci_List(x$2, $m_sci_Nil$());
+          t.tl$und$eq__sci_List__V(nx);
+          t = nx
+        };
+        rest = $as_sci_List(rest.tail__O())
+      } while ((rest !== $m_sci_Nil$()));
+      return h
+    }
+  } else {
+    return $f_sc_TraversableLike__collect__s_PartialFunction__scg_CanBuildFrom__O(this, pf, bf)
+  }
+});
 $c_sci_List.prototype.foreach__F1__V = (function(f) {
   var these = this;
   while ((!these.isEmpty__Z())) {
@@ -35157,6 +36202,9 @@ $c_sci_List.prototype.seq__sc_Seq = (function() {
 });
 $c_sci_List.prototype.seq__sc_LinearSeq = (function() {
   return this.seq__sci_LinearSeq()
+});
+$c_sci_List.prototype.isDefinedAt__O__Z = (function(x) {
+  return this.isDefinedAt__I__Z($uI(x))
 });
 $c_sci_List.prototype.apply__O__O = (function(v1) {
   return this.apply__I__O($uI(v1))
@@ -35388,11 +36436,14 @@ $c_sci_Stream$Cons.prototype.$$anonfun$map$1__psc_TraversableLike__F1__scm_Build
 $c_sci_Stream$Cons.prototype.$$anonfun$addString$1__psc_TraversableOnce__scm_StringBuilder__T__sr_BooleanRef__O__O = (function(b$1, sep$1, first$4, x) {
   return $f_sc_TraversableOnce__$$anonfun$addString$1__psc_TraversableOnce__scm_StringBuilder__T__sr_BooleanRef__O__O(this, b$1, sep$1, first$4, x)
 });
+$c_sci_Stream$Cons.prototype.$$anonfun$foldLeft$1__psc_TraversableOnce__F2__sr_ObjectRef__O__V = (function(op$3, result$2, x) {
+  $f_sc_TraversableOnce__$$anonfun$foldLeft$1__psc_TraversableOnce__F2__sr_ObjectRef__O__V(this, op$3, result$2, x)
+});
 $c_sci_Stream$Cons.prototype.$$anonfun$sum$1__psc_TraversableOnce__s_math_Numeric__O__O__O = (function(num$1, x, y) {
   return $f_sc_TraversableOnce__$$anonfun$sum$1__psc_TraversableOnce__s_math_Numeric__O__O__O(this, num$1, x, y)
 });
-$c_sci_Stream$Cons.prototype.$$anonfun$foldLeft$1__psc_TraversableOnce__F2__sr_ObjectRef__O__V = (function(op$3, result$2, x) {
-  $f_sc_TraversableOnce__$$anonfun$foldLeft$1__psc_TraversableOnce__F2__sr_ObjectRef__O__V(this, op$3, result$2, x)
+$c_sci_Stream$Cons.prototype.$$anonfun$runWith$1__ps_PartialFunction__F1__O__Z = (function(action$1, x) {
+  return $f_s_PartialFunction__$$anonfun$runWith$1__ps_PartialFunction__F1__O__Z(this, action$1, x)
 });
 $c_sci_Stream$Cons.prototype.$$anonfun$filterImpl$1__psc_TraversableLike__F1__Z__scm_Builder__O__O = (function(p$8, isFlipped$1, b$3, x) {
   return $f_sc_TraversableLike__$$anonfun$filterImpl$1__psc_TraversableLike__F1__Z__scm_Builder__O__O(this, p$8, isFlipped$1, b$3, x)
@@ -35402,6 +36453,9 @@ $c_sci_Stream$Cons.prototype.$$anonfun$indexOf$1__psc_GenSeqLike__O__O__Z = (fun
 });
 $c_sci_Stream$Cons.prototype.$$anonfun$grouped$1__psc_IterableLike__sc_Seq__O = (function(xs) {
   return $f_sc_IterableLike__$$anonfun$grouped$1__psc_IterableLike__sc_Seq__O(this, xs)
+});
+$c_sci_Stream$Cons.prototype.$$anonfun$collect$1__psc_TraversableLike__scm_Builder__O__scm_Builder = (function(b$4, x$1) {
+  return $f_sc_TraversableLike__$$anonfun$collect$1__psc_TraversableLike__scm_Builder__O__scm_Builder(this, b$4, x$1)
 });
 $c_sci_Stream$Cons.prototype.$$anonfun$size$1__psc_TraversableOnce__sr_IntRef__O__V = (function(result$1, x) {
   $f_sc_TraversableOnce__$$anonfun$size$1__psc_TraversableOnce__sr_IntRef__O__V(this, result$1, x)
@@ -35521,11 +36575,14 @@ $c_sci_Stream$Empty$.prototype.$$anonfun$map$1__psc_TraversableLike__F1__scm_Bui
 $c_sci_Stream$Empty$.prototype.$$anonfun$addString$1__psc_TraversableOnce__scm_StringBuilder__T__sr_BooleanRef__O__O = (function(b$1, sep$1, first$4, x) {
   return $f_sc_TraversableOnce__$$anonfun$addString$1__psc_TraversableOnce__scm_StringBuilder__T__sr_BooleanRef__O__O(this, b$1, sep$1, first$4, x)
 });
+$c_sci_Stream$Empty$.prototype.$$anonfun$foldLeft$1__psc_TraversableOnce__F2__sr_ObjectRef__O__V = (function(op$3, result$2, x) {
+  $f_sc_TraversableOnce__$$anonfun$foldLeft$1__psc_TraversableOnce__F2__sr_ObjectRef__O__V(this, op$3, result$2, x)
+});
 $c_sci_Stream$Empty$.prototype.$$anonfun$sum$1__psc_TraversableOnce__s_math_Numeric__O__O__O = (function(num$1, x, y) {
   return $f_sc_TraversableOnce__$$anonfun$sum$1__psc_TraversableOnce__s_math_Numeric__O__O__O(this, num$1, x, y)
 });
-$c_sci_Stream$Empty$.prototype.$$anonfun$foldLeft$1__psc_TraversableOnce__F2__sr_ObjectRef__O__V = (function(op$3, result$2, x) {
-  $f_sc_TraversableOnce__$$anonfun$foldLeft$1__psc_TraversableOnce__F2__sr_ObjectRef__O__V(this, op$3, result$2, x)
+$c_sci_Stream$Empty$.prototype.$$anonfun$runWith$1__ps_PartialFunction__F1__O__Z = (function(action$1, x) {
+  return $f_s_PartialFunction__$$anonfun$runWith$1__ps_PartialFunction__F1__O__Z(this, action$1, x)
 });
 $c_sci_Stream$Empty$.prototype.$$anonfun$filterImpl$1__psc_TraversableLike__F1__Z__scm_Builder__O__O = (function(p$8, isFlipped$1, b$3, x) {
   return $f_sc_TraversableLike__$$anonfun$filterImpl$1__psc_TraversableLike__F1__Z__scm_Builder__O__O(this, p$8, isFlipped$1, b$3, x)
@@ -35535,6 +36592,9 @@ $c_sci_Stream$Empty$.prototype.$$anonfun$indexOf$1__psc_GenSeqLike__O__O__Z = (f
 });
 $c_sci_Stream$Empty$.prototype.$$anonfun$grouped$1__psc_IterableLike__sc_Seq__O = (function(xs) {
   return $f_sc_IterableLike__$$anonfun$grouped$1__psc_IterableLike__sc_Seq__O(this, xs)
+});
+$c_sci_Stream$Empty$.prototype.$$anonfun$collect$1__psc_TraversableLike__scm_Builder__O__scm_Builder = (function(b$4, x$1) {
+  return $f_sc_TraversableLike__$$anonfun$collect$1__psc_TraversableLike__scm_Builder__O__scm_Builder(this, b$4, x$1)
 });
 $c_sci_Stream$Empty$.prototype.$$anonfun$size$1__psc_TraversableOnce__sr_IntRef__O__V = (function(result$1, x) {
   $f_sc_TraversableOnce__$$anonfun$size$1__psc_TraversableOnce__sr_IntRef__O__V(this, result$1, x)
@@ -35779,6 +36839,12 @@ $c_sci_Vector.prototype.drop__I__sci_Vector = (function(n) {
 });
 $c_sci_Vector.prototype.takeRight__I__sci_Vector = (function(n) {
   return ((n <= 0) ? $m_sci_Vector$().empty__sci_Vector() : ((((this.endIndex__I() - n) | 0) > this.startIndex__I()) ? this.dropFront0__p4__I__sci_Vector(((this.endIndex__I() - n) | 0)) : this))
+});
+$c_sci_Vector.prototype.head__O = (function() {
+  if (this.isEmpty__Z()) {
+    throw new $c_jl_UnsupportedOperationException().init___T("empty.head")
+  };
+  return this.apply__I__O(0)
 });
 $c_sci_Vector.prototype.tail__sci_Vector = (function() {
   if (this.isEmpty__Z()) {
@@ -36109,6 +37175,9 @@ $c_sci_Vector.prototype.dropFront0__p4__I__sci_Vector = (function(cutIndex) {
   s.cleanLeftEdge__p4__I__V(((cutIndex - shift) | 0));
   return s
 });
+$c_sci_Vector.prototype.isDefinedAt__O__Z = (function(x) {
+  return this.isDefinedAt__I__Z($uI(x))
+});
 $c_sci_Vector.prototype.thisCollection__sc_Traversable = (function() {
   return this.thisCollection__sc_IndexedSeq()
 });
@@ -36188,6 +37257,9 @@ $c_sci_Vector.prototype.$$anonfun$sum$1__psc_TraversableOnce__s_math_Numeric__O_
 $c_sci_Vector.prototype.$$anonfun$foldLeft$1__psc_TraversableOnce__F2__sr_ObjectRef__O__V = (function(op$3, result$2, x) {
   $f_sc_TraversableOnce__$$anonfun$foldLeft$1__psc_TraversableOnce__F2__sr_ObjectRef__O__V(this, op$3, result$2, x)
 });
+$c_sci_Vector.prototype.$$anonfun$runWith$1__ps_PartialFunction__F1__O__Z = (function(action$1, x) {
+  return $f_s_PartialFunction__$$anonfun$runWith$1__ps_PartialFunction__F1__O__Z(this, action$1, x)
+});
 $c_sci_Vector.prototype.$$anonfun$filterImpl$1__psc_TraversableLike__F1__Z__scm_Builder__O__O = (function(p$8, isFlipped$1, b$3, x) {
   return $f_sc_TraversableLike__$$anonfun$filterImpl$1__psc_TraversableLike__F1__Z__scm_Builder__O__O(this, p$8, isFlipped$1, b$3, x)
 });
@@ -36196,6 +37268,9 @@ $c_sci_Vector.prototype.$$anonfun$indexOf$1__psc_GenSeqLike__O__O__Z = (function
 });
 $c_sci_Vector.prototype.$$anonfun$grouped$1__psc_IterableLike__sc_Seq__O = (function(xs) {
   return $f_sc_IterableLike__$$anonfun$grouped$1__psc_IterableLike__sc_Seq__O(this, xs)
+});
+$c_sci_Vector.prototype.$$anonfun$collect$1__psc_TraversableLike__scm_Builder__O__scm_Builder = (function(b$4, x$1) {
+  return $f_sc_TraversableLike__$$anonfun$collect$1__psc_TraversableLike__scm_Builder__O__scm_Builder(this, b$4, x$1)
 });
 $c_sci_Vector.prototype.$$anonfun$size$1__psc_TraversableOnce__sr_IntRef__O__V = (function(result$1, x) {
   $f_sc_TraversableOnce__$$anonfun$size$1__psc_TraversableOnce__sr_IntRef__O__V(this, result$1, x)
@@ -36296,6 +37371,9 @@ $c_sci_WrappedString.prototype.foreach__F1__V = (function(f) {
 $c_sci_WrappedString.prototype.foldLeft__O__F2__O = (function(z, op) {
   return $f_sc_IndexedSeqOptimized__foldLeft__O__F2__O(this, z, op)
 });
+$c_sci_WrappedString.prototype.head__O = (function() {
+  return $f_sc_IndexedSeqOptimized__head__O(this)
+});
 $c_sci_WrappedString.prototype.tail__O = (function() {
   return $f_sc_IndexedSeqOptimized__tail__O(this)
 });
@@ -36360,6 +37438,9 @@ $c_sci_WrappedString.prototype.length__I = (function() {
 });
 $c_sci_WrappedString.prototype.toString__T = (function() {
   return this.self__T()
+});
+$c_sci_WrappedString.prototype.isDefinedAt__O__Z = (function(x) {
+  return this.isDefinedAt__I__Z($uI(x))
 });
 $c_sci_WrappedString.prototype.seq__sc_TraversableOnce = (function() {
   return this.seq__sci_IndexedSeq()
@@ -36432,6 +37513,9 @@ $c_sci_WrappedString.prototype.$$anonfun$sum$1__psc_TraversableOnce__s_math_Nume
 $c_sci_WrappedString.prototype.$$anonfun$foldLeft$1__psc_TraversableOnce__F2__sr_ObjectRef__O__V = (function(op$3, result$2, x) {
   $f_sc_TraversableOnce__$$anonfun$foldLeft$1__psc_TraversableOnce__F2__sr_ObjectRef__O__V(this, op$3, result$2, x)
 });
+$c_sci_WrappedString.prototype.$$anonfun$runWith$1__ps_PartialFunction__F1__O__Z = (function(action$1, x) {
+  return $f_s_PartialFunction__$$anonfun$runWith$1__ps_PartialFunction__F1__O__Z(this, action$1, x)
+});
 $c_sci_WrappedString.prototype.$$anonfun$filterImpl$1__psc_TraversableLike__F1__Z__scm_Builder__O__O = (function(p$8, isFlipped$1, b$3, x) {
   return $f_sc_TraversableLike__$$anonfun$filterImpl$1__psc_TraversableLike__F1__Z__scm_Builder__O__O(this, p$8, isFlipped$1, b$3, x)
 });
@@ -36440,6 +37524,9 @@ $c_sci_WrappedString.prototype.$$anonfun$indexOf$1__psc_GenSeqLike__O__O__Z = (f
 });
 $c_sci_WrappedString.prototype.$$anonfun$grouped$1__psc_IterableLike__sc_Seq__O = (function(xs) {
   return $f_sc_IterableLike__$$anonfun$grouped$1__psc_IterableLike__sc_Seq__O(this, xs)
+});
+$c_sci_WrappedString.prototype.$$anonfun$collect$1__psc_TraversableLike__scm_Builder__O__scm_Builder = (function(b$4, x$1) {
+  return $f_sc_TraversableLike__$$anonfun$collect$1__psc_TraversableLike__scm_Builder__O__scm_Builder(this, b$4, x$1)
 });
 $c_sci_WrappedString.prototype.$$anonfun$format$1__psci_StringLike__O__O = (function(arg) {
   return $f_sci_StringLike__$$anonfun$format$1__psci_StringLike__O__O(this, arg)
@@ -36605,6 +37692,9 @@ $c_sci_$colon$colon.prototype.$$anonfun$sum$1__psc_TraversableOnce__s_math_Numer
 $c_sci_$colon$colon.prototype.$$anonfun$foldLeft$1__psc_TraversableOnce__F2__sr_ObjectRef__O__V = (function(op$3, result$2, x) {
   $f_sc_TraversableOnce__$$anonfun$foldLeft$1__psc_TraversableOnce__F2__sr_ObjectRef__O__V(this, op$3, result$2, x)
 });
+$c_sci_$colon$colon.prototype.$$anonfun$runWith$1__ps_PartialFunction__F1__O__Z = (function(action$1, x) {
+  return $f_s_PartialFunction__$$anonfun$runWith$1__ps_PartialFunction__F1__O__Z(this, action$1, x)
+});
 $c_sci_$colon$colon.prototype.$$anonfun$filterImpl$1__psc_TraversableLike__F1__Z__scm_Builder__O__O = (function(p$8, isFlipped$1, b$3, x) {
   return $f_sc_TraversableLike__$$anonfun$filterImpl$1__psc_TraversableLike__F1__Z__scm_Builder__O__O(this, p$8, isFlipped$1, b$3, x)
 });
@@ -36613,6 +37703,9 @@ $c_sci_$colon$colon.prototype.$$anonfun$indexOf$1__psc_GenSeqLike__O__O__Z = (fu
 });
 $c_sci_$colon$colon.prototype.$$anonfun$grouped$1__psc_IterableLike__sc_Seq__O = (function(xs) {
   return $f_sc_IterableLike__$$anonfun$grouped$1__psc_IterableLike__sc_Seq__O(this, xs)
+});
+$c_sci_$colon$colon.prototype.$$anonfun$collect$1__psc_TraversableLike__scm_Builder__O__scm_Builder = (function(b$4, x$1) {
+  return $f_sc_TraversableLike__$$anonfun$collect$1__psc_TraversableLike__scm_Builder__O__scm_Builder(this, b$4, x$1)
 });
 $c_sci_$colon$colon.prototype.$$anonfun$size$1__psc_TraversableOnce__sr_IntRef__O__V = (function(result$1, x) {
   $f_sc_TraversableOnce__$$anonfun$size$1__psc_TraversableOnce__sr_IntRef__O__V(this, result$1, x)
@@ -36758,6 +37851,9 @@ $c_sci_Nil$.prototype.$$anonfun$sum$1__psc_TraversableOnce__s_math_Numeric__O__O
 $c_sci_Nil$.prototype.$$anonfun$foldLeft$1__psc_TraversableOnce__F2__sr_ObjectRef__O__V = (function(op$3, result$2, x) {
   $f_sc_TraversableOnce__$$anonfun$foldLeft$1__psc_TraversableOnce__F2__sr_ObjectRef__O__V(this, op$3, result$2, x)
 });
+$c_sci_Nil$.prototype.$$anonfun$runWith$1__ps_PartialFunction__F1__O__Z = (function(action$1, x) {
+  return $f_s_PartialFunction__$$anonfun$runWith$1__ps_PartialFunction__F1__O__Z(this, action$1, x)
+});
 $c_sci_Nil$.prototype.$$anonfun$filterImpl$1__psc_TraversableLike__F1__Z__scm_Builder__O__O = (function(p$8, isFlipped$1, b$3, x) {
   return $f_sc_TraversableLike__$$anonfun$filterImpl$1__psc_TraversableLike__F1__Z__scm_Builder__O__O(this, p$8, isFlipped$1, b$3, x)
 });
@@ -36766,6 +37862,9 @@ $c_sci_Nil$.prototype.$$anonfun$indexOf$1__psc_GenSeqLike__O__O__Z = (function(e
 });
 $c_sci_Nil$.prototype.$$anonfun$grouped$1__psc_IterableLike__sc_Seq__O = (function(xs) {
   return $f_sc_IterableLike__$$anonfun$grouped$1__psc_IterableLike__sc_Seq__O(this, xs)
+});
+$c_sci_Nil$.prototype.$$anonfun$collect$1__psc_TraversableLike__scm_Builder__O__scm_Builder = (function(b$4, x$1) {
+  return $f_sc_TraversableLike__$$anonfun$collect$1__psc_TraversableLike__scm_Builder__O__scm_Builder(this, b$4, x$1)
 });
 $c_sci_Nil$.prototype.$$anonfun$size$1__psc_TraversableOnce__sr_IntRef__O__V = (function(result$1, x) {
   $f_sc_TraversableOnce__$$anonfun$size$1__psc_TraversableOnce__sr_IntRef__O__V(this, result$1, x)
@@ -36890,6 +37989,9 @@ $c_scm_LinkedList.prototype.next$und$eq__scm_LinkedList__V = (function(x$1) {
 $c_scm_LinkedList.prototype.companion__scg_GenericCompanion = (function() {
   return $m_scm_LinkedList$()
 });
+$c_scm_LinkedList.prototype.isDefinedAt__O__Z = (function(x) {
+  return this.isDefinedAt__I__Z($uI(x))
+});
 $c_scm_LinkedList.prototype.thisCollection__sc_Traversable = (function() {
   return this.thisCollection__sc_LinearSeq()
 });
@@ -36976,6 +38078,9 @@ $c_scm_LinkedList.prototype.$$anonfun$sum$1__psc_TraversableOnce__s_math_Numeric
 $c_scm_LinkedList.prototype.$$anonfun$foldLeft$1__psc_TraversableOnce__F2__sr_ObjectRef__O__V = (function(op$3, result$2, x) {
   $f_sc_TraversableOnce__$$anonfun$foldLeft$1__psc_TraversableOnce__F2__sr_ObjectRef__O__V(this, op$3, result$2, x)
 });
+$c_scm_LinkedList.prototype.$$anonfun$runWith$1__ps_PartialFunction__F1__O__Z = (function(action$1, x) {
+  return $f_s_PartialFunction__$$anonfun$runWith$1__ps_PartialFunction__F1__O__Z(this, action$1, x)
+});
 $c_scm_LinkedList.prototype.$$anonfun$filterImpl$1__psc_TraversableLike__F1__Z__scm_Builder__O__O = (function(p$8, isFlipped$1, b$3, x) {
   return $f_sc_TraversableLike__$$anonfun$filterImpl$1__psc_TraversableLike__F1__Z__scm_Builder__O__O(this, p$8, isFlipped$1, b$3, x)
 });
@@ -36987,6 +38092,9 @@ $c_scm_LinkedList.prototype.$$anonfun$grouped$1__psc_IterableLike__sc_Seq__O = (
 });
 $c_scm_LinkedList.prototype.atLocation__pscm_LinkedListLike__I__F1__O = (function(n, f) {
   return $f_scm_LinkedListLike__atLocation__pscm_LinkedListLike__I__F1__O(this, n, f)
+});
+$c_scm_LinkedList.prototype.$$anonfun$collect$1__psc_TraversableLike__scm_Builder__O__scm_Builder = (function(b$4, x$1) {
+  return $f_sc_TraversableLike__$$anonfun$collect$1__psc_TraversableLike__scm_Builder__O__scm_Builder(this, b$4, x$1)
 });
 $c_scm_LinkedList.prototype.$$anonfun$size$1__psc_TraversableOnce__sr_IntRef__O__V = (function(result$1, x) {
   $f_sc_TraversableOnce__$$anonfun$size$1__psc_TraversableOnce__sr_IntRef__O__V(this, result$1, x)
@@ -37116,6 +38224,9 @@ $c_scm_WrappedArray.prototype.foldLeft__O__F2__O = (function(z, op) {
 $c_scm_WrappedArray.prototype.slice__I__I__O = (function(from, until) {
   return $f_sc_IndexedSeqOptimized__slice__I__I__O(this, from, until)
 });
+$c_scm_WrappedArray.prototype.head__O = (function() {
+  return $f_sc_IndexedSeqOptimized__head__O(this)
+});
 $c_scm_WrappedArray.prototype.tail__O = (function() {
   return $f_sc_IndexedSeqOptimized__tail__O(this)
 });
@@ -37170,6 +38281,9 @@ $c_scm_WrappedArray.prototype.stringPrefix__T = (function() {
 });
 $c_scm_WrappedArray.prototype.newBuilder__scm_Builder = (function() {
   return new $c_scm_WrappedArrayBuilder().init___s_reflect_ClassTag(this.elemTag__s_reflect_ClassTag())
+});
+$c_scm_WrappedArray.prototype.isDefinedAt__O__Z = (function(x) {
+  return this.isDefinedAt__I__Z($uI(x))
 });
 $c_scm_WrappedArray.prototype.seq__sc_TraversableOnce = (function() {
   return this.seq__scm_IndexedSeq()
@@ -37261,6 +38375,9 @@ $c_scm_MutableList.prototype.sameElements__sc_GenIterable__Z = (function(that) {
 });
 $c_scm_MutableList.prototype.lengthCompare__I__I = (function(len) {
   return $f_sc_LinearSeqOptimized__lengthCompare__I__I(this, len)
+});
+$c_scm_MutableList.prototype.isDefinedAt__I__Z = (function(x) {
+  return $f_sc_LinearSeqOptimized__isDefinedAt__I__Z(this, x)
 });
 $c_scm_MutableList.prototype.indexWhere__F1__I__I = (function(p, from) {
   return $f_sc_LinearSeqOptimized__indexWhere__F1__I__I(this, p, from)
@@ -37390,6 +38507,9 @@ $c_scm_MutableList.prototype.seq__scm_Seq = (function() {
 $c_scm_MutableList.prototype.seq__sc_LinearSeq = (function() {
   return this.seq__scm_LinearSeq()
 });
+$c_scm_MutableList.prototype.isDefinedAt__O__Z = (function(x) {
+  return this.isDefinedAt__I__Z($uI(x))
+});
 $c_scm_MutableList.prototype.drop__I__O = (function(n) {
   return this.drop__I__sc_LinearSeqOptimized(n)
 });
@@ -37454,6 +38574,9 @@ $c_scm_MutableList.prototype.$$anonfun$foldLeft$1__psc_TraversableOnce__F2__sr_O
 $c_scm_MutableList.prototype.$$anonfun$$plus$plus$eq$1__pscg_Growable__O__scg_Growable = (function(elem) {
   return $f_scg_Growable__$$anonfun$$plus$plus$eq$1__pscg_Growable__O__scg_Growable(this, elem)
 });
+$c_scm_MutableList.prototype.$$anonfun$runWith$1__ps_PartialFunction__F1__O__Z = (function(action$1, x) {
+  return $f_s_PartialFunction__$$anonfun$runWith$1__ps_PartialFunction__F1__O__Z(this, action$1, x)
+});
 $c_scm_MutableList.prototype.$$anonfun$filterImpl$1__psc_TraversableLike__F1__Z__scm_Builder__O__O = (function(p$8, isFlipped$1, b$3, x) {
   return $f_sc_TraversableLike__$$anonfun$filterImpl$1__psc_TraversableLike__F1__Z__scm_Builder__O__O(this, p$8, isFlipped$1, b$3, x)
 });
@@ -37462,6 +38585,9 @@ $c_scm_MutableList.prototype.$$anonfun$indexOf$1__psc_GenSeqLike__O__O__Z = (fun
 });
 $c_scm_MutableList.prototype.$$anonfun$grouped$1__psc_IterableLike__sc_Seq__O = (function(xs) {
   return $f_sc_IterableLike__$$anonfun$grouped$1__psc_IterableLike__sc_Seq__O(this, xs)
+});
+$c_scm_MutableList.prototype.$$anonfun$collect$1__psc_TraversableLike__scm_Builder__O__scm_Builder = (function(b$4, x$1) {
+  return $f_sc_TraversableLike__$$anonfun$collect$1__psc_TraversableLike__scm_Builder__O__scm_Builder(this, b$4, x$1)
 });
 $c_scm_MutableList.prototype.$$anonfun$size$1__psc_TraversableOnce__sr_IntRef__O__V = (function(result$1, x) {
   $f_sc_TraversableOnce__$$anonfun$size$1__psc_TraversableOnce__sr_IntRef__O__V(this, result$1, x)
@@ -37594,6 +38720,9 @@ $c_scm_Queue.prototype.seq__sc_Seq = (function() {
 });
 $c_scm_Queue.prototype.seq__sc_LinearSeq = (function() {
   return this.seq__scm_LinearSeq()
+});
+$c_scm_Queue.prototype.isDefinedAt__O__Z = (function(x) {
+  return this.isDefinedAt__I__Z($uI(x))
 });
 $c_scm_Queue.prototype.drop__I__O = (function(n) {
   return this.drop__I__sc_LinearSeqOptimized(n)
@@ -37763,6 +38892,9 @@ $c_scm_WrappedArray$ofBoolean.prototype.$$anonfun$sum$1__psc_TraversableOnce__s_
 $c_scm_WrappedArray$ofBoolean.prototype.$$anonfun$foldLeft$1__psc_TraversableOnce__F2__sr_ObjectRef__O__V = (function(op$3, result$2, x) {
   $f_sc_TraversableOnce__$$anonfun$foldLeft$1__psc_TraversableOnce__F2__sr_ObjectRef__O__V(this, op$3, result$2, x)
 });
+$c_scm_WrappedArray$ofBoolean.prototype.$$anonfun$runWith$1__ps_PartialFunction__F1__O__Z = (function(action$1, x) {
+  return $f_s_PartialFunction__$$anonfun$runWith$1__ps_PartialFunction__F1__O__Z(this, action$1, x)
+});
 $c_scm_WrappedArray$ofBoolean.prototype.$$anonfun$filterImpl$1__psc_TraversableLike__F1__Z__scm_Builder__O__O = (function(p$8, isFlipped$1, b$3, x) {
   return $f_sc_TraversableLike__$$anonfun$filterImpl$1__psc_TraversableLike__F1__Z__scm_Builder__O__O(this, p$8, isFlipped$1, b$3, x)
 });
@@ -37771,6 +38903,9 @@ $c_scm_WrappedArray$ofBoolean.prototype.$$anonfun$indexOf$1__psc_GenSeqLike__O__
 });
 $c_scm_WrappedArray$ofBoolean.prototype.$$anonfun$grouped$1__psc_IterableLike__sc_Seq__O = (function(xs) {
   return $f_sc_IterableLike__$$anonfun$grouped$1__psc_IterableLike__sc_Seq__O(this, xs)
+});
+$c_scm_WrappedArray$ofBoolean.prototype.$$anonfun$collect$1__psc_TraversableLike__scm_Builder__O__scm_Builder = (function(b$4, x$1) {
+  return $f_sc_TraversableLike__$$anonfun$collect$1__psc_TraversableLike__scm_Builder__O__scm_Builder(this, b$4, x$1)
 });
 $c_scm_WrappedArray$ofBoolean.prototype.foldl__psc_IndexedSeqOptimized__I__I__O__F2__O = (function(start, end, z, op) {
   return $f_sc_IndexedSeqOptimized__foldl__psc_IndexedSeqOptimized__I__I__O__F2__O(this, start, end, z, op)
@@ -37933,6 +39068,9 @@ $c_scm_WrappedArray$ofByte.prototype.$$anonfun$sum$1__psc_TraversableOnce__s_mat
 $c_scm_WrappedArray$ofByte.prototype.$$anonfun$foldLeft$1__psc_TraversableOnce__F2__sr_ObjectRef__O__V = (function(op$3, result$2, x) {
   $f_sc_TraversableOnce__$$anonfun$foldLeft$1__psc_TraversableOnce__F2__sr_ObjectRef__O__V(this, op$3, result$2, x)
 });
+$c_scm_WrappedArray$ofByte.prototype.$$anonfun$runWith$1__ps_PartialFunction__F1__O__Z = (function(action$1, x) {
+  return $f_s_PartialFunction__$$anonfun$runWith$1__ps_PartialFunction__F1__O__Z(this, action$1, x)
+});
 $c_scm_WrappedArray$ofByte.prototype.$$anonfun$filterImpl$1__psc_TraversableLike__F1__Z__scm_Builder__O__O = (function(p$8, isFlipped$1, b$3, x) {
   return $f_sc_TraversableLike__$$anonfun$filterImpl$1__psc_TraversableLike__F1__Z__scm_Builder__O__O(this, p$8, isFlipped$1, b$3, x)
 });
@@ -37941,6 +39079,9 @@ $c_scm_WrappedArray$ofByte.prototype.$$anonfun$indexOf$1__psc_GenSeqLike__O__O__
 });
 $c_scm_WrappedArray$ofByte.prototype.$$anonfun$grouped$1__psc_IterableLike__sc_Seq__O = (function(xs) {
   return $f_sc_IterableLike__$$anonfun$grouped$1__psc_IterableLike__sc_Seq__O(this, xs)
+});
+$c_scm_WrappedArray$ofByte.prototype.$$anonfun$collect$1__psc_TraversableLike__scm_Builder__O__scm_Builder = (function(b$4, x$1) {
+  return $f_sc_TraversableLike__$$anonfun$collect$1__psc_TraversableLike__scm_Builder__O__scm_Builder(this, b$4, x$1)
 });
 $c_scm_WrappedArray$ofByte.prototype.foldl__psc_IndexedSeqOptimized__I__I__O__F2__O = (function(start, end, z, op) {
   return $f_sc_IndexedSeqOptimized__foldl__psc_IndexedSeqOptimized__I__I__O__F2__O(this, start, end, z, op)
@@ -38103,6 +39244,9 @@ $c_scm_WrappedArray$ofChar.prototype.$$anonfun$sum$1__psc_TraversableOnce__s_mat
 $c_scm_WrappedArray$ofChar.prototype.$$anonfun$foldLeft$1__psc_TraversableOnce__F2__sr_ObjectRef__O__V = (function(op$3, result$2, x) {
   $f_sc_TraversableOnce__$$anonfun$foldLeft$1__psc_TraversableOnce__F2__sr_ObjectRef__O__V(this, op$3, result$2, x)
 });
+$c_scm_WrappedArray$ofChar.prototype.$$anonfun$runWith$1__ps_PartialFunction__F1__O__Z = (function(action$1, x) {
+  return $f_s_PartialFunction__$$anonfun$runWith$1__ps_PartialFunction__F1__O__Z(this, action$1, x)
+});
 $c_scm_WrappedArray$ofChar.prototype.$$anonfun$filterImpl$1__psc_TraversableLike__F1__Z__scm_Builder__O__O = (function(p$8, isFlipped$1, b$3, x) {
   return $f_sc_TraversableLike__$$anonfun$filterImpl$1__psc_TraversableLike__F1__Z__scm_Builder__O__O(this, p$8, isFlipped$1, b$3, x)
 });
@@ -38111,6 +39255,9 @@ $c_scm_WrappedArray$ofChar.prototype.$$anonfun$indexOf$1__psc_GenSeqLike__O__O__
 });
 $c_scm_WrappedArray$ofChar.prototype.$$anonfun$grouped$1__psc_IterableLike__sc_Seq__O = (function(xs) {
   return $f_sc_IterableLike__$$anonfun$grouped$1__psc_IterableLike__sc_Seq__O(this, xs)
+});
+$c_scm_WrappedArray$ofChar.prototype.$$anonfun$collect$1__psc_TraversableLike__scm_Builder__O__scm_Builder = (function(b$4, x$1) {
+  return $f_sc_TraversableLike__$$anonfun$collect$1__psc_TraversableLike__scm_Builder__O__scm_Builder(this, b$4, x$1)
 });
 $c_scm_WrappedArray$ofChar.prototype.foldl__psc_IndexedSeqOptimized__I__I__O__F2__O = (function(start, end, z, op) {
   return $f_sc_IndexedSeqOptimized__foldl__psc_IndexedSeqOptimized__I__I__O__F2__O(this, start, end, z, op)
@@ -38276,6 +39423,9 @@ $c_scm_WrappedArray$ofDouble.prototype.$$anonfun$sum$1__psc_TraversableOnce__s_m
 $c_scm_WrappedArray$ofDouble.prototype.$$anonfun$foldLeft$1__psc_TraversableOnce__F2__sr_ObjectRef__O__V = (function(op$3, result$2, x) {
   $f_sc_TraversableOnce__$$anonfun$foldLeft$1__psc_TraversableOnce__F2__sr_ObjectRef__O__V(this, op$3, result$2, x)
 });
+$c_scm_WrappedArray$ofDouble.prototype.$$anonfun$runWith$1__ps_PartialFunction__F1__O__Z = (function(action$1, x) {
+  return $f_s_PartialFunction__$$anonfun$runWith$1__ps_PartialFunction__F1__O__Z(this, action$1, x)
+});
 $c_scm_WrappedArray$ofDouble.prototype.$$anonfun$filterImpl$1__psc_TraversableLike__F1__Z__scm_Builder__O__O = (function(p$8, isFlipped$1, b$3, x) {
   return $f_sc_TraversableLike__$$anonfun$filterImpl$1__psc_TraversableLike__F1__Z__scm_Builder__O__O(this, p$8, isFlipped$1, b$3, x)
 });
@@ -38284,6 +39434,9 @@ $c_scm_WrappedArray$ofDouble.prototype.$$anonfun$indexOf$1__psc_GenSeqLike__O__O
 });
 $c_scm_WrappedArray$ofDouble.prototype.$$anonfun$grouped$1__psc_IterableLike__sc_Seq__O = (function(xs) {
   return $f_sc_IterableLike__$$anonfun$grouped$1__psc_IterableLike__sc_Seq__O(this, xs)
+});
+$c_scm_WrappedArray$ofDouble.prototype.$$anonfun$collect$1__psc_TraversableLike__scm_Builder__O__scm_Builder = (function(b$4, x$1) {
+  return $f_sc_TraversableLike__$$anonfun$collect$1__psc_TraversableLike__scm_Builder__O__scm_Builder(this, b$4, x$1)
 });
 $c_scm_WrappedArray$ofDouble.prototype.foldl__psc_IndexedSeqOptimized__I__I__O__F2__O = (function(start, end, z, op) {
   return $f_sc_IndexedSeqOptimized__foldl__psc_IndexedSeqOptimized__I__I__O__F2__O(this, start, end, z, op)
@@ -38449,6 +39602,9 @@ $c_scm_WrappedArray$ofFloat.prototype.$$anonfun$sum$1__psc_TraversableOnce__s_ma
 $c_scm_WrappedArray$ofFloat.prototype.$$anonfun$foldLeft$1__psc_TraversableOnce__F2__sr_ObjectRef__O__V = (function(op$3, result$2, x) {
   $f_sc_TraversableOnce__$$anonfun$foldLeft$1__psc_TraversableOnce__F2__sr_ObjectRef__O__V(this, op$3, result$2, x)
 });
+$c_scm_WrappedArray$ofFloat.prototype.$$anonfun$runWith$1__ps_PartialFunction__F1__O__Z = (function(action$1, x) {
+  return $f_s_PartialFunction__$$anonfun$runWith$1__ps_PartialFunction__F1__O__Z(this, action$1, x)
+});
 $c_scm_WrappedArray$ofFloat.prototype.$$anonfun$filterImpl$1__psc_TraversableLike__F1__Z__scm_Builder__O__O = (function(p$8, isFlipped$1, b$3, x) {
   return $f_sc_TraversableLike__$$anonfun$filterImpl$1__psc_TraversableLike__F1__Z__scm_Builder__O__O(this, p$8, isFlipped$1, b$3, x)
 });
@@ -38457,6 +39613,9 @@ $c_scm_WrappedArray$ofFloat.prototype.$$anonfun$indexOf$1__psc_GenSeqLike__O__O_
 });
 $c_scm_WrappedArray$ofFloat.prototype.$$anonfun$grouped$1__psc_IterableLike__sc_Seq__O = (function(xs) {
   return $f_sc_IterableLike__$$anonfun$grouped$1__psc_IterableLike__sc_Seq__O(this, xs)
+});
+$c_scm_WrappedArray$ofFloat.prototype.$$anonfun$collect$1__psc_TraversableLike__scm_Builder__O__scm_Builder = (function(b$4, x$1) {
+  return $f_sc_TraversableLike__$$anonfun$collect$1__psc_TraversableLike__scm_Builder__O__scm_Builder(this, b$4, x$1)
 });
 $c_scm_WrappedArray$ofFloat.prototype.foldl__psc_IndexedSeqOptimized__I__I__O__F2__O = (function(start, end, z, op) {
   return $f_sc_IndexedSeqOptimized__foldl__psc_IndexedSeqOptimized__I__I__O__F2__O(this, start, end, z, op)
@@ -38622,6 +39781,9 @@ $c_scm_WrappedArray$ofInt.prototype.$$anonfun$sum$1__psc_TraversableOnce__s_math
 $c_scm_WrappedArray$ofInt.prototype.$$anonfun$foldLeft$1__psc_TraversableOnce__F2__sr_ObjectRef__O__V = (function(op$3, result$2, x) {
   $f_sc_TraversableOnce__$$anonfun$foldLeft$1__psc_TraversableOnce__F2__sr_ObjectRef__O__V(this, op$3, result$2, x)
 });
+$c_scm_WrappedArray$ofInt.prototype.$$anonfun$runWith$1__ps_PartialFunction__F1__O__Z = (function(action$1, x) {
+  return $f_s_PartialFunction__$$anonfun$runWith$1__ps_PartialFunction__F1__O__Z(this, action$1, x)
+});
 $c_scm_WrappedArray$ofInt.prototype.$$anonfun$filterImpl$1__psc_TraversableLike__F1__Z__scm_Builder__O__O = (function(p$8, isFlipped$1, b$3, x) {
   return $f_sc_TraversableLike__$$anonfun$filterImpl$1__psc_TraversableLike__F1__Z__scm_Builder__O__O(this, p$8, isFlipped$1, b$3, x)
 });
@@ -38630,6 +39792,9 @@ $c_scm_WrappedArray$ofInt.prototype.$$anonfun$indexOf$1__psc_GenSeqLike__O__O__Z
 });
 $c_scm_WrappedArray$ofInt.prototype.$$anonfun$grouped$1__psc_IterableLike__sc_Seq__O = (function(xs) {
   return $f_sc_IterableLike__$$anonfun$grouped$1__psc_IterableLike__sc_Seq__O(this, xs)
+});
+$c_scm_WrappedArray$ofInt.prototype.$$anonfun$collect$1__psc_TraversableLike__scm_Builder__O__scm_Builder = (function(b$4, x$1) {
+  return $f_sc_TraversableLike__$$anonfun$collect$1__psc_TraversableLike__scm_Builder__O__scm_Builder(this, b$4, x$1)
 });
 $c_scm_WrappedArray$ofInt.prototype.foldl__psc_IndexedSeqOptimized__I__I__O__F2__O = (function(start, end, z, op) {
   return $f_sc_IndexedSeqOptimized__foldl__psc_IndexedSeqOptimized__I__I__O__F2__O(this, start, end, z, op)
@@ -38795,6 +39960,9 @@ $c_scm_WrappedArray$ofLong.prototype.$$anonfun$sum$1__psc_TraversableOnce__s_mat
 $c_scm_WrappedArray$ofLong.prototype.$$anonfun$foldLeft$1__psc_TraversableOnce__F2__sr_ObjectRef__O__V = (function(op$3, result$2, x) {
   $f_sc_TraversableOnce__$$anonfun$foldLeft$1__psc_TraversableOnce__F2__sr_ObjectRef__O__V(this, op$3, result$2, x)
 });
+$c_scm_WrappedArray$ofLong.prototype.$$anonfun$runWith$1__ps_PartialFunction__F1__O__Z = (function(action$1, x) {
+  return $f_s_PartialFunction__$$anonfun$runWith$1__ps_PartialFunction__F1__O__Z(this, action$1, x)
+});
 $c_scm_WrappedArray$ofLong.prototype.$$anonfun$filterImpl$1__psc_TraversableLike__F1__Z__scm_Builder__O__O = (function(p$8, isFlipped$1, b$3, x) {
   return $f_sc_TraversableLike__$$anonfun$filterImpl$1__psc_TraversableLike__F1__Z__scm_Builder__O__O(this, p$8, isFlipped$1, b$3, x)
 });
@@ -38803,6 +39971,9 @@ $c_scm_WrappedArray$ofLong.prototype.$$anonfun$indexOf$1__psc_GenSeqLike__O__O__
 });
 $c_scm_WrappedArray$ofLong.prototype.$$anonfun$grouped$1__psc_IterableLike__sc_Seq__O = (function(xs) {
   return $f_sc_IterableLike__$$anonfun$grouped$1__psc_IterableLike__sc_Seq__O(this, xs)
+});
+$c_scm_WrappedArray$ofLong.prototype.$$anonfun$collect$1__psc_TraversableLike__scm_Builder__O__scm_Builder = (function(b$4, x$1) {
+  return $f_sc_TraversableLike__$$anonfun$collect$1__psc_TraversableLike__scm_Builder__O__scm_Builder(this, b$4, x$1)
 });
 $c_scm_WrappedArray$ofLong.prototype.foldl__psc_IndexedSeqOptimized__I__I__O__F2__O = (function(start, end, z, op) {
   return $f_sc_IndexedSeqOptimized__foldl__psc_IndexedSeqOptimized__I__I__O__F2__O(this, start, end, z, op)
@@ -38962,11 +40133,14 @@ $c_scm_WrappedArray$ofRef.prototype.$$anonfun$map$1__psc_TraversableLike__F1__sc
 $c_scm_WrappedArray$ofRef.prototype.$$anonfun$addString$1__psc_TraversableOnce__scm_StringBuilder__T__sr_BooleanRef__O__O = (function(b$1, sep$1, first$4, x) {
   return $f_sc_TraversableOnce__$$anonfun$addString$1__psc_TraversableOnce__scm_StringBuilder__T__sr_BooleanRef__O__O(this, b$1, sep$1, first$4, x)
 });
+$c_scm_WrappedArray$ofRef.prototype.$$anonfun$sum$1__psc_TraversableOnce__s_math_Numeric__O__O__O = (function(num$1, x, y) {
+  return $f_sc_TraversableOnce__$$anonfun$sum$1__psc_TraversableOnce__s_math_Numeric__O__O__O(this, num$1, x, y)
+});
 $c_scm_WrappedArray$ofRef.prototype.$$anonfun$foldLeft$1__psc_TraversableOnce__F2__sr_ObjectRef__O__V = (function(op$3, result$2, x) {
   $f_sc_TraversableOnce__$$anonfun$foldLeft$1__psc_TraversableOnce__F2__sr_ObjectRef__O__V(this, op$3, result$2, x)
 });
-$c_scm_WrappedArray$ofRef.prototype.$$anonfun$sum$1__psc_TraversableOnce__s_math_Numeric__O__O__O = (function(num$1, x, y) {
-  return $f_sc_TraversableOnce__$$anonfun$sum$1__psc_TraversableOnce__s_math_Numeric__O__O__O(this, num$1, x, y)
+$c_scm_WrappedArray$ofRef.prototype.$$anonfun$runWith$1__ps_PartialFunction__F1__O__Z = (function(action$1, x) {
+  return $f_s_PartialFunction__$$anonfun$runWith$1__ps_PartialFunction__F1__O__Z(this, action$1, x)
 });
 $c_scm_WrappedArray$ofRef.prototype.$$anonfun$filterImpl$1__psc_TraversableLike__F1__Z__scm_Builder__O__O = (function(p$8, isFlipped$1, b$3, x) {
   return $f_sc_TraversableLike__$$anonfun$filterImpl$1__psc_TraversableLike__F1__Z__scm_Builder__O__O(this, p$8, isFlipped$1, b$3, x)
@@ -38976,6 +40150,9 @@ $c_scm_WrappedArray$ofRef.prototype.$$anonfun$indexOf$1__psc_GenSeqLike__O__O__Z
 });
 $c_scm_WrappedArray$ofRef.prototype.$$anonfun$grouped$1__psc_IterableLike__sc_Seq__O = (function(xs) {
   return $f_sc_IterableLike__$$anonfun$grouped$1__psc_IterableLike__sc_Seq__O(this, xs)
+});
+$c_scm_WrappedArray$ofRef.prototype.$$anonfun$collect$1__psc_TraversableLike__scm_Builder__O__scm_Builder = (function(b$4, x$1) {
+  return $f_sc_TraversableLike__$$anonfun$collect$1__psc_TraversableLike__scm_Builder__O__scm_Builder(this, b$4, x$1)
 });
 $c_scm_WrappedArray$ofRef.prototype.foldl__psc_IndexedSeqOptimized__I__I__O__F2__O = (function(start, end, z, op) {
   return $f_sc_IndexedSeqOptimized__foldl__psc_IndexedSeqOptimized__I__I__O__F2__O(this, start, end, z, op)
@@ -39138,6 +40315,9 @@ $c_scm_WrappedArray$ofShort.prototype.$$anonfun$sum$1__psc_TraversableOnce__s_ma
 $c_scm_WrappedArray$ofShort.prototype.$$anonfun$foldLeft$1__psc_TraversableOnce__F2__sr_ObjectRef__O__V = (function(op$3, result$2, x) {
   $f_sc_TraversableOnce__$$anonfun$foldLeft$1__psc_TraversableOnce__F2__sr_ObjectRef__O__V(this, op$3, result$2, x)
 });
+$c_scm_WrappedArray$ofShort.prototype.$$anonfun$runWith$1__ps_PartialFunction__F1__O__Z = (function(action$1, x) {
+  return $f_s_PartialFunction__$$anonfun$runWith$1__ps_PartialFunction__F1__O__Z(this, action$1, x)
+});
 $c_scm_WrappedArray$ofShort.prototype.$$anonfun$filterImpl$1__psc_TraversableLike__F1__Z__scm_Builder__O__O = (function(p$8, isFlipped$1, b$3, x) {
   return $f_sc_TraversableLike__$$anonfun$filterImpl$1__psc_TraversableLike__F1__Z__scm_Builder__O__O(this, p$8, isFlipped$1, b$3, x)
 });
@@ -39146,6 +40326,9 @@ $c_scm_WrappedArray$ofShort.prototype.$$anonfun$indexOf$1__psc_GenSeqLike__O__O_
 });
 $c_scm_WrappedArray$ofShort.prototype.$$anonfun$grouped$1__psc_IterableLike__sc_Seq__O = (function(xs) {
   return $f_sc_IterableLike__$$anonfun$grouped$1__psc_IterableLike__sc_Seq__O(this, xs)
+});
+$c_scm_WrappedArray$ofShort.prototype.$$anonfun$collect$1__psc_TraversableLike__scm_Builder__O__scm_Builder = (function(b$4, x$1) {
+  return $f_sc_TraversableLike__$$anonfun$collect$1__psc_TraversableLike__scm_Builder__O__scm_Builder(this, b$4, x$1)
 });
 $c_scm_WrappedArray$ofShort.prototype.foldl__psc_IndexedSeqOptimized__I__I__O__F2__O = (function(start, end, z, op) {
   return $f_sc_IndexedSeqOptimized__foldl__psc_IndexedSeqOptimized__I__I__O__F2__O(this, start, end, z, op)
@@ -39311,6 +40494,9 @@ $c_scm_WrappedArray$ofUnit.prototype.$$anonfun$sum$1__psc_TraversableOnce__s_mat
 $c_scm_WrappedArray$ofUnit.prototype.$$anonfun$foldLeft$1__psc_TraversableOnce__F2__sr_ObjectRef__O__V = (function(op$3, result$2, x) {
   $f_sc_TraversableOnce__$$anonfun$foldLeft$1__psc_TraversableOnce__F2__sr_ObjectRef__O__V(this, op$3, result$2, x)
 });
+$c_scm_WrappedArray$ofUnit.prototype.$$anonfun$runWith$1__ps_PartialFunction__F1__O__Z = (function(action$1, x) {
+  return $f_s_PartialFunction__$$anonfun$runWith$1__ps_PartialFunction__F1__O__Z(this, action$1, x)
+});
 $c_scm_WrappedArray$ofUnit.prototype.$$anonfun$filterImpl$1__psc_TraversableLike__F1__Z__scm_Builder__O__O = (function(p$8, isFlipped$1, b$3, x) {
   return $f_sc_TraversableLike__$$anonfun$filterImpl$1__psc_TraversableLike__F1__Z__scm_Builder__O__O(this, p$8, isFlipped$1, b$3, x)
 });
@@ -39319,6 +40505,9 @@ $c_scm_WrappedArray$ofUnit.prototype.$$anonfun$indexOf$1__psc_GenSeqLike__O__O__
 });
 $c_scm_WrappedArray$ofUnit.prototype.$$anonfun$grouped$1__psc_IterableLike__sc_Seq__O = (function(xs) {
   return $f_sc_IterableLike__$$anonfun$grouped$1__psc_IterableLike__sc_Seq__O(this, xs)
+});
+$c_scm_WrappedArray$ofUnit.prototype.$$anonfun$collect$1__psc_TraversableLike__scm_Builder__O__scm_Builder = (function(b$4, x$1) {
+  return $f_sc_TraversableLike__$$anonfun$collect$1__psc_TraversableLike__scm_Builder__O__scm_Builder(this, b$4, x$1)
 });
 $c_scm_WrappedArray$ofUnit.prototype.foldl__psc_IndexedSeqOptimized__I__I__O__F2__O = (function(start, end, z, op) {
   return $f_sc_IndexedSeqOptimized__foldl__psc_IndexedSeqOptimized__I__I__O__F2__O(this, start, end, z, op)
@@ -39419,6 +40608,9 @@ $h_scm_ListBuffer.prototype = $c_scm_ListBuffer.prototype;
 $c_scm_ListBuffer.prototype.lengthCompare__I__I = (function(len) {
   return $f_scg_SeqForwarder__lengthCompare__I__I(this, len)
 });
+$c_scm_ListBuffer.prototype.isDefinedAt__I__Z = (function(x) {
+  return $f_scg_SeqForwarder__isDefinedAt__I__Z(this, x)
+});
 $c_scm_ListBuffer.prototype.indexWhere__F1__I__I = (function(p, from) {
   return $f_scg_SeqForwarder__indexWhere__F1__I__I(this, p, from)
 });
@@ -39439,6 +40631,9 @@ $c_scm_ListBuffer.prototype.foldLeft__O__F2__O = (function(z, op) {
 });
 $c_scm_ListBuffer.prototype.sum__s_math_Numeric__O = (function(num) {
   return $f_scg_TraversableForwarder__sum__s_math_Numeric__O(this, num)
+});
+$c_scm_ListBuffer.prototype.head__O = (function() {
+  return $f_scg_TraversableForwarder__head__O(this)
 });
 $c_scm_ListBuffer.prototype.copyToArray__O__I__I__V = (function(xs, start, len) {
   $f_scg_TraversableForwarder__copyToArray__O__I__I__V(this, xs, start, len)
@@ -39655,6 +40850,9 @@ $c_scm_ListBuffer.prototype.thisCollection__sc_Iterable = (function() {
 $c_scm_ListBuffer.prototype.seq__sc_Seq = (function() {
   return this.seq__scm_Seq()
 });
+$c_scm_ListBuffer.prototype.isDefinedAt__O__Z = (function(x) {
+  return this.isDefinedAt__I__Z($uI(x))
+});
 $c_scm_ListBuffer.prototype.result__O = (function() {
   return this.result__sci_List()
 });
@@ -39717,6 +40915,9 @@ $c_scm_ListBuffer.prototype.$$anonfun$foldLeft$1__psc_TraversableOnce__F2__sr_Ob
 $c_scm_ListBuffer.prototype.$$anonfun$$plus$plus$eq$1__pscg_Growable__O__scg_Growable = (function(elem) {
   return $f_scg_Growable__$$anonfun$$plus$plus$eq$1__pscg_Growable__O__scg_Growable(this, elem)
 });
+$c_scm_ListBuffer.prototype.$$anonfun$runWith$1__ps_PartialFunction__F1__O__Z = (function(action$1, x) {
+  return $f_s_PartialFunction__$$anonfun$runWith$1__ps_PartialFunction__F1__O__Z(this, action$1, x)
+});
 $c_scm_ListBuffer.prototype.$$anonfun$filterImpl$1__psc_TraversableLike__F1__Z__scm_Builder__O__O = (function(p$8, isFlipped$1, b$3, x) {
   return $f_sc_TraversableLike__$$anonfun$filterImpl$1__psc_TraversableLike__F1__Z__scm_Builder__O__O(this, p$8, isFlipped$1, b$3, x)
 });
@@ -39725,6 +40926,9 @@ $c_scm_ListBuffer.prototype.$$anonfun$indexOf$1__psc_GenSeqLike__O__O__Z = (func
 });
 $c_scm_ListBuffer.prototype.$$anonfun$grouped$1__psc_IterableLike__sc_Seq__O = (function(xs) {
   return $f_sc_IterableLike__$$anonfun$grouped$1__psc_IterableLike__sc_Seq__O(this, xs)
+});
+$c_scm_ListBuffer.prototype.$$anonfun$collect$1__psc_TraversableLike__scm_Builder__O__scm_Builder = (function(b$4, x$1) {
+  return $f_sc_TraversableLike__$$anonfun$collect$1__psc_TraversableLike__scm_Builder__O__scm_Builder(this, b$4, x$1)
 });
 $c_scm_ListBuffer.prototype.$$anonfun$size$1__psc_TraversableOnce__sr_IntRef__O__V = (function(result$1, x) {
   $f_sc_TraversableOnce__$$anonfun$size$1__psc_TraversableOnce__sr_IntRef__O__V(this, result$1, x)
@@ -39859,6 +41063,9 @@ $c_scm_StringBuilder.prototype.foreach__F1__V = (function(f) {
 $c_scm_StringBuilder.prototype.foldLeft__O__F2__O = (function(z, op) {
   return $f_sc_IndexedSeqOptimized__foldLeft__O__F2__O(this, z, op)
 });
+$c_scm_StringBuilder.prototype.head__O = (function() {
+  return $f_sc_IndexedSeqOptimized__head__O(this)
+});
 $c_scm_StringBuilder.prototype.tail__O = (function() {
   return $f_sc_IndexedSeqOptimized__tail__O(this)
 });
@@ -39937,6 +41144,9 @@ $c_scm_StringBuilder.prototype.toString__T = (function() {
 });
 $c_scm_StringBuilder.prototype.result__T = (function() {
   return this.toString__T()
+});
+$c_scm_StringBuilder.prototype.isDefinedAt__O__Z = (function(x) {
+  return this.isDefinedAt__I__Z($uI(x))
 });
 $c_scm_StringBuilder.prototype.seq__sc_TraversableOnce = (function() {
   return this.seq__scm_IndexedSeq()
@@ -40032,6 +41242,9 @@ $c_scm_StringBuilder.prototype.$$anonfun$foldLeft$1__psc_TraversableOnce__F2__sr
 $c_scm_StringBuilder.prototype.$$anonfun$$plus$plus$eq$1__pscg_Growable__O__scg_Growable = (function(elem) {
   return $f_scg_Growable__$$anonfun$$plus$plus$eq$1__pscg_Growable__O__scg_Growable(this, elem)
 });
+$c_scm_StringBuilder.prototype.$$anonfun$runWith$1__ps_PartialFunction__F1__O__Z = (function(action$1, x) {
+  return $f_s_PartialFunction__$$anonfun$runWith$1__ps_PartialFunction__F1__O__Z(this, action$1, x)
+});
 $c_scm_StringBuilder.prototype.$$anonfun$filterImpl$1__psc_TraversableLike__F1__Z__scm_Builder__O__O = (function(p$8, isFlipped$1, b$3, x) {
   return $f_sc_TraversableLike__$$anonfun$filterImpl$1__psc_TraversableLike__F1__Z__scm_Builder__O__O(this, p$8, isFlipped$1, b$3, x)
 });
@@ -40040,6 +41253,9 @@ $c_scm_StringBuilder.prototype.$$anonfun$indexOf$1__psc_GenSeqLike__O__O__Z = (f
 });
 $c_scm_StringBuilder.prototype.$$anonfun$grouped$1__psc_IterableLike__sc_Seq__O = (function(xs) {
   return $f_sc_IterableLike__$$anonfun$grouped$1__psc_IterableLike__sc_Seq__O(this, xs)
+});
+$c_scm_StringBuilder.prototype.$$anonfun$collect$1__psc_TraversableLike__scm_Builder__O__scm_Builder = (function(b$4, x$1) {
+  return $f_sc_TraversableLike__$$anonfun$collect$1__psc_TraversableLike__scm_Builder__O__scm_Builder(this, b$4, x$1)
 });
 $c_scm_StringBuilder.prototype.$$anonfun$format$1__psci_StringLike__O__O = (function(arg) {
   return $f_sci_StringLike__$$anonfun$format$1__psci_StringLike__O__O(this, arg)
@@ -40165,6 +41381,9 @@ $c_sjs_js_WrappedArray.prototype.foldLeft__O__F2__O = (function(z, op) {
 $c_sjs_js_WrappedArray.prototype.slice__I__I__O = (function(from, until) {
   return $f_sc_IndexedSeqOptimized__slice__I__I__O(this, from, until)
 });
+$c_sjs_js_WrappedArray.prototype.head__O = (function() {
+  return $f_sc_IndexedSeqOptimized__head__O(this)
+});
 $c_sjs_js_WrappedArray.prototype.tail__O = (function() {
   return $f_sc_IndexedSeqOptimized__tail__O(this)
 });
@@ -40231,6 +41450,9 @@ $c_sjs_js_WrappedArray.prototype.remove__I__I__V = (function(n, count) {
 });
 $c_sjs_js_WrappedArray.prototype.stringPrefix__T = (function() {
   return "WrappedArray"
+});
+$c_sjs_js_WrappedArray.prototype.isDefinedAt__O__Z = (function(x) {
+  return this.isDefinedAt__I__Z($uI(x))
 });
 $c_sjs_js_WrappedArray.prototype.thisCollection__sc_Traversable = (function() {
   return this.thisCollection__scm_IndexedSeq()
@@ -40311,6 +41533,9 @@ $c_sjs_js_WrappedArray.prototype.$$anonfun$foldLeft$1__psc_TraversableOnce__F2__
 $c_sjs_js_WrappedArray.prototype.$$anonfun$$plus$plus$eq$1__pscg_Growable__O__scg_Growable = (function(elem) {
   return $f_scg_Growable__$$anonfun$$plus$plus$eq$1__pscg_Growable__O__scg_Growable(this, elem)
 });
+$c_sjs_js_WrappedArray.prototype.$$anonfun$runWith$1__ps_PartialFunction__F1__O__Z = (function(action$1, x) {
+  return $f_s_PartialFunction__$$anonfun$runWith$1__ps_PartialFunction__F1__O__Z(this, action$1, x)
+});
 $c_sjs_js_WrappedArray.prototype.$$anonfun$filterImpl$1__psc_TraversableLike__F1__Z__scm_Builder__O__O = (function(p$8, isFlipped$1, b$3, x) {
   return $f_sc_TraversableLike__$$anonfun$filterImpl$1__psc_TraversableLike__F1__Z__scm_Builder__O__O(this, p$8, isFlipped$1, b$3, x)
 });
@@ -40319,6 +41544,9 @@ $c_sjs_js_WrappedArray.prototype.$$anonfun$indexOf$1__psc_GenSeqLike__O__O__Z = 
 });
 $c_sjs_js_WrappedArray.prototype.$$anonfun$grouped$1__psc_IterableLike__sc_Seq__O = (function(xs) {
   return $f_sc_IterableLike__$$anonfun$grouped$1__psc_IterableLike__sc_Seq__O(this, xs)
+});
+$c_sjs_js_WrappedArray.prototype.$$anonfun$collect$1__psc_TraversableLike__scm_Builder__O__scm_Builder = (function(b$4, x$1) {
+  return $f_sc_TraversableLike__$$anonfun$collect$1__psc_TraversableLike__scm_Builder__O__scm_Builder(this, b$4, x$1)
 });
 $c_sjs_js_WrappedArray.prototype.foldl__psc_IndexedSeqOptimized__I__I__O__F2__O = (function(start, end, z, op) {
   return $f_sc_IndexedSeqOptimized__foldl__psc_IndexedSeqOptimized__I__I__O__F2__O(this, start, end, z, op)
@@ -40462,6 +41690,9 @@ $c_scm_ArrayBuffer.prototype.foldLeft__O__F2__O = (function(z, op) {
 $c_scm_ArrayBuffer.prototype.slice__I__I__O = (function(from, until) {
   return $f_sc_IndexedSeqOptimized__slice__I__I__O(this, from, until)
 });
+$c_scm_ArrayBuffer.prototype.head__O = (function() {
+  return $f_sc_IndexedSeqOptimized__head__O(this)
+});
 $c_scm_ArrayBuffer.prototype.tail__O = (function() {
   return $f_sc_IndexedSeqOptimized__tail__O(this)
 });
@@ -40560,6 +41791,9 @@ $c_scm_ArrayBuffer.prototype.result__scm_ArrayBuffer = (function() {
 $c_scm_ArrayBuffer.prototype.stringPrefix__T = (function() {
   return "ArrayBuffer"
 });
+$c_scm_ArrayBuffer.prototype.isDefinedAt__O__Z = (function(x) {
+  return this.isDefinedAt__I__Z($uI(x))
+});
 $c_scm_ArrayBuffer.prototype.thisCollection__sc_Traversable = (function() {
   return this.thisCollection__scm_IndexedSeq()
 });
@@ -40643,6 +41877,9 @@ $c_scm_ArrayBuffer.prototype.$$anonfun$foldLeft$1__psc_TraversableOnce__F2__sr_O
 $c_scm_ArrayBuffer.prototype.$$anonfun$$plus$plus$eq$1__pscg_Growable__O__scg_Growable = (function(elem) {
   return $f_scg_Growable__$$anonfun$$plus$plus$eq$1__pscg_Growable__O__scg_Growable(this, elem)
 });
+$c_scm_ArrayBuffer.prototype.$$anonfun$runWith$1__ps_PartialFunction__F1__O__Z = (function(action$1, x) {
+  return $f_s_PartialFunction__$$anonfun$runWith$1__ps_PartialFunction__F1__O__Z(this, action$1, x)
+});
 $c_scm_ArrayBuffer.prototype.$$anonfun$filterImpl$1__psc_TraversableLike__F1__Z__scm_Builder__O__O = (function(p$8, isFlipped$1, b$3, x) {
   return $f_sc_TraversableLike__$$anonfun$filterImpl$1__psc_TraversableLike__F1__Z__scm_Builder__O__O(this, p$8, isFlipped$1, b$3, x)
 });
@@ -40651,6 +41888,9 @@ $c_scm_ArrayBuffer.prototype.$$anonfun$indexOf$1__psc_GenSeqLike__O__O__Z = (fun
 });
 $c_scm_ArrayBuffer.prototype.$$anonfun$grouped$1__psc_IterableLike__sc_Seq__O = (function(xs) {
   return $f_sc_IterableLike__$$anonfun$grouped$1__psc_IterableLike__sc_Seq__O(this, xs)
+});
+$c_scm_ArrayBuffer.prototype.$$anonfun$collect$1__psc_TraversableLike__scm_Builder__O__scm_Builder = (function(b$4, x$1) {
+  return $f_sc_TraversableLike__$$anonfun$collect$1__psc_TraversableLike__scm_Builder__O__scm_Builder(this, b$4, x$1)
 });
 $c_scm_ArrayBuffer.prototype.foldl__psc_IndexedSeqOptimized__I__I__O__F2__O = (function(start, end, z, op) {
   return $f_sc_IndexedSeqOptimized__foldl__psc_IndexedSeqOptimized__I__I__O__F2__O(this, start, end, z, op)

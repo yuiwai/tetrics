@@ -2,12 +2,13 @@ package com.yuiwai.tetrics.js
 
 import com.yuiwai.tetrics.core._
 import org.scalajs.dom
-import org.scalajs.dom.{CanvasRenderingContext2D => Context2D}
 import org.scalajs.dom.ext.KeyCode
 import org.scalajs.dom.html.Canvas
-import org.scalajs.dom.raw.KeyboardEvent
-import org.scalajs.dom.raw.MessageEvent
-import scalajs.js.typedarray._
+import org.scalajs.dom.raw.{KeyboardEvent, MessageEvent}
+import org.scalajs.dom.{CanvasRenderingContext2D => Context2D}
+
+import scala.scalajs.js.Date
+import scala.scalajs.js.typedarray._
 
 object Example extends Subscriber with DefaultSettings {
   self =>
@@ -18,7 +19,8 @@ object Example extends Subscriber with DefaultSettings {
   private implicit val eventBus = EventBus()
   private implicit val ctx: Context2D =
     canvas.asInstanceOf[Canvas].getContext("2d").asInstanceOf[Context2D]
-  private var game = new TenTen[KeyboardEvent, Context2D] with JsController with JsView
+  private var game = new TenTen[KeyboardEvent, Context2D]
+    with JsController with JsView with AnimationModule[KeyboardEvent, Context2D]
   private val serializer = new ByteEventSerializer {
     val setting: TetricsSetting = self.setting
   }
@@ -54,6 +56,12 @@ object Example extends Subscriber with DefaultSettings {
     }
   }
   def init(): TetricsGame[KeyboardEvent, Context2D] = {
+    var lastUpdated = .0
+    lazy val updater: Double => Unit = (timestamp: Double) => {
+      game.update(timestamp - lastUpdated)
+      lastUpdated = timestamp
+      window.requestAnimationFrame(updater)
+    }
     document.body.appendChild(canvas)
     window.onkeydown = (e: KeyboardEvent) => {
       if (!keyDown) {
@@ -68,6 +76,7 @@ object Example extends Subscriber with DefaultSettings {
         keyDown = false
       }
     }
+    window.requestAnimationFrame(updater)
     canvas.setAttribute("width", (game.offset * 2 + game.tileWidth * 32).toString)
     canvas.setAttribute("height", (game.offset * 2 + game.tileHeight * 32).toString)
     game
@@ -139,17 +148,27 @@ trait JsController extends TetricsController[KeyboardEvent, Context2D] {
   }
 }
 
-trait AnimationModule[E, C] {
-  private var animation: Option[Animation[C]] = None
-  def input(event: E, game:TetricsGame[E, C])(implicit setting: TetricsSetting): Unit = game.input(event)
-  def draw()(implicit ctx: C): Unit = {
-    drawBackground()
-    drawAnimation()
-    drawForeground()
+trait AnimationModule[E, C] extends TetricsGame[E, C] {
+  override def beforeAction(action: TetricsAction): TetricsAction = {
+    super.beforeAction(action)
+    action match {
+      case d: DropAction =>
+        tetrics.act(d).field(d.fieldType).filledRows match {
+          case s: Seq[Int] if s.nonEmpty =>
+            block()
+            NoAction
+          case _ => action
+        }
+      case _ => action
+    }
   }
-  def drawBackground()(implicit ctx: C): Unit
-  def drawAnimation()(implicit ctx: C): Unit
-  def drawForeground()(implicit ctx: C): Unit
+  private var animation: Option[Animation[C]] = None
+  override def update(delta: Double)(implicit ctx: C): Unit = {
+    super.update(delta)
+    // animation foreach()
+  }
+  def draw()(implicit ctx: C): Unit = {
+  }
 }
 trait Animation[C]
 trait BlockingAnimation[C] extends Animation[C]
