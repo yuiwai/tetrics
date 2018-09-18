@@ -8,7 +8,7 @@ final case class GameEnded(gameType: GameType) extends TetricsEvent
 final case class BlockAdded(block: Block) extends TetricsEvent
 final case class BlockRotated(rotationType: RotationType) extends TetricsEvent
 final case class BlockMoved(moveType: MoveType) extends TetricsEvent
-final case class BlockDropped(fieldType: DroppableField, numRows: Int) extends TetricsEvent
+final case class BlockDropped(fieldType: DroppableField, numRows: Int, filledRows: Seq[Int]) extends TetricsEvent
 final case class FieldNormalized(fieldType: DroppableField, numRows: Int) extends TetricsEvent
 
 trait EventSerializer[T] {
@@ -42,12 +42,12 @@ trait EventSerializer[T] {
 trait ByteEventSerializer extends EventSerializer[Array[Byte]] {
   override def serialize(event: TetricsEvent): Array[Byte] = event match {
     case GameStarted(gameType) => s(1) ++ s(gameType)
-    case GameEnded(gameType: GameType) => s(2) ++ s(gameType)
-    case BlockAdded(block: Block) => s(3) ++ s(block)
-    case BlockRotated(rotationType: RotationType) => s(4) ++ s(rotationType)
-    case BlockMoved(moveType: MoveType) => s(5) ++ s(moveType)
-    case BlockDropped(fieldType: FieldType, numRows: Int) => s(6) ++ s(fieldType) ++ s(numRows)
-    case FieldNormalized(fieldType: FieldType, numRows: Int) => s(7) ++ s(fieldType) ++ s(numRows)
+    case GameEnded(gameType) => s(2) ++ s(gameType)
+    case BlockAdded(block) => s(3) ++ s(block)
+    case BlockRotated(rotationType) => s(4) ++ s(rotationType)
+    case BlockMoved(moveType) => s(5) ++ s(moveType)
+    case BlockDropped(fieldType, numRows, filledRows) => s(6) ++ s(fieldType) ++ s(numRows) ++ s(filledRows)
+    case FieldNormalized(fieldType, numRows) => s(7) ++ s(fieldType) ++ s(numRows)
   }
   private def s(intVal: Int): Array[Byte] = Array(intVal.toByte)
   private def s(gameType: GameType): Array[Byte] = s(gameType2Int(gameType))
@@ -55,14 +55,22 @@ trait ByteEventSerializer extends EventSerializer[Array[Byte]] {
   private def s(moveType: MoveType): Array[Byte] = s(moveType2Int(moveType))
   private def s(fieldType: FieldType): Array[Byte] = s(fieldType2Int(fieldType))
   private def s(block: Block): Array[Byte] = s(block2Int(block))
+  private def s(filledRows: Seq[Int]): Array[Byte] = filledRows match {
+    case Seq() => s(0)
+    case seq => s(seq.tail.foldLeft(seq.head)((acc, i) => acc | (1 << (i - seq.head + 3))))
+  }
   override def deserialize(data: Array[Byte]): TetricsEvent = data.head.toInt match {
     case 1 => GameStarted(a2gt(data.tail))
     case 2 => GameEnded(a2gt(data.tail))
     case 3 => BlockAdded(a2bl(data.tail))
     case 4 => BlockRotated(a2rt(data.tail))
     case 5 => BlockMoved(a2mt(data.tail))
-    case 6 => BlockDropped(a2df(data.tail), data.drop(2).head.toInt)
+    case 6 => BlockDropped(a2df(data.tail), data.drop(2).head.toInt, i2sq(data.drop(3).head.toInt))
     case 7 => FieldNormalized(a2df(data.tail), data.drop(2).head.toInt)
+  }
+  private def i2sq(i: Int): Seq[Int] = (1 to 4).foldLeft(Seq(i & 15)) { (acc, j) =>
+    if ((i >> (j + 3) & 1) == 1) acc :+ (acc.head + j)
+    else acc
   }
   private def a2gt(a: Array[Byte]): GameType = a.head.toInt match {
     case 1 => GameTypeTenTen
