@@ -76,8 +76,13 @@ case class Tetrics(
     case DropRightAction => dropRight
     case DropTopAction => dropTop
     case DropBottomAction => dropBottom
+    case NormalizeLeftAction => normalizeLeft
+    case NormalizeRightAction => normalizeRight
+    case NormalizeTopAction => normalizeTop
+    case NormalizeBottomAction => normalizeBottom
     case TurnLeftAction => turnLeft
     case TurnRightAction => turnRight
+    case DropAndNormalizeAction(d, n) => act(d).act(n)
     case NoAction => this
   }
 }
@@ -135,18 +140,23 @@ case object Rotation3 extends Rotation {
 sealed trait FieldType
 sealed trait DroppableField extends FieldType {
   val action: DropAction
+  val normalizeAction: NormalizeAction
 }
 case object FieldLeft extends FieldType with DroppableField {
   override val action: DropAction = DropLeftAction
+  override val normalizeAction: NormalizeAction = NormalizeLeftAction
 }
 case object FieldRight extends FieldType with DroppableField {
   override val action: DropAction = DropRightAction
+  override val normalizeAction: NormalizeAction = NormalizeRightAction
 }
 case object FieldTop extends FieldType with DroppableField {
   override val action: DropAction = DropTopAction
+  override val normalizeAction: NormalizeAction = NormalizeTopAction
 }
 case object FieldBottom extends FieldType with DroppableField {
   override val action: DropAction = DropBottomAction
+  override val normalizeAction: NormalizeAction = NormalizeBottomAction
 }
 case object FieldCentral extends FieldType
 sealed trait FieldStatus
