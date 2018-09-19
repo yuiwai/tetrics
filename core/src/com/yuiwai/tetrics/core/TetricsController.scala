@@ -43,5 +43,7 @@ case object NormalizeBottomAction extends TetricsAction with NormalizeAction {
 }
 case object TurnLeftAction extends TetricsAction with RotateAction
 case object TurnRightAction extends TetricsAction with RotateAction
-final case class DropAndNormalizeAction(dropAction: DropAction, normalizeAction: NormalizeAction) extends TetricsAction
+final case class DropAndNormalizeAction(dropAction: DropAction, normalizeAction: NormalizeAction) extends TetricsAction {
+  def fieldType: FieldType = dropAction.fieldType
+}
 case object NoAction extends TetricsAction
