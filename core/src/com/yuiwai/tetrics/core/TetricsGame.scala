@@ -99,7 +99,7 @@ trait TetricsGame[E, C]
     afterAction(action)
   }
   def act(autoPlayer: AutoPlayer)
-    (implicit ctx: C, setting: TetricsSetting): Unit = act(autoPlayer.act(tetrics))
+    (implicit ctx: C, setting: TetricsSetting): Unit = if (status == GameStatusAutoPlay) act(autoPlayer.act(tetrics))
 }
 sealed trait GameStatus
 case object GameStatusReady extends GameStatus
