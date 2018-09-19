@@ -147,37 +147,51 @@ trait JsController extends TetricsController[KeyboardEvent, Context2D] {
 }
 
 trait AnimationComponent[E, C] extends TetricsGame[E, C] {
+  private var animation: Option[Animation] = None
+  def addAnimation(anim: Animation): Unit = {
+    animation match {
+      case None => animation = Some(anim)
+      case Some(a) => animation = Some(a + anim)
+    }
+  }
   override def beforeAction(action: TetricsAction): TetricsAction = {
     super.beforeAction(action)
     action match {
       case dn: DropAndNormalizeAction =>
         tetrics.act(dn.dropAction).field(dn.fieldType).filledRows match {
           case s: Seq[Int] if s.nonEmpty =>
-            animation = Some(BlockDeletionAnimation(dn.fieldType, s))
+            addAnimation(BlockDeletionAnimation(dn.fieldType, s))
             block(dn.normalizeAction)
             dn.dropAction
           case _ => dn
         }
+      case mv: MoveAction =>
+        addAnimation(BlockMovementAnimation(tetrics.block, tetrics.offset))
+        mv
+      case rt: RotateAction =>
+        addAnimation(BlockRotationAnimation(tetrics.block, tetrics.offset))
+        rt
       case _ => action
     }
   }
-  private var animation: Option[Animation[C]] = None
   override def update(delta: Double)(implicit ctx: C, setting: TetricsSetting): Unit = {
     super.update(delta)
     animation match {
       case Some(a) =>
         animation = a.update(delta)
-        animation foreach draw
-      case None =>
-        drawAll(tetrics)
-        unblock()
+        animation foreach { anim =>
+          if (!anim.isBlocking) unblock()
+          draw(anim)
+        }
+      case None => unblock()
     }
   }
-  def draw(animation: Animation[C])(implicit ctx: C): Unit
+  def draw(animation: Animation)(implicit ctx: C): Unit
 }
 trait JsCanvasAnimation extends AnimationComponent[KeyboardEvent, Context2D] {
-  override def draw(animation: Animation[Context2D])(implicit ctx: Context2D): Unit = {
+  override def draw(animation: Animation)(implicit ctx: Context2D): Unit = {
     animation match {
+      case CompositeAnimation(animations) => animations foreach draw
       case b@BlockDeletionAnimation(fieldType, filledRows, _) =>
         drawAll(tetrics)
         ctx.beginPath()
@@ -222,17 +236,83 @@ trait JsCanvasAnimation extends AnimationComponent[KeyboardEvent, Context2D] {
           case _ =>
         }
         ctx.fill()
+      case b@BlockMovementAnimation(block, o, _) =>
+        drawCentral(tetrics)
+        ctx.beginPath()
+        ctx.strokeStyle = s"rgba(0,127,0,${1 - b.rate})"
+        block.rows.zipWithIndex.foreach { case (row, y) =>
+          (0 until row.width) foreach { x =>
+            if ((row.cols >> x & 1) == 1)
+              ctx.rect(
+                offset + tileWidth * (fieldSize + 1 + o.x + x),
+                offset + tileHeight * (fieldSize + 1 + o.y + y),
+                tileWidth,
+                tileHeight
+              )
+          }
+        }
+        ctx.stroke()
+      case b@BlockRotationAnimation(block, o, _) =>
+        drawCentral(tetrics)
+        ctx.beginPath()
+        ctx.strokeStyle = s"rgba(0,127,0,${1 - b.rate})"
+        block.rows.zipWithIndex.foreach { case (row, y) =>
+          (0 until row.width) foreach { x =>
+            if ((row.cols >> x & 1) == 1)
+              ctx.rect(
+                offset + tileWidth * (fieldSize + 1 + o.x + x),
+                offset + tileHeight * (fieldSize + 1 + o.y + y),
+                tileWidth,
+                tileHeight
+              )
+          }
+        }
+        ctx.stroke()
       case _ =>
     }
   }
 }
-trait Animation[C] {
-  def update(delta: Double): Option[Animation[C]]
-}
-case class BlockDeletionAnimation[C](fieldType: FieldType, filledRows: Seq[Int], now: Double = 0) extends Animation[C] {
-  val long = 400.0
+trait Animation {
+  val long: Double
+  val now: Double
+  def +(that: Animation): CompositeAnimation = CompositeAnimation(Seq(this, that))
   def rate: Double = now / long
-  override def update(delta: Double): Option[Animation[C]] = now + delta match {
+  def update(delta: Double): Option[Animation]
+  def isBlocking: Boolean = false
+}
+trait BlockingAnimation extends Animation {
+  override def isBlocking: Boolean = true
+}
+case class CompositeAnimation(animations: Seq[Animation]) extends Animation {
+  val long: Double = 0
+  val now: Double = 0
+  override def +(that: Animation): CompositeAnimation = copy(animations :+ that)
+  override def update(delta: Double): Option[Animation] = {
+    animations.map(_.update(delta)).filter(_.isDefined).flatten match {
+      case s if s.nonEmpty => Some(copy(s))
+      case _ => None
+    }
+  }
+  override def isBlocking: Boolean = animations.exists(_.isBlocking)
+}
+case class BlockDeletionAnimation(fieldType: FieldType, filledRows: Seq[Int], now: Double = 0)
+  extends Animation with BlockingAnimation {
+  val long = 400.0
+  override def update(delta: Double): Option[Animation] = now + delta match {
+    case t if t > long => None
+    case t => Some(copy(now = t))
+  }
+}
+case class BlockMovementAnimation(block: Block, offset: Offset, now: Double = 0) extends Animation {
+  val long = 300.0
+  override def update(delta: Double): Option[Animation] = now + delta match {
+    case t if t > long => None
+    case t => Some(copy(now = t))
+  }
+}
+case class BlockRotationAnimation(block: Block, offset: Offset, now: Double = 0) extends Animation {
+  val long = 300.0
+  override def update(delta: Double): Option[Animation] = now + delta match {
     case t if t > long => None
     case t => Some(copy(now = t))
   }
