@@ -163,7 +163,9 @@ trait AnimationComponent[E, C] extends TetricsGame[E, C] {
             addAnimation(BlockDeletionAnimation(dn.fieldType, s))
             block(dn.normalizeAction)
             dn.dropAction
-          case _ => dn
+          case _ =>
+            addAnimation(DropAnimation(dn.dropAction.fieldType, tetrics.offset, tetrics.block))
+            dn
         }
       case mv: MoveAction =>
         addAnimation(BlockMovementAnimation(tetrics.block, tetrics.offset))
@@ -175,6 +177,7 @@ trait AnimationComponent[E, C] extends TetricsGame[E, C] {
     }
   }
   override def update(delta: Double)(implicit ctx: C, setting: TetricsSetting): Unit = {
+    drawAll(tetrics)
     super.update(delta)
     animation match {
       case Some(a) =>
@@ -192,8 +195,42 @@ trait JsCanvasAnimation extends AnimationComponent[KeyboardEvent, Context2D] {
   override def draw(animation: Animation)(implicit ctx: Context2D): Unit = {
     animation match {
       case CompositeAnimation(animations) => animations foreach draw
+      case d@DropAnimation(fieldType, o, b, _) =>
+        ctx.beginPath()
+        ctx.fillStyle = s"rgba(0,0,127,${1 - d.rate})"
+        fieldType match {
+          case FieldLeft =>
+            ctx.rect(
+              offset,
+              offset + (tileHeight * (fieldSize + 1 + o.y)),
+              tileWidth * fieldSize * d.rate,
+              tileHeight * b.height
+            )
+          case FieldRight =>
+            ctx.rect(
+              offset + tileWidth * (fieldSize * 3 + 2) - tileWidth * fieldSize * d.rate,
+              offset + (tileHeight * (fieldSize + 1 + o.y)),
+              tileWidth * fieldSize * d.rate,
+              tileHeight * b.height
+            )
+          case FieldTop =>
+            ctx.rect(
+              offset + tileWidth * (fieldSize + 1 + o.x),
+              offset,
+              tileWidth * b.width,
+              tileHeight * fieldSize * d.rate
+            )
+          case FieldBottom =>
+            ctx.rect(
+              offset + tileWidth * (fieldSize + 1 + o.x),
+              offset + tileHeight * (fieldSize * 3 + 2) - tileHeight * fieldSize * d.rate,
+              tileWidth * b.width,
+              tileHeight * fieldSize * d.rate
+            )
+          case _ =>
+        }
+        ctx.fill()
       case b@BlockDeletionAnimation(fieldType, filledRows, _) =>
-        drawAll(tetrics)
         ctx.beginPath()
         ctx.fillStyle = s"rgba(255,255,255,${1 - b.rate})"
         fieldType match {
@@ -237,7 +274,6 @@ trait JsCanvasAnimation extends AnimationComponent[KeyboardEvent, Context2D] {
         }
         ctx.fill()
       case b@BlockMovementAnimation(block, o, _) =>
-        drawCentral(tetrics)
         ctx.beginPath()
         ctx.strokeStyle = s"rgba(0,127,0,${1 - b.rate})"
         block.rows.zipWithIndex.foreach { case (row, y) =>
@@ -253,7 +289,6 @@ trait JsCanvasAnimation extends AnimationComponent[KeyboardEvent, Context2D] {
         }
         ctx.stroke()
       case b@BlockRotationAnimation(block, o, _) =>
-        drawCentral(tetrics)
         ctx.beginPath()
         ctx.strokeStyle = s"rgba(0,127,0,${1 - b.rate})"
         block.rows.zipWithIndex.foreach { case (row, y) =>
@@ -294,6 +329,13 @@ case class CompositeAnimation(animations: Seq[Animation]) extends Animation {
     }
   }
   override def isBlocking: Boolean = animations.exists(_.isBlocking)
+}
+case class DropAnimation(fieldType: FieldType, offset: Offset, block: Block, now: Double = 0) extends Animation {
+  val long = 400.0
+  override def update(delta: Double): Option[Animation] = now + delta match {
+    case t if t > long => None
+    case t => Some(copy(now = t))
+  }
 }
 case class BlockDeletionAnimation(fieldType: FieldType, filledRows: Seq[Int], now: Double = 0)
   extends Animation with BlockingAnimation {

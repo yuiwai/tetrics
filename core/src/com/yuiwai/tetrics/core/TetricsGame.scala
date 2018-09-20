@@ -57,7 +57,7 @@ trait TetricsGame[E, C]
       case _ => ()
     }
   def act(event: TetricsEvent)(implicit ctx: C, setting: TetricsSetting): Unit = event match {
-    case BlockAdded(block: Block) => drawCentral(modify(_.putCenter(block)))
+    case BlockAdded(block: Block) => modify(_.putCenter(block))
     case BlockRotated(rotationType: RotationType) => act(rotationType match {
       case RotationLeft => TurnLeftAction
       case RotationRight => TurnRightAction
@@ -78,22 +78,22 @@ trait TetricsGame[E, C]
   }
   def act(action: TetricsAction)(implicit ctx: C, setting: TetricsSetting): Unit = {
     beforeAction(action) match {
-      case ma: MoveAction => drawCentral(modify(_.act(ma)))
-      case ra: RotateAction => drawCentral(modify(_.act(ra)))
+      case ma: MoveAction => modify(_.act(ma))
+      case ra: RotateAction => modify(_.act(ra))
       case da: DropAndNormalizeAction =>
-        drawAll(modify(_.act(da)))
-        drawCentral(randPut())
+        modify(_.act(da))
+        randPut()
       case dr: DropAction =>
-        drawAll(modify(_.act(dr)))
-        drawCentral(randPut())
+        modify(_.act(dr))
+        randPut()
       case NormalizeLeftAction =>
-        drawLeft(modify(_.act(action)))
+        modify(_.act(action))
       case NormalizeRightAction =>
-        drawRight(modify(_.act(action)))
+        modify(_.act(action))
       case NormalizeTopAction =>
-        drawTop(modify(_.act(action)))
+        modify(_.act(action))
       case NormalizeBottomAction =>
-        drawBottom(modify(_.act(action)))
+        modify(_.act(action))
       case _ =>
     }
     afterAction(action)
