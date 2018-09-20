@@ -43,7 +43,7 @@ object js extends ScalaJSModule with Base {
   override def fastOpt = T {
     import ammonite.ops._
     val p = super.fastOpt()
-    val d = pwd / "js" / "tetrics.js"
+    val d = pwd / "js" / "contents" / "tetrics.js"
     cp.over(p.path, d)
     PathRef(d)
   }

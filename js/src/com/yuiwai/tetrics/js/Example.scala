@@ -7,6 +7,7 @@ import org.scalajs.dom.html.Canvas
 import org.scalajs.dom.raw.{KeyboardEvent, MessageEvent}
 import org.scalajs.dom.{CanvasRenderingContext2D => Context2D}
 
+import scala.scalajs.js
 import scala.scalajs.js.typedarray._
 
 object Example extends Subscriber with DefaultSettings {
@@ -18,10 +19,15 @@ object Example extends Subscriber with DefaultSettings {
   private implicit val eventBus = EventBus()
   private implicit val ctx: Context2D =
     canvas.asInstanceOf[Canvas].getContext("2d").asInstanceOf[Context2D]
-  private var game = new TenTen[KeyboardEvent, Context2D]
-    with JsController with JsView with JsCanvasAnimation
+  private var game: TetricsGame[KeyboardEvent, Context2D] = _
   private val serializer = new ByteEventSerializer {
     val setting: TetricsSetting = self.setting
+  }
+  private var lastUpdated = 0.0
+  private lazy val updater: Double => Unit = (timestamp: Double) => {
+    game.update(timestamp - lastUpdated)
+    lastUpdated = timestamp
+    window.requestAnimationFrame(updater)
   }
   def main(args: Array[String]): Unit = {
     if (window == window.parent) {
@@ -55,12 +61,7 @@ object Example extends Subscriber with DefaultSettings {
     }
   }
   def init(): TetricsGame[KeyboardEvent, Context2D] = {
-    var lastUpdated = .0
-    lazy val updater: Double => Unit = (timestamp: Double) => {
-      game.update(timestamp - lastUpdated)
-      lastUpdated = timestamp
-      window.requestAnimationFrame(updater)
-    }
+    game = new TenTen[KeyboardEvent, Context2D] with JsController with JsView with JsCanvasAnimation
     document.body.appendChild(canvas)
     window.onkeydown = (e: KeyboardEvent) => {
       if (!keyDown) {
@@ -357,6 +358,11 @@ case class BlockRotationAnimation(block: Block, offset: Offset, now: Double = 0)
     case t if t > long => None
     case t => Some(copy(now = t))
   }
+}
+
+@js.native
+trait JsSetting extends js.Object {
+  val autoPlayInterval: Int = js.native
 }
 
 trait JsMatchConnector {
