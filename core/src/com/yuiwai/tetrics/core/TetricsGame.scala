@@ -27,7 +27,7 @@ trait TetricsGame[E, C]
       a.foreach(act)
     case _ => ()
   }
-  def update(delta: Double)(implicit ctx: C, setting: TetricsSetting): Unit = ()
+  def update(delta: Double)(implicit ctx: C, setting: TetricsSetting): Unit = drawAll(tetrics)
   def start()(implicit ctx: C, setting: TetricsSetting): Unit = {
     status = GameStatusPlaying
     publish(GameStarted(gameType))

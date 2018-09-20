@@ -178,7 +178,6 @@ trait AnimationComponent[E, C] extends TetricsGame[E, C] {
   }
   override def update(delta: Double)(implicit ctx: C, setting: TetricsSetting): Unit = {
     drawAll(tetrics)
-    super.update(delta)
     animation match {
       case Some(a) =>
         animation = a.update(delta)
