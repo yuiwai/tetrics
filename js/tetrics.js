@@ -10991,9 +10991,6 @@ function $f_Lcom_yuiwai_tetrics_core_TetricsGame__unblock__O__Lcom_yuiwai_tetric
     })($thiz, ctx, setting)))
   }
 }
-function $f_Lcom_yuiwai_tetrics_core_TetricsGame__update__D__O__Lcom_yuiwai_tetrics_core_TetricsSetting__V($thiz, delta, ctx, setting) {
-  /*<skip>*/
-}
 function $f_Lcom_yuiwai_tetrics_core_TetricsGame__start__O__Lcom_yuiwai_tetrics_core_TetricsSetting__V($thiz, ctx, setting) {
   $thiz.com$yuiwai$tetrics$core$TetricsGame$$status$und$eq__Lcom_yuiwai_tetrics_core_GameStatus__V($m_Lcom_yuiwai_tetrics_core_GameStatusPlaying$());
   $thiz.publish__Lcom_yuiwai_tetrics_core_TetricsEvent__Lcom_yuiwai_tetrics_core_EventBus__V(new $c_Lcom_yuiwai_tetrics_core_GameStarted().init___Lcom_yuiwai_tetrics_core_GameType($thiz.gameType__Lcom_yuiwai_tetrics_core_GameType()), $thiz.eventBus__Lcom_yuiwai_tetrics_core_EventBus());
@@ -14668,7 +14665,6 @@ function $f_Lcom_yuiwai_tetrics_js_AnimationComponent__beforeAction__Lcom_yuiwai
 }
 function $f_Lcom_yuiwai_tetrics_js_AnimationComponent__update__D__O__Lcom_yuiwai_tetrics_core_TetricsSetting__V($thiz, delta, ctx, setting) {
   $thiz.drawAll__Lcom_yuiwai_tetrics_core_Tetrics__O__V($thiz.tetrics__Lcom_yuiwai_tetrics_core_Tetrics(), ctx);
-  $thiz.com$yuiwai$tetrics$js$AnimationComponent$$super$update__D__O__Lcom_yuiwai_tetrics_core_TetricsSetting__V(delta, ctx, setting);
   var x1 = $thiz.com$yuiwai$tetrics$js$AnimationComponent$$animation__s_Option();
   if ($is_s_Some(x1)) {
     var x2 = $as_s_Some(x1);
@@ -28088,9 +28084,6 @@ $c_Lcom_yuiwai_tetrics_js_Example$$anon$1.prototype.draw__Lcom_yuiwai_tetrics_js
 });
 $c_Lcom_yuiwai_tetrics_js_Example$$anon$1.prototype.com$yuiwai$tetrics$js$AnimationComponent$$super$beforeAction__Lcom_yuiwai_tetrics_core_TetricsAction__Lcom_yuiwai_tetrics_core_TetricsAction = (function(action) {
   return $f_Lcom_yuiwai_tetrics_core_TetricsGame__beforeAction__Lcom_yuiwai_tetrics_core_TetricsAction__Lcom_yuiwai_tetrics_core_TetricsAction(this, action)
-});
-$c_Lcom_yuiwai_tetrics_js_Example$$anon$1.prototype.com$yuiwai$tetrics$js$AnimationComponent$$super$update__D__O__Lcom_yuiwai_tetrics_core_TetricsSetting__V = (function(delta, ctx, setting) {
-  $f_Lcom_yuiwai_tetrics_core_TetricsGame__update__D__O__Lcom_yuiwai_tetrics_core_TetricsSetting__V(this, delta, ctx, setting)
 });
 $c_Lcom_yuiwai_tetrics_js_Example$$anon$1.prototype.addAnimation__Lcom_yuiwai_tetrics_js_Animation__V = (function(anim) {
   $f_Lcom_yuiwai_tetrics_js_AnimationComponent__addAnimation__Lcom_yuiwai_tetrics_js_Animation__V(this, anim)

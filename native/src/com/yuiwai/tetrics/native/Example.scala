@@ -36,6 +36,7 @@ object Example {
     val char = getch
     try {
       game.input(char)
+      game.update(0)
     } catch {
       case _: IllegalArgumentException =>
       case e => throw e
@@ -45,6 +46,7 @@ object Example {
   def loopAutoPlay(autoPlayer: AutoPlayer): Unit = {
     unistd.usleep(200000.toUInt)
     game.act(autoPlayer)
+    game.update(0)
     refresh()
     loopAutoPlay(autoPlayer)
   }
