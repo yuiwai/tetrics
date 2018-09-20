@@ -9,14 +9,25 @@ trait TetricsGame[E, C]
     with Publisher
     with Subscriber {
   val gameType: GameType
-  protected var status: GameStatus = GameStatusReady
+  private var status: GameStatus = GameStatusReady
   protected var tetrics: Tetrics
   protected val handler: TetricsEvent => Unit
   implicit val eventBus: EventBus
-  private def modify(f: Tetrics => Tetrics): Tetrics = {
+  protected def beforeAction(action: TetricsAction): TetricsAction = action
+  protected def afterAction(action: TetricsAction): Unit = ()
+  protected def modify(f: Tetrics => Tetrics): Tetrics = {
     tetrics = f(tetrics)
     tetrics
   }
+  protected def block(nextAction: TetricsAction): Unit = status = GameStatusBlocking(status, Some(nextAction))
+  protected def block(): Unit = status = GameStatusBlocking(status, None)
+  protected def unblock()(implicit ctx: C, setting: TetricsSetting): Unit = status match {
+    case GameStatusBlocking(s, a) =>
+      status = s
+      a.foreach(act)
+    case _ => ()
+  }
+  def update(delta: Double)(implicit ctx: C, setting: TetricsSetting): Unit = ()
   def start()(implicit ctx: C, setting: TetricsSetting): Unit = {
     status = GameStatusPlaying
     publish(GameStarted(gameType))
@@ -57,41 +68,44 @@ trait TetricsGame[E, C]
       case MoveUp => MoveUpAction
       case MoveDown => MoveDownAction
     })
-    case BlockDropped(fieldType, _) => act(fieldType match {
-      case FieldLeft => DropLeftAction
-      case FieldRight => DropRightAction
-      case FieldTop => DropTopAction
-      case FieldBottom => DropBottomAction
+    case BlockDropped(fieldType, _, _) => act(fieldType match {
+      case FieldLeft => DropAndNormalizeAction(DropLeftAction, NormalizeLeftAction)
+      case FieldRight => DropAndNormalizeAction(DropRightAction, NormalizeRightAction)
+      case FieldTop => DropAndNormalizeAction(DropTopAction, NormalizeTopAction)
+      case FieldBottom => DropAndNormalizeAction(DropBottomAction, NormalizeBottomAction)
     })
     case _ => ()
   }
-  def act(action: TetricsAction)(implicit ctx: C, setting: TetricsSetting): Unit =
-    action match {
-      case MoveLeftAction => drawCentral(modify(_.moveLeft))
-      case MoveRightAction => drawCentral(modify(_.moveRight))
-      case MoveUpAction => drawCentral(modify(_.moveUp))
-      case MoveDownAction => drawCentral(modify(_.moveDown))
-      case DropLeftAction =>
-        drawLeft(modify(_.dropLeft.normalizeLeft))
+  def act(action: TetricsAction)(implicit ctx: C, setting: TetricsSetting): Unit = {
+    beforeAction(action) match {
+      case ma: MoveAction => drawCentral(modify(_.act(ma)))
+      case ra: RotateAction => drawCentral(modify(_.act(ra)))
+      case da: DropAndNormalizeAction =>
+        drawAll(modify(_.act(da)))
         drawCentral(randPut())
-      case DropRightAction =>
-        drawRight(modify(_.dropRight.normalizeRight))
+      case dr: DropAction =>
+        drawAll(modify(_.act(dr)))
         drawCentral(randPut())
-      case DropTopAction =>
-        drawTop(modify(_.dropTop.normalizeTop))
-        drawCentral(randPut())
-      case DropBottomAction =>
-        drawBottom(modify(_.dropBottom.normalizeBottom))
-        drawCentral(randPut())
-      case TurnLeftAction => drawCentral(modify(_.turnLeft))
-      case TurnRightAction => drawCentral(modify(_.turnRight))
+      case NormalizeLeftAction =>
+        drawLeft(modify(_.act(action)))
+      case NormalizeRightAction =>
+        drawRight(modify(_.act(action)))
+      case NormalizeTopAction =>
+        drawTop(modify(_.act(action)))
+      case NormalizeBottomAction =>
+        drawBottom(modify(_.act(action)))
+      case _ =>
     }
+    afterAction(action)
+  }
   def act(autoPlayer: AutoPlayer)
-    (implicit ctx: C, setting: TetricsSetting): Unit = act(autoPlayer.act(tetrics))
+    (implicit ctx: C, setting: TetricsSetting): Unit = if (status == GameStatusAutoPlay) act(autoPlayer.act(tetrics))
 }
 sealed trait GameStatus
 case object GameStatusReady extends GameStatus
 case object GameStatusPlaying extends GameStatus
+final case class GameStatusBlocking(
+  previousStatus: GameStatus, blockedAction: Option[TetricsAction]) extends GameStatus
 case object GameStatusFinished extends GameStatus
 case object GameStatusAutoPlay extends GameStatus
 
@@ -110,7 +124,7 @@ abstract class TenTen[E, C](implicit val eventBus: EventBus, ctx: C)
   }
   private def judge(s: TetricsStats, t: Tetrics): Unit = {
     import TenTen._
-    if (s.achieved || t.deactivedFields.size > 2) {
+    if (s.achieved || t.deactivatedFields.size > 2) {
       end()
     }
   }
@@ -161,7 +175,7 @@ trait DefaultAutoPlayer extends AutoPlayer {
     def >>(eval: Eval): Eval = if (total > eval.total) this else eval
     def moved(moveAction: MoveAction): Eval = copy(moveAction :: actions)
     def dropped(point: Int)(implicit droppableField: DroppableField): Eval = {
-      copy(droppableField.action :: actions, points + point)
+      copy(DropAndNormalizeAction(droppableField.action, droppableField.normalizeAction) :: actions, points + point)
     }
   }
   object Eval {
@@ -171,18 +185,6 @@ trait DefaultAutoPlayer extends AutoPlayer {
     def apply(action: TetricsAction): Eval = Eval(action :: Nil)
   }
   private val queue: mutable.Queue[TetricsAction] = mutable.Queue()
-  val allActions = Seq(
-    MoveLeftAction,
-    MoveRightAction,
-    MoveUpAction,
-    MoveDownAction,
-    DropLeftAction,
-    DropRightAction,
-    DropTopAction,
-    DropBottomAction,
-    TurnLeftAction,
-    TurnRightAction
-  )
   def act(tetrics: Tetrics): TetricsAction =
     if (queue.nonEmpty) queue.dequeue()
     else {
@@ -215,7 +217,7 @@ trait DefaultAutoPlayer extends AutoPlayer {
     }
   def evalDrop(tetrics: Tetrics, eval: Eval)(implicit droppableField: DroppableField): Eval =
     try {
-      eval.dropped(evalAction(tetrics, tetrics.act(droppableField.action)))
+      eval.dropped(evalAction(tetrics, tetrics.act(DropAndNormalizeAction(droppableField.action, droppableField.normalizeAction))))
     } catch {
       case _: Throwable => Eval.failed
     }

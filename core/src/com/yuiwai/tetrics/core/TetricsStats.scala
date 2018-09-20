@@ -21,7 +21,7 @@ case class TetricsStats(
       copy(rotationCount = rotationCount + 1)
     case BlockMoved(_) =>
       copy(moveCount = moveCount + 1)
-    case BlockDropped(fieldType: FieldType, _) =>
+    case BlockDropped(fieldType: FieldType, _, _) =>
       fieldType match {
         case FieldLeft =>
           copy(leftField = leftField(event))
@@ -50,7 +50,7 @@ case class TetricsStats(
 }
 case class FieldStats(numRows: Int = 0, droppedBlocks: Int = 0, deletedRows: Int = 0) {
   def apply(event: TetricsEvent): FieldStats = event match {
-    case BlockDropped(_, newNumRows) => copy(newNumRows, droppedBlocks + 1)
+    case BlockDropped(_, newNumRows, _) => copy(newNumRows, droppedBlocks + 1)
     case FieldNormalized(_, newNumRows) => copy(newNumRows, deletedRows = deletedRows + numRows - newNumRows)
     case _ => this
   }

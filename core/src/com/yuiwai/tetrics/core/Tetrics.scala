@@ -25,7 +25,7 @@ case class Tetrics(
     case FieldCentral => centralField
   }
   def fields: Seq[Field] = Seq(leftField, rightField, topField, bottomField)
-  def deactivedFields: Seq[Field] = fields.filterNot(_.active)
+  def deactivatedFields: Seq[Field] = fields.filterNot(_.active)
   def centralField: Field = emptyField.put(block, offset.x, offset.y)
   def put(block: Block, offset: Offset = Offset()): Tetrics = copy(block = block, offset = offset)
     .publishAndReturn(_ => BlockAdded(block))
@@ -47,18 +47,18 @@ case class Tetrics(
     offset.x + r.round((block.width - b.width) / 2.0),
     offset.y + r.round((block.height - b.height) / 2.0)
   )
-  def turnRight: Tetrics = turn(block.turnRight, rotation.right)
-    .publishAndReturn(_ => BlockRotated(RotationRight))
   def turnLeft: Tetrics = turn(block.turnLeft, rotation.left)
     .publishAndReturn(_ => BlockRotated(RotationLeft))
-  def dropBottom: Tetrics = copy(bottomField = bottomField.drop(block, offset.x))
-    .publishAndReturn(t => BlockDropped(FieldBottom, t.bottomField.numRows))
-  def dropRight: Tetrics = copy(rightField = rightField.drop(block.turnRight, fieldSize - offset.y - block.height))
-    .publishAndReturn(t => BlockDropped(FieldRight, t.rightField.numRows))
+  def turnRight: Tetrics = turn(block.turnRight, rotation.right)
+    .publishAndReturn(_ => BlockRotated(RotationRight))
   def dropLeft: Tetrics = copy(leftField = leftField.drop(block.turnLeft, offset.y))
-    .publishAndReturn(t => BlockDropped(FieldLeft, t.leftField.numRows))
+    .publishAndReturn(t => BlockDropped(FieldLeft, t.leftField.numRows, t.leftField.filledRows))
+  def dropRight: Tetrics = copy(rightField = rightField.drop(block.turnRight, fieldSize - offset.y - block.height))
+    .publishAndReturn(t => BlockDropped(FieldRight, t.rightField.numRows, t.rightField.filledRows))
   def dropTop: Tetrics = copy(topField = topField.drop(block.turnLeft.turnLeft, fieldSize - offset.x - block.width))
-    .publishAndReturn(t => BlockDropped(FieldTop, t.topField.numRows))
+    .publishAndReturn(t => BlockDropped(FieldTop, t.topField.numRows, t.topField.filledRows))
+  def dropBottom: Tetrics = copy(bottomField = bottomField.drop(block, offset.x))
+    .publishAndReturn(t => BlockDropped(FieldBottom, t.bottomField.numRows, t.bottomField.filledRows))
   def normalizeLeft: Tetrics = copy(leftField = leftField.normalized)
     .publishAndReturn(t => FieldNormalized(FieldLeft, t.leftField.numRows))
   def normalizeRight: Tetrics = copy(rightField = rightField.normalized)
@@ -72,12 +72,18 @@ case class Tetrics(
     case MoveRightAction => moveRight
     case MoveUpAction => moveUp
     case MoveDownAction => moveDown
-    case DropLeftAction => dropLeft.normalizeLeft
-    case DropRightAction => dropRight.normalizeRight
-    case DropTopAction => dropTop.normalizeTop
-    case DropBottomAction => dropBottom.normalizeBottom
+    case DropLeftAction => dropLeft
+    case DropRightAction => dropRight
+    case DropTopAction => dropTop
+    case DropBottomAction => dropBottom
+    case NormalizeLeftAction => normalizeLeft
+    case NormalizeRightAction => normalizeRight
+    case NormalizeTopAction => normalizeTop
+    case NormalizeBottomAction => normalizeBottom
     case TurnLeftAction => turnLeft
     case TurnRightAction => turnRight
+    case DropAndNormalizeAction(d, n) => act(d).act(n)
+    case NoAction => this
   }
 }
 object Tetrics {
@@ -134,18 +140,23 @@ case object Rotation3 extends Rotation {
 sealed trait FieldType
 sealed trait DroppableField extends FieldType {
   val action: DropAction
+  val normalizeAction: NormalizeAction
 }
 case object FieldLeft extends FieldType with DroppableField {
   override val action: DropAction = DropLeftAction
+  override val normalizeAction: NormalizeAction = NormalizeLeftAction
 }
 case object FieldRight extends FieldType with DroppableField {
   override val action: DropAction = DropRightAction
+  override val normalizeAction: NormalizeAction = NormalizeRightAction
 }
 case object FieldTop extends FieldType with DroppableField {
   override val action: DropAction = DropTopAction
+  override val normalizeAction: NormalizeAction = NormalizeTopAction
 }
 case object FieldBottom extends FieldType with DroppableField {
   override val action: DropAction = DropBottomAction
+  override val normalizeAction: NormalizeAction = NormalizeBottomAction
 }
 case object FieldCentral extends FieldType
 sealed trait FieldStatus
@@ -178,6 +189,7 @@ case class Field(rows: List[Row], width: Int, status: FieldStatus = FieldStatusA
       Math.round((width - block.width) / 2.0).toInt + offset.x,
       Math.round((rows.length - block.height) / 2.0).toInt + offset.y
     )
+  def filledRows: Seq[Int] = rows.zipWithIndex.collect { case (row, i) if row.isFilled => i }
   def slice(offset: Int, width: Int): Slice = Slice(rows.map(row => row.copy(row.cols >> offset, width)))
   def normalized: Field = copy(fillLeftRows(rows.filter(!_.isFilled), width, height))
   def count: Int = rows.map(c => bitCount(c.cols)).sum
