@@ -6,18 +6,30 @@
     <style>
         html, body {
             background-color: black;
-        };
+        }
     </style>
 </head>
 <body>
 <div>
     <button onclick="start()">start</button>
+    <select id="interval">
+        <option value="5">超高速</option>
+        <option value="20">高速</option>
+        <option value="200" selected="selected">中速</option>
+        <option value="1000">低速</option>
+    </select>
 </div>
 <iframe src="index.html" id="child" style="border: 0" width="520" height="520"></iframe>
 <script>
+    var currentId = 0;
     function start() {
-        // TODO ここでゲーム開始に必要な情報を設定
-        window.top.child.contentWindow.postMessage("autoPlay", "https://lab.yuiwai.com");
+        window.top.child.contentWindow.postMessage("semiAuto", "https://lab.yuiwai.com");
+        loop(++currentId);
+    }
+    function loop(sessionId) {
+        if (sessionId != currentId) return;
+        window.top.child.contentWindow.postMessage("semiAutoLoop", "https://lab.yuiwai.com");
+        setTimeout(() => loop(sessionId), document.getElementById("interval").value - 0);
     }
     window.addEventListener("message", function(e) {
         if (e.origin != "https://lab.yuiwai.com") {
