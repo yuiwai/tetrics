@@ -14,6 +14,7 @@ object Example extends Subscriber with DefaultSettings {
   self =>
   import dom.window
   import window.document
+  private var semiAuto: Option[SemiAuto] = None
   private var keyDown = false
   private val canvas = document.createElement("canvas")
   private implicit val eventBus = EventBus()
@@ -56,6 +57,16 @@ object Example extends Subscriber with DefaultSettings {
             val autoPlayer = DefaultAutoPlayer()
             game.autoPlay()
             dom.window.setInterval(() => game.act(autoPlayer), 250)
+          case "semiAuto" =>
+            init().autoPlay()
+          case "semiAutoLoop" =>
+            semiAuto match {
+              case Some(semiAuto) => 
+                game.act(semiAuto.autoPlayer)
+              case None =>
+                init().autoPlay()
+                semiAuto = Some(SemiAuto(DefaultAutoPlayer()))
+            }
         }
       }
     }
@@ -360,12 +371,9 @@ case class BlockRotationAnimation(block: Block, offset: Offset, now: Double = 0)
   }
 }
 
-@js.native
-trait JsSetting extends js.Object {
-  val autoPlayInterval: Int = js.native
-}
-
 trait JsMatchConnector {
 
 }
 object JsMatchConnector extends JsMatchConnector
+
+case class SemiAuto(autoPlayer: AutoPlayer)

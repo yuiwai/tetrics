@@ -8247,6 +8247,7 @@ function $m_Lcom_yuiwai_tetrics_core_Tetrics$() {
 function $c_Lcom_yuiwai_tetrics_js_Example$() {
   $c_O.call(this);
   this.updater$1 = null;
+  this.semiAuto$1 = null;
   this.keyDown$1 = false;
   this.canvas$1 = null;
   this.com$yuiwai$tetrics$js$Example$$eventBus$1 = null;
@@ -8273,6 +8274,12 @@ $c_Lcom_yuiwai_tetrics_js_Example$.prototype.setting__Lcom_yuiwai_tetrics_core_T
 });
 $c_Lcom_yuiwai_tetrics_js_Example$.prototype.com$yuiwai$tetrics$core$DefaultSettings$$undsetter$und$setting$und$eq__Lcom_yuiwai_tetrics_core_TetricsSetting__V = (function(x$1) {
   this.setting$1 = x$1
+});
+$c_Lcom_yuiwai_tetrics_js_Example$.prototype.semiAuto__p1__s_Option = (function() {
+  return this.semiAuto$1
+});
+$c_Lcom_yuiwai_tetrics_js_Example$.prototype.semiAuto$und$eq__p1__s_Option__V = (function(x$1) {
+  this.semiAuto$1 = x$1
 });
 $c_Lcom_yuiwai_tetrics_js_Example$.prototype.keyDown__p1__Z = (function() {
   return this.keyDown$1
@@ -8398,6 +8405,27 @@ $c_Lcom_yuiwai_tetrics_js_Example$.prototype.com$yuiwai$tetrics$js$Example$$$ano
           return $m_Lcom_yuiwai_tetrics_js_Example$().com$yuiwai$tetrics$js$Example$$$anonfun$initWithParent$3__Lcom_yuiwai_tetrics_core_TetricsGame__Lcom_yuiwai_tetrics_core_DefaultAutoPlayer__O(game$1, autoPlayer$1)
         })
       })(game, autoPlayer), 250.0))
+    } else if (("semiAuto" === x1)) {
+      $m_Lcom_yuiwai_tetrics_js_Example$().init__Lcom_yuiwai_tetrics_core_TetricsGame().autoPlay__O__Lcom_yuiwai_tetrics_core_TetricsSetting__V($m_Lcom_yuiwai_tetrics_js_Example$().com$yuiwai$tetrics$js$Example$$ctx__Lorg_scalajs_dom_raw_CanvasRenderingContext2D(), $m_Lcom_yuiwai_tetrics_js_Example$().setting__Lcom_yuiwai_tetrics_core_TetricsSetting());
+      return (void 0)
+    } else if (("semiAutoLoop" === x1)) {
+      var x1$2 = $m_Lcom_yuiwai_tetrics_js_Example$().semiAuto__p1__s_Option();
+      if ($is_s_Some(x1$2)) {
+        var x2 = $as_s_Some(x1$2);
+        var semiAuto = $as_Lcom_yuiwai_tetrics_js_SemiAuto(x2.value__O());
+        $m_Lcom_yuiwai_tetrics_js_Example$().game__p1__Lcom_yuiwai_tetrics_core_TetricsGame().act__Lcom_yuiwai_tetrics_core_AutoPlayer__O__Lcom_yuiwai_tetrics_core_TetricsSetting__V(semiAuto.autoPlayer__Lcom_yuiwai_tetrics_core_AutoPlayer(), $m_Lcom_yuiwai_tetrics_js_Example$().com$yuiwai$tetrics$js$Example$$ctx__Lorg_scalajs_dom_raw_CanvasRenderingContext2D(), $m_Lcom_yuiwai_tetrics_js_Example$().setting__Lcom_yuiwai_tetrics_core_TetricsSetting());
+        return (void 0)
+      } else {
+        var x = $m_s_None$();
+        var x$2 = x1$2;
+        if (((x === null) ? (x$2 === null) : x.equals__O__Z(x$2))) {
+          $m_Lcom_yuiwai_tetrics_js_Example$().init__Lcom_yuiwai_tetrics_core_TetricsGame().autoPlay__O__Lcom_yuiwai_tetrics_core_TetricsSetting__V($m_Lcom_yuiwai_tetrics_js_Example$().com$yuiwai$tetrics$js$Example$$ctx__Lorg_scalajs_dom_raw_CanvasRenderingContext2D(), $m_Lcom_yuiwai_tetrics_js_Example$().setting__Lcom_yuiwai_tetrics_core_TetricsSetting());
+          $m_Lcom_yuiwai_tetrics_js_Example$().semiAuto$und$eq__p1__s_Option__V(new $c_s_Some().init___O(new $c_Lcom_yuiwai_tetrics_js_SemiAuto().init___Lcom_yuiwai_tetrics_core_AutoPlayer($m_Lcom_yuiwai_tetrics_core_DefaultAutoPlayer$().apply__Lcom_yuiwai_tetrics_core_DefaultAutoPlayer())));
+          return (void 0)
+        } else {
+          throw new $c_s_MatchError().init___O(x1$2)
+        }
+      }
     } else {
       throw new $c_s_MatchError().init___O(x1)
     }
@@ -8435,6 +8463,7 @@ $c_Lcom_yuiwai_tetrics_js_Example$.prototype.init___ = (function() {
   $n_Lcom_yuiwai_tetrics_js_Example$ = this;
   $f_Lcom_yuiwai_tetrics_core_Subscriber__$$init$__V(this);
   $f_Lcom_yuiwai_tetrics_core_DefaultSettings__$$init$__V(this);
+  this.semiAuto$1 = $m_s_None$();
   this.keyDown$1 = false;
   this.canvas$1 = $m_Lorg_scalajs_dom_package$().window__Lorg_scalajs_dom_raw_Window().document.createElement("canvas");
   this.com$yuiwai$tetrics$js$Example$$eventBus$1 = $m_Lcom_yuiwai_tetrics_core_EventBus$().apply__Lcom_yuiwai_tetrics_core_EventBus();
@@ -14764,6 +14793,99 @@ function $m_Lcom_yuiwai_tetrics_js_DropAnimation$() {
   };
   return $n_Lcom_yuiwai_tetrics_js_DropAnimation$
 }
+/** @constructor */
+function $c_Lcom_yuiwai_tetrics_js_SemiAuto() {
+  $c_O.call(this);
+  this.autoPlayer$1 = null
+}
+$c_Lcom_yuiwai_tetrics_js_SemiAuto.prototype = new $h_O();
+$c_Lcom_yuiwai_tetrics_js_SemiAuto.prototype.constructor = $c_Lcom_yuiwai_tetrics_js_SemiAuto;
+/** @constructor */
+function $h_Lcom_yuiwai_tetrics_js_SemiAuto() {
+  /*<skip>*/
+}
+$h_Lcom_yuiwai_tetrics_js_SemiAuto.prototype = $c_Lcom_yuiwai_tetrics_js_SemiAuto.prototype;
+$c_Lcom_yuiwai_tetrics_js_SemiAuto.prototype.autoPlayer__Lcom_yuiwai_tetrics_core_AutoPlayer = (function() {
+  return this.autoPlayer$1
+});
+$c_Lcom_yuiwai_tetrics_js_SemiAuto.prototype.productPrefix__T = (function() {
+  return "SemiAuto"
+});
+$c_Lcom_yuiwai_tetrics_js_SemiAuto.prototype.productArity__I = (function() {
+  return 1
+});
+$c_Lcom_yuiwai_tetrics_js_SemiAuto.prototype.productElement__I__O = (function(x$1) {
+  var x1 = x$1;
+  switch (x1) {
+    case 0: {
+      return this.autoPlayer__Lcom_yuiwai_tetrics_core_AutoPlayer();
+      break
+    }
+    default: {
+      throw new $c_jl_IndexOutOfBoundsException().init___T($objectToString(x$1))
+    }
+  }
+});
+$c_Lcom_yuiwai_tetrics_js_SemiAuto.prototype.productIterator__sc_Iterator = (function() {
+  return $m_sr_ScalaRunTime$().typedProductIterator__s_Product__sc_Iterator(this)
+});
+$c_Lcom_yuiwai_tetrics_js_SemiAuto.prototype.canEqual__O__Z = (function(x$1) {
+  return $is_Lcom_yuiwai_tetrics_js_SemiAuto(x$1)
+});
+$c_Lcom_yuiwai_tetrics_js_SemiAuto.prototype.hashCode__I = (function() {
+  return $m_sr_ScalaRunTime$().$$undhashCode__s_Product__I(this)
+});
+$c_Lcom_yuiwai_tetrics_js_SemiAuto.prototype.toString__T = (function() {
+  return $m_sr_ScalaRunTime$().$$undtoString__s_Product__T(this)
+});
+$c_Lcom_yuiwai_tetrics_js_SemiAuto.prototype.equals__O__Z = (function(x$1) {
+  if ((this === x$1)) {
+    return true
+  } else {
+    var x1 = x$1;
+    if (($is_Lcom_yuiwai_tetrics_js_SemiAuto(x1) || false)) {
+      var SemiAuto$1 = $as_Lcom_yuiwai_tetrics_js_SemiAuto(x$1);
+      var x = this.autoPlayer__Lcom_yuiwai_tetrics_core_AutoPlayer();
+      var x$2 = SemiAuto$1.autoPlayer__Lcom_yuiwai_tetrics_core_AutoPlayer();
+      if (((x === null) ? (x$2 === null) : x.equals__O__Z(x$2))) {
+        return SemiAuto$1.canEqual__O__Z(this)
+      } else {
+        return false
+      }
+    } else {
+      return false
+    }
+  }
+});
+$c_Lcom_yuiwai_tetrics_js_SemiAuto.prototype.init___Lcom_yuiwai_tetrics_core_AutoPlayer = (function(autoPlayer) {
+  this.autoPlayer$1 = autoPlayer;
+  $c_O.prototype.init___.call(this);
+  $f_s_Product__$$init$__V(this);
+  return this
+});
+function $is_Lcom_yuiwai_tetrics_js_SemiAuto(obj) {
+  return (!(!((obj && obj.$classData) && obj.$classData.ancestors.Lcom_yuiwai_tetrics_js_SemiAuto)))
+}
+function $as_Lcom_yuiwai_tetrics_js_SemiAuto(obj) {
+  return (($is_Lcom_yuiwai_tetrics_js_SemiAuto(obj) || (obj === null)) ? obj : $throwClassCastException(obj, "com.yuiwai.tetrics.js.SemiAuto"))
+}
+function $isArrayOf_Lcom_yuiwai_tetrics_js_SemiAuto(obj, depth) {
+  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.Lcom_yuiwai_tetrics_js_SemiAuto)))
+}
+function $asArrayOf_Lcom_yuiwai_tetrics_js_SemiAuto(obj, depth) {
+  return (($isArrayOf_Lcom_yuiwai_tetrics_js_SemiAuto(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lcom.yuiwai.tetrics.js.SemiAuto;", depth))
+}
+var $d_Lcom_yuiwai_tetrics_js_SemiAuto = new $TypeData().initClass({
+  Lcom_yuiwai_tetrics_js_SemiAuto: 0
+}, false, "com.yuiwai.tetrics.js.SemiAuto", {
+  Lcom_yuiwai_tetrics_js_SemiAuto: 1,
+  O: 1,
+  s_Product: 1,
+  s_Equals: 1,
+  s_Serializable: 1,
+  Ljava_io_Serializable: 1
+});
+$c_Lcom_yuiwai_tetrics_js_SemiAuto.prototype.$classData = $d_Lcom_yuiwai_tetrics_js_SemiAuto;
 /** @constructor */
 function $c_Ljava_io_FilterOutputStream() {
   $c_Ljava_io_OutputStream.call(this);
