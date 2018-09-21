@@ -7,21 +7,28 @@ import org.scalajs.dom.html.Canvas
 import org.scalajs.dom.raw.{KeyboardEvent, MessageEvent}
 import org.scalajs.dom.{CanvasRenderingContext2D => Context2D}
 
+import scala.scalajs.js
 import scala.scalajs.js.typedarray._
 
 object Example extends Subscriber with DefaultSettings {
   self =>
   import dom.window
   import window.document
+  private var semiAuto: Option[SemiAuto] = None
   private var keyDown = false
   private val canvas = document.createElement("canvas")
   private implicit val eventBus = EventBus()
   private implicit val ctx: Context2D =
     canvas.asInstanceOf[Canvas].getContext("2d").asInstanceOf[Context2D]
-  private var game = new TenTen[KeyboardEvent, Context2D]
-    with JsController with JsView with JsCanvasAnimation
+  private var game: TetricsGame[KeyboardEvent, Context2D] = _
   private val serializer = new ByteEventSerializer {
     val setting: TetricsSetting = self.setting
+  }
+  private var lastUpdated = 0.0
+  private lazy val updater: Double => Unit = (timestamp: Double) => {
+    game.update(timestamp - lastUpdated)
+    lastUpdated = timestamp
+    window.requestAnimationFrame(updater)
   }
   def main(args: Array[String]): Unit = {
     if (window == window.parent) {
@@ -50,17 +57,22 @@ object Example extends Subscriber with DefaultSettings {
             val autoPlayer = DefaultAutoPlayer()
             game.autoPlay()
             dom.window.setInterval(() => game.act(autoPlayer), 250)
+          case "semiAuto" =>
+            init().autoPlay()
+          case "semiAutoLoop" =>
+            semiAuto match {
+              case Some(semiAuto) => 
+                game.act(semiAuto.autoPlayer)
+              case None =>
+                init().autoPlay()
+                semiAuto = Some(SemiAuto(DefaultAutoPlayer()))
+            }
         }
       }
     }
   }
   def init(): TetricsGame[KeyboardEvent, Context2D] = {
-    var lastUpdated = .0
-    lazy val updater: Double => Unit = (timestamp: Double) => {
-      game.update(timestamp - lastUpdated)
-      lastUpdated = timestamp
-      window.requestAnimationFrame(updater)
-    }
+    game = new TenTen[KeyboardEvent, Context2D] with JsController with JsView with JsCanvasAnimation
     document.body.appendChild(canvas)
     window.onkeydown = (e: KeyboardEvent) => {
       if (!keyDown) {
@@ -363,3 +375,5 @@ trait JsMatchConnector {
 
 }
 object JsMatchConnector extends JsMatchConnector
+
+case class SemiAuto(autoPlayer: AutoPlayer)

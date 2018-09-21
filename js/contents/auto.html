@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tetrics</title>
+    <style>
+        html, body {
+            background-color: black;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <button onclick="start()">start</button>
+    <select id="interval">
+        <option value="5">超高速</option>
+        <option value="20">高速</option>
+        <option value="200" selected="selected">中速</option>
+        <option value="1000">低速</option>
+    </select>
+</div>
+<iframe src="index.html" id="child" style="border: 0" width="520" height="520"></iframe>
+<script>
+    var currentId = 0;
+    function start() {
+        window.top.child.contentWindow.postMessage("semiAuto", "https://lab.yuiwai.com");
+        loop(++currentId);
+    }
+    function loop(sessionId) {
+        if (sessionId != currentId) return;
+        window.top.child.contentWindow.postMessage("semiAutoLoop", "https://lab.yuiwai.com");
+        setTimeout(() => loop(sessionId), document.getElementById("interval").value - 0);
+    }
+    window.addEventListener("message", function(e) {
+        if (e.origin != "https://lab.yuiwai.com") {
+            return;
+        }
+        if (e.source == window.top.child.contentWindow) {
+            // window.top.slave.contentWindow.postMessage(e.data, "https://lab.yuiwai.com");
+        }
+    });
+</script>
+</body>
+</html>
