@@ -22,6 +22,10 @@ object auto extends ScalaModule with Base {
 object check extends ScalaModule with Base {
   override def moduleDeps: Seq[JavaModule] = Seq(tetricsJvm("2.12.6"))
   override def scalaVersion = "2.12.6"
+  object test extends Tests {
+    def ivyDeps = Agg(ivy"com.lihaoyi::utest::0.6.5")
+    def testFrameworks = Seq("utest.runner.Framework")
+  }
 }
 
 object tetricsJs extends Cross[TetricsJsModule]("2.11.12", "2.12.6")

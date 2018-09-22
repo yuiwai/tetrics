@@ -167,6 +167,12 @@ case class Field(rows: List[Row], width: Int, status: FieldStatus = FieldStatusA
   require(!rows.exists(_.width != width), "Field contains different width rows.")
   lazy val height: Int = rows.length
   lazy val numRows: Int = rows.count(_.nonEmpty)
+  def surface: Surface = Surface {
+    turnRightRows(rows, width).map {
+      case row if row.isEmpty => 0
+      case row => (0 until width).foldLeft(0)((acc, i) => if ((row.cols >> i & 1) == 1) i + 1 else acc)
+    }
+  }
   def active: Boolean = status == FieldStatusActive
   def freeze: Field = copy(status = FieldStatusFrozen)
   def drop(block: Block, offset: Int): Field = {
@@ -215,6 +221,9 @@ case class Block(rows: List[Row], width: Int) {
   import RowsOps._
   require(rows.forall(_.width == width), "Block contains different width rows.")
   lazy val height: Int = rows.length
+  def surface: Surface = Surface {
+    turnRightRows(rows, width).map(row => (0 until width).find(i => (row.cols >> i & 1) == 1).get)
+  }.normalize
   def turnRight: Block = Block(turnRightRows(rows, width), height)
   def turnLeft: Block = Block(turnLeftRows(rows, width), height)
 }
@@ -266,3 +275,28 @@ object Row {
     case (acc, (_, i)) => acc | (1 << i)
   }, cols.length)
 }
+
+case class Surface(value: List[Int]) extends AnyVal {
+  def size: Int = value.size
+  def lift(i: Int): Surface = copy(value.map(_ + i))
+  def liftTo(i: Int): Surface = value match {
+    case Nil => this
+    case h :: _ => lift(i - h)
+  }
+  def slice(offset: Int): Surface = copy(value.drop(offset))
+  def slice(offset: Int, limit: Int): Surface = copy(value.slice(offset, offset + limit))
+  def fitting(that: Surface): Int = value.zip(that.value) match {
+    case Nil => Int.MinValue
+    case l => l.foldLeft(0) {
+      case (acc, (base, put)) =>
+        if (base > put) fitting(that.liftTo(base))
+        else acc + base - put
+    }
+  }
+  def normalize: Surface = value match {
+    case Nil => this
+    case 0 :: _ => this
+    case _ => liftTo(0)
+  }
+}
+
