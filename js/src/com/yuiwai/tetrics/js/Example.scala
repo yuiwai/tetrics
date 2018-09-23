@@ -61,8 +61,8 @@ object Example extends Subscriber with DefaultSettings {
             init().autoPlay()
           case "semiAutoLoop" =>
             semiAuto match {
-              case Some(semiAuto) => 
-                game.act(semiAuto.autoPlayer)
+              case Some(s) =>
+                game.act(s.autoPlayer)
               case None =>
                 init().autoPlay()
                 semiAuto = Some(SemiAuto(DefaultAutoPlayer()))

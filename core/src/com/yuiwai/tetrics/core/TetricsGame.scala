@@ -175,7 +175,7 @@ trait DefaultAutoPlayer extends AutoPlayer {
     def >>(eval: Eval): Eval = if (total > eval.total) this else eval
     def moved(moveAction: MoveAction): Eval = copy(moveAction :: actions)
     def dropped(point: Int)(implicit droppableField: DroppableField): Eval = {
-      copy(DropAndNormalizeAction(droppableField.action, droppableField.normalizeAction) :: actions, points + point)
+      copy(DropAndNormalizeAction(droppableField.dropAction, droppableField.normalizeAction) :: actions, points + point)
     }
   }
   object Eval {
@@ -217,7 +217,7 @@ trait DefaultAutoPlayer extends AutoPlayer {
     }
   def evalDrop(tetrics: Tetrics, eval: Eval)(implicit droppableField: DroppableField): Eval =
     try {
-      eval.dropped(evalAction(tetrics, tetrics.act(DropAndNormalizeAction(droppableField.action, droppableField.normalizeAction))))
+      eval.dropped(evalAction(tetrics, tetrics.act(DropAndNormalizeAction(droppableField.dropAction, droppableField.normalizeAction))))
     } catch {
       case _: Throwable => Eval.failed
     }
