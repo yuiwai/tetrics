@@ -139,23 +139,23 @@ case object Rotation3 extends Rotation {
 }
 sealed trait FieldType
 sealed trait DroppableField extends FieldType {
-  val action: DropAction
+  val dropAction: DropAction
   val normalizeAction: NormalizeAction
 }
 case object FieldLeft extends FieldType with DroppableField {
-  override val action: DropAction = DropLeftAction
+  override val dropAction: DropAction = DropLeftAction
   override val normalizeAction: NormalizeAction = NormalizeLeftAction
 }
 case object FieldRight extends FieldType with DroppableField {
-  override val action: DropAction = DropRightAction
+  override val dropAction: DropAction = DropRightAction
   override val normalizeAction: NormalizeAction = NormalizeRightAction
 }
 case object FieldTop extends FieldType with DroppableField {
-  override val action: DropAction = DropTopAction
+  override val dropAction: DropAction = DropTopAction
   override val normalizeAction: NormalizeAction = NormalizeTopAction
 }
 case object FieldBottom extends FieldType with DroppableField {
-  override val action: DropAction = DropBottomAction
+  override val dropAction: DropAction = DropBottomAction
   override val normalizeAction: NormalizeAction = NormalizeBottomAction
 }
 case object FieldCentral extends FieldType
@@ -222,7 +222,7 @@ case class Block(rows: List[Row], width: Int) {
   require(rows.forall(_.width == width), "Block contains different width rows.")
   lazy val height: Int = rows.length
   def surface: Surface = Surface {
-    turnRightRows(rows, width).map(row => (0 until width).find(i => (row.cols >> i & 1) == 1).get)
+    turnRightRows(rows, width).map(row => (0 until height).find(i => (row.cols >> i & 1) == 1).get)
   }.normalize
   def turnRight: Block = Block(turnRightRows(rows, width), height)
   def turnLeft: Block = Block(turnLeftRows(rows, width), height)
@@ -277,6 +277,7 @@ object Row {
 }
 
 case class Surface(value: List[Int]) extends AnyVal {
+  def apply(i: Int): Int = value(i)
   def size: Int = value.size
   def lift(i: Int): Surface = copy(value.map(_ + i))
   def liftTo(i: Int): Surface = value match {
@@ -289,7 +290,7 @@ case class Surface(value: List[Int]) extends AnyVal {
     case Nil => Int.MinValue
     case l => l.foldLeft(0) {
       case (acc, (base, put)) =>
-        if (base > put) fitting(that.liftTo(base))
+        if (base > put) fitting(that.lift(base - put))
         else acc + base - put
     }
   }
