@@ -23,10 +23,10 @@ object Main {
 }
 object Evaluator extends Subscriber {
   def run(autoPlayer: AutoPlayer, loopCount: Int)(implicit setting: TetricsSetting): TetricsStats = {
+    require(loopCount > 0)
     implicit val eventBus: EventBus = EventBus()
     var stats = TetricsStats()
     subscribe { e => stats = stats(e) }
-    require(loopCount > 0)
     loop(randPut(Tetrics()), autoPlayer, loopCount)
     stats
   }
@@ -40,7 +40,7 @@ object Evaluator extends Subscriber {
   }
   def act(tetrics: Tetrics, action: TetricsAction)(implicit setting: TetricsSetting): Tetrics =
     action match {
-      case d: DropAction => randPut(tetrics.act(d))
+      case d: DropAndNormalizeAction => randPut(tetrics.act(d))
       case a => tetrics.act(a)
     }
   def randPut(tetrics: Tetrics)(implicit setting: TetricsSetting): Tetrics = {

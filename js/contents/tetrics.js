@@ -2199,7 +2199,7 @@ function $f_Lcom_yuiwai_tetrics_core_DefaultAutoPlayer__evalMove__Lcom_yuiwai_te
 }
 function $f_Lcom_yuiwai_tetrics_core_DefaultAutoPlayer__evalDrop__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_DefaultAutoPlayer$Eval__Lcom_yuiwai_tetrics_core_DroppableField__Lcom_yuiwai_tetrics_core_DefaultAutoPlayer$Eval($thiz, tetrics, eval$2, droppableField) {
   try {
-    return eval$2.dropped__I__Lcom_yuiwai_tetrics_core_DroppableField__Lcom_yuiwai_tetrics_core_DefaultAutoPlayer$Eval($thiz.evalAction__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_DroppableField__I(tetrics, tetrics.act__Lcom_yuiwai_tetrics_core_TetricsAction__Lcom_yuiwai_tetrics_core_Tetrics(new $c_Lcom_yuiwai_tetrics_core_DropAndNormalizeAction().init___Lcom_yuiwai_tetrics_core_DropAction__Lcom_yuiwai_tetrics_core_NormalizeAction(droppableField.action__Lcom_yuiwai_tetrics_core_DropAction(), droppableField.normalizeAction__Lcom_yuiwai_tetrics_core_NormalizeAction())), droppableField), droppableField)
+    return eval$2.dropped__I__Lcom_yuiwai_tetrics_core_DroppableField__Lcom_yuiwai_tetrics_core_DefaultAutoPlayer$Eval($thiz.evalAction__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_DroppableField__I(tetrics, tetrics.act__Lcom_yuiwai_tetrics_core_TetricsAction__Lcom_yuiwai_tetrics_core_Tetrics(new $c_Lcom_yuiwai_tetrics_core_DropAndNormalizeAction().init___Lcom_yuiwai_tetrics_core_DropAction__Lcom_yuiwai_tetrics_core_NormalizeAction(droppableField.dropAction__Lcom_yuiwai_tetrics_core_DropAction(), droppableField.normalizeAction__Lcom_yuiwai_tetrics_core_NormalizeAction())), droppableField), droppableField)
   } catch (e) {
     var e$2 = $m_sjsr_package$().wrapJavaScriptException__O__jl_Throwable(e);
     if ($is_jl_Throwable(e$2)) {
@@ -2401,30 +2401,8 @@ $c_Lcom_yuiwai_tetrics_core_RowsOps$.prototype.fillLeftRows__sci_List__I__I__sci
     })
   })(this, width)))).$$plus$plus__sc_GenTraversableOnce__scg_CanBuildFrom__O(rows, $m_sci_List$().canBuildFrom__scg_CanBuildFrom()))
 });
-$c_Lcom_yuiwai_tetrics_core_RowsOps$.prototype.$$anonfun$turnRightRows$2__p1__I__I__T2__I = (function(i$1, x0$2, x1$1) {
-  var x1 = new $c_T2().init___O__O(x0$2, x1$1);
-  if ((x1 !== null)) {
-    var acc = x1.$$und1$mcI$sp__I();
-    var p2 = $as_T2(x1.$$und2__O());
-    if ((p2 !== null)) {
-      var row = $as_Lcom_yuiwai_tetrics_core_Row(p2.$$und1__O());
-      var j = p2.$$und2$mcI$sp__I();
-      return (acc | (((row.cols__I() >> i$1) & 1) << j))
-    }
-  };
-  throw new $c_s_MatchError().init___O(x1)
-});
-$c_Lcom_yuiwai_tetrics_core_RowsOps$.prototype.$$anonfun$turnRightRows$1__p1__sci_List__I__Lcom_yuiwai_tetrics_core_Row = (function(rows$1, i) {
-  return new $c_Lcom_yuiwai_tetrics_core_Row().init___I__I($uI($as_sc_LinearSeqOptimized(rows$1.reverse__sci_List().zipWithIndex__scg_CanBuildFrom__O($m_sci_List$().canBuildFrom__scg_CanBuildFrom())).foldLeft__O__F2__O(0, new $c_sjsr_AnonFunction2().init___sjs_js_Function2((function($this, i) {
-    return (function(x0$2$2, x1$1$2) {
-      var x0$2 = $uI(x0$2$2);
-      var x1$1 = $as_T2(x1$1$2);
-      return $this.$$anonfun$turnRightRows$2__p1__I__I__T2__I(i, x0$2, x1$1)
-    })
-  })(this, i)))), rows$1.length__I())
-});
-$c_Lcom_yuiwai_tetrics_core_RowsOps$.prototype.$$anonfun$turnLeftRows$2__p1__I__I__T2__I = (function(i$2, x0$3, x1$2) {
-  var x1 = new $c_T2().init___O__O(x0$3, x1$2);
+$c_Lcom_yuiwai_tetrics_core_RowsOps$.prototype.$$anonfun$turnRightRows$2__p1__I__I__T2__I = (function(i$2, x0$3, x1$1) {
+  var x1 = new $c_T2().init___O__O(x0$3, x1$1);
   if ((x1 !== null)) {
     var acc = x1.$$und1$mcI$sp__I();
     var p2 = $as_T2(x1.$$und2__O());
@@ -2436,12 +2414,34 @@ $c_Lcom_yuiwai_tetrics_core_RowsOps$.prototype.$$anonfun$turnLeftRows$2__p1__I__
   };
   throw new $c_s_MatchError().init___O(x1)
 });
+$c_Lcom_yuiwai_tetrics_core_RowsOps$.prototype.$$anonfun$turnRightRows$1__p1__sci_List__I__Lcom_yuiwai_tetrics_core_Row = (function(rows$1, i) {
+  return new $c_Lcom_yuiwai_tetrics_core_Row().init___I__I($uI($as_sc_LinearSeqOptimized(rows$1.reverse__sci_List().zipWithIndex__scg_CanBuildFrom__O($m_sci_List$().canBuildFrom__scg_CanBuildFrom())).foldLeft__O__F2__O(0, new $c_sjsr_AnonFunction2().init___sjs_js_Function2((function($this, i) {
+    return (function(x0$3$2, x1$1$2) {
+      var x0$3 = $uI(x0$3$2);
+      var x1$1 = $as_T2(x1$1$2);
+      return $this.$$anonfun$turnRightRows$2__p1__I__I__T2__I(i, x0$3, x1$1)
+    })
+  })(this, i)))), rows$1.length__I())
+});
+$c_Lcom_yuiwai_tetrics_core_RowsOps$.prototype.$$anonfun$turnLeftRows$2__p1__I__I__T2__I = (function(i$3, x0$4, x1$2) {
+  var x1 = new $c_T2().init___O__O(x0$4, x1$2);
+  if ((x1 !== null)) {
+    var acc = x1.$$und1$mcI$sp__I();
+    var p2 = $as_T2(x1.$$und2__O());
+    if ((p2 !== null)) {
+      var row = $as_Lcom_yuiwai_tetrics_core_Row(p2.$$und1__O());
+      var j = p2.$$und2$mcI$sp__I();
+      return (acc | (((row.cols__I() >> i$3) & 1) << j))
+    }
+  };
+  throw new $c_s_MatchError().init___O(x1)
+});
 $c_Lcom_yuiwai_tetrics_core_RowsOps$.prototype.$$anonfun$turnLeftRows$1__p1__sci_List__I__Lcom_yuiwai_tetrics_core_Row = (function(rows$2, i) {
   return new $c_Lcom_yuiwai_tetrics_core_Row().init___I__I($uI($as_sc_LinearSeqOptimized(rows$2.zipWithIndex__scg_CanBuildFrom__O($m_sci_List$().canBuildFrom__scg_CanBuildFrom())).foldLeft__O__F2__O(0, new $c_sjsr_AnonFunction2().init___sjs_js_Function2((function($this, i) {
-    return (function(x0$3$2, x1$2$2) {
-      var x0$3 = $uI(x0$3$2);
+    return (function(x0$4$2, x1$2$2) {
+      var x0$4 = $uI(x0$4$2);
       var x1$2 = $as_T2(x1$2$2);
-      return $this.$$anonfun$turnLeftRows$2__p1__I__I__T2__I(i, x0$3, x1$2)
+      return $this.$$anonfun$turnLeftRows$2__p1__I__I__T2__I(i, x0$4, x1$2)
     })
   })(this, i)))), rows$2.length__I())
 });
@@ -8155,15 +8155,15 @@ function $h_Lcom_yuiwai_tetrics_core_Row$() {
 $h_Lcom_yuiwai_tetrics_core_Row$.prototype = $c_Lcom_yuiwai_tetrics_core_Row$.prototype;
 $c_Lcom_yuiwai_tetrics_core_Row$.prototype.apply__T__Lcom_yuiwai_tetrics_core_Row = (function(cols) {
   return new $c_Lcom_yuiwai_tetrics_core_Row().init___I__I($uI($as_sc_TraversableOnce(new $c_sci_StringOps().init___T($m_s_Predef$().augmentString__T__T(cols)).zipWithIndex__scg_CanBuildFrom__O($m_s_Predef$().fallbackStringCanBuildFrom__scg_CanBuildFrom())).foldLeft__O__F2__O(0, new $c_sjsr_AnonFunction2().init___sjs_js_Function2((function($this) {
-    return (function(x0$4$2, x1$3$2) {
-      var x0$4 = $uI(x0$4$2);
+    return (function(x0$5$2, x1$3$2) {
+      var x0$5 = $uI(x0$5$2);
       var x1$3 = $as_T2(x1$3$2);
-      return $this.$$anonfun$apply$3__p1__I__T2__I(x0$4, x1$3)
+      return $this.$$anonfun$apply$3__p1__I__T2__I(x0$5, x1$3)
     })
   })(this)))), $m_sjsr_RuntimeString$().length__T__I(cols))
 });
-$c_Lcom_yuiwai_tetrics_core_Row$.prototype.$$anonfun$apply$3__p1__I__T2__I = (function(x0$4, x1$3) {
-  var x1 = new $c_T2().init___O__O(x0$4, x1$3);
+$c_Lcom_yuiwai_tetrics_core_Row$.prototype.$$anonfun$apply$3__p1__I__T2__I = (function(x0$5, x1$3) {
+  var x1 = new $c_T2().init___O__O(x0$5, x1$3);
   if ((x1 !== null)) {
     var acc = x1.$$und1$mcI$sp__I();
     var p2 = $as_T2(x1.$$und2__O());
@@ -8412,8 +8412,8 @@ $c_Lcom_yuiwai_tetrics_js_Example$.prototype.com$yuiwai$tetrics$js$Example$$$ano
       var x1$2 = $m_Lcom_yuiwai_tetrics_js_Example$().semiAuto__p1__s_Option();
       if ($is_s_Some(x1$2)) {
         var x2 = $as_s_Some(x1$2);
-        var semiAuto = $as_Lcom_yuiwai_tetrics_js_SemiAuto(x2.value__O());
-        $m_Lcom_yuiwai_tetrics_js_Example$().game__p1__Lcom_yuiwai_tetrics_core_TetricsGame().act__Lcom_yuiwai_tetrics_core_AutoPlayer__O__Lcom_yuiwai_tetrics_core_TetricsSetting__V(semiAuto.autoPlayer__Lcom_yuiwai_tetrics_core_AutoPlayer(), $m_Lcom_yuiwai_tetrics_js_Example$().com$yuiwai$tetrics$js$Example$$ctx__Lorg_scalajs_dom_raw_CanvasRenderingContext2D(), $m_Lcom_yuiwai_tetrics_js_Example$().setting__Lcom_yuiwai_tetrics_core_TetricsSetting());
+        var s = $as_Lcom_yuiwai_tetrics_js_SemiAuto(x2.value__O());
+        $m_Lcom_yuiwai_tetrics_js_Example$().game__p1__Lcom_yuiwai_tetrics_core_TetricsGame().act__Lcom_yuiwai_tetrics_core_AutoPlayer__O__Lcom_yuiwai_tetrics_core_TetricsSetting__V(s.autoPlayer__Lcom_yuiwai_tetrics_core_AutoPlayer(), $m_Lcom_yuiwai_tetrics_js_Example$().com$yuiwai$tetrics$js$Example$$ctx__Lorg_scalajs_dom_raw_CanvasRenderingContext2D(), $m_Lcom_yuiwai_tetrics_js_Example$().setting__Lcom_yuiwai_tetrics_core_TetricsSetting());
         return (void 0)
       } else {
         var x = $m_s_None$();
@@ -12920,7 +12920,7 @@ $c_Lcom_yuiwai_tetrics_core_DefaultAutoPlayer$Eval.prototype.moved__Lcom_yuiwai_
   return this.copy__sci_List__I__Lcom_yuiwai_tetrics_core_DefaultAutoPlayer$Eval(this.actions__sci_List().$$colon$colon__O__sci_List(x$12), this.copy$default$2__I())
 });
 $c_Lcom_yuiwai_tetrics_core_DefaultAutoPlayer$Eval.prototype.dropped__I__Lcom_yuiwai_tetrics_core_DroppableField__Lcom_yuiwai_tetrics_core_DefaultAutoPlayer$Eval = (function(point, droppableField) {
-  var x$13 = new $c_Lcom_yuiwai_tetrics_core_DropAndNormalizeAction().init___Lcom_yuiwai_tetrics_core_DropAction__Lcom_yuiwai_tetrics_core_NormalizeAction(droppableField.action__Lcom_yuiwai_tetrics_core_DropAction(), droppableField.normalizeAction__Lcom_yuiwai_tetrics_core_NormalizeAction());
+  var x$13 = new $c_Lcom_yuiwai_tetrics_core_DropAndNormalizeAction().init___Lcom_yuiwai_tetrics_core_DropAction__Lcom_yuiwai_tetrics_core_NormalizeAction(droppableField.dropAction__Lcom_yuiwai_tetrics_core_DropAction(), droppableField.normalizeAction__Lcom_yuiwai_tetrics_core_NormalizeAction());
   return this.copy__sci_List__I__Lcom_yuiwai_tetrics_core_DefaultAutoPlayer$Eval(this.actions__sci_List().$$colon$colon__O__sci_List(x$13), ((this.points__I() + point) | 0))
 });
 $c_Lcom_yuiwai_tetrics_core_DefaultAutoPlayer$Eval.prototype.copy__sci_List__I__Lcom_yuiwai_tetrics_core_DefaultAutoPlayer$Eval = (function(actions, points) {
@@ -13080,10 +13080,10 @@ $c_Lcom_yuiwai_tetrics_core_Field.prototype.active__Z = (function() {
   return ((x === null) ? (x$2 === null) : x.equals__O__Z(x$2))
 });
 $c_Lcom_yuiwai_tetrics_core_Field.prototype.freeze__Lcom_yuiwai_tetrics_core_Field = (function() {
-  var x$131 = $m_Lcom_yuiwai_tetrics_core_FieldStatusFrozen$();
-  var x$132 = this.copy$default$1__sci_List();
-  var x$133 = this.copy$default$2__I();
-  return this.copy__sci_List__I__Lcom_yuiwai_tetrics_core_FieldStatus__Lcom_yuiwai_tetrics_core_Field(x$132, x$133, x$131)
+  var x$132 = $m_Lcom_yuiwai_tetrics_core_FieldStatusFrozen$();
+  var x$133 = this.copy$default$1__sci_List();
+  var x$134 = this.copy$default$2__I();
+  return this.copy__sci_List__I__Lcom_yuiwai_tetrics_core_FieldStatus__Lcom_yuiwai_tetrics_core_Field(x$133, x$134, x$132)
 });
 $c_Lcom_yuiwai_tetrics_core_Field.prototype.drop__Lcom_yuiwai_tetrics_core_Block__I__Lcom_yuiwai_tetrics_core_Field = (function(block, offset) {
   $m_s_Predef$().require__Z__F0__V(this.active__Z(), new $c_sjsr_AnonFunction0().init___sjs_js_Function0((function($this) {
@@ -13583,14 +13583,14 @@ $c_Lcom_yuiwai_tetrics_core_Offset.prototype.moveLeft__Lcom_yuiwai_tetrics_core_
   return this.copy__I__I__Lcom_yuiwai_tetrics_core_Offset(((this.x__I() - 1) | 0), this.copy$default$2__I())
 });
 $c_Lcom_yuiwai_tetrics_core_Offset.prototype.moveUp__Lcom_yuiwai_tetrics_core_Offset = (function() {
-  var x$127 = ((this.y__I() - 1) | 0);
-  var x$128 = this.copy$default$1__I();
-  return this.copy__I__I__Lcom_yuiwai_tetrics_core_Offset(x$128, x$127)
+  var x$128 = ((this.y__I() - 1) | 0);
+  var x$129 = this.copy$default$1__I();
+  return this.copy__I__I__Lcom_yuiwai_tetrics_core_Offset(x$129, x$128)
 });
 $c_Lcom_yuiwai_tetrics_core_Offset.prototype.moveDown__Lcom_yuiwai_tetrics_core_Offset = (function() {
-  var x$129 = ((this.y__I() + 1) | 0);
-  var x$130 = this.copy$default$1__I();
-  return this.copy__I__I__Lcom_yuiwai_tetrics_core_Offset(x$130, x$129)
+  var x$130 = ((this.y__I() + 1) | 0);
+  var x$131 = this.copy$default$1__I();
+  return this.copy__I__I__Lcom_yuiwai_tetrics_core_Offset(x$131, x$130)
 });
 $c_Lcom_yuiwai_tetrics_core_Offset.prototype.copy__I__I__Lcom_yuiwai_tetrics_core_Offset = (function(x, y) {
   return new $c_Lcom_yuiwai_tetrics_core_Offset().init___I__I(x, y)
@@ -13924,9 +13924,9 @@ $c_Lcom_yuiwai_tetrics_core_Slice.prototype.dropPos$default$2__I = (function() {
 });
 $c_Lcom_yuiwai_tetrics_core_Slice.prototype.hitTest__Lcom_yuiwai_tetrics_core_Block__I__Z = (function(block, y) {
   return $as_sc_LinearSeqOptimized(block.rows__sci_List().zipWithIndex__scg_CanBuildFrom__O($m_sci_List$().canBuildFrom__scg_CanBuildFrom())).exists__F1__Z(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function($this, y) {
-    return (function(x0$1$2) {
-      var x0$1 = $as_T2(x0$1$2);
-      return $this.$$anonfun$hitTest$1__p1__I__T2__Z(y, x0$1)
+    return (function(x0$2$2) {
+      var x0$2 = $as_T2(x0$2$2);
+      return $this.$$anonfun$hitTest$1__p1__I__T2__Z(y, x0$2)
     })
   })(this, y)))
 });
@@ -13985,8 +13985,8 @@ $c_Lcom_yuiwai_tetrics_core_Slice.prototype.$$anonfun$spaces$1__p1__Lcom_yuiwai_
 $c_Lcom_yuiwai_tetrics_core_Slice.prototype.$$anonfun$spaces$2__p1__Lcom_yuiwai_tetrics_core_Row__I = (function(x$13) {
   return x$13.spaces__I()
 });
-$c_Lcom_yuiwai_tetrics_core_Slice.prototype.$$anonfun$hitTest$1__p1__I__T2__Z = (function(y$1, x0$1) {
-  var x1 = x0$1;
+$c_Lcom_yuiwai_tetrics_core_Slice.prototype.$$anonfun$hitTest$1__p1__I__T2__Z = (function(y$1, x0$2) {
+  var x1 = x0$2;
   if ((x1 !== null)) {
     var row = $as_Lcom_yuiwai_tetrics_core_Row(x1.$$und1__O());
     var i = x1.$$und2$mcI$sp__I();
@@ -19419,15 +19419,15 @@ $c_Lcom_yuiwai_tetrics_core_Tetrics.prototype.centralField__Lcom_yuiwai_tetrics_
   return this.emptyField__p1__Lcom_yuiwai_tetrics_core_Field().put__Lcom_yuiwai_tetrics_core_Block__I__I__Lcom_yuiwai_tetrics_core_Field(this.block__Lcom_yuiwai_tetrics_core_Block(), this.offset__Lcom_yuiwai_tetrics_core_Offset().x__I(), this.offset__Lcom_yuiwai_tetrics_core_Offset().y__I())
 });
 $c_Lcom_yuiwai_tetrics_core_Tetrics.prototype.put__Lcom_yuiwai_tetrics_core_Block__Lcom_yuiwai_tetrics_core_Offset__Lcom_yuiwai_tetrics_core_Tetrics = (function(block, offset) {
-  var x$15 = block;
-  var x$16 = offset;
-  var x$17 = this.copy$default$1__I();
-  var x$18 = this.copy$default$4__Lcom_yuiwai_tetrics_core_Rotation();
-  var x$19 = this.copy$default$5__Lcom_yuiwai_tetrics_core_Field();
-  var x$20 = this.copy$default$6__Lcom_yuiwai_tetrics_core_Field();
-  var x$21 = this.copy$default$7__Lcom_yuiwai_tetrics_core_Field();
-  var x$22 = this.copy$default$8__Lcom_yuiwai_tetrics_core_Field();
-  return this.copy__I__Lcom_yuiwai_tetrics_core_Block__Lcom_yuiwai_tetrics_core_Offset__Lcom_yuiwai_tetrics_core_Rotation__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_EventBus__Lcom_yuiwai_tetrics_core_Tetrics(x$17, x$15, x$16, x$18, x$19, x$20, x$21, x$22, this.eventBus$1).publishAndReturn__p1__F1__Lcom_yuiwai_tetrics_core_Tetrics(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function($this, block) {
+  var x$16 = block;
+  var x$17 = offset;
+  var x$18 = this.copy$default$1__I();
+  var x$19 = this.copy$default$4__Lcom_yuiwai_tetrics_core_Rotation();
+  var x$20 = this.copy$default$5__Lcom_yuiwai_tetrics_core_Field();
+  var x$21 = this.copy$default$6__Lcom_yuiwai_tetrics_core_Field();
+  var x$22 = this.copy$default$7__Lcom_yuiwai_tetrics_core_Field();
+  var x$23 = this.copy$default$8__Lcom_yuiwai_tetrics_core_Field();
+  return this.copy__I__Lcom_yuiwai_tetrics_core_Block__Lcom_yuiwai_tetrics_core_Offset__Lcom_yuiwai_tetrics_core_Rotation__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_EventBus__Lcom_yuiwai_tetrics_core_Tetrics(x$18, x$16, x$17, x$19, x$20, x$21, x$22, x$23, this.eventBus$1).publishAndReturn__p1__F1__Lcom_yuiwai_tetrics_core_Tetrics(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function($this, block) {
     return (function(x$2$2) {
       var x$2 = $as_Lcom_yuiwai_tetrics_core_Tetrics(x$2$2);
       return $this.$$anonfun$put$1__p1__Lcom_yuiwai_tetrics_core_Block__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_BlockAdded(block, x$2)
@@ -19438,15 +19438,15 @@ $c_Lcom_yuiwai_tetrics_core_Tetrics.prototype.putCenter__Lcom_yuiwai_tetrics_cor
   return this.put__Lcom_yuiwai_tetrics_core_Block__Lcom_yuiwai_tetrics_core_Offset__Lcom_yuiwai_tetrics_core_Tetrics(block, new $c_Lcom_yuiwai_tetrics_core_Offset().init___I__I($m_jl_Math$().round__D__J((((this.fieldSize__I() - block.width__I()) | 0) / 2.0)).toInt__I(), $m_jl_Math$().round__D__J((((this.fieldSize__I() - block.height__I()) | 0) / 2.0)).toInt__I()))
 });
 $c_Lcom_yuiwai_tetrics_core_Tetrics.prototype.moveRight__Lcom_yuiwai_tetrics_core_Tetrics = (function() {
-  var x$23 = this.offset__Lcom_yuiwai_tetrics_core_Offset().moveRight__Lcom_yuiwai_tetrics_core_Offset();
-  var x$24 = this.copy$default$1__I();
-  var x$25 = this.copy$default$2__Lcom_yuiwai_tetrics_core_Block();
-  var x$26 = this.copy$default$4__Lcom_yuiwai_tetrics_core_Rotation();
-  var x$27 = this.copy$default$5__Lcom_yuiwai_tetrics_core_Field();
-  var x$28 = this.copy$default$6__Lcom_yuiwai_tetrics_core_Field();
-  var x$29 = this.copy$default$7__Lcom_yuiwai_tetrics_core_Field();
-  var x$30 = this.copy$default$8__Lcom_yuiwai_tetrics_core_Field();
-  return this.copy__I__Lcom_yuiwai_tetrics_core_Block__Lcom_yuiwai_tetrics_core_Offset__Lcom_yuiwai_tetrics_core_Rotation__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_EventBus__Lcom_yuiwai_tetrics_core_Tetrics(x$24, x$25, x$23, x$26, x$27, x$28, x$29, x$30, this.eventBus$1).publishAndReturn__p1__F1__Lcom_yuiwai_tetrics_core_Tetrics(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function($this) {
+  var x$24 = this.offset__Lcom_yuiwai_tetrics_core_Offset().moveRight__Lcom_yuiwai_tetrics_core_Offset();
+  var x$25 = this.copy$default$1__I();
+  var x$26 = this.copy$default$2__Lcom_yuiwai_tetrics_core_Block();
+  var x$27 = this.copy$default$4__Lcom_yuiwai_tetrics_core_Rotation();
+  var x$28 = this.copy$default$5__Lcom_yuiwai_tetrics_core_Field();
+  var x$29 = this.copy$default$6__Lcom_yuiwai_tetrics_core_Field();
+  var x$30 = this.copy$default$7__Lcom_yuiwai_tetrics_core_Field();
+  var x$31 = this.copy$default$8__Lcom_yuiwai_tetrics_core_Field();
+  return this.copy__I__Lcom_yuiwai_tetrics_core_Block__Lcom_yuiwai_tetrics_core_Offset__Lcom_yuiwai_tetrics_core_Rotation__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_EventBus__Lcom_yuiwai_tetrics_core_Tetrics(x$25, x$26, x$24, x$27, x$28, x$29, x$30, x$31, this.eventBus$1).publishAndReturn__p1__F1__Lcom_yuiwai_tetrics_core_Tetrics(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function($this) {
     return (function(x$3$2) {
       var x$3 = $as_Lcom_yuiwai_tetrics_core_Tetrics(x$3$2);
       return $this.$$anonfun$moveRight$1__p1__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_BlockMoved(x$3)
@@ -19454,15 +19454,15 @@ $c_Lcom_yuiwai_tetrics_core_Tetrics.prototype.moveRight__Lcom_yuiwai_tetrics_cor
   })(this)))
 });
 $c_Lcom_yuiwai_tetrics_core_Tetrics.prototype.moveLeft__Lcom_yuiwai_tetrics_core_Tetrics = (function() {
-  var x$31 = this.offset__Lcom_yuiwai_tetrics_core_Offset().moveLeft__Lcom_yuiwai_tetrics_core_Offset();
-  var x$32 = this.copy$default$1__I();
-  var x$33 = this.copy$default$2__Lcom_yuiwai_tetrics_core_Block();
-  var x$34 = this.copy$default$4__Lcom_yuiwai_tetrics_core_Rotation();
-  var x$35 = this.copy$default$5__Lcom_yuiwai_tetrics_core_Field();
-  var x$36 = this.copy$default$6__Lcom_yuiwai_tetrics_core_Field();
-  var x$37 = this.copy$default$7__Lcom_yuiwai_tetrics_core_Field();
-  var x$38 = this.copy$default$8__Lcom_yuiwai_tetrics_core_Field();
-  return this.copy__I__Lcom_yuiwai_tetrics_core_Block__Lcom_yuiwai_tetrics_core_Offset__Lcom_yuiwai_tetrics_core_Rotation__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_EventBus__Lcom_yuiwai_tetrics_core_Tetrics(x$32, x$33, x$31, x$34, x$35, x$36, x$37, x$38, this.eventBus$1).publishAndReturn__p1__F1__Lcom_yuiwai_tetrics_core_Tetrics(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function($this) {
+  var x$32 = this.offset__Lcom_yuiwai_tetrics_core_Offset().moveLeft__Lcom_yuiwai_tetrics_core_Offset();
+  var x$33 = this.copy$default$1__I();
+  var x$34 = this.copy$default$2__Lcom_yuiwai_tetrics_core_Block();
+  var x$35 = this.copy$default$4__Lcom_yuiwai_tetrics_core_Rotation();
+  var x$36 = this.copy$default$5__Lcom_yuiwai_tetrics_core_Field();
+  var x$37 = this.copy$default$6__Lcom_yuiwai_tetrics_core_Field();
+  var x$38 = this.copy$default$7__Lcom_yuiwai_tetrics_core_Field();
+  var x$39 = this.copy$default$8__Lcom_yuiwai_tetrics_core_Field();
+  return this.copy__I__Lcom_yuiwai_tetrics_core_Block__Lcom_yuiwai_tetrics_core_Offset__Lcom_yuiwai_tetrics_core_Rotation__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_EventBus__Lcom_yuiwai_tetrics_core_Tetrics(x$33, x$34, x$32, x$35, x$36, x$37, x$38, x$39, this.eventBus$1).publishAndReturn__p1__F1__Lcom_yuiwai_tetrics_core_Tetrics(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function($this) {
     return (function(x$4$2) {
       var x$4 = $as_Lcom_yuiwai_tetrics_core_Tetrics(x$4$2);
       return $this.$$anonfun$moveLeft$1__p1__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_BlockMoved(x$4)
@@ -19470,15 +19470,15 @@ $c_Lcom_yuiwai_tetrics_core_Tetrics.prototype.moveLeft__Lcom_yuiwai_tetrics_core
   })(this)))
 });
 $c_Lcom_yuiwai_tetrics_core_Tetrics.prototype.moveUp__Lcom_yuiwai_tetrics_core_Tetrics = (function() {
-  var x$39 = this.offset__Lcom_yuiwai_tetrics_core_Offset().moveUp__Lcom_yuiwai_tetrics_core_Offset();
-  var x$40 = this.copy$default$1__I();
-  var x$41 = this.copy$default$2__Lcom_yuiwai_tetrics_core_Block();
-  var x$42 = this.copy$default$4__Lcom_yuiwai_tetrics_core_Rotation();
-  var x$43 = this.copy$default$5__Lcom_yuiwai_tetrics_core_Field();
-  var x$44 = this.copy$default$6__Lcom_yuiwai_tetrics_core_Field();
-  var x$45 = this.copy$default$7__Lcom_yuiwai_tetrics_core_Field();
-  var x$46 = this.copy$default$8__Lcom_yuiwai_tetrics_core_Field();
-  return this.copy__I__Lcom_yuiwai_tetrics_core_Block__Lcom_yuiwai_tetrics_core_Offset__Lcom_yuiwai_tetrics_core_Rotation__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_EventBus__Lcom_yuiwai_tetrics_core_Tetrics(x$40, x$41, x$39, x$42, x$43, x$44, x$45, x$46, this.eventBus$1).publishAndReturn__p1__F1__Lcom_yuiwai_tetrics_core_Tetrics(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function($this) {
+  var x$40 = this.offset__Lcom_yuiwai_tetrics_core_Offset().moveUp__Lcom_yuiwai_tetrics_core_Offset();
+  var x$41 = this.copy$default$1__I();
+  var x$42 = this.copy$default$2__Lcom_yuiwai_tetrics_core_Block();
+  var x$43 = this.copy$default$4__Lcom_yuiwai_tetrics_core_Rotation();
+  var x$44 = this.copy$default$5__Lcom_yuiwai_tetrics_core_Field();
+  var x$45 = this.copy$default$6__Lcom_yuiwai_tetrics_core_Field();
+  var x$46 = this.copy$default$7__Lcom_yuiwai_tetrics_core_Field();
+  var x$47 = this.copy$default$8__Lcom_yuiwai_tetrics_core_Field();
+  return this.copy__I__Lcom_yuiwai_tetrics_core_Block__Lcom_yuiwai_tetrics_core_Offset__Lcom_yuiwai_tetrics_core_Rotation__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_EventBus__Lcom_yuiwai_tetrics_core_Tetrics(x$41, x$42, x$40, x$43, x$44, x$45, x$46, x$47, this.eventBus$1).publishAndReturn__p1__F1__Lcom_yuiwai_tetrics_core_Tetrics(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function($this) {
     return (function(x$5$2) {
       var x$5 = $as_Lcom_yuiwai_tetrics_core_Tetrics(x$5$2);
       return $this.$$anonfun$moveUp$1__p1__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_BlockMoved(x$5)
@@ -19486,15 +19486,15 @@ $c_Lcom_yuiwai_tetrics_core_Tetrics.prototype.moveUp__Lcom_yuiwai_tetrics_core_T
   })(this)))
 });
 $c_Lcom_yuiwai_tetrics_core_Tetrics.prototype.moveDown__Lcom_yuiwai_tetrics_core_Tetrics = (function() {
-  var x$47 = this.offset__Lcom_yuiwai_tetrics_core_Offset().moveDown__Lcom_yuiwai_tetrics_core_Offset();
-  var x$48 = this.copy$default$1__I();
-  var x$49 = this.copy$default$2__Lcom_yuiwai_tetrics_core_Block();
-  var x$50 = this.copy$default$4__Lcom_yuiwai_tetrics_core_Rotation();
-  var x$51 = this.copy$default$5__Lcom_yuiwai_tetrics_core_Field();
-  var x$52 = this.copy$default$6__Lcom_yuiwai_tetrics_core_Field();
-  var x$53 = this.copy$default$7__Lcom_yuiwai_tetrics_core_Field();
-  var x$54 = this.copy$default$8__Lcom_yuiwai_tetrics_core_Field();
-  return this.copy__I__Lcom_yuiwai_tetrics_core_Block__Lcom_yuiwai_tetrics_core_Offset__Lcom_yuiwai_tetrics_core_Rotation__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_EventBus__Lcom_yuiwai_tetrics_core_Tetrics(x$48, x$49, x$47, x$50, x$51, x$52, x$53, x$54, this.eventBus$1).publishAndReturn__p1__F1__Lcom_yuiwai_tetrics_core_Tetrics(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function($this) {
+  var x$48 = this.offset__Lcom_yuiwai_tetrics_core_Offset().moveDown__Lcom_yuiwai_tetrics_core_Offset();
+  var x$49 = this.copy$default$1__I();
+  var x$50 = this.copy$default$2__Lcom_yuiwai_tetrics_core_Block();
+  var x$51 = this.copy$default$4__Lcom_yuiwai_tetrics_core_Rotation();
+  var x$52 = this.copy$default$5__Lcom_yuiwai_tetrics_core_Field();
+  var x$53 = this.copy$default$6__Lcom_yuiwai_tetrics_core_Field();
+  var x$54 = this.copy$default$7__Lcom_yuiwai_tetrics_core_Field();
+  var x$55 = this.copy$default$8__Lcom_yuiwai_tetrics_core_Field();
+  return this.copy__I__Lcom_yuiwai_tetrics_core_Block__Lcom_yuiwai_tetrics_core_Offset__Lcom_yuiwai_tetrics_core_Rotation__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_EventBus__Lcom_yuiwai_tetrics_core_Tetrics(x$49, x$50, x$48, x$51, x$52, x$53, x$54, x$55, this.eventBus$1).publishAndReturn__p1__F1__Lcom_yuiwai_tetrics_core_Tetrics(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function($this) {
     return (function(x$6$2) {
       var x$6 = $as_Lcom_yuiwai_tetrics_core_Tetrics(x$6$2);
       return $this.$$anonfun$moveDown$1__p1__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_BlockMoved(x$6)
@@ -19502,15 +19502,15 @@ $c_Lcom_yuiwai_tetrics_core_Tetrics.prototype.moveDown__Lcom_yuiwai_tetrics_core
   })(this)))
 });
 $c_Lcom_yuiwai_tetrics_core_Tetrics.prototype.turn__Lcom_yuiwai_tetrics_core_Block__Lcom_yuiwai_tetrics_core_Rotation__Lcom_yuiwai_tetrics_core_Tetrics = (function(b, r) {
-  var x$55 = b;
-  var x$56 = this.turnedOffset__Lcom_yuiwai_tetrics_core_Block__Lcom_yuiwai_tetrics_core_Rotation__Lcom_yuiwai_tetrics_core_Offset(b, r);
-  var x$57 = r;
-  var x$58 = this.copy$default$1__I();
-  var x$59 = this.copy$default$5__Lcom_yuiwai_tetrics_core_Field();
-  var x$60 = this.copy$default$6__Lcom_yuiwai_tetrics_core_Field();
-  var x$61 = this.copy$default$7__Lcom_yuiwai_tetrics_core_Field();
-  var x$62 = this.copy$default$8__Lcom_yuiwai_tetrics_core_Field();
-  return this.copy__I__Lcom_yuiwai_tetrics_core_Block__Lcom_yuiwai_tetrics_core_Offset__Lcom_yuiwai_tetrics_core_Rotation__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_EventBus__Lcom_yuiwai_tetrics_core_Tetrics(x$58, x$55, x$56, x$57, x$59, x$60, x$61, x$62, this.eventBus$1)
+  var x$56 = b;
+  var x$57 = this.turnedOffset__Lcom_yuiwai_tetrics_core_Block__Lcom_yuiwai_tetrics_core_Rotation__Lcom_yuiwai_tetrics_core_Offset(b, r);
+  var x$58 = r;
+  var x$59 = this.copy$default$1__I();
+  var x$60 = this.copy$default$5__Lcom_yuiwai_tetrics_core_Field();
+  var x$61 = this.copy$default$6__Lcom_yuiwai_tetrics_core_Field();
+  var x$62 = this.copy$default$7__Lcom_yuiwai_tetrics_core_Field();
+  var x$63 = this.copy$default$8__Lcom_yuiwai_tetrics_core_Field();
+  return this.copy__I__Lcom_yuiwai_tetrics_core_Block__Lcom_yuiwai_tetrics_core_Offset__Lcom_yuiwai_tetrics_core_Rotation__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_EventBus__Lcom_yuiwai_tetrics_core_Tetrics(x$59, x$56, x$57, x$58, x$60, x$61, x$62, x$63, this.eventBus$1)
 });
 $c_Lcom_yuiwai_tetrics_core_Tetrics.prototype.turnedOffset__Lcom_yuiwai_tetrics_core_Block__Lcom_yuiwai_tetrics_core_Rotation__Lcom_yuiwai_tetrics_core_Offset = (function(b, r) {
   return new $c_Lcom_yuiwai_tetrics_core_Offset().init___I__I(((this.offset__Lcom_yuiwai_tetrics_core_Offset().x__I() + r.round__D__I((((this.block__Lcom_yuiwai_tetrics_core_Block().width__I() - b.width__I()) | 0) / 2.0))) | 0), ((this.offset__Lcom_yuiwai_tetrics_core_Offset().y__I() + r.round__D__I((((this.block__Lcom_yuiwai_tetrics_core_Block().height__I() - b.height__I()) | 0) / 2.0))) | 0))
@@ -19532,15 +19532,15 @@ $c_Lcom_yuiwai_tetrics_core_Tetrics.prototype.turnRight__Lcom_yuiwai_tetrics_cor
   })(this)))
 });
 $c_Lcom_yuiwai_tetrics_core_Tetrics.prototype.dropLeft__Lcom_yuiwai_tetrics_core_Tetrics = (function() {
-  var x$63 = this.leftField__Lcom_yuiwai_tetrics_core_Field().drop__Lcom_yuiwai_tetrics_core_Block__I__Lcom_yuiwai_tetrics_core_Field(this.block__Lcom_yuiwai_tetrics_core_Block().turnLeft__Lcom_yuiwai_tetrics_core_Block(), this.offset__Lcom_yuiwai_tetrics_core_Offset().y__I());
-  var x$64 = this.copy$default$1__I();
-  var x$65 = this.copy$default$2__Lcom_yuiwai_tetrics_core_Block();
-  var x$66 = this.copy$default$3__Lcom_yuiwai_tetrics_core_Offset();
-  var x$67 = this.copy$default$4__Lcom_yuiwai_tetrics_core_Rotation();
-  var x$68 = this.copy$default$5__Lcom_yuiwai_tetrics_core_Field();
-  var x$69 = this.copy$default$6__Lcom_yuiwai_tetrics_core_Field();
-  var x$70 = this.copy$default$8__Lcom_yuiwai_tetrics_core_Field();
-  return this.copy__I__Lcom_yuiwai_tetrics_core_Block__Lcom_yuiwai_tetrics_core_Offset__Lcom_yuiwai_tetrics_core_Rotation__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_EventBus__Lcom_yuiwai_tetrics_core_Tetrics(x$64, x$65, x$66, x$67, x$68, x$69, x$63, x$70, this.eventBus$1).publishAndReturn__p1__F1__Lcom_yuiwai_tetrics_core_Tetrics(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function($this) {
+  var x$64 = this.leftField__Lcom_yuiwai_tetrics_core_Field().drop__Lcom_yuiwai_tetrics_core_Block__I__Lcom_yuiwai_tetrics_core_Field(this.block__Lcom_yuiwai_tetrics_core_Block().turnLeft__Lcom_yuiwai_tetrics_core_Block(), this.offset__Lcom_yuiwai_tetrics_core_Offset().y__I());
+  var x$65 = this.copy$default$1__I();
+  var x$66 = this.copy$default$2__Lcom_yuiwai_tetrics_core_Block();
+  var x$67 = this.copy$default$3__Lcom_yuiwai_tetrics_core_Offset();
+  var x$68 = this.copy$default$4__Lcom_yuiwai_tetrics_core_Rotation();
+  var x$69 = this.copy$default$5__Lcom_yuiwai_tetrics_core_Field();
+  var x$70 = this.copy$default$6__Lcom_yuiwai_tetrics_core_Field();
+  var x$71 = this.copy$default$8__Lcom_yuiwai_tetrics_core_Field();
+  return this.copy__I__Lcom_yuiwai_tetrics_core_Block__Lcom_yuiwai_tetrics_core_Offset__Lcom_yuiwai_tetrics_core_Rotation__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_EventBus__Lcom_yuiwai_tetrics_core_Tetrics(x$65, x$66, x$67, x$68, x$69, x$70, x$64, x$71, this.eventBus$1).publishAndReturn__p1__F1__Lcom_yuiwai_tetrics_core_Tetrics(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function($this) {
     return (function(t$2) {
       var t = $as_Lcom_yuiwai_tetrics_core_Tetrics(t$2);
       return $this.$$anonfun$dropLeft$1__p1__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_BlockDropped(t)
@@ -19548,15 +19548,15 @@ $c_Lcom_yuiwai_tetrics_core_Tetrics.prototype.dropLeft__Lcom_yuiwai_tetrics_core
   })(this)))
 });
 $c_Lcom_yuiwai_tetrics_core_Tetrics.prototype.dropRight__Lcom_yuiwai_tetrics_core_Tetrics = (function() {
-  var x$71 = this.rightField__Lcom_yuiwai_tetrics_core_Field().drop__Lcom_yuiwai_tetrics_core_Block__I__Lcom_yuiwai_tetrics_core_Field(this.block__Lcom_yuiwai_tetrics_core_Block().turnRight__Lcom_yuiwai_tetrics_core_Block(), ((((this.fieldSize__I() - this.offset__Lcom_yuiwai_tetrics_core_Offset().y__I()) | 0) - this.block__Lcom_yuiwai_tetrics_core_Block().height__I()) | 0));
-  var x$72 = this.copy$default$1__I();
-  var x$73 = this.copy$default$2__Lcom_yuiwai_tetrics_core_Block();
-  var x$74 = this.copy$default$3__Lcom_yuiwai_tetrics_core_Offset();
-  var x$75 = this.copy$default$4__Lcom_yuiwai_tetrics_core_Rotation();
-  var x$76 = this.copy$default$5__Lcom_yuiwai_tetrics_core_Field();
-  var x$77 = this.copy$default$7__Lcom_yuiwai_tetrics_core_Field();
-  var x$78 = this.copy$default$8__Lcom_yuiwai_tetrics_core_Field();
-  return this.copy__I__Lcom_yuiwai_tetrics_core_Block__Lcom_yuiwai_tetrics_core_Offset__Lcom_yuiwai_tetrics_core_Rotation__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_EventBus__Lcom_yuiwai_tetrics_core_Tetrics(x$72, x$73, x$74, x$75, x$76, x$71, x$77, x$78, this.eventBus$1).publishAndReturn__p1__F1__Lcom_yuiwai_tetrics_core_Tetrics(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function($this) {
+  var x$72 = this.rightField__Lcom_yuiwai_tetrics_core_Field().drop__Lcom_yuiwai_tetrics_core_Block__I__Lcom_yuiwai_tetrics_core_Field(this.block__Lcom_yuiwai_tetrics_core_Block().turnRight__Lcom_yuiwai_tetrics_core_Block(), ((((this.fieldSize__I() - this.offset__Lcom_yuiwai_tetrics_core_Offset().y__I()) | 0) - this.block__Lcom_yuiwai_tetrics_core_Block().height__I()) | 0));
+  var x$73 = this.copy$default$1__I();
+  var x$74 = this.copy$default$2__Lcom_yuiwai_tetrics_core_Block();
+  var x$75 = this.copy$default$3__Lcom_yuiwai_tetrics_core_Offset();
+  var x$76 = this.copy$default$4__Lcom_yuiwai_tetrics_core_Rotation();
+  var x$77 = this.copy$default$5__Lcom_yuiwai_tetrics_core_Field();
+  var x$78 = this.copy$default$7__Lcom_yuiwai_tetrics_core_Field();
+  var x$79 = this.copy$default$8__Lcom_yuiwai_tetrics_core_Field();
+  return this.copy__I__Lcom_yuiwai_tetrics_core_Block__Lcom_yuiwai_tetrics_core_Offset__Lcom_yuiwai_tetrics_core_Rotation__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_EventBus__Lcom_yuiwai_tetrics_core_Tetrics(x$73, x$74, x$75, x$76, x$77, x$72, x$78, x$79, this.eventBus$1).publishAndReturn__p1__F1__Lcom_yuiwai_tetrics_core_Tetrics(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function($this) {
     return (function(t$2) {
       var t = $as_Lcom_yuiwai_tetrics_core_Tetrics(t$2);
       return $this.$$anonfun$dropRight$1__p1__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_BlockDropped(t)
@@ -19564,15 +19564,15 @@ $c_Lcom_yuiwai_tetrics_core_Tetrics.prototype.dropRight__Lcom_yuiwai_tetrics_cor
   })(this)))
 });
 $c_Lcom_yuiwai_tetrics_core_Tetrics.prototype.dropTop__Lcom_yuiwai_tetrics_core_Tetrics = (function() {
-  var x$79 = this.topField__Lcom_yuiwai_tetrics_core_Field().drop__Lcom_yuiwai_tetrics_core_Block__I__Lcom_yuiwai_tetrics_core_Field(this.block__Lcom_yuiwai_tetrics_core_Block().turnLeft__Lcom_yuiwai_tetrics_core_Block().turnLeft__Lcom_yuiwai_tetrics_core_Block(), ((((this.fieldSize__I() - this.offset__Lcom_yuiwai_tetrics_core_Offset().x__I()) | 0) - this.block__Lcom_yuiwai_tetrics_core_Block().width__I()) | 0));
-  var x$80 = this.copy$default$1__I();
-  var x$81 = this.copy$default$2__Lcom_yuiwai_tetrics_core_Block();
-  var x$82 = this.copy$default$3__Lcom_yuiwai_tetrics_core_Offset();
-  var x$83 = this.copy$default$4__Lcom_yuiwai_tetrics_core_Rotation();
-  var x$84 = this.copy$default$5__Lcom_yuiwai_tetrics_core_Field();
-  var x$85 = this.copy$default$6__Lcom_yuiwai_tetrics_core_Field();
-  var x$86 = this.copy$default$7__Lcom_yuiwai_tetrics_core_Field();
-  return this.copy__I__Lcom_yuiwai_tetrics_core_Block__Lcom_yuiwai_tetrics_core_Offset__Lcom_yuiwai_tetrics_core_Rotation__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_EventBus__Lcom_yuiwai_tetrics_core_Tetrics(x$80, x$81, x$82, x$83, x$84, x$85, x$86, x$79, this.eventBus$1).publishAndReturn__p1__F1__Lcom_yuiwai_tetrics_core_Tetrics(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function($this) {
+  var x$80 = this.topField__Lcom_yuiwai_tetrics_core_Field().drop__Lcom_yuiwai_tetrics_core_Block__I__Lcom_yuiwai_tetrics_core_Field(this.block__Lcom_yuiwai_tetrics_core_Block().turnLeft__Lcom_yuiwai_tetrics_core_Block().turnLeft__Lcom_yuiwai_tetrics_core_Block(), ((((this.fieldSize__I() - this.offset__Lcom_yuiwai_tetrics_core_Offset().x__I()) | 0) - this.block__Lcom_yuiwai_tetrics_core_Block().width__I()) | 0));
+  var x$81 = this.copy$default$1__I();
+  var x$82 = this.copy$default$2__Lcom_yuiwai_tetrics_core_Block();
+  var x$83 = this.copy$default$3__Lcom_yuiwai_tetrics_core_Offset();
+  var x$84 = this.copy$default$4__Lcom_yuiwai_tetrics_core_Rotation();
+  var x$85 = this.copy$default$5__Lcom_yuiwai_tetrics_core_Field();
+  var x$86 = this.copy$default$6__Lcom_yuiwai_tetrics_core_Field();
+  var x$87 = this.copy$default$7__Lcom_yuiwai_tetrics_core_Field();
+  return this.copy__I__Lcom_yuiwai_tetrics_core_Block__Lcom_yuiwai_tetrics_core_Offset__Lcom_yuiwai_tetrics_core_Rotation__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_EventBus__Lcom_yuiwai_tetrics_core_Tetrics(x$81, x$82, x$83, x$84, x$85, x$86, x$87, x$80, this.eventBus$1).publishAndReturn__p1__F1__Lcom_yuiwai_tetrics_core_Tetrics(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function($this) {
     return (function(t$2) {
       var t = $as_Lcom_yuiwai_tetrics_core_Tetrics(t$2);
       return $this.$$anonfun$dropTop$1__p1__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_BlockDropped(t)
@@ -19580,15 +19580,15 @@ $c_Lcom_yuiwai_tetrics_core_Tetrics.prototype.dropTop__Lcom_yuiwai_tetrics_core_
   })(this)))
 });
 $c_Lcom_yuiwai_tetrics_core_Tetrics.prototype.dropBottom__Lcom_yuiwai_tetrics_core_Tetrics = (function() {
-  var x$87 = this.bottomField__Lcom_yuiwai_tetrics_core_Field().drop__Lcom_yuiwai_tetrics_core_Block__I__Lcom_yuiwai_tetrics_core_Field(this.block__Lcom_yuiwai_tetrics_core_Block(), this.offset__Lcom_yuiwai_tetrics_core_Offset().x__I());
-  var x$88 = this.copy$default$1__I();
-  var x$89 = this.copy$default$2__Lcom_yuiwai_tetrics_core_Block();
-  var x$90 = this.copy$default$3__Lcom_yuiwai_tetrics_core_Offset();
-  var x$91 = this.copy$default$4__Lcom_yuiwai_tetrics_core_Rotation();
-  var x$92 = this.copy$default$6__Lcom_yuiwai_tetrics_core_Field();
-  var x$93 = this.copy$default$7__Lcom_yuiwai_tetrics_core_Field();
-  var x$94 = this.copy$default$8__Lcom_yuiwai_tetrics_core_Field();
-  return this.copy__I__Lcom_yuiwai_tetrics_core_Block__Lcom_yuiwai_tetrics_core_Offset__Lcom_yuiwai_tetrics_core_Rotation__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_EventBus__Lcom_yuiwai_tetrics_core_Tetrics(x$88, x$89, x$90, x$91, x$87, x$92, x$93, x$94, this.eventBus$1).publishAndReturn__p1__F1__Lcom_yuiwai_tetrics_core_Tetrics(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function($this) {
+  var x$88 = this.bottomField__Lcom_yuiwai_tetrics_core_Field().drop__Lcom_yuiwai_tetrics_core_Block__I__Lcom_yuiwai_tetrics_core_Field(this.block__Lcom_yuiwai_tetrics_core_Block(), this.offset__Lcom_yuiwai_tetrics_core_Offset().x__I());
+  var x$89 = this.copy$default$1__I();
+  var x$90 = this.copy$default$2__Lcom_yuiwai_tetrics_core_Block();
+  var x$91 = this.copy$default$3__Lcom_yuiwai_tetrics_core_Offset();
+  var x$92 = this.copy$default$4__Lcom_yuiwai_tetrics_core_Rotation();
+  var x$93 = this.copy$default$6__Lcom_yuiwai_tetrics_core_Field();
+  var x$94 = this.copy$default$7__Lcom_yuiwai_tetrics_core_Field();
+  var x$95 = this.copy$default$8__Lcom_yuiwai_tetrics_core_Field();
+  return this.copy__I__Lcom_yuiwai_tetrics_core_Block__Lcom_yuiwai_tetrics_core_Offset__Lcom_yuiwai_tetrics_core_Rotation__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_EventBus__Lcom_yuiwai_tetrics_core_Tetrics(x$89, x$90, x$91, x$92, x$88, x$93, x$94, x$95, this.eventBus$1).publishAndReturn__p1__F1__Lcom_yuiwai_tetrics_core_Tetrics(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function($this) {
     return (function(t$2) {
       var t = $as_Lcom_yuiwai_tetrics_core_Tetrics(t$2);
       return $this.$$anonfun$dropBottom$1__p1__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_BlockDropped(t)
@@ -19596,15 +19596,15 @@ $c_Lcom_yuiwai_tetrics_core_Tetrics.prototype.dropBottom__Lcom_yuiwai_tetrics_co
   })(this)))
 });
 $c_Lcom_yuiwai_tetrics_core_Tetrics.prototype.normalizeLeft__Lcom_yuiwai_tetrics_core_Tetrics = (function() {
-  var x$95 = this.leftField__Lcom_yuiwai_tetrics_core_Field().normalized__Lcom_yuiwai_tetrics_core_Field();
-  var x$96 = this.copy$default$1__I();
-  var x$97 = this.copy$default$2__Lcom_yuiwai_tetrics_core_Block();
-  var x$98 = this.copy$default$3__Lcom_yuiwai_tetrics_core_Offset();
-  var x$99 = this.copy$default$4__Lcom_yuiwai_tetrics_core_Rotation();
-  var x$100 = this.copy$default$5__Lcom_yuiwai_tetrics_core_Field();
-  var x$101 = this.copy$default$6__Lcom_yuiwai_tetrics_core_Field();
-  var x$102 = this.copy$default$8__Lcom_yuiwai_tetrics_core_Field();
-  return this.copy__I__Lcom_yuiwai_tetrics_core_Block__Lcom_yuiwai_tetrics_core_Offset__Lcom_yuiwai_tetrics_core_Rotation__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_EventBus__Lcom_yuiwai_tetrics_core_Tetrics(x$96, x$97, x$98, x$99, x$100, x$101, x$95, x$102, this.eventBus$1).publishAndReturn__p1__F1__Lcom_yuiwai_tetrics_core_Tetrics(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function($this) {
+  var x$96 = this.leftField__Lcom_yuiwai_tetrics_core_Field().normalized__Lcom_yuiwai_tetrics_core_Field();
+  var x$97 = this.copy$default$1__I();
+  var x$98 = this.copy$default$2__Lcom_yuiwai_tetrics_core_Block();
+  var x$99 = this.copy$default$3__Lcom_yuiwai_tetrics_core_Offset();
+  var x$100 = this.copy$default$4__Lcom_yuiwai_tetrics_core_Rotation();
+  var x$101 = this.copy$default$5__Lcom_yuiwai_tetrics_core_Field();
+  var x$102 = this.copy$default$6__Lcom_yuiwai_tetrics_core_Field();
+  var x$103 = this.copy$default$8__Lcom_yuiwai_tetrics_core_Field();
+  return this.copy__I__Lcom_yuiwai_tetrics_core_Block__Lcom_yuiwai_tetrics_core_Offset__Lcom_yuiwai_tetrics_core_Rotation__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_EventBus__Lcom_yuiwai_tetrics_core_Tetrics(x$97, x$98, x$99, x$100, x$101, x$102, x$96, x$103, this.eventBus$1).publishAndReturn__p1__F1__Lcom_yuiwai_tetrics_core_Tetrics(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function($this) {
     return (function(t$2) {
       var t = $as_Lcom_yuiwai_tetrics_core_Tetrics(t$2);
       return $this.$$anonfun$normalizeLeft$1__p1__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_FieldNormalized(t)
@@ -19612,15 +19612,15 @@ $c_Lcom_yuiwai_tetrics_core_Tetrics.prototype.normalizeLeft__Lcom_yuiwai_tetrics
   })(this)))
 });
 $c_Lcom_yuiwai_tetrics_core_Tetrics.prototype.normalizeRight__Lcom_yuiwai_tetrics_core_Tetrics = (function() {
-  var x$103 = this.rightField__Lcom_yuiwai_tetrics_core_Field().normalized__Lcom_yuiwai_tetrics_core_Field();
-  var x$104 = this.copy$default$1__I();
-  var x$105 = this.copy$default$2__Lcom_yuiwai_tetrics_core_Block();
-  var x$106 = this.copy$default$3__Lcom_yuiwai_tetrics_core_Offset();
-  var x$107 = this.copy$default$4__Lcom_yuiwai_tetrics_core_Rotation();
-  var x$108 = this.copy$default$5__Lcom_yuiwai_tetrics_core_Field();
-  var x$109 = this.copy$default$7__Lcom_yuiwai_tetrics_core_Field();
-  var x$110 = this.copy$default$8__Lcom_yuiwai_tetrics_core_Field();
-  return this.copy__I__Lcom_yuiwai_tetrics_core_Block__Lcom_yuiwai_tetrics_core_Offset__Lcom_yuiwai_tetrics_core_Rotation__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_EventBus__Lcom_yuiwai_tetrics_core_Tetrics(x$104, x$105, x$106, x$107, x$108, x$103, x$109, x$110, this.eventBus$1).publishAndReturn__p1__F1__Lcom_yuiwai_tetrics_core_Tetrics(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function($this) {
+  var x$104 = this.rightField__Lcom_yuiwai_tetrics_core_Field().normalized__Lcom_yuiwai_tetrics_core_Field();
+  var x$105 = this.copy$default$1__I();
+  var x$106 = this.copy$default$2__Lcom_yuiwai_tetrics_core_Block();
+  var x$107 = this.copy$default$3__Lcom_yuiwai_tetrics_core_Offset();
+  var x$108 = this.copy$default$4__Lcom_yuiwai_tetrics_core_Rotation();
+  var x$109 = this.copy$default$5__Lcom_yuiwai_tetrics_core_Field();
+  var x$110 = this.copy$default$7__Lcom_yuiwai_tetrics_core_Field();
+  var x$111 = this.copy$default$8__Lcom_yuiwai_tetrics_core_Field();
+  return this.copy__I__Lcom_yuiwai_tetrics_core_Block__Lcom_yuiwai_tetrics_core_Offset__Lcom_yuiwai_tetrics_core_Rotation__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_EventBus__Lcom_yuiwai_tetrics_core_Tetrics(x$105, x$106, x$107, x$108, x$109, x$104, x$110, x$111, this.eventBus$1).publishAndReturn__p1__F1__Lcom_yuiwai_tetrics_core_Tetrics(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function($this) {
     return (function(t$2) {
       var t = $as_Lcom_yuiwai_tetrics_core_Tetrics(t$2);
       return $this.$$anonfun$normalizeRight$1__p1__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_FieldNormalized(t)
@@ -19628,15 +19628,15 @@ $c_Lcom_yuiwai_tetrics_core_Tetrics.prototype.normalizeRight__Lcom_yuiwai_tetric
   })(this)))
 });
 $c_Lcom_yuiwai_tetrics_core_Tetrics.prototype.normalizeTop__Lcom_yuiwai_tetrics_core_Tetrics = (function() {
-  var x$111 = this.topField__Lcom_yuiwai_tetrics_core_Field().normalized__Lcom_yuiwai_tetrics_core_Field();
-  var x$112 = this.copy$default$1__I();
-  var x$113 = this.copy$default$2__Lcom_yuiwai_tetrics_core_Block();
-  var x$114 = this.copy$default$3__Lcom_yuiwai_tetrics_core_Offset();
-  var x$115 = this.copy$default$4__Lcom_yuiwai_tetrics_core_Rotation();
-  var x$116 = this.copy$default$5__Lcom_yuiwai_tetrics_core_Field();
-  var x$117 = this.copy$default$6__Lcom_yuiwai_tetrics_core_Field();
-  var x$118 = this.copy$default$7__Lcom_yuiwai_tetrics_core_Field();
-  return this.copy__I__Lcom_yuiwai_tetrics_core_Block__Lcom_yuiwai_tetrics_core_Offset__Lcom_yuiwai_tetrics_core_Rotation__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_EventBus__Lcom_yuiwai_tetrics_core_Tetrics(x$112, x$113, x$114, x$115, x$116, x$117, x$118, x$111, this.eventBus$1).publishAndReturn__p1__F1__Lcom_yuiwai_tetrics_core_Tetrics(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function($this) {
+  var x$112 = this.topField__Lcom_yuiwai_tetrics_core_Field().normalized__Lcom_yuiwai_tetrics_core_Field();
+  var x$113 = this.copy$default$1__I();
+  var x$114 = this.copy$default$2__Lcom_yuiwai_tetrics_core_Block();
+  var x$115 = this.copy$default$3__Lcom_yuiwai_tetrics_core_Offset();
+  var x$116 = this.copy$default$4__Lcom_yuiwai_tetrics_core_Rotation();
+  var x$117 = this.copy$default$5__Lcom_yuiwai_tetrics_core_Field();
+  var x$118 = this.copy$default$6__Lcom_yuiwai_tetrics_core_Field();
+  var x$119 = this.copy$default$7__Lcom_yuiwai_tetrics_core_Field();
+  return this.copy__I__Lcom_yuiwai_tetrics_core_Block__Lcom_yuiwai_tetrics_core_Offset__Lcom_yuiwai_tetrics_core_Rotation__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_EventBus__Lcom_yuiwai_tetrics_core_Tetrics(x$113, x$114, x$115, x$116, x$117, x$118, x$119, x$112, this.eventBus$1).publishAndReturn__p1__F1__Lcom_yuiwai_tetrics_core_Tetrics(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function($this) {
     return (function(t$2) {
       var t = $as_Lcom_yuiwai_tetrics_core_Tetrics(t$2);
       return $this.$$anonfun$normalizeTop$1__p1__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_FieldNormalized(t)
@@ -19644,15 +19644,15 @@ $c_Lcom_yuiwai_tetrics_core_Tetrics.prototype.normalizeTop__Lcom_yuiwai_tetrics_
   })(this)))
 });
 $c_Lcom_yuiwai_tetrics_core_Tetrics.prototype.normalizeBottom__Lcom_yuiwai_tetrics_core_Tetrics = (function() {
-  var x$119 = this.bottomField__Lcom_yuiwai_tetrics_core_Field().normalized__Lcom_yuiwai_tetrics_core_Field();
-  var x$120 = this.copy$default$1__I();
-  var x$121 = this.copy$default$2__Lcom_yuiwai_tetrics_core_Block();
-  var x$122 = this.copy$default$3__Lcom_yuiwai_tetrics_core_Offset();
-  var x$123 = this.copy$default$4__Lcom_yuiwai_tetrics_core_Rotation();
-  var x$124 = this.copy$default$6__Lcom_yuiwai_tetrics_core_Field();
-  var x$125 = this.copy$default$7__Lcom_yuiwai_tetrics_core_Field();
-  var x$126 = this.copy$default$8__Lcom_yuiwai_tetrics_core_Field();
-  return this.copy__I__Lcom_yuiwai_tetrics_core_Block__Lcom_yuiwai_tetrics_core_Offset__Lcom_yuiwai_tetrics_core_Rotation__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_EventBus__Lcom_yuiwai_tetrics_core_Tetrics(x$120, x$121, x$122, x$123, x$119, x$124, x$125, x$126, this.eventBus$1).publishAndReturn__p1__F1__Lcom_yuiwai_tetrics_core_Tetrics(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function($this) {
+  var x$120 = this.bottomField__Lcom_yuiwai_tetrics_core_Field().normalized__Lcom_yuiwai_tetrics_core_Field();
+  var x$121 = this.copy$default$1__I();
+  var x$122 = this.copy$default$2__Lcom_yuiwai_tetrics_core_Block();
+  var x$123 = this.copy$default$3__Lcom_yuiwai_tetrics_core_Offset();
+  var x$124 = this.copy$default$4__Lcom_yuiwai_tetrics_core_Rotation();
+  var x$125 = this.copy$default$6__Lcom_yuiwai_tetrics_core_Field();
+  var x$126 = this.copy$default$7__Lcom_yuiwai_tetrics_core_Field();
+  var x$127 = this.copy$default$8__Lcom_yuiwai_tetrics_core_Field();
+  return this.copy__I__Lcom_yuiwai_tetrics_core_Block__Lcom_yuiwai_tetrics_core_Offset__Lcom_yuiwai_tetrics_core_Rotation__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_EventBus__Lcom_yuiwai_tetrics_core_Tetrics(x$121, x$122, x$123, x$124, x$120, x$125, x$126, x$127, this.eventBus$1).publishAndReturn__p1__F1__Lcom_yuiwai_tetrics_core_Tetrics(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function($this) {
     return (function(t$2) {
       var t = $as_Lcom_yuiwai_tetrics_core_Tetrics(t$2);
       return $this.$$anonfun$normalizeBottom$1__p1__Lcom_yuiwai_tetrics_core_Tetrics__Lcom_yuiwai_tetrics_core_FieldNormalized(t)
@@ -22557,7 +22557,7 @@ function $m_Lcom_yuiwai_tetrics_core_DropTopAction$() {
 /** @constructor */
 function $c_Lcom_yuiwai_tetrics_core_FieldBottom$() {
   $c_O.call(this);
-  this.action$1 = null;
+  this.dropAction$1 = null;
   this.normalizeAction$1 = null
 }
 $c_Lcom_yuiwai_tetrics_core_FieldBottom$.prototype = new $h_O();
@@ -22567,8 +22567,8 @@ function $h_Lcom_yuiwai_tetrics_core_FieldBottom$() {
   /*<skip>*/
 }
 $h_Lcom_yuiwai_tetrics_core_FieldBottom$.prototype = $c_Lcom_yuiwai_tetrics_core_FieldBottom$.prototype;
-$c_Lcom_yuiwai_tetrics_core_FieldBottom$.prototype.action__Lcom_yuiwai_tetrics_core_DropAction = (function() {
-  return this.action$1
+$c_Lcom_yuiwai_tetrics_core_FieldBottom$.prototype.dropAction__Lcom_yuiwai_tetrics_core_DropAction = (function() {
+  return this.dropAction$1
 });
 $c_Lcom_yuiwai_tetrics_core_FieldBottom$.prototype.normalizeAction__Lcom_yuiwai_tetrics_core_NormalizeAction = (function() {
   return this.normalizeAction$1
@@ -22596,7 +22596,7 @@ $c_Lcom_yuiwai_tetrics_core_FieldBottom$.prototype.init___ = (function() {
   $c_O.prototype.init___.call(this);
   $n_Lcom_yuiwai_tetrics_core_FieldBottom$ = this;
   $f_s_Product__$$init$__V(this);
-  this.action$1 = $m_Lcom_yuiwai_tetrics_core_DropBottomAction$();
+  this.dropAction$1 = $m_Lcom_yuiwai_tetrics_core_DropBottomAction$();
   this.normalizeAction$1 = $m_Lcom_yuiwai_tetrics_core_NormalizeBottomAction$();
   return this
 });
@@ -22623,7 +22623,7 @@ function $m_Lcom_yuiwai_tetrics_core_FieldBottom$() {
 /** @constructor */
 function $c_Lcom_yuiwai_tetrics_core_FieldLeft$() {
   $c_O.call(this);
-  this.action$1 = null;
+  this.dropAction$1 = null;
   this.normalizeAction$1 = null
 }
 $c_Lcom_yuiwai_tetrics_core_FieldLeft$.prototype = new $h_O();
@@ -22633,8 +22633,8 @@ function $h_Lcom_yuiwai_tetrics_core_FieldLeft$() {
   /*<skip>*/
 }
 $h_Lcom_yuiwai_tetrics_core_FieldLeft$.prototype = $c_Lcom_yuiwai_tetrics_core_FieldLeft$.prototype;
-$c_Lcom_yuiwai_tetrics_core_FieldLeft$.prototype.action__Lcom_yuiwai_tetrics_core_DropAction = (function() {
-  return this.action$1
+$c_Lcom_yuiwai_tetrics_core_FieldLeft$.prototype.dropAction__Lcom_yuiwai_tetrics_core_DropAction = (function() {
+  return this.dropAction$1
 });
 $c_Lcom_yuiwai_tetrics_core_FieldLeft$.prototype.normalizeAction__Lcom_yuiwai_tetrics_core_NormalizeAction = (function() {
   return this.normalizeAction$1
@@ -22662,7 +22662,7 @@ $c_Lcom_yuiwai_tetrics_core_FieldLeft$.prototype.init___ = (function() {
   $c_O.prototype.init___.call(this);
   $n_Lcom_yuiwai_tetrics_core_FieldLeft$ = this;
   $f_s_Product__$$init$__V(this);
-  this.action$1 = $m_Lcom_yuiwai_tetrics_core_DropLeftAction$();
+  this.dropAction$1 = $m_Lcom_yuiwai_tetrics_core_DropLeftAction$();
   this.normalizeAction$1 = $m_Lcom_yuiwai_tetrics_core_NormalizeLeftAction$();
   return this
 });
@@ -22689,7 +22689,7 @@ function $m_Lcom_yuiwai_tetrics_core_FieldLeft$() {
 /** @constructor */
 function $c_Lcom_yuiwai_tetrics_core_FieldRight$() {
   $c_O.call(this);
-  this.action$1 = null;
+  this.dropAction$1 = null;
   this.normalizeAction$1 = null
 }
 $c_Lcom_yuiwai_tetrics_core_FieldRight$.prototype = new $h_O();
@@ -22699,8 +22699,8 @@ function $h_Lcom_yuiwai_tetrics_core_FieldRight$() {
   /*<skip>*/
 }
 $h_Lcom_yuiwai_tetrics_core_FieldRight$.prototype = $c_Lcom_yuiwai_tetrics_core_FieldRight$.prototype;
-$c_Lcom_yuiwai_tetrics_core_FieldRight$.prototype.action__Lcom_yuiwai_tetrics_core_DropAction = (function() {
-  return this.action$1
+$c_Lcom_yuiwai_tetrics_core_FieldRight$.prototype.dropAction__Lcom_yuiwai_tetrics_core_DropAction = (function() {
+  return this.dropAction$1
 });
 $c_Lcom_yuiwai_tetrics_core_FieldRight$.prototype.normalizeAction__Lcom_yuiwai_tetrics_core_NormalizeAction = (function() {
   return this.normalizeAction$1
@@ -22728,7 +22728,7 @@ $c_Lcom_yuiwai_tetrics_core_FieldRight$.prototype.init___ = (function() {
   $c_O.prototype.init___.call(this);
   $n_Lcom_yuiwai_tetrics_core_FieldRight$ = this;
   $f_s_Product__$$init$__V(this);
-  this.action$1 = $m_Lcom_yuiwai_tetrics_core_DropRightAction$();
+  this.dropAction$1 = $m_Lcom_yuiwai_tetrics_core_DropRightAction$();
   this.normalizeAction$1 = $m_Lcom_yuiwai_tetrics_core_NormalizeRightAction$();
   return this
 });
@@ -22755,7 +22755,7 @@ function $m_Lcom_yuiwai_tetrics_core_FieldRight$() {
 /** @constructor */
 function $c_Lcom_yuiwai_tetrics_core_FieldTop$() {
   $c_O.call(this);
-  this.action$1 = null;
+  this.dropAction$1 = null;
   this.normalizeAction$1 = null
 }
 $c_Lcom_yuiwai_tetrics_core_FieldTop$.prototype = new $h_O();
@@ -22765,8 +22765,8 @@ function $h_Lcom_yuiwai_tetrics_core_FieldTop$() {
   /*<skip>*/
 }
 $h_Lcom_yuiwai_tetrics_core_FieldTop$.prototype = $c_Lcom_yuiwai_tetrics_core_FieldTop$.prototype;
-$c_Lcom_yuiwai_tetrics_core_FieldTop$.prototype.action__Lcom_yuiwai_tetrics_core_DropAction = (function() {
-  return this.action$1
+$c_Lcom_yuiwai_tetrics_core_FieldTop$.prototype.dropAction__Lcom_yuiwai_tetrics_core_DropAction = (function() {
+  return this.dropAction$1
 });
 $c_Lcom_yuiwai_tetrics_core_FieldTop$.prototype.normalizeAction__Lcom_yuiwai_tetrics_core_NormalizeAction = (function() {
   return this.normalizeAction$1
@@ -22794,7 +22794,7 @@ $c_Lcom_yuiwai_tetrics_core_FieldTop$.prototype.init___ = (function() {
   $c_O.prototype.init___.call(this);
   $n_Lcom_yuiwai_tetrics_core_FieldTop$ = this;
   $f_s_Product__$$init$__V(this);
-  this.action$1 = $m_Lcom_yuiwai_tetrics_core_DropTopAction$();
+  this.dropAction$1 = $m_Lcom_yuiwai_tetrics_core_DropTopAction$();
   this.normalizeAction$1 = $m_Lcom_yuiwai_tetrics_core_NormalizeTopAction$();
   return this
 });
