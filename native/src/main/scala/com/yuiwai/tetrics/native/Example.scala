@@ -92,16 +92,16 @@ trait NativeController extends TetricsController[CInt, NativeContext] {
       case 102 => Some(TurnRightAction)
       // H
       case 104 => Some(MoveLeftAction)
-      case 72 => Some(DropLeftAction)
+      case 72 => Some(DropAndNormalizeAction(DropLeftAction, NormalizeLeftAction))
       // J
       case 106 => Some(MoveDownAction)
-      case 74 => Some(DropBottomAction)
+      case 74 => Some(DropAndNormalizeAction(DropBottomAction, NormalizeBottomAction))
       // K
       case 107 => Some(MoveUpAction)
-      case 75 => Some(DropTopAction)
+      case 75 => Some(DropAndNormalizeAction(DropTopAction, NormalizeTopAction))
       // L
       case 108 => Some(MoveRightAction)
-      case 76 => Some(DropRightAction)
+      case 76 => Some(DropAndNormalizeAction(DropRightAction, NormalizeRightAction))
       // Other
       case _ => None
     }
