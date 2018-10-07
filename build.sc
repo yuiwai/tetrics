@@ -9,7 +9,7 @@ trait Base extends ScalaModule {
     "-feature"
   )
 }
-trait TetricsModule extends CrossScalaModule with Base {
+trait TetricsModule extends CrossSbtModule with Base {
   override def millSourcePath: Path = pwd / "core"
 }
 object tetricsJvm extends Cross[TetricsJvmModule]("2.11.12", "2.12.6")
@@ -37,7 +37,7 @@ class TetricsNativeModule(val crossScalaVersion: String) extends TetricsModule w
   def scalaNativeVersion = "0.3.8"
 }
 
-object js extends ScalaJSModule with Base {
+object js extends ScalaJSModule with SbtModule with Base {
   override def scalaVersion: T[String] = "2.12.6"
   override def scalaJSVersion = "0.6.24"
   override def moduleDeps = Seq(tetricsJs("2.12.6"))
@@ -53,7 +53,7 @@ object js extends ScalaJSModule with Base {
   }
 }
 
-object native extends ScalaNativeModule with Base {
+object native extends ScalaNativeModule with SbtModule with Base {
   def scalaVersion = "2.11.12"
   def scalaNativeVersion = "0.3.8"
   override def moduleDeps = Seq(tetricsNative("2.11.12"))

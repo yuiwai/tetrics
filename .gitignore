@@ -4,3 +4,4 @@ sync.sh
 .idea/
 .idea_modules/
 out/
+target/
