@@ -1,7 +1,10 @@
 import sbtcrossproject.CrossPlugin.autoImport.{crossProject, CrossType}
+import scalapb.compiler.Version.scalapbVersion
 
 scalaVersion in ThisBuild := "2.12.7"
 version in ThisBuild := "0.1.0"
+
+val pbruntime = "com.thesamet.scalapb" %% "scalapb-runtime" % scalapbVersion % "protobuf"
 
 lazy val core = (crossProject(JSPlatform, JVMPlatform, NativePlatform).crossType(CrossType.Pure) in file("core"))
   .settings(
@@ -11,8 +14,12 @@ lazy val core = (crossProject(JSPlatform, JVMPlatform, NativePlatform).crossType
       scalapb.gen() -> (sourceManaged in Compile).value
     )
   )
+  .jsSettings(
+    libraryDependencies += pbruntime
+  )
   .nativeSettings(
-    scalaVersion := "2.11.11"
+    scalaVersion := "2.11.11",
+    libraryDependencies += pbruntime
   )
 
 lazy val coreJVM = core.jvm
