@@ -42,3 +42,13 @@ lazy val native = (project in file("native"))
   )
   .dependsOn(coreNative)
   .enablePlugins(ScalaNativePlugin)
+
+lazy val libgdx = (project in file("libgdx"))
+  .settings(
+    name := "tetrics-gdx",
+    libraryDependencies ++= Seq(
+      "com.badlogicgames.gdx" % "gdx-backend-lwjgl" % "1.9.8",
+      "com.badlogicgames.gdx" % "gdx-platform" % "1.9.8" classifier "natives-desktop"
+    )
+  )
+  .dependsOn(coreJVM)
