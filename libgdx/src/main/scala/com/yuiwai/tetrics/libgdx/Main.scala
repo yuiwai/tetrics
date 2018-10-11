@@ -2,15 +2,12 @@ package com.yuiwai.tetrics.libgdx
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
-import com.badlogic.gdx.graphics.{Color, GL20}
-import com.badlogic.gdx.scenes.scene2d.{InputEvent, InputListener, Stage}
+import com.badlogic.gdx.graphics.{Color, GL20, OrthographicCamera}
 import com.badlogic.gdx.utils.viewport.FitViewport
-import com.badlogic.gdx.{Game, Gdx, Screen}
+import com.badlogic.gdx.{Game, Gdx, InputAdapter, Screen}
 import com.yuiwai.tetrics.core._
 
-import scala.collection.mutable
-
-object Main extends Subscriber with DefaultSettings {
+object Main {
   def main(args: Array[String]): Unit = {
     // TODO 定数化
     new LwjglApplication(new AppListener, "tetrics", 520, 520)
@@ -22,53 +19,47 @@ class AppListener extends Game {
     setScreen(new MainScreen)
   }
 }
-class MainScreen extends Screen with DefaultSettings  {
+class MainScreen extends Screen with DefaultSettings {
   implicit val eventBus = EventBus()
   implicit val ctx = new GdxContext
-  // TODO 定数化
-  lazy val stage: Stage = new Stage(new FitViewport(520, 520))
   lazy val shapeRenderer: ShapeRenderer = new ShapeRenderer()
+  lazy val camera: OrthographicCamera = new OrthographicCamera()
+  lazy val viewport: FitViewport = new FitViewport(520, 520, camera)
   private var game: TetricsGame[Char, GdxContext] = _
   init()
   def init(): Unit = {
-    Gdx.input.setInputProcessor(stage)
+    camera.translate(260, 260)
     game = new TenTen[Char, GdxContext] with GdxController with GdxView
-    stage.addListener(new InputListener {
-      override def keyTyped(event: InputEvent, character: Char): Boolean = {
-        game.input(character)
-        super.keyTyped(event, character)
+    game.start()
+    Gdx.input.setInputProcessor(new InputAdapter {
+      override def keyTyped(character: Char): Boolean = {
+        try {
+          game.input(character)
+        } catch {
+          case _: Throwable => ()
+        }
+        super.keyTyped(character)
       }
     })
-    game.start()
   }
-  override def resize(width: Int, height: Int): Unit = {
-    // stage.getViewport.update(width, height)
-  }
+  override def resize(width: Int, height: Int): Unit = viewport.update(width, height)
   override def render(delta: Float): Unit = {
+    ctx.clear()
+    game.update(delta)
+
     Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT)
     Gdx.gl.glClearColor(0, 0, 0, 1)
 
-    shapeRenderer.begin(ShapeRenderer.ShapeType.Line)
-    shapeRenderer.setColor(Color.GREEN)
-    draw()
+    shapeRenderer.begin(ShapeRenderer.ShapeType.Filled)
+    shapeRenderer.setProjectionMatrix(camera.combined)
+    ctx.renderers foreach (_.apply(shapeRenderer))
     shapeRenderer.end()
-    // stage.act(Gdx.graphics.getDeltaTime)
-    // stage.draw()
-  }
-  private def draw(): Unit = {
-    ctx.popRenderer() match {
-      case Some(renderer) =>
-        renderer(shapeRenderer)
-        draw()
-      case None =>
-    }
   }
   override def show(): Unit = ()
   override def hide(): Unit = ()
   override def pause(): Unit = ()
   override def resume(): Unit = ()
   override def dispose(): Unit = {
-    stage.dispose()
     shapeRenderer.dispose()
   }
 }
@@ -88,17 +79,27 @@ trait GdxController extends TetricsController[Char, GdxContext] {
       case 'J' => Some(DropAndNormalizeAction(DropBottomAction, NormalizeBottomAction))
       case _ => None
     }
-    None
   }
 }
 
 trait GdxView extends TetricsView[GdxContext] with LabeledFieldView[GdxContext] {
   override def offset: Int = 20
-  override def tileWidth: Int = 10
-  override def tileHeight: Int = 10
+  override def tileWidth: Int = 15
+  override def tileHeight: Int = 15
   override def drawField(field: Field, offsetX: Int, offsetY: Int)(implicit ctx: GdxContext): Unit = {
     ctx.pushRenderer { r =>
-      r.rect(offsetX, offsetY, tileWidth, tileHeight)
+      r.setColor(Color.GREEN)
+      r.rect(offsetX - 1, 520 - (offsetY + tileHeight * fieldSize + offset - tileHeight) - 1, tileWidth * fieldSize + 1, tileHeight * fieldSize + 1)
+      field.rows.zipWithIndex.foreach { case (row, y) =>
+        (0 until row.width) foreach { x =>
+          if ((row.cols >> x & 1) == 0) {
+            r.setColor(Color.BLACK)
+          } else {
+            r.setColor(Color.RED)
+          }
+          r.rect(x * tileWidth + offsetX, 520 - (y * tileHeight + offsetY + offset), tileWidth - 1, tileHeight - 1)
+        }
+      }
     }
   }
   override def drawLabel(label: Label, offsetX: Int, offsetY: Int)(implicit ctx: GdxContext): Unit = ()
@@ -106,7 +107,7 @@ trait GdxView extends TetricsView[GdxContext] with LabeledFieldView[GdxContext] 
 
 class GdxContext {
   type Renderer = ShapeRenderer => Unit
-  private val renderers: mutable.Queue[Renderer] = mutable.Queue.empty
-  def popRenderer(): Option[Renderer] = if (renderers.isEmpty) None else Some(renderers.dequeue())
-  def pushRenderer(renderer: Renderer): Unit = renderers.enqueue(renderer)
+  private[tetrics] var renderers: Seq[Renderer] = Seq.empty
+  def clear(): Unit = renderers = Seq.empty
+  def pushRenderer(renderer: Renderer): Unit = renderers = renderers :+ renderer
 }
