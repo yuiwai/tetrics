@@ -5,7 +5,9 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.badlogic.gdx.graphics.{Color, GL20, OrthographicCamera}
 import com.badlogic.gdx.utils.viewport.FitViewport
 import com.badlogic.gdx.{Game, Gdx, InputAdapter, Screen}
+import com.softwaremill.sttp.asynchttpclient.future.AsyncHttpClientFutureBackend
 import com.yuiwai.tetrics.core._
+import org.scalasapporo.gamecenter.connector.{HttpConnector, HttpConnectorContext}
 
 object Main {
   def main(args: Array[String]): Unit = {
@@ -35,12 +37,23 @@ class MainScreen extends Screen with DefaultSettings {
       override def keyTyped(character: Char): Boolean = {
         try {
           game.input(character)
+          httpTest()
         } catch {
           case _: Throwable => ()
         }
         super.keyTyped(character)
       }
     })
+  }
+  def httpTest(): Unit = {
+    // TODO 暫定処理
+    import scala.concurrent.ExecutionContext.Implicits.global
+    implicit val backend = AsyncHttpClientFutureBackend()
+    implicit val context = HttpConnectorContext("http://localhost:8080")
+    HttpConnector
+      .execute("test".getBytes)
+      .map(b => new String(b))
+      .foreach(println)
   }
   override def resize(width: Int, height: Int): Unit = viewport.update(width, height)
   override def render(delta: Float): Unit = {

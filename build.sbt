@@ -46,7 +46,10 @@ lazy val native = (project in file("native"))
 lazy val libgdx = (project in file("libgdx"))
   .settings(
     name := "tetrics-gdx",
+    resolvers += "scala-sapporo repo" at "https://s3-us-west-2.amazonaws.com/repo.scala-sapporo.org",
     libraryDependencies ++= Seq(
+      "org.scalasapporo.gamecenter" %% "scala-gamecenter-connector" % "0.1.0-SNAPSHOT",
+      "com.softwaremill.sttp" %% "async-http-client-backend-future" % "1.3.7",
       "com.badlogicgames.gdx" % "gdx-backend-lwjgl" % "1.9.8",
       "com.badlogicgames.gdx" % "gdx-platform" % "1.9.8" classifier "natives-desktop"
     )
