@@ -101,11 +101,13 @@ trait TetricsGame[E, C]
     afterAction(action)
   }
   def act(autoPlayer: AutoPlayer)
-    (implicit ctx: C, setting: TetricsSetting): Unit = if (status == GameStatusAutoPlay) try {
-    act(autoPlayer.act(tetrics))
-  } catch {
-    case _: Throwable => ()
-  }
+    (implicit ctx: C, setting: TetricsSetting): Unit =
+    if (status == GameStatusAutoPlay) try {
+      act(autoPlayer.act(tetrics))
+    } catch {
+      // FIXME いったん無視
+      case _: Throwable => ()
+    }
 }
 sealed trait GameStatus
 case object GameStatusReady extends GameStatus

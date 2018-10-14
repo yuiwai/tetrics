@@ -139,8 +139,7 @@ class GdxContext {
 
 trait AutoPlayerWithConnector extends QueueingAutoPlayer {
   import tetrics.{Request => PRequest, Response => PResponse}
-  private var lock = new AtomicBoolean(false)
-  // TODO 暫定実装
+  private val lock = new AtomicBoolean(false)
   def http(tetrics: Tetrics): Unit = {
     import scala.concurrent.ExecutionContext.Implicits.global
     implicit val backend = AsyncHttpClientFutureBackend()

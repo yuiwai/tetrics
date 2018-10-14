@@ -19,11 +19,17 @@ lazy val core = (crossProject(JSPlatform, JVMPlatform, NativePlatform).crossType
     libraryDependencies += "com.lihaoyi" %% "utest" % "0.6.5" % "test"
   )
   .jsSettings(
-    libraryDependencies += pbruntime
+    libraryDependencies ++= Seq(
+      pbruntime,
+      "com.lihaoyi" %%% "utest" % "0.6.5" % "test"
+    )
   )
   .nativeSettings(
     scalaVersion := "2.11.11",
-    libraryDependencies += pbruntime
+    libraryDependencies ++= Seq(
+      pbruntime,
+      "com.lihaoyi" %%% "utest" % "0.6.5" % "test"
+    )
   )
 
 lazy val coreJVM = core.jvm

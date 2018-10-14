@@ -99,6 +99,7 @@ object Tetrics {
   )
 }
 case class Offset(x: Int = 0, y: Int = 0) {
+  def +(other: Offset): Offset = Offset(x + other.x, y + other.y)
   def moveRight: Offset = copy(x = x + 1)
   def moveLeft: Offset = copy(x = x - 1)
   def moveUp: Offset = copy(y = y - 1)

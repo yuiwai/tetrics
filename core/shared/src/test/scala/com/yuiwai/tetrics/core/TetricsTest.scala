@@ -4,6 +4,14 @@ import utest._
 
 object TetricsTest extends TestSuite {
   val tests = Tests {
+    "block" - {
+      "rotate" - {
+        Block("1111", 4).turnLeft ==> Block("1111", 1)
+        Block("1111", 4).turnRight ==> Block("1111", 1)
+        Block("1111", 4).turnRight.turnLeft ==> Block("1111", 4)
+        Block("1111", 4).turnRight.turnRight ==> Block("1111", 4)
+      }
+    }
     "field" - {
       val field = Field(10)
       "offset" - {
@@ -20,6 +28,32 @@ object TetricsTest extends TestSuite {
         field.trim ==> (Block.empty, Offset.zero)
         field.put(Block("11", 2), 2, 3).trim ==> (Block("11", 2), Offset(2, 3))
         field.put(Block("1101", 2), 8, 8).trim ==> (Block("1101", 2), Offset(8, 8))
+        field.put(Block("0111", 2), 8, 8).trim ==> (Block("0111", 2), Offset(8, 8))
+        field.put(Block("1110", 2), 8, 8).trim ==> (Block("1110", 2), Offset(8, 8))
+      }
+    }
+    "tetrics" - {
+      implicit val eb = EventBus()
+      val tetrics = Tetrics()
+      "put center" - {
+        tetrics.putCenter(Block("1111", 2)).offset ==> Offset(4, 4)
+        tetrics.putCenter(Block("1111", 4)).offset ==> Offset(3, 5)
+        tetrics.putCenter(Block("100111", 3)).offset ==> Offset(4, 4)
+      }
+      "rotate" - {
+        val o1 = Offset(4, 4)
+        val o2 = o1 + Offset(Math.ceil((4 - 1) / 2.0).toInt, Math.ceil((1 - 4) / 2.0).toInt) // (6, 3)
+        val o3 = o2 + Offset(Math.floor((1 - 4) / 2.0).toInt, Math.floor((4 - 1) / 2.0).toInt) // (4, 4)
+        val o4 = o1 + Offset(Math.floor((4 - 1) / 2.0).toInt, Math.floor((1 - 4) / 2.0).toInt) // (5, 2)
+        val o5 = o4 + Offset(Math.floor((1 - 4) / 2.0).toInt, Math.floor((4 - 1) / 2.0).toInt) // (3, 3)
+        val o6 = o5 + Offset(Math.ceil((4 - 1) / 2.0).toInt, Math.ceil((1 - 4) / 2.0).toInt) // (5, 2)
+        val t = tetrics.put(Block("1111", 4), o1)
+        t.turnRight.offset ==> o2
+        t.turnRight.turnRight.offset ==> o3
+        t.turnRight.turnRight.turnRight.offset ==> o4
+        t.turnLeft.offset ==> o4
+        t.turnLeft.turnLeft.offset ==> o5
+        t.turnLeft.turnLeft.turnLeft.offset ==> o6
       }
     }
   }
