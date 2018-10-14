@@ -1,11 +1,18 @@
 package com.yuiwai.tetrics.libgdx
 
+import java.util.concurrent.atomic.AtomicBoolean
+
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.badlogic.gdx.graphics.{Color, GL20, OrthographicCamera}
+import com.badlogic.gdx.utils.Timer
 import com.badlogic.gdx.utils.viewport.FitViewport
 import com.badlogic.gdx.{Game, Gdx, InputAdapter, Screen}
+import com.softwaremill.sttp.asynchttpclient.future.AsyncHttpClientFutureBackend
 import com.yuiwai.tetrics.core._
+import converter.ProtobufConverter
+import com.yuiwai.tetrics.libgdx.AppSettings._
+import org.scalasapporo.gamecenter.connector.{HttpConnector, HttpConnectorContext}
 
 object Main {
   def main(args: Array[String]): Unit = {
@@ -16,20 +23,32 @@ object Main {
 
 class AppListener extends Game {
   override def create(): Unit = {
-    setScreen(new MainScreen)
+    setScreen(new MainScreen(ConnectorMode))
   }
 }
-class MainScreen extends Screen with DefaultSettings {
+object AppSettings {
+  sealed trait Mode
+  case object ConnectorMode extends Mode
+}
+class MainScreen(mode: Mode) extends Screen with DefaultSettings {
   implicit val eventBus = EventBus()
   implicit val ctx = new GdxContext
   lazy val shapeRenderer: ShapeRenderer = new ShapeRenderer()
   lazy val camera: OrthographicCamera = new OrthographicCamera()
   lazy val viewport: FitViewport = new FitViewport(520, 520, camera)
   private var game: TetricsGame[Char, GdxContext] = _
-  init()
+
+  mode match {
+    case ConnectorMode => initWithConnector()
+    case _ => initWithPlayer()
+  }
+
   def init(): Unit = {
     camera.translate(260, 260)
     game = new TenTen[Char, GdxContext] with GdxController with GdxView
+  }
+  def initWithPlayer(): Unit = {
+    init()
     game.start()
     Gdx.input.setInputProcessor(new InputAdapter {
       override def keyTyped(character: Char): Boolean = {
@@ -41,6 +60,12 @@ class MainScreen extends Screen with DefaultSettings {
         super.keyTyped(character)
       }
     })
+  }
+  def initWithConnector(): Unit = {
+    init()
+    game.autoPlay()
+    val autoPlayer = new AutoPlayerWithConnector {}
+    new Timer().scheduleTask(() => game.act(autoPlayer), 1.0f, 0.25f)
   }
   override def resize(width: Int, height: Int): Unit = viewport.update(width, height)
   override def render(delta: Float): Unit = {
@@ -110,4 +135,31 @@ class GdxContext {
   private[tetrics] var renderers: Seq[Renderer] = Seq.empty
   def clear(): Unit = renderers = Seq.empty
   def pushRenderer(renderer: Renderer): Unit = renderers = renderers :+ renderer
+}
+
+trait AutoPlayerWithConnector extends QueueingAutoPlayer {
+  import tetrics.{Request => PRequest, Response => PResponse}
+  private var lock = new AtomicBoolean(false)
+  // TODO 暫定実装
+  def http(tetrics: Tetrics): Unit = {
+    import scala.concurrent.ExecutionContext.Implicits.global
+    implicit val backend = AsyncHttpClientFutureBackend()
+    // TODO URLを設定ファイルから取得
+    implicit val context = HttpConnectorContext("http://localhost:8080")
+    HttpConnector
+      .execute(PRequest("0.1", Some(ProtobufConverter.toProto(tetrics))).toByteArray)
+      .map(b => ProtobufConverter.fromProto(PResponse.parseFrom(b)))
+      .recover { case _ => Seq(NoAction) }
+      .foreach { actions =>
+        actions.foreach(queue.put)
+        lock.set(false)
+      }
+  }
+  override def actImpl(tetrics: Tetrics): Seq[TetricsAction] = {
+    if (queue.isEmpty & !lock.get()) {
+      lock.set(true)
+      http(tetrics)
+    }
+    Seq.empty
+  }
 }

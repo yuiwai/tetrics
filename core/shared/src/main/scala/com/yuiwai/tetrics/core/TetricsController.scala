@@ -8,6 +8,7 @@ sealed trait TetricsAction
 sealed trait MoveAction extends TetricsAction
 sealed trait DropAction extends TetricsAction {
   val fieldType: FieldType
+  def withNormalize: DropAndNormalizeAction
 }
 sealed trait NormalizeAction extends TetricsAction {
   val fieldType: FieldType
@@ -19,15 +20,19 @@ case object MoveUpAction extends TetricsAction with MoveAction
 case object MoveDownAction extends TetricsAction with MoveAction
 case object DropLeftAction extends TetricsAction with DropAction {
   override val fieldType: FieldType = FieldLeft
+  override def withNormalize: DropAndNormalizeAction = DropAndNormalizeAction(this, NormalizeLeftAction)
 }
 case object DropRightAction extends TetricsAction with DropAction {
   override val fieldType: FieldType = FieldRight
+  override def withNormalize: DropAndNormalizeAction = DropAndNormalizeAction(this, NormalizeRightAction)
 }
 case object DropTopAction extends TetricsAction with DropAction {
   override val fieldType: FieldType = FieldTop
+  override def withNormalize: DropAndNormalizeAction = DropAndNormalizeAction(this, NormalizeTopAction)
 }
 case object DropBottomAction extends TetricsAction with DropAction {
   override val fieldType: FieldType = FieldBottom
+  override def withNormalize: DropAndNormalizeAction = DropAndNormalizeAction(this, NormalizeBottomAction)
 }
 case object NormalizeLeftAction extends TetricsAction with NormalizeAction {
   override val fieldType: FieldType = FieldLeft
