@@ -9,6 +9,7 @@ import com.badlogic.gdx.utils.Timer
 import com.badlogic.gdx.utils.viewport.FitViewport
 import com.badlogic.gdx.{Game, Gdx, InputAdapter, Screen}
 import com.softwaremill.sttp.asynchttpclient.future.AsyncHttpClientFutureBackend
+import com.typesafe.config.ConfigFactory
 import com.yuiwai.tetrics.core._
 import converter.ProtobufConverter
 import com.yuiwai.tetrics.libgdx.AppSettings._
@@ -143,8 +144,8 @@ trait AutoPlayerWithConnector extends QueueingAutoPlayer {
   def http(tetrics: Tetrics): Unit = {
     import scala.concurrent.ExecutionContext.Implicits.global
     implicit val backend = AsyncHttpClientFutureBackend()
-    // TODO URLを設定ファイルから取得
-    implicit val context = HttpConnectorContext("http://localhost:8080")
+    val config = ConfigFactory.load()
+    implicit val context = HttpConnectorContext(config.getString("connector.url"))
     HttpConnector
       .execute(PRequest("0.1", Some(ProtobufConverter.toProto(tetrics))).toByteArray)
       .map(b => ProtobufConverter.fromProto(PResponse.parseFrom(b)))
