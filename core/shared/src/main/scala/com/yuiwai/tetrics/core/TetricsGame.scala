@@ -1,5 +1,7 @@
 package com.yuiwai.tetrics.core
 
+import java.util.concurrent.LinkedBlockingQueue
+
 import scala.util.{Success, Try}
 
 trait TetricsGame[E, C]
@@ -99,7 +101,11 @@ trait TetricsGame[E, C]
     afterAction(action)
   }
   def act(autoPlayer: AutoPlayer)
-    (implicit ctx: C, setting: TetricsSetting): Unit = if (status == GameStatusAutoPlay) act(autoPlayer.act(tetrics))
+    (implicit ctx: C, setting: TetricsSetting): Unit = if (status == GameStatusAutoPlay) try {
+    act(autoPlayer.act(tetrics))
+  } catch {
+    case _: Throwable => ()
+  }
 }
 sealed trait GameStatus
 case object GameStatusReady extends GameStatus
@@ -168,8 +174,19 @@ object DefaultSettings extends DefaultSettings
 trait AutoPlayer {
   def act(tetrics: Tetrics): TetricsAction
 }
-trait DefaultAutoPlayer extends AutoPlayer {
-  import scala.collection.mutable
+trait QueueingAutoPlayer extends AutoPlayer {
+  protected val queue = new LinkedBlockingQueue[TetricsAction]()
+  def actImpl(tetrics: Tetrics): Seq[TetricsAction]
+  def act(tetrics: Tetrics): TetricsAction = {
+    if (queue.isEmpty) {
+      actImpl(tetrics).foreach { action =>
+        queue.put(action)
+      }
+    }
+    queue.poll()
+  }
+}
+trait DefaultAutoPlayer extends QueueingAutoPlayer {
   case class Eval(actions: List[TetricsAction], points: Int) {
     def total: Int = points - actions.size
     def >>(eval: Eval): Eval = if (total > eval.total) this else eval
@@ -184,17 +201,12 @@ trait DefaultAutoPlayer extends AutoPlayer {
     def apply(actions: List[TetricsAction]): Eval = Eval(actions, 0)
     def apply(action: TetricsAction): Eval = Eval(action :: Nil)
   }
-  private val queue: mutable.Queue[TetricsAction] = mutable.Queue()
-  def act(tetrics: Tetrics): TetricsAction =
-    if (queue.nonEmpty) queue.dequeue()
-    else {
-      (evalRotate(tetrics)(FieldLeft) >>
-        evalRotate(tetrics)(FieldRight) >>
-        evalRotate(tetrics)(FieldTop) >>
-        evalRotate(tetrics)(FieldBottom))
-        .actions.reverse.foreach(a => queue.enqueue(a))
-      queue.dequeue()
-    }
+  def actImpl(tetrics: Tetrics): Seq[TetricsAction] =
+    (evalRotate(tetrics)(FieldLeft) >>
+      evalRotate(tetrics)(FieldRight) >>
+      evalRotate(tetrics)(FieldTop) >>
+      evalRotate(tetrics)(FieldBottom))
+      .actions.reverse
   def evalRotate(tetrics: Tetrics)(implicit droppableField: DroppableField): Eval = {
     evalField(tetrics, Eval.empty) >>
       evalField(tetrics.turnLeft, Eval(TurnLeftAction)) >>

@@ -104,6 +104,9 @@ case class Offset(x: Int = 0, y: Int = 0) {
   def moveUp: Offset = copy(y = y - 1)
   def moveDown: Offset = copy(y = y + 1)
 }
+object Offset {
+  val zero: Offset = Offset()
+}
 sealed trait MoveType
 case object MoveLeft extends MoveType
 case object MoveRight extends MoveType
@@ -202,6 +205,22 @@ case class Field(rows: List[Row], width: Int, status: FieldStatus = FieldStatusA
   private def bitCount(i: Int, count: Int = 0): Int = if (i == 0) count else bitCount(i & i - 1, count + 1)
   def turnRight: Field = Field(turnRightRows(rows, width), height)
   def turnLeft: Field = Field(turnLeftRows(rows, width), height)
+  def offset: Option[Offset] = for {
+    x <- offsetX
+    y <- offsetY
+  } yield Offset(x, y)
+  def offsetX: Option[Int] = turnRight.offsetY
+  def offsetY: Option[Int] = rows.zipWithIndex.find(_._1.nonEmpty).map(_._2)
+  def region(offset: Offset, width: Int, height: Int): Block = {
+    val rs = rows.slice(offset.y, offset.y + height).map(_.slice(offset.x, width))
+    Block(rs, width)
+  }
+  def trim: (Block, Offset) =
+    (for {
+      os <- offset
+      oe <- turnRight.turnRight.offset
+    } yield region(os, width - oe.x - os.x, height - oe.y - os.y) -> os)
+      .getOrElse(Block.empty, Offset.zero)
 }
 object Field {
   def apply(size: Int): Field = Field(size, size)
@@ -261,6 +280,17 @@ case class Row(cols: Int, width: Int) {
     (0 until width).foldLeft("") { (acc, i) =>
       acc + (cols >> i & 1)
     }
+  }
+  def toSeq: Seq[Boolean] = {
+    (0 until width).foldLeft(Seq.empty[Boolean]) { (acc, i) =>
+      acc :+ ((cols >> i & 1) == 1)
+    }
+  }
+  def slice(x: Int, width: Int): Row = {
+    val mask = (0 until width).foldLeft(0) { (acc, i) =>
+      acc | (1 << i)
+    }
+    Row((cols >> x) & mask, width)
   }
   def count: Int = {
     (0 until width).foldLeft(0) { (acc, i) =>
