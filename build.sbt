@@ -63,7 +63,13 @@ lazy val libgdx = (project in file("libgdx"))
       "com.softwaremill.sttp" %% "async-http-client-backend-future" % "1.3.7",
       "com.badlogicgames.gdx" % "gdx-backend-lwjgl" % "1.9.8",
       "com.badlogicgames.gdx" % "gdx-platform" % "1.9.8" classifier "natives-desktop"
-    )
+    ),
+    assemblyMergeStrategy in assembly := {
+      case "META-INF/io.netty.versions.properties" => MergeStrategy.concat
+      case x =>
+        val oldStrategy = (assemblyMergeStrategy in assembly).value
+        oldStrategy(x)
+    }
   )
   .dependsOn(coreJVM)
 
