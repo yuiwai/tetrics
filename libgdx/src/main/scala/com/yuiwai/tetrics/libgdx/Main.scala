@@ -5,7 +5,6 @@ import java.util.concurrent.atomic.AtomicBoolean
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.badlogic.gdx.graphics.{Color, GL20, OrthographicCamera}
-import com.badlogic.gdx.utils.Timer
 import com.badlogic.gdx.utils.viewport.FitViewport
 import com.badlogic.gdx.{Game, Gdx, InputAdapter, Screen}
 import com.softwaremill.sttp.asynchttpclient.future.AsyncHttpClientFutureBackend
@@ -31,6 +30,12 @@ object AppSettings {
   sealed trait Mode
   case object ConnectorMode extends Mode
 }
+case class Task(interval: Float, current: Float, callback: () => Unit) {
+  def update(delta: Float): Task = if (current + delta > interval) {
+    callback()
+    copy(current = current + delta - interval)
+  } else copy(current = current + delta)
+}
 class MainScreen(mode: Mode) extends Screen with DefaultSettings {
   implicit val eventBus = EventBus()
   implicit val ctx = new GdxContext
@@ -38,6 +43,7 @@ class MainScreen(mode: Mode) extends Screen with DefaultSettings {
   lazy val camera: OrthographicCamera = new OrthographicCamera()
   lazy val viewport: FitViewport = new FitViewport(520, 520, camera)
   private var game: TetricsGame[Char, GdxContext] = _
+  private var task: Option[Task] = None
 
   mode match {
     case ConnectorMode => initWithConnector()
@@ -66,11 +72,15 @@ class MainScreen(mode: Mode) extends Screen with DefaultSettings {
     init()
     game.autoPlay()
     val autoPlayer = new AutoPlayerWithConnector {}
-    new Timer().scheduleTask(() => game.act(autoPlayer), 1.0f, 0.25f)
+    // new Timer().scheduleTask(() => game.act(autoPlayer), 1.0f, 0.25f)
+    task = Some(Task(0.25f, 0, () => {
+      game.act(autoPlayer)
+    }))
   }
   override def resize(width: Int, height: Int): Unit = viewport.update(width, height)
   override def render(delta: Float): Unit = {
     ctx.clear()
+    task = task.map(_.update(delta))
     game.update(delta)
 
     Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT)
