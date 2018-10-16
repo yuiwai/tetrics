@@ -36,6 +36,9 @@ lazy val coreJVM = core.jvm
 lazy val coreJS = core.js
 lazy val coreNative = core.native
 
+lazy val check = (project in file("check"))
+  .dependsOn(coreJVM)
+
 lazy val js = (project in file("js"))
   .settings(
     name := "tetrics-js",
