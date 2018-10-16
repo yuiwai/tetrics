@@ -27,8 +27,9 @@ case class Tetrics(
   def fields: Seq[Field] = Seq(leftField, rightField, topField, bottomField)
   def deactivatedFields: Seq[Field] = fields.filterNot(_.active)
   def centralField: Field = emptyField.put(block, offset.x, offset.y)
-  def put(block: Block, offset: Offset = Offset()): Tetrics = copy(block = block, offset = offset)
-    .publishAndReturn(_ => BlockAdded(block))
+  def put(block: Block, offset: Offset = Offset(), rotation: Rotation = Rotation0): Tetrics =
+    copy(block = block, offset = offset, rotation = rotation)
+      .publishAndReturn(_ => BlockAdded(block))
   def putCenter(block: Block): Tetrics = put(block, Offset(
     Math.round((fieldSize - block.width) / 2.0).toInt,
     Math.round((fieldSize - block.height) / 2.0).toInt

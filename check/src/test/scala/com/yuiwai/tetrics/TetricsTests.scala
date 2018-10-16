@@ -1,6 +1,8 @@
 package com.yuiwai.tetrics
 
-import com.yuiwai.tetrics.core.{Block, Field, Surface}
+import com.yuiwai.tetrics.core.converter.ProtobufConverter
+import com.yuiwai.tetrics.core._
+import tetrics.Response
 import utest._
 
 object TetricsTests extends TestSuite {
@@ -42,6 +44,26 @@ object TetricsTests extends TestSuite {
         assert(Surface(List(1, 1, 2)).fitting(Surface(List(0, 1, 2))) == -2)
         assert(Surface(List(1, 2, 1)).fitting(Surface(List(0, 0, 0))) == -2)
         assert(Surface(List(0, 0, 0)).fitting(Surface(List(0, -1, -1))) == -1)
+      }
+    }
+    "protobuf converter" - {
+      import tetrics.{Row => PRow}
+      import tetrics.Action._
+      "to proto" - {
+        import ProtobufConverter.toProto
+        "actions" - {
+          toProto(Seq.empty) ==> Response(Nil)
+          toProto(Seq(TurnLeftAction)) ==> Response(List(ROTATE_LEFT))
+          toProto(Seq(DropLeftAction)) ==> Response(List(DROP_LEFT))
+          toProto(Seq(TurnLeftAction, DropLeftAction)) ==> Response(List(ROTATE_LEFT, DROP_LEFT))
+          toProto(Seq(DropAndNormalizeAction(DropLeftAction, NormalizeLeftAction))) ==> Response(List(DROP_LEFT))
+        }
+      }
+      "from proto" - {
+        import ProtobufConverter.fromProto
+        "row" - {
+          fromProto(PRow(Seq(false, true, true))) ==> Row("0110000000")
+        }
       }
     }
   }
