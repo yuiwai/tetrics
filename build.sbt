@@ -36,6 +36,13 @@ lazy val coreJVM = core.jvm
 lazy val coreJS = core.js
 lazy val coreNative = core.native
 
+lazy val check = (project in file("check"))
+  .settings(
+    libraryDependencies += "com.lihaoyi" %% "utest" % "0.6.5" % "test",
+    testFrameworks += new TestFramework("utest.runner.Framework")
+  )
+  .dependsOn(coreJVM)
+
 lazy val js = (project in file("js"))
   .settings(
     name := "tetrics-js",
@@ -60,16 +67,11 @@ lazy val libgdx = (project in file("libgdx"))
     libraryDependencies ++= Seq(
       "com.typesafe" % "config" % "1.3.2",
       "org.scalasapporo.gamecenter" %% "scala-gamecenter-connector" % "0.1.0-SNAPSHOT",
-      "com.softwaremill.sttp" %% "async-http-client-backend-future" % "1.3.7",
+      "com.softwaremill.sttp" %% "akka-http-backend" % "1.3.8",
+      "com.typesafe.akka" %% "akka-stream" % "2.5.11",
       "com.badlogicgames.gdx" % "gdx-backend-lwjgl" % "1.9.8",
       "com.badlogicgames.gdx" % "gdx-platform" % "1.9.8" classifier "natives-desktop"
-    ),
-    assemblyMergeStrategy in assembly := {
-      case "META-INF/io.netty.versions.properties" => MergeStrategy.concat
-      case x =>
-        val oldStrategy = (assemblyMergeStrategy in assembly).value
-        oldStrategy(x)
-    }
+    )
   )
   .dependsOn(coreJVM)
 

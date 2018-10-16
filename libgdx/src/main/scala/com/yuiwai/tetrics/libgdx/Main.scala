@@ -7,10 +7,10 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.badlogic.gdx.graphics.{Color, GL20, OrthographicCamera}
 import com.badlogic.gdx.utils.viewport.FitViewport
 import com.badlogic.gdx.{Game, Gdx, InputAdapter, Screen}
-import com.softwaremill.sttp.asynchttpclient.future.AsyncHttpClientFutureBackend
+import com.softwaremill.sttp.akkahttp.AkkaHttpBackend
 import com.typesafe.config.ConfigFactory
 import com.yuiwai.tetrics.core._
-import converter.ProtobufConverter
+import com.yuiwai.tetrics.core.converter.ProtobufConverter
 import com.yuiwai.tetrics.libgdx.AppSettings._
 import org.scalasapporo.gamecenter.connector.{HttpConnector, HttpConnectorContext}
 
@@ -28,6 +28,7 @@ class AppListener extends Game {
 }
 object AppSettings {
   sealed trait Mode
+  case object PlayerMode extends Mode
   case object ConnectorMode extends Mode
 }
 case class Task(interval: Float, current: Float, callback: () => Unit) {
@@ -44,6 +45,7 @@ class MainScreen(mode: Mode) extends Screen with DefaultSettings {
   lazy val viewport: FitViewport = new FitViewport(520, 520, camera)
   private var game: TetricsGame[Char, GdxContext] = _
   private var task: Option[Task] = None
+  private var autoPlayer: Option[AutoPlayer] = None
 
   mode match {
     case ConnectorMode => initWithConnector()
@@ -71,10 +73,9 @@ class MainScreen(mode: Mode) extends Screen with DefaultSettings {
   def initWithConnector(): Unit = {
     init()
     game.autoPlay()
-    val autoPlayer = new AutoPlayerWithConnector {}
-    // new Timer().scheduleTask(() => game.act(autoPlayer), 1.0f, 0.25f)
+    autoPlayer = Some(new AutoPlayerWithConnector {})
     task = Some(Task(0.25f, 0, () => {
-      game.act(autoPlayer)
+      game.act(autoPlayer.get)
     }))
   }
   override def resize(width: Int, height: Int): Unit = viewport.update(width, height)
@@ -150,12 +151,12 @@ class GdxContext {
 
 trait AutoPlayerWithConnector extends QueueingAutoPlayer {
   import tetrics.{Request => PRequest, Response => PResponse}
+  import scala.concurrent.ExecutionContext.Implicits.global
+  implicit val backend = AkkaHttpBackend()
+  val config = ConfigFactory.load()
+  implicit val context = HttpConnectorContext(config.getString("connector.url"))
   private val lock = new AtomicBoolean(false)
   def http(tetrics: Tetrics): Unit = {
-    import scala.concurrent.ExecutionContext.Implicits.global
-    implicit val backend = AsyncHttpClientFutureBackend()
-    val config = ConfigFactory.load()
-    implicit val context = HttpConnectorContext(config.getString("connector.url"))
     HttpConnector
       .execute(PRequest("0.1", Some(ProtobufConverter.toProto(tetrics))).toByteArray)
       .map(b => ProtobufConverter.fromProto(PResponse.parseFrom(b)))
@@ -166,7 +167,7 @@ trait AutoPlayerWithConnector extends QueueingAutoPlayer {
       }
   }
   override def actImpl(tetrics: Tetrics): Seq[TetricsAction] = {
-    if (queue.isEmpty & !lock.get()) {
+    if (queue.isEmpty && !lock.get()) {
       lock.set(true)
       http(tetrics)
     }

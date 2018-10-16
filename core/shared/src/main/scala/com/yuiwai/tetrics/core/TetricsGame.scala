@@ -106,7 +106,7 @@ trait TetricsGame[E, C]
       act(autoPlayer.act(tetrics))
     } catch {
       // FIXME いったん無視
-      case _: Throwable => ()
+      case e: Throwable => println(e.getMessage)
     }
 }
 sealed trait GameStatus
