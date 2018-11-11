@@ -1,0 +1,9 @@
+server
+libgdx
+native
+js
+check
+coreNative
+coreJS
+coreJVM
+core

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="ivy-report.xsl"?>
+<ivy-report version="1.0">
+	<info
+		organisation="tetrics-native"
+		module="tetrics-native_native0.3_2.11"
+		revision="0.1.0"
+		conf="protobuf"
+		confs="compile, runtime, test, provided, optional, protobuf, compile-internal, runtime-internal, test-internal, plugin, pom, scala-tool"
+		date="20181111093859"/>
+	<dependencies>
+	</dependencies>
+</ivy-report>
