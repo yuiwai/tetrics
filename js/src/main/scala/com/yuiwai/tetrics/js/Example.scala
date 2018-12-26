@@ -4,10 +4,9 @@ import com.yuiwai.tetrics.core._
 import org.scalajs.dom
 import org.scalajs.dom.ext.KeyCode
 import org.scalajs.dom.html.Canvas
-import org.scalajs.dom.raw.{KeyboardEvent, MessageEvent}
+import org.scalajs.dom.raw._
 import org.scalajs.dom.{CanvasRenderingContext2D => Context2D}
 
-import scala.scalajs.js
 import scala.scalajs.js.typedarray._
 
 object Example extends Subscriber with DefaultSettings {
@@ -20,7 +19,7 @@ object Example extends Subscriber with DefaultSettings {
   private implicit val eventBus = EventBus()
   private implicit val ctx: Context2D =
     canvas.asInstanceOf[Canvas].getContext("2d").asInstanceOf[Context2D]
-  private var game: TetricsGame[KeyboardEvent, Context2D] = _
+  private var game: TetricsGame[UIEvent, Context2D] = _
   private val serializer = new ByteEventSerializer {
     val setting: TetricsSetting = self.setting
   }
@@ -32,7 +31,11 @@ object Example extends Subscriber with DefaultSettings {
   }
   def main(args: Array[String]): Unit = {
     if (window == window.parent) {
-      init().start()
+      if (window.screen.width >= 1080) {
+        init().start()
+      } else {
+        initMobile().start()
+      }
     } else {
       initWithParent()
     }
@@ -71,8 +74,8 @@ object Example extends Subscriber with DefaultSettings {
       }
     }
   }
-  def init(): TetricsGame[KeyboardEvent, Context2D] = {
-    game = new TenTen[KeyboardEvent, Context2D] with JsController with JsView with JsCanvasAnimation
+  def init(): TetricsGame[UIEvent, Context2D] = {
+    game = new TenTen[UIEvent, Context2D] with JsController with JsView with JsCanvasAnimation
     document.body.appendChild(canvas)
     window.onkeydown = (e: KeyboardEvent) => {
       if (!keyDown) {
@@ -92,6 +95,15 @@ object Example extends Subscriber with DefaultSettings {
     canvas.setAttribute("height", (game.offset * 2 + game.tileHeight * 32).toString)
     game
   }
+  def initMobile(): TetricsGame[UIEvent, Context2D] = {
+    game = new TenTen[UIEvent, Context2D] with MobileController with JsView with JsCanvasAnimation
+    document.body.appendChild(canvas)
+    document.body.addEventListener("touchstart", (e: Event) => game.input(e.asInstanceOf[TouchEvent]))
+    window.requestAnimationFrame(updater)
+    canvas.setAttribute("width", window.screen.width.toString)
+    canvas.setAttribute("height", window.screen.width.toString)
+    game
+  }
   val handleMessageEvent = (messageEvent: MessageEvent) => {
     game.act(
       serializer.deserialize(int8Array2ByteArray(messageEvent.data.asInstanceOf[Int8Array]))
@@ -100,6 +112,7 @@ object Example extends Subscriber with DefaultSettings {
 }
 
 trait JsView extends LabeledFieldView[Context2D] {
+  val baseWidth = 520
   val offset = 20
   override val labelHeight = 12
   override val labelMargin = 1
@@ -107,6 +120,9 @@ trait JsView extends LabeledFieldView[Context2D] {
   val tileHeight: Int = 15
   def drawField(field: Field, offsetX: Int, offsetY: Int)
     (implicit ctx: Context2D): Unit = {
+    val n = ctx.canvas.width.toDouble / 520
+    val m = (d: Double) => d * n
+    def rect(x: Double, y: Double, w: Double, h: Double) = ctx.rect(m(x), m(y), m(w), m(h))
     field.rows.zipWithIndex.foreach { case (row, y) =>
       (0 until row.width) foreach { x =>
         ctx.beginPath()
@@ -116,7 +132,7 @@ trait JsView extends LabeledFieldView[Context2D] {
         } else {
           ctx.fillStyle = "darkgreen"
         }
-        ctx.rect(x * tileWidth + offsetX, y * tileHeight + offsetY, tileWidth, tileHeight)
+        rect(x * tileWidth + offsetX, y * tileHeight + offsetY, tileWidth, tileHeight)
         ctx.fill()
         ctx.stroke()
       }
@@ -124,20 +140,24 @@ trait JsView extends LabeledFieldView[Context2D] {
   }
   def drawLabel(label: Label, offsetX: Int, offsetY: Int)
     (implicit ctx: Context2D): Unit = {
+    val n = ctx.canvas.width.toDouble / 520
+    val m = (d: Double) => d * n
+    def rect(x: Double, y: Double, w: Double, h: Double) = ctx.rect(m(x), m(y), m(w), m(h))
     ctx.beginPath()
     ctx.fillStyle = "black"
-    ctx.rect(offsetX, offsetY, tileWidth * fieldSize, labelHeight)
+    rect(offsetX, offsetY, tileWidth * fieldSize, labelHeight)
     ctx.fill()
     ctx.fillStyle = "white"
     ctx.font = "12px Arial"
     ctx.textAlign = "left"
     ctx.textBaseline = "top"
-    ctx.fillText(label.text, offsetX, offsetY)
+    ctx.fillText(label.text, m(offsetX), m(offsetY))
   }
 }
 
-trait JsController extends TetricsController[KeyboardEvent, Context2D] {
-  override protected def eventToAction(event: KeyboardEvent): Option[TetricsAction] = {
+trait JsController extends TetricsController[UIEvent, Context2D] {
+  override protected def eventToAction(e: UIEvent): Option[TetricsAction] = {
+    val event = e.asInstanceOf[KeyboardEvent]
     event.keyCode match {
       case KeyCode.F => Some(TurnRightAction)
       case KeyCode.D => Some(TurnLeftAction)
@@ -155,6 +175,22 @@ trait JsController extends TetricsController[KeyboardEvent, Context2D] {
         else Some(MoveDownAction)
       case _ => None
     }
+  }
+}
+
+trait MobileController extends TetricsController[UIEvent, Context2D] {
+  override def eventToAction(e: UIEvent): Option[TetricsAction] = {
+    val event = e.asInstanceOf[TouchEvent]
+    event.`type` match {
+      case "touchstart" =>
+        if (isLeft(event)) Some(MoveLeftAction)
+        else Some(MoveRightAction)
+      case "touchend" => None
+      case "touchmove" => None
+    }
+  }
+  def isLeft(e: TouchEvent): Boolean = {
+    e.changedTouches(0).screenX < (dom.window.screen.width / 2)
   }
 }
 
@@ -202,8 +238,11 @@ trait AnimationComponent[E, C] extends TetricsGame[E, C] {
   }
   def draw(animation: Animation)(implicit ctx: C): Unit
 }
-trait JsCanvasAnimation extends AnimationComponent[KeyboardEvent, Context2D] {
+trait JsCanvasAnimation extends AnimationComponent[UIEvent, Context2D] {
   override def draw(animation: Animation)(implicit ctx: Context2D): Unit = {
+    val n = ctx.canvas.width.toDouble / 520
+    val m = (d: Double) => d * n
+    def rect(x: Double, y: Double, w: Double, h: Double) = ctx.rect(m(x), m(y), m(w), m(h))
     animation match {
       case CompositeAnimation(animations) => animations foreach draw
       case d@DropAnimation(fieldType, o, b, _) =>
@@ -211,28 +250,28 @@ trait JsCanvasAnimation extends AnimationComponent[KeyboardEvent, Context2D] {
         ctx.fillStyle = s"rgba(0,0,127,${1 - d.rate})"
         fieldType match {
           case FieldLeft =>
-            ctx.rect(
+            rect(
               offset,
               offset + (tileHeight * (fieldSize + 1 + o.y)),
               tileWidth * fieldSize * d.rate,
               tileHeight * b.height
             )
           case FieldRight =>
-            ctx.rect(
+            rect(
               offset + tileWidth * (fieldSize * 3 + 2) - tileWidth * fieldSize * d.rate,
               offset + (tileHeight * (fieldSize + 1 + o.y)),
               tileWidth * fieldSize * d.rate,
               tileHeight * b.height
             )
           case FieldTop =>
-            ctx.rect(
+            rect(
               offset + tileWidth * (fieldSize + 1 + o.x),
               offset,
               tileWidth * b.width,
               tileHeight * fieldSize * d.rate
             )
           case FieldBottom =>
-            ctx.rect(
+            rect(
               offset + tileWidth * (fieldSize + 1 + o.x),
               offset + tileHeight * (fieldSize * 3 + 2) - tileHeight * fieldSize * d.rate,
               tileWidth * b.width,
@@ -247,7 +286,7 @@ trait JsCanvasAnimation extends AnimationComponent[KeyboardEvent, Context2D] {
         fieldType match {
           case FieldLeft =>
             filledRows.foreach { x =>
-              ctx.rect(
+              rect(
                 offset + tileWidth * (fieldSize - x - 1),
                 offset + (tileHeight * (fieldSize + 1)),
                 tileWidth,
@@ -256,7 +295,7 @@ trait JsCanvasAnimation extends AnimationComponent[KeyboardEvent, Context2D] {
             }
           case FieldRight =>
             filledRows.foreach { x =>
-              ctx.rect(
+              rect(
                 offset + tileWidth * ((fieldSize * 2) + 2 + x),
                 offset + (tileHeight * (fieldSize + 1)),
                 tileWidth,
@@ -265,7 +304,7 @@ trait JsCanvasAnimation extends AnimationComponent[KeyboardEvent, Context2D] {
             }
           case FieldTop =>
             filledRows.foreach { y =>
-              ctx.rect(
+              rect(
                 offset + tileWidth * (fieldSize + 1),
                 offset + (tileHeight * (fieldSize - y - 1)),
                 tileWidth * fieldSize,
@@ -274,7 +313,7 @@ trait JsCanvasAnimation extends AnimationComponent[KeyboardEvent, Context2D] {
             }
           case FieldBottom =>
             filledRows.foreach { y =>
-              ctx.rect(
+              rect(
                 offset + tileWidth * (fieldSize + 1),
                 offset + (tileHeight * ((fieldSize * 2) + 2 + y)),
                 tileWidth * fieldSize,
@@ -290,7 +329,7 @@ trait JsCanvasAnimation extends AnimationComponent[KeyboardEvent, Context2D] {
         block.rows.zipWithIndex.foreach { case (row, y) =>
           (0 until row.width) foreach { x =>
             if ((row.cols >> x & 1) == 1)
-              ctx.rect(
+              rect(
                 offset + tileWidth * (fieldSize + 1 + o.x + x),
                 offset + tileHeight * (fieldSize + 1 + o.y + y),
                 tileWidth,
@@ -305,7 +344,7 @@ trait JsCanvasAnimation extends AnimationComponent[KeyboardEvent, Context2D] {
         block.rows.zipWithIndex.foreach { case (row, y) =>
           (0 until row.width) foreach { x =>
             if ((row.cols >> x & 1) == 1)
-              ctx.rect(
+              rect(
                 offset + tileWidth * (fieldSize + 1 + o.x + x),
                 offset + tileHeight * (fieldSize + 1 + o.y + y),
                 tileWidth,
