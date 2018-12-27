@@ -179,19 +179,51 @@ trait JsController extends TetricsController[UIEvent, Context2D] {
 }
 
 trait MobileController extends TetricsController[UIEvent, Context2D] {
+  private var state = MobileController.State(None, None)
   override def eventToAction(e: UIEvent): Option[TetricsAction] = {
     val event = e.asInstanceOf[TouchEvent]
+    val eventPos = MobileController.Pos(event.changedTouches(0).screenX, event.changedTouches(0).screenY)
     event.`type` match {
       case "touchstart" =>
-        if (isLeft(event)) Some(MoveLeftAction)
-        else Some(MoveRightAction)
-      case "touchend" => None
-      case "touchmove" => None
+        if (isLeft(event)) {
+          state = state.copy(left = Some(eventPos))
+        }
+        None
+      case "touchend" =>
+        state = state.copy(None, None)
+        None
+      case "touchmove" =>
+        val (a, s) = state.moved(eventPos)
+        state = s
+        a
     }
   }
   def isLeft(e: TouchEvent): Boolean = {
     e.changedTouches(0).screenX < (dom.window.screen.width / 2)
   }
+}
+object MobileController {
+  // FIXME 暫定値
+  val moveUnit = 20
+  case class State(left: Option[Pos], right: Option[Pos]) {
+    def moved(pos: Pos): (Option[TetricsAction], State) = {
+      import pos.{x, y}
+      left match {
+        case Some(l) =>
+          if (l.x > x + moveUnit) {
+            (Some(MoveLeftAction), copy(left = Some(l.copy(x = x))))
+          } else if (l.x < x - moveUnit) {
+            (Some(MoveRightAction), copy(left = Some(l.copy(x = x))))
+          } else if (l.y > y + moveUnit) {
+            (Some(MoveUpAction), copy(left = Some(l.copy(y = y))))
+          } else if (l.y < y - moveUnit) {
+            (Some(MoveDownAction), copy(left = Some(l.copy(y = y))))
+          } else (None, this)
+        case None => (None, this)
+      }
+    } 
+  }
+  case class Pos(x: Double, y: Double)
 }
 
 trait AnimationComponent[E, C] extends TetricsGame[E, C] {
