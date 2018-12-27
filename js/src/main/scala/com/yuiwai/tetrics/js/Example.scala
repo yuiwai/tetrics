@@ -99,6 +99,8 @@ object Example extends Subscriber with DefaultSettings {
     game = new TenTen[UIEvent, Context2D] with MobileController with JsView with JsCanvasAnimation
     document.body.appendChild(canvas)
     document.body.addEventListener("touchstart", (e: Event) => game.input(e.asInstanceOf[TouchEvent]))
+    document.body.addEventListener("touchmove", (e: Event) => game.input(e.asInstanceOf[TouchEvent]))
+    document.body.addEventListener("touchend", (e: Event) => game.input(e.asInstanceOf[TouchEvent]))
     window.requestAnimationFrame(updater)
     canvas.setAttribute("width", window.screen.width.toString)
     canvas.setAttribute("height", window.screen.width.toString)
@@ -187,6 +189,8 @@ trait MobileController extends TetricsController[UIEvent, Context2D] {
       case "touchstart" =>
         if (isLeft(event)) {
           state = state.copy(left = Some(eventPos))
+        } else {
+          state = state.copy(right = Some(eventPos))
         }
         None
       case "touchend" =>
@@ -208,7 +212,7 @@ object MobileController {
   case class State(left: Option[Pos], right: Option[Pos]) {
     def moved(pos: Pos): (Option[TetricsAction], State) = {
       import pos.{x, y}
-      left match {
+      (left match {
         case Some(l) =>
           if (l.x > x + moveUnit) {
             (Some(MoveLeftAction), copy(left = Some(l.copy(x = x))))
@@ -220,6 +224,18 @@ object MobileController {
             (Some(MoveDownAction), copy(left = Some(l.copy(y = y))))
           } else (None, this)
         case None => (None, this)
+      }) match {
+        case (None, s) =>
+          right match {
+            case Some(r) =>
+              if (r.x > x + moveUnit) {
+                (Some(TurnLeftAction), copy(right = Some(r.copy(x = x))))
+              } else if (r.x < x - moveUnit) {
+                (Some(TurnRightAction), copy(right = Some(r.copy(x = x))))
+              } else (None, this)
+            case None => (None, this)
+          }
+        case other => other
       }
     } 
   }

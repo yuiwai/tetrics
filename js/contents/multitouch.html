@@ -24,7 +24,7 @@ var state = {
   left: null,
   right: null,
 };
-document.body.addEventListener('touchstart', function(event) {
+/* document.body.addEventListener('touchstart', function(event) {
   var x = event.changedTouches[0].pageX;
   var y = event.changedTouches[0].pageY;
   if (isLeft(x)) {
@@ -60,7 +60,7 @@ document.body.addEventListener('touchmove', function(event) {
   }
   if (moved) show(moved);
   event.preventDefault();
-}, false);
+}, false); */
 document.body.addEventListener("selectstart", function(e) {
   e.preventDefault();
 }, false);
