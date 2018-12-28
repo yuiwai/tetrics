@@ -124,7 +124,9 @@ trait JsView extends LabeledFieldView[Context2D] {
     (implicit ctx: Context2D): Unit = {
     val n = ctx.canvas.width.toDouble / 520
     val m = (d: Double) => d * n
+
     def rect(x: Double, y: Double, w: Double, h: Double) = ctx.rect(m(x), m(y), m(w), m(h))
+
     field.rows.zipWithIndex.foreach { case (row, y) =>
       (0 until row.width) foreach { x =>
         ctx.beginPath()
@@ -144,13 +146,15 @@ trait JsView extends LabeledFieldView[Context2D] {
     (implicit ctx: Context2D): Unit = {
     val n = ctx.canvas.width.toDouble / 520
     val m = (d: Double) => d * n
+
     def rect(x: Double, y: Double, w: Double, h: Double) = ctx.rect(m(x), m(y), m(w), m(h))
+
     ctx.beginPath()
     ctx.fillStyle = "black"
     rect(offsetX, offsetY, tileWidth * fieldSize, labelHeight)
     ctx.fill()
     ctx.fillStyle = "white"
-    ctx.font = "12px Arial"
+    ctx.font = s"${m(12).toInt}px Arial"
     ctx.textAlign = "left"
     ctx.textBaseline = "top"
     ctx.fillText(label.text, m(offsetX), m(offsetY))
@@ -184,60 +188,74 @@ trait MobileController extends TetricsController[UIEvent, Context2D] {
   private var state = MobileController.State(None, None)
   override def eventToAction(e: UIEvent): Option[TetricsAction] = {
     val event = e.asInstanceOf[TouchEvent]
-    val eventPos = MobileController.Pos(event.changedTouches(0).screenX, event.changedTouches(0).screenY)
+    val touch = event.changedTouches(0)
     event.`type` match {
       case "touchstart" =>
-        if (isLeft(event)) {
-          state = state.copy(left = Some(eventPos))
+        if (isLeft(touch)) {
+          state = state.copy(left = Some(touch))
         } else {
-          state = state.copy(right = Some(eventPos))
+          state = state.copy(right = Some(touch))
         }
         None
       case "touchend" =>
-        state = state.copy(None, None)
+        state = state.copy(
+          state.left.flatMap {
+            case t if t.identifier == touch.identifier => None
+            case t => Some(t)
+          },
+          state.right.flatMap {
+            case t if t.identifier == touch.identifier => None
+            case t => Some(t)
+          }
+        )
         None
       case "touchmove" =>
-        val (a, s) = state.moved(eventPos)
+        val (a, s) = state.moved(touch)
         state = s
         a
     }
   }
-  def isLeft(e: TouchEvent): Boolean = {
-    e.changedTouches(0).screenX < (dom.window.screen.width / 2)
+  def isLeft(e: Touch): Boolean = {
+    e.screenX < (dom.window.screen.width / 2)
   }
 }
 object MobileController {
-  // FIXME 暫定値
-  val moveUnit = 50
-  case class State(left: Option[Pos], right: Option[Pos]) {
-    def moved(pos: Pos): (Option[TetricsAction], State) = {
-      import pos.{x, y}
+  // FIXME 暫定値(スクリーンのサイズから算出したい)
+  val moveUnit = 25
+  val rotateUnit = 35
+  case class State(left: Option[Touch], right: Option[Touch]) {
+    def moved(touch: Touch): (Option[TetricsAction], State) = {
+      import touch.{screenX => x, screenY => y}
       (left, right) match {
         case (None, None) => (None, this)
-        case (Some(l), None) =>
-          if (l.x > x + moveUnit) {
-            (Some(MoveLeftAction), copy(left = Some(l.copy(x = x))))
-          } else if (l.x < x - moveUnit) {
-            (Some(MoveRightAction), copy(left = Some(l.copy(x = x))))
-          } else if (l.y > y + moveUnit) {
-            (Some(MoveUpAction), copy(left = Some(l.copy(y = y))))
-          } else if (l.y < y - moveUnit) {
-            (Some(MoveDownAction), copy(left = Some(l.copy(y = y))))
+        case (Some(l), None) if l.identifier == touch.identifier =>
+          if (l.screenX > x + moveUnit) {
+            (Some(MoveLeftAction), copy(left = Some(touch)))
+          } else if (l.screenX < x - moveUnit) {
+            (Some(MoveRightAction), copy(left = Some(touch)))
+          } else if (l.screenY > y + moveUnit) {
+            (Some(MoveUpAction), copy(left = Some(touch)))
+          } else if (l.screenY < y - moveUnit) {
+            (Some(MoveDownAction), copy(left = Some(touch)))
           } else (None, this)
-        case (None, Some(r)) =>
-          if (r.x > x + moveUnit) {
-            (Some(TurnLeftAction), copy(right = Some(r.copy(x = x))))
-          } else if (r.x < x - moveUnit) {
-            (Some(TurnRightAction), copy(right = Some(r.copy(x = x))))
+        case (None, Some(r)) if r.identifier == touch.identifier =>
+          if (r.screenX > x + rotateUnit) {
+            (Some(TurnLeftAction), copy(right = Some(touch)))
+          } else if (r.screenX < x - rotateUnit) {
+            (Some(TurnRightAction), copy(right = Some(touch)))
           } else (None, this)
-        case (Some(l), Some(r)) =>
-          if (r.x > x + moveUnit) {
-            (Some(DropAndNormalizeAction(DropLeftAction, NormalizeLeftAction)), copy(right = Some(r.copy(x = x))))
-          } else if (r.x < x - moveUnit) {
-            (Some(DropAndNormalizeAction(DropRightAction, NormalizeRightAction)), copy(right = Some(r.copy(x = x))))
+        case (Some(_), Some(r)) if r.identifier == touch.identifier =>
+          if (r.screenX > x + moveUnit) {
+            (Some(DropAndNormalizeAction(DropLeftAction, NormalizeLeftAction)), copy(right = None))
+          } else if (r.screenX < x - moveUnit) {
+            (Some(DropAndNormalizeAction(DropRightAction, NormalizeRightAction)), copy(right = None))
+          } else if (r.screenY > y + moveUnit) {
+            (Some(DropAndNormalizeAction(DropTopAction, NormalizeTopAction)), copy(right = None))
+          } else if (r.screenY < y - moveUnit) {
+            (Some(DropAndNormalizeAction(DropBottomAction, NormalizeBottomAction)), copy(right = None))
           } else (None, this)
       }
-    } 
+    }
   }
   case class Pos(x: Double, y: Double)
 }
@@ -290,7 +308,9 @@ trait JsCanvasAnimation extends AnimationComponent[UIEvent, Context2D] {
   override def draw(animation: Animation)(implicit ctx: Context2D): Unit = {
     val n = ctx.canvas.width.toDouble / 520
     val m = (d: Double) => d * n
+
     def rect(x: Double, y: Double, w: Double, h: Double) = ctx.rect(m(x), m(y), m(w), m(h))
+
     animation match {
       case CompositeAnimation(animations) => animations foreach draw
       case d@DropAnimation(fieldType, o, b, _) =>

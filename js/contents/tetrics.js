@@ -3030,35 +3030,47 @@ function $f_Lcom_yuiwai_tetrics_js_JsController__eventToAction__Lorg_scalajs_dom
     }
   }
 }
+function $f_Lcom_yuiwai_tetrics_js_MobileController__isLeft__Lorg_scalajs_dom_raw_Touch__Z($thiz, e) {
+  return ($uD(e.screenX) < ($uD($m_Lorg_scalajs_dom_package$().window__Lorg_scalajs_dom_raw_Window().screen.width) / 2))
+}
 function $f_Lcom_yuiwai_tetrics_js_MobileController__$$init$__V($thiz) {
   $thiz.com$yuiwai$tetrics$js$MobileController$$state$2 = new $c_Lcom_yuiwai_tetrics_js_MobileController$State().init___s_Option__s_Option($m_s_None$(), $m_s_None$())
 }
-function $f_Lcom_yuiwai_tetrics_js_MobileController__isLeft__Lorg_scalajs_dom_raw_TouchEvent__Z($thiz, e) {
-  return ($uD(e.changedTouches[0].screenX) < ($uD($m_Lorg_scalajs_dom_package$().window__Lorg_scalajs_dom_raw_Window().screen.width) / 2))
-}
 function $f_Lcom_yuiwai_tetrics_js_MobileController__eventToAction__Lorg_scalajs_dom_raw_UIEvent__s_Option($thiz, e) {
-  var eventPos = new $c_Lcom_yuiwai_tetrics_js_MobileController$Pos().init___D__D($uD(e.changedTouches[0].screenX), $uD(e.changedTouches[0].screenY));
+  var touch = e.changedTouches[0];
   var x1 = $as_T(e.type);
   if ((x1 === "touchstart")) {
-    if ($f_Lcom_yuiwai_tetrics_js_MobileController__isLeft__Lorg_scalajs_dom_raw_TouchEvent__Z($thiz, e)) {
+    if ($f_Lcom_yuiwai_tetrics_js_MobileController__isLeft__Lorg_scalajs_dom_raw_Touch__Z($thiz, touch)) {
       var qual$5 = $thiz.com$yuiwai$tetrics$js$MobileController$$state$2;
-      var x$18 = new $c_s_Some().init___O(eventPos);
+      var x$18 = new $c_s_Some().init___O(touch);
       var x$19 = qual$5.right$1;
       $thiz.com$yuiwai$tetrics$js$MobileController$$state$2 = new $c_Lcom_yuiwai_tetrics_js_MobileController$State().init___s_Option__s_Option(x$18, x$19)
     } else {
       var qual$6 = $thiz.com$yuiwai$tetrics$js$MobileController$$state$2;
-      var x$20 = new $c_s_Some().init___O(eventPos);
+      var x$20 = new $c_s_Some().init___O(touch);
       var x$21 = qual$6.left$1;
       $thiz.com$yuiwai$tetrics$js$MobileController$$state$2 = new $c_Lcom_yuiwai_tetrics_js_MobileController$State().init___s_Option__s_Option(x$21, x$20)
     };
     return $m_s_None$()
   } else if ((x1 === "touchend")) {
-    var left = $m_s_None$();
-    var right = $m_s_None$();
+    var this$1 = $thiz.com$yuiwai$tetrics$js$MobileController$$state$2.left$1;
+    if (this$1.isEmpty__Z()) {
+      var left = $m_s_None$()
+    } else {
+      var arg1 = this$1.get__O();
+      var left = (($uD(arg1.identifier) === $uD(touch.identifier)) ? $m_s_None$() : new $c_s_Some().init___O(arg1))
+    };
+    var this$2 = $thiz.com$yuiwai$tetrics$js$MobileController$$state$2.right$1;
+    if (this$2.isEmpty__Z()) {
+      var right = $m_s_None$()
+    } else {
+      var arg1$1 = this$2.get__O();
+      var right = (($uD(arg1$1.identifier) === $uD(touch.identifier)) ? $m_s_None$() : new $c_s_Some().init___O(arg1$1))
+    };
     $thiz.com$yuiwai$tetrics$js$MobileController$$state$2 = new $c_Lcom_yuiwai_tetrics_js_MobileController$State().init___s_Option__s_Option(left, right);
     return $m_s_None$()
   } else if ((x1 === "touchmove")) {
-    var x1$2 = $thiz.com$yuiwai$tetrics$js$MobileController$$state$2.moved__Lcom_yuiwai_tetrics_js_MobileController$Pos__T2(eventPos);
+    var x1$2 = $thiz.com$yuiwai$tetrics$js$MobileController$$state$2.moved__Lorg_scalajs_dom_raw_Touch__T2(touch);
     if ((x1$2 === null)) {
       throw new $c_s_MatchError().init___O(x1$2)
     };
@@ -3073,7 +3085,8 @@ function $f_Lcom_yuiwai_tetrics_js_MobileController__eventToAction__Lorg_scalajs
 /** @constructor */
 function $c_Lcom_yuiwai_tetrics_js_MobileController$() {
   $c_O.call(this);
-  this.moveUnit$1 = 0
+  this.moveUnit$1 = 0;
+  this.rotateUnit$1 = 0
 }
 $c_Lcom_yuiwai_tetrics_js_MobileController$.prototype = new $h_O();
 $c_Lcom_yuiwai_tetrics_js_MobileController$.prototype.constructor = $c_Lcom_yuiwai_tetrics_js_MobileController$;
@@ -3083,7 +3096,8 @@ function $h_Lcom_yuiwai_tetrics_js_MobileController$() {
 }
 $h_Lcom_yuiwai_tetrics_js_MobileController$.prototype = $c_Lcom_yuiwai_tetrics_js_MobileController$.prototype;
 $c_Lcom_yuiwai_tetrics_js_MobileController$.prototype.init___ = (function() {
-  this.moveUnit$1 = 50;
+  this.moveUnit$1 = 20;
+  this.rotateUnit$1 = 40;
   return this
 });
 var $d_Lcom_yuiwai_tetrics_js_MobileController$ = new $TypeData().initClass({
@@ -5818,7 +5832,7 @@ function $f_Lcom_yuiwai_tetrics_js_JsView__drawLabel__Lcom_yuiwai_tetrics_core_L
   ctx.rect($uD(f(offsetX)), $uD(f(offsetY)), $uD(f(w)), $uD(f(h)));
   ctx.fill();
   ctx.fillStyle = "white";
-  ctx.font = "12px Arial";
+  ctx.font = ($doubleToInt($uD(f(12.0))) + "px Arial");
   ctx.textAlign = "left";
   ctx.textBaseline = "top";
   ctx.fillText(label.text$1, $uD(f(offsetX)), $uD(f(offsetY)))
@@ -11694,90 +11708,6 @@ function $f_Lcom_yuiwai_tetrics_js_AnimationComponent__beforeAction__Lcom_yuiwai
   }
 }
 /** @constructor */
-function $c_Lcom_yuiwai_tetrics_js_MobileController$Pos() {
-  $c_O.call(this);
-  this.x$1 = 0.0;
-  this.y$1 = 0.0
-}
-$c_Lcom_yuiwai_tetrics_js_MobileController$Pos.prototype = new $h_O();
-$c_Lcom_yuiwai_tetrics_js_MobileController$Pos.prototype.constructor = $c_Lcom_yuiwai_tetrics_js_MobileController$Pos;
-/** @constructor */
-function $h_Lcom_yuiwai_tetrics_js_MobileController$Pos() {
-  /*<skip>*/
-}
-$h_Lcom_yuiwai_tetrics_js_MobileController$Pos.prototype = $c_Lcom_yuiwai_tetrics_js_MobileController$Pos.prototype;
-$c_Lcom_yuiwai_tetrics_js_MobileController$Pos.prototype.productPrefix__T = (function() {
-  return "Pos"
-});
-$c_Lcom_yuiwai_tetrics_js_MobileController$Pos.prototype.productArity__I = (function() {
-  return 2
-});
-$c_Lcom_yuiwai_tetrics_js_MobileController$Pos.prototype.equals__O__Z = (function(x$1) {
-  if ((this === x$1)) {
-    return true
-  } else if ($is_Lcom_yuiwai_tetrics_js_MobileController$Pos(x$1)) {
-    var Pos$1 = $as_Lcom_yuiwai_tetrics_js_MobileController$Pos(x$1);
-    return ((this.x$1 === Pos$1.x$1) && (this.y$1 === Pos$1.y$1))
-  } else {
-    return false
-  }
-});
-$c_Lcom_yuiwai_tetrics_js_MobileController$Pos.prototype.productElement__I__O = (function(x$1) {
-  switch (x$1) {
-    case 0: {
-      return this.x$1;
-      break
-    }
-    case 1: {
-      return this.y$1;
-      break
-    }
-    default: {
-      throw new $c_jl_IndexOutOfBoundsException().init___T(("" + x$1))
-    }
-  }
-});
-$c_Lcom_yuiwai_tetrics_js_MobileController$Pos.prototype.toString__T = (function() {
-  return $m_sr_ScalaRunTime$().$$undtoString__s_Product__T(this)
-});
-$c_Lcom_yuiwai_tetrics_js_MobileController$Pos.prototype.init___D__D = (function(x, y) {
-  this.x$1 = x;
-  this.y$1 = y;
-  return this
-});
-$c_Lcom_yuiwai_tetrics_js_MobileController$Pos.prototype.hashCode__I = (function() {
-  var acc = (-889275714);
-  acc = $m_sr_Statics$().mix__I__I__I(acc, $m_sr_Statics$().doubleHash__D__I(this.x$1));
-  acc = $m_sr_Statics$().mix__I__I__I(acc, $m_sr_Statics$().doubleHash__D__I(this.y$1));
-  return $m_sr_Statics$().finalizeHash__I__I__I(acc, 2)
-});
-$c_Lcom_yuiwai_tetrics_js_MobileController$Pos.prototype.productIterator__sc_Iterator = (function() {
-  return new $c_sr_ScalaRunTime$$anon$1().init___s_Product(this)
-});
-function $is_Lcom_yuiwai_tetrics_js_MobileController$Pos(obj) {
-  return (!(!((obj && obj.$classData) && obj.$classData.ancestors.Lcom_yuiwai_tetrics_js_MobileController$Pos)))
-}
-function $as_Lcom_yuiwai_tetrics_js_MobileController$Pos(obj) {
-  return (($is_Lcom_yuiwai_tetrics_js_MobileController$Pos(obj) || (obj === null)) ? obj : $throwClassCastException(obj, "com.yuiwai.tetrics.js.MobileController$Pos"))
-}
-function $isArrayOf_Lcom_yuiwai_tetrics_js_MobileController$Pos(obj, depth) {
-  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.Lcom_yuiwai_tetrics_js_MobileController$Pos)))
-}
-function $asArrayOf_Lcom_yuiwai_tetrics_js_MobileController$Pos(obj, depth) {
-  return (($isArrayOf_Lcom_yuiwai_tetrics_js_MobileController$Pos(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lcom.yuiwai.tetrics.js.MobileController$Pos;", depth))
-}
-var $d_Lcom_yuiwai_tetrics_js_MobileController$Pos = new $TypeData().initClass({
-  Lcom_yuiwai_tetrics_js_MobileController$Pos: 0
-}, false, "com.yuiwai.tetrics.js.MobileController$Pos", {
-  Lcom_yuiwai_tetrics_js_MobileController$Pos: 1,
-  O: 1,
-  s_Product: 1,
-  s_Equals: 1,
-  s_Serializable: 1,
-  Ljava_io_Serializable: 1
-});
-$c_Lcom_yuiwai_tetrics_js_MobileController$Pos.prototype.$classData = $d_Lcom_yuiwai_tetrics_js_MobileController$Pos;
-/** @constructor */
 function $c_Lcom_yuiwai_tetrics_js_MobileController$State() {
   $c_O.call(this);
   this.left$1 = null;
@@ -11832,7 +11762,7 @@ $c_Lcom_yuiwai_tetrics_js_MobileController$State.prototype.productElement__I__O 
 $c_Lcom_yuiwai_tetrics_js_MobileController$State.prototype.toString__T = (function() {
   return $m_sr_ScalaRunTime$().$$undtoString__s_Product__T(this)
 });
-$c_Lcom_yuiwai_tetrics_js_MobileController$State.prototype.moved__Lcom_yuiwai_tetrics_js_MobileController$Pos__T2 = (function(pos) {
+$c_Lcom_yuiwai_tetrics_js_MobileController$State.prototype.moved__Lorg_scalajs_dom_raw_Touch__T2 = (function(touch) {
   var x1 = new $c_T2().init___O__O(this.left$1, this.right$1);
   var p2 = $as_s_Option(x1.$$und1$f);
   var p3 = $as_s_Option(x1.$$und2$f);
@@ -11850,35 +11780,27 @@ $c_Lcom_yuiwai_tetrics_js_MobileController$State.prototype.moved__Lcom_yuiwai_te
   var p5 = $as_s_Option(x1.$$und2$f);
   if ($is_s_Some(p4)) {
     var x6 = $as_s_Some(p4);
-    var l = $as_Lcom_yuiwai_tetrics_js_MobileController$Pos(x6.value$2);
+    var l = x6.value$2;
     var x$5 = $m_s_None$();
-    if ((x$5 === p5)) {
-      if ((l.x$1 > (pos.x$1 + $m_Lcom_yuiwai_tetrics_js_MobileController$().moveUnit$1))) {
+    if (((x$5 === p5) && ($uD(l.identifier) === $uD(touch.identifier)))) {
+      if (($uD(l.screenX) > ($uD(touch.screenX) + $m_Lcom_yuiwai_tetrics_js_MobileController$().moveUnit$1))) {
         var jsx$2 = new $c_s_Some().init___O($m_Lcom_yuiwai_tetrics_core_MoveLeftAction$());
-        var x$1 = pos.x$1;
-        var y = l.y$1;
-        var left = new $c_s_Some().init___O(new $c_Lcom_yuiwai_tetrics_js_MobileController$Pos().init___D__D(x$1, y));
+        var left = new $c_s_Some().init___O(touch);
         var right = this.right$1;
         return new $c_T2().init___O__O(jsx$2, new $c_Lcom_yuiwai_tetrics_js_MobileController$State().init___s_Option__s_Option(left, right))
-      } else if ((l.x$1 < (pos.x$1 - $m_Lcom_yuiwai_tetrics_js_MobileController$().moveUnit$1))) {
+      } else if (($uD(l.screenX) < ($uD(touch.screenX) - $m_Lcom_yuiwai_tetrics_js_MobileController$().moveUnit$1))) {
         var jsx$3 = new $c_s_Some().init___O($m_Lcom_yuiwai_tetrics_core_MoveRightAction$());
-        var x$2 = pos.x$1;
-        var y$1 = l.y$1;
-        var left$1 = new $c_s_Some().init___O(new $c_Lcom_yuiwai_tetrics_js_MobileController$Pos().init___D__D(x$2, y$1));
+        var left$1 = new $c_s_Some().init___O(touch);
         var right$1 = this.right$1;
         return new $c_T2().init___O__O(jsx$3, new $c_Lcom_yuiwai_tetrics_js_MobileController$State().init___s_Option__s_Option(left$1, right$1))
-      } else if ((l.y$1 > (pos.y$1 + $m_Lcom_yuiwai_tetrics_js_MobileController$().moveUnit$1))) {
+      } else if (($uD(l.screenY) > ($uD(touch.screenY) + $m_Lcom_yuiwai_tetrics_js_MobileController$().moveUnit$1))) {
         var jsx$4 = new $c_s_Some().init___O($m_Lcom_yuiwai_tetrics_core_MoveUpAction$());
-        var x$22 = pos.y$1;
-        var x$23 = l.x$1;
-        var left$2 = new $c_s_Some().init___O(new $c_Lcom_yuiwai_tetrics_js_MobileController$Pos().init___D__D(x$23, x$22));
+        var left$2 = new $c_s_Some().init___O(touch);
         var right$2 = this.right$1;
         return new $c_T2().init___O__O(jsx$4, new $c_Lcom_yuiwai_tetrics_js_MobileController$State().init___s_Option__s_Option(left$2, right$2))
-      } else if ((l.y$1 < (pos.y$1 - $m_Lcom_yuiwai_tetrics_js_MobileController$().moveUnit$1))) {
+      } else if (($uD(l.screenY) < ($uD(touch.screenY) - $m_Lcom_yuiwai_tetrics_js_MobileController$().moveUnit$1))) {
         var jsx$5 = new $c_s_Some().init___O($m_Lcom_yuiwai_tetrics_core_MoveDownAction$());
-        var x$24 = pos.y$1;
-        var x$25 = l.x$1;
-        var left$3 = new $c_s_Some().init___O(new $c_Lcom_yuiwai_tetrics_js_MobileController$Pos().init___D__D(x$25, x$24));
+        var left$3 = new $c_s_Some().init___O(touch);
         var right$3 = this.right$1;
         return new $c_T2().init___O__O(jsx$5, new $c_Lcom_yuiwai_tetrics_js_MobileController$State().init___s_Option__s_Option(left$3, right$3))
       } else {
@@ -11891,46 +11813,52 @@ $c_Lcom_yuiwai_tetrics_js_MobileController$State.prototype.moved__Lcom_yuiwai_te
   var x$7 = $m_s_None$();
   if (((x$7 === p7) && $is_s_Some(p8))) {
     var x9 = $as_s_Some(p8);
-    var r = $as_Lcom_yuiwai_tetrics_js_MobileController$Pos(x9.value$2);
-    if ((r.x$1 > (pos.x$1 + $m_Lcom_yuiwai_tetrics_js_MobileController$().moveUnit$1))) {
-      var jsx$6 = new $c_s_Some().init___O($m_Lcom_yuiwai_tetrics_core_TurnLeftAction$());
-      var x$4 = pos.x$1;
-      var y$2 = r.y$1;
-      var x$26 = new $c_s_Some().init___O(new $c_Lcom_yuiwai_tetrics_js_MobileController$Pos().init___D__D(x$4, y$2));
-      var x$27 = this.left$1;
-      return new $c_T2().init___O__O(jsx$6, new $c_Lcom_yuiwai_tetrics_js_MobileController$State().init___s_Option__s_Option(x$27, x$26))
-    } else if ((r.x$1 < (pos.x$1 - $m_Lcom_yuiwai_tetrics_js_MobileController$().moveUnit$1))) {
-      var jsx$7 = new $c_s_Some().init___O($m_Lcom_yuiwai_tetrics_core_TurnRightAction$());
-      var x$6 = pos.x$1;
-      var y$3 = r.y$1;
-      var x$28 = new $c_s_Some().init___O(new $c_Lcom_yuiwai_tetrics_js_MobileController$Pos().init___D__D(x$6, y$3));
-      var x$29 = this.left$1;
-      return new $c_T2().init___O__O(jsx$7, new $c_Lcom_yuiwai_tetrics_js_MobileController$State().init___s_Option__s_Option(x$29, x$28))
-    } else {
-      return new $c_T2().init___O__O($m_s_None$(), this)
+    var r = x9.value$2;
+    if (($uD(r.identifier) === $uD(touch.identifier))) {
+      if (($uD(r.screenX) > ($uD(touch.screenX) + $m_Lcom_yuiwai_tetrics_js_MobileController$().rotateUnit$1))) {
+        var jsx$6 = new $c_s_Some().init___O($m_Lcom_yuiwai_tetrics_core_TurnLeftAction$());
+        var x$22 = new $c_s_Some().init___O(touch);
+        var x$23 = this.left$1;
+        return new $c_T2().init___O__O(jsx$6, new $c_Lcom_yuiwai_tetrics_js_MobileController$State().init___s_Option__s_Option(x$23, x$22))
+      } else if (($uD(r.screenX) < ($uD(touch.screenX) - $m_Lcom_yuiwai_tetrics_js_MobileController$().rotateUnit$1))) {
+        var jsx$7 = new $c_s_Some().init___O($m_Lcom_yuiwai_tetrics_core_TurnRightAction$());
+        var x$24 = new $c_s_Some().init___O(touch);
+        var x$25 = this.left$1;
+        return new $c_T2().init___O__O(jsx$7, new $c_Lcom_yuiwai_tetrics_js_MobileController$State().init___s_Option__s_Option(x$25, x$24))
+      } else {
+        return new $c_T2().init___O__O($m_s_None$(), this)
+      }
     }
   };
   var p10 = $as_s_Option(x1.$$und1$f);
   var p11 = $as_s_Option(x1.$$und2$f);
   if (($is_s_Some(p10) && $is_s_Some(p11))) {
-    var x13 = $as_s_Some(p11);
-    var r$2 = $as_Lcom_yuiwai_tetrics_js_MobileController$Pos(x13.value$2);
-    if ((r$2.x$1 > (pos.x$1 + $m_Lcom_yuiwai_tetrics_js_MobileController$().moveUnit$1))) {
-      var jsx$8 = new $c_s_Some().init___O(new $c_Lcom_yuiwai_tetrics_core_DropAndNormalizeAction().init___Lcom_yuiwai_tetrics_core_DropAction__Lcom_yuiwai_tetrics_core_NormalizeAction($m_Lcom_yuiwai_tetrics_core_DropLeftAction$(), $m_Lcom_yuiwai_tetrics_core_NormalizeLeftAction$()));
-      var x$8 = pos.x$1;
-      var y$4 = r$2.y$1;
-      var x$30 = new $c_s_Some().init___O(new $c_Lcom_yuiwai_tetrics_js_MobileController$Pos().init___D__D(x$8, y$4));
-      var x$31 = this.left$1;
-      return new $c_T2().init___O__O(jsx$8, new $c_Lcom_yuiwai_tetrics_js_MobileController$State().init___s_Option__s_Option(x$31, x$30))
-    } else if ((r$2.x$1 < (pos.x$1 - $m_Lcom_yuiwai_tetrics_js_MobileController$().moveUnit$1))) {
-      var jsx$9 = new $c_s_Some().init___O(new $c_Lcom_yuiwai_tetrics_core_DropAndNormalizeAction().init___Lcom_yuiwai_tetrics_core_DropAction__Lcom_yuiwai_tetrics_core_NormalizeAction($m_Lcom_yuiwai_tetrics_core_DropRightAction$(), $m_Lcom_yuiwai_tetrics_core_NormalizeRightAction$()));
-      var x$9 = pos.x$1;
-      var y$5 = r$2.y$1;
-      var x$32 = new $c_s_Some().init___O(new $c_Lcom_yuiwai_tetrics_js_MobileController$Pos().init___D__D(x$9, y$5));
-      var x$33 = this.left$1;
-      return new $c_T2().init___O__O(jsx$9, new $c_Lcom_yuiwai_tetrics_js_MobileController$State().init___s_Option__s_Option(x$33, x$32))
-    } else {
-      return new $c_T2().init___O__O($m_s_None$(), this)
+    var x14 = $as_s_Some(p11);
+    var r$2 = x14.value$2;
+    if (($uD(r$2.identifier) === $uD(touch.identifier))) {
+      if (($uD(r$2.screenX) > ($uD(touch.screenX) + $m_Lcom_yuiwai_tetrics_js_MobileController$().moveUnit$1))) {
+        var jsx$8 = new $c_s_Some().init___O(new $c_Lcom_yuiwai_tetrics_core_DropAndNormalizeAction().init___Lcom_yuiwai_tetrics_core_DropAction__Lcom_yuiwai_tetrics_core_NormalizeAction($m_Lcom_yuiwai_tetrics_core_DropLeftAction$(), $m_Lcom_yuiwai_tetrics_core_NormalizeLeftAction$()));
+        var x$26 = $m_s_None$();
+        var x$27 = this.left$1;
+        return new $c_T2().init___O__O(jsx$8, new $c_Lcom_yuiwai_tetrics_js_MobileController$State().init___s_Option__s_Option(x$27, x$26))
+      } else if (($uD(r$2.screenX) < ($uD(touch.screenX) - $m_Lcom_yuiwai_tetrics_js_MobileController$().moveUnit$1))) {
+        var jsx$9 = new $c_s_Some().init___O(new $c_Lcom_yuiwai_tetrics_core_DropAndNormalizeAction().init___Lcom_yuiwai_tetrics_core_DropAction__Lcom_yuiwai_tetrics_core_NormalizeAction($m_Lcom_yuiwai_tetrics_core_DropRightAction$(), $m_Lcom_yuiwai_tetrics_core_NormalizeRightAction$()));
+        var x$28 = $m_s_None$();
+        var x$29 = this.left$1;
+        return new $c_T2().init___O__O(jsx$9, new $c_Lcom_yuiwai_tetrics_js_MobileController$State().init___s_Option__s_Option(x$29, x$28))
+      } else if (($uD(r$2.screenY) > ($uD(touch.screenY) + $m_Lcom_yuiwai_tetrics_js_MobileController$().moveUnit$1))) {
+        var jsx$10 = new $c_s_Some().init___O(new $c_Lcom_yuiwai_tetrics_core_DropAndNormalizeAction().init___Lcom_yuiwai_tetrics_core_DropAction__Lcom_yuiwai_tetrics_core_NormalizeAction($m_Lcom_yuiwai_tetrics_core_DropTopAction$(), $m_Lcom_yuiwai_tetrics_core_NormalizeTopAction$()));
+        var x$30 = $m_s_None$();
+        var x$31 = this.left$1;
+        return new $c_T2().init___O__O(jsx$10, new $c_Lcom_yuiwai_tetrics_js_MobileController$State().init___s_Option__s_Option(x$31, x$30))
+      } else if (($uD(r$2.screenY) < ($uD(touch.screenY) - $m_Lcom_yuiwai_tetrics_js_MobileController$().moveUnit$1))) {
+        var jsx$11 = new $c_s_Some().init___O(new $c_Lcom_yuiwai_tetrics_core_DropAndNormalizeAction().init___Lcom_yuiwai_tetrics_core_DropAction__Lcom_yuiwai_tetrics_core_NormalizeAction($m_Lcom_yuiwai_tetrics_core_DropBottomAction$(), $m_Lcom_yuiwai_tetrics_core_NormalizeBottomAction$()));
+        var x$32 = $m_s_None$();
+        var x$33 = this.left$1;
+        return new $c_T2().init___O__O(jsx$11, new $c_Lcom_yuiwai_tetrics_js_MobileController$State().init___s_Option__s_Option(x$33, x$32))
+      } else {
+        return new $c_T2().init___O__O($m_s_None$(), this)
+      }
     }
   };
   throw new $c_s_MatchError().init___O(x1)
@@ -17002,10 +16930,10 @@ function $f_Lcom_yuiwai_tetrics_js_JsCanvasAnimation__draw__Lcom_yuiwai_tetrics_
     var these = this$10;
     while ((!these.isEmpty__Z())) {
       var arg1 = these.head__O();
-      var x0$2 = $as_T2(arg1);
-      if ((x0$2 !== null)) {
-        var row = $as_Lcom_yuiwai_tetrics_core_Row(x0$2.$$und1__O());
-        var y$9 = x0$2.$$und2$mcI$sp__I();
+      var x0$4 = $as_T2(arg1);
+      if ((x0$4 !== null)) {
+        var row = $as_Lcom_yuiwai_tetrics_core_Row(x0$4.$$und1__O());
+        var y$9 = x0$4.$$und2$mcI$sp__I();
         var end = row.width$1;
         var isEmpty$4 = (end <= 0);
         var scala$collection$immutable$Range$$lastElement$4 = (((-1) + end) | 0);
@@ -17027,7 +16955,7 @@ function $f_Lcom_yuiwai_tetrics_js_JsCanvasAnimation__draw__Lcom_yuiwai_tetrics_
           }
         }
       } else {
-        throw new $c_s_MatchError().init___O(x0$2)
+        throw new $c_s_MatchError().init___O(x0$4)
       };
       these = $as_sci_List(these.tail__O())
     };
@@ -17046,10 +16974,10 @@ function $f_Lcom_yuiwai_tetrics_js_JsCanvasAnimation__draw__Lcom_yuiwai_tetrics_
     var these$1 = this$17;
     while ((!these$1.isEmpty__Z())) {
       var arg1$1 = these$1.head__O();
-      var x0$3 = $as_T2(arg1$1);
-      if ((x0$3 !== null)) {
-        var row$1 = $as_Lcom_yuiwai_tetrics_core_Row(x0$3.$$und1__O());
-        var y$11 = x0$3.$$und2$mcI$sp__I();
+      var x0$5 = $as_T2(arg1$1);
+      if ((x0$5 !== null)) {
+        var row$1 = $as_Lcom_yuiwai_tetrics_core_Row(x0$5.$$und1__O());
+        var y$11 = x0$5.$$und2$mcI$sp__I();
         var end$1 = row$1.width$1;
         var isEmpty$4$1 = (end$1 <= 0);
         var scala$collection$immutable$Range$$lastElement$4$1 = (((-1) + end$1) | 0);
@@ -17071,7 +16999,7 @@ function $f_Lcom_yuiwai_tetrics_js_JsCanvasAnimation__draw__Lcom_yuiwai_tetrics_
           }
         }
       } else {
-        throw new $c_s_MatchError().init___O(x0$3)
+        throw new $c_s_MatchError().init___O(x0$5)
       };
       these$1 = $as_sci_List(these$1.tail__O())
     };
