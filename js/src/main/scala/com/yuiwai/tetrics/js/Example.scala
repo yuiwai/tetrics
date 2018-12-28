@@ -208,12 +208,13 @@ trait MobileController extends TetricsController[UIEvent, Context2D] {
 }
 object MobileController {
   // FIXME 暫定値
-  val moveUnit = 20
+  val moveUnit = 50
   case class State(left: Option[Pos], right: Option[Pos]) {
     def moved(pos: Pos): (Option[TetricsAction], State) = {
       import pos.{x, y}
-      (left match {
-        case Some(l) =>
+      (left, right) match {
+        case (None, None) => (None, this)
+        case (Some(l), None) =>
           if (l.x > x + moveUnit) {
             (Some(MoveLeftAction), copy(left = Some(l.copy(x = x))))
           } else if (l.x < x - moveUnit) {
@@ -223,19 +224,18 @@ object MobileController {
           } else if (l.y < y - moveUnit) {
             (Some(MoveDownAction), copy(left = Some(l.copy(y = y))))
           } else (None, this)
-        case None => (None, this)
-      }) match {
-        case (None, s) =>
-          right match {
-            case Some(r) =>
-              if (r.x > x + moveUnit) {
-                (Some(TurnLeftAction), copy(right = Some(r.copy(x = x))))
-              } else if (r.x < x - moveUnit) {
-                (Some(TurnRightAction), copy(right = Some(r.copy(x = x))))
-              } else (None, this)
-            case None => (None, this)
-          }
-        case other => other
+        case (None, Some(r)) =>
+          if (r.x > x + moveUnit) {
+            (Some(TurnLeftAction), copy(right = Some(r.copy(x = x))))
+          } else if (r.x < x - moveUnit) {
+            (Some(TurnRightAction), copy(right = Some(r.copy(x = x))))
+          } else (None, this)
+        case (Some(l), Some(r)) =>
+          if (r.x > x + moveUnit) {
+            (Some(DropAndNormalizeAction(DropLeftAction, NormalizeLeftAction)), copy(right = Some(r.copy(x = x))))
+          } else if (r.x < x - moveUnit) {
+            (Some(DropAndNormalizeAction(DropRightAction, NormalizeRightAction)), copy(right = Some(r.copy(x = x))))
+          } else (None, this)
       }
     } 
   }
