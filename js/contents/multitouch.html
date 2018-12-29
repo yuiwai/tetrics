@@ -1,0 +1,79 @@
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+<style>
+html {
+  touch-action: none;
+  touch-callout: none;
+  user-select: none;
+  background-color: black;
+  overflow: hidden;
+  color: white;
+}
+</style>
+</head>
+<body>
+<div id="display">touch me</div>
+<script src="tetrics.js"></script>
+<script>
+function startMobile() {
+    window.top.child.contentWindow.postMessage("startMobile", "https://lab.yuiwai.com");
+}
+var moveUnit = window.innerWidth * .1;
+var state = {
+  left: null,
+  right: null,
+};
+/* document.body.addEventListener('touchstart', function(event) {
+  var x = event.changedTouches[0].pageX;
+  var y = event.changedTouches[0].pageY;
+  if (isLeft(x)) {
+    state.left = {x: x, y: y};
+  } else {
+    state.right = {x: x, y: y};
+  }
+});
+document.body.addEventListener('touchend', function(event) {
+  state.left = null;
+  state.right = null;
+});
+document.body.addEventListener('touchmove', function(event) {
+  var moved = "";
+  var x = event.changedTouches[0].pageX;
+  var y = event.changedTouches[0].pageY;
+  if (state.left) {
+    if (state.left.x > x + moveUnit) {
+      moved += "(left.left)";
+      state.left.x = x;
+    } else if (state.left.x < x - moveUnit) {
+      moved += "(left.right)";
+      state.left.x = x;
+    }
+    if (state.left.y > y + moveUnit) {
+      moved += "(left.up)";
+      state.left.y = y;
+    } else if (state.left.y < y - moveUnit) {
+      moved += "(left.down)";
+      state.left.y = y;
+    }
+  } else {
+  }
+  if (moved) show(moved);
+  event.preventDefault();
+}, false); */
+document.body.addEventListener("selectstart", function(e) {
+  e.preventDefault();
+}, false);
+document.body.addEventListener("oncontextmenu", function(e) {
+  e.preventDefault();
+}, false);
+function show(msg) {
+  document.getElementById('display').innerHTML = msg;
+}
+function isLeft(x) {
+  return x < window.innerWidth / 2;
+}
+</script>
+</body>
+</html>
+
