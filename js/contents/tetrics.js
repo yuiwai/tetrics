@@ -3096,8 +3096,8 @@ function $h_Lcom_yuiwai_tetrics_js_MobileController$() {
 }
 $h_Lcom_yuiwai_tetrics_js_MobileController$.prototype = $c_Lcom_yuiwai_tetrics_js_MobileController$.prototype;
 $c_Lcom_yuiwai_tetrics_js_MobileController$.prototype.init___ = (function() {
-  this.moveUnit$1 = 20;
-  this.rotateUnit$1 = 40;
+  this.moveUnit$1 = 25;
+  this.rotateUnit$1 = 35;
   return this
 });
 var $d_Lcom_yuiwai_tetrics_js_MobileController$ = new $TypeData().initClass({
