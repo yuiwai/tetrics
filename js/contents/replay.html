@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
+    <title>replay test</title>
+    <style>
+html {
+  touch-action: none;
+  touch-callout: none;
+  user-select: none;
+  background-color: black;
+  overflow: hidden;
+  color: white;
+  height: 100%;
+}
+body {
+  margin: 0;
+  height: 100%;
+}
+iframe {
+  width: 100%;
+  height: 100%;
+}
+    </style>
+</head>
+<body>
+<div><button onclick="start()">reset</button><button onclick="replay()">replay</button></div>
+<iframe src="multitouch.html" id="child" style="border: 0"></iframe>
+<script>
+    var index = 0;
+    var evants = [];
+    window.onload = function() {
+        start();
+    }
+    window.addEventListener("message", function(e) {
+        if (e.origin != "https://lab.yuiwai.com") {
+            return;
+        }
+        if (e.source == window.top.child.contentWindow) {
+            events.push(e.data);
+        }
+    });
+    function start() {
+        index = 0;
+        events = [];
+        window.top.child.contentWindow.postMessage("start", "https://lab.yuiwai.com");
+    }
+    function replay() {
+        window.top.child.contentWindow.postMessage("readOnly", "https://lab.yuiwai.com");
+        sendReplayData();
+    }
+    function sendReplayData() {
+        if (index < events.length) {
+            window.top.child.contentWindow.postMessage(events[index], "https://lab.yuiwai.com");
+            index++;
+            setTimeout(sendReplayData, 1000);
+        }
+    }
+</script>
+</body>
+</html>

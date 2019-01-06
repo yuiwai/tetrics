@@ -6864,20 +6864,15 @@ $c_Lcom_yuiwai_tetrics_js_Example$.prototype.initMobile__Lcom_yuiwai_tetrics_cor
     })
   })(this.updater__p1__F1()));
   var jsx$1 = this.canvas$1;
-  var this$7 = $uD($m_Lorg_scalajs_dom_package$().window__Lorg_scalajs_dom_raw_Window().screen.width);
+  var this$7 = $uD($m_Lorg_scalajs_dom_package$().window__Lorg_scalajs_dom_raw_Window().top.screen.width);
   jsx$1.setAttribute("width", ("" + this$7));
   var jsx$2 = this.canvas$1;
-  var this$9 = $uD($m_Lorg_scalajs_dom_package$().window__Lorg_scalajs_dom_raw_Window().screen.width);
+  var this$9 = $uD($m_Lorg_scalajs_dom_package$().window__Lorg_scalajs_dom_raw_Window().top.screen.width);
   jsx$2.setAttribute("height", ("" + this$9));
   return this.game$1
 });
 $c_Lcom_yuiwai_tetrics_js_Example$.prototype.updater__p1__F1 = (function() {
   return ((!this.bitmap$0$1) ? this.updater$lzycompute__p1__F1() : this.updater$1)
-});
-$c_Lcom_yuiwai_tetrics_js_Example$.prototype.initWithParent__V = (function() {
-  $m_Lorg_scalajs_dom_package$().window__Lorg_scalajs_dom_raw_Window().onmessage = (function(arg1$2) {
-    return $m_Lcom_yuiwai_tetrics_js_Example$().com$yuiwai$tetrics$js$Example$$$anonfun$initWithParent$1__Lorg_scalajs_dom_raw_MessageEvent__O(arg1$2)
-  })
 });
 $c_Lcom_yuiwai_tetrics_js_Example$.prototype.init__Lcom_yuiwai_tetrics_core_TetricsGame = (function() {
   this.game$1 = new $c_Lcom_yuiwai_tetrics_js_Example$$anon$1().init___();
@@ -6898,6 +6893,90 @@ $c_Lcom_yuiwai_tetrics_js_Example$.prototype.init__Lcom_yuiwai_tetrics_core_Tetr
   jsx$2.setAttribute("height", ("" + this$3));
   return this.game$1
 });
+$c_Lcom_yuiwai_tetrics_js_Example$.prototype.com$yuiwai$tetrics$js$Example$$$anonfun$initWithParentImpl$3__Lorg_scalajs_dom_raw_MessageEvent__F0__O = (function(messageEvent, initializer$1) {
+  if (($as_T(messageEvent.origin) === "https://lab.yuiwai.com")) {
+    var x1 = messageEvent.data;
+    if ((x1 === "start")) {
+      var this$2 = $m_Lcom_yuiwai_tetrics_js_Example$();
+      var callback = new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function($this, messageEvent$1) {
+        return (function(gameEvent$2) {
+          var gameEvent = $as_Lcom_yuiwai_tetrics_core_TetricsEvent(gameEvent$2);
+          var qual$1 = messageEvent$1.source;
+          var this$1 = $m_Lcom_yuiwai_tetrics_js_Example$().serializer$1;
+          var x$6 = $byteArray2TypedArray($f_Lcom_yuiwai_tetrics_core_ByteEventSerializer__serialize__Lcom_yuiwai_tetrics_core_TetricsEvent__AB(this$1, gameEvent));
+          var x$7 = $as_T(messageEvent$1.origin);
+          qual$1.postMessage(x$6, x$7)
+        })
+      })(this, messageEvent));
+      var eventBus = $m_Lcom_yuiwai_tetrics_js_Example$().com$yuiwai$tetrics$js$Example$$eventBus$1;
+      $f_Lcom_yuiwai_tetrics_core_EventBus__subscribe__Lcom_yuiwai_tetrics_core_Subscriber__F1__V(eventBus, this$2, callback);
+      var this$3 = $as_Lcom_yuiwai_tetrics_core_TetricsGame(initializer$1.apply__O());
+      var ctx = $m_Lcom_yuiwai_tetrics_js_Example$().com$yuiwai$tetrics$js$Example$$ctx$1;
+      var setting = $m_Lcom_yuiwai_tetrics_js_Example$().setting$1;
+      $f_Lcom_yuiwai_tetrics_core_TetricsGame__start__O__Lcom_yuiwai_tetrics_core_TetricsSetting__V(this$3, ctx, setting);
+      return (void 0)
+    } else if ((x1 === "readOnly")) {
+      var this$4 = $as_Lcom_yuiwai_tetrics_core_TetricsGame(initializer$1.apply__O());
+      var ctx$1 = $m_Lcom_yuiwai_tetrics_js_Example$().com$yuiwai$tetrics$js$Example$$ctx$1;
+      var setting$1 = $m_Lcom_yuiwai_tetrics_js_Example$().setting$1;
+      $f_Lcom_yuiwai_tetrics_core_TetricsGame__readOnly__O__Lcom_yuiwai_tetrics_core_TetricsSetting__V(this$4, ctx$1, setting$1);
+      $m_Lorg_scalajs_dom_package$().window__Lorg_scalajs_dom_raw_Window().onmessage = (function(f) {
+        return (function(arg1) {
+          return f.apply__O__O(arg1)
+        })
+      })($m_Lcom_yuiwai_tetrics_js_Example$().handleMessageEvent$1);
+      return (void 0)
+    } else if ((x1 === "autoPlay")) {
+      var game = $as_Lcom_yuiwai_tetrics_core_TetricsGame(initializer$1.apply__O());
+      var autoPlayer = new $c_Lcom_yuiwai_tetrics_core_DefaultAutoPlayer$$anon$1().init___();
+      var ctx$2 = $m_Lcom_yuiwai_tetrics_js_Example$().com$yuiwai$tetrics$js$Example$$ctx$1;
+      var setting$2 = $m_Lcom_yuiwai_tetrics_js_Example$().setting$1;
+      $f_Lcom_yuiwai_tetrics_core_TetricsGame__autoPlay__O__Lcom_yuiwai_tetrics_core_TetricsSetting__V(game, ctx$2, setting$2);
+      return $uI($m_Lorg_scalajs_dom_package$().window__Lorg_scalajs_dom_raw_Window().setInterval((function(game$1, autoPlayer$1) {
+        return (function() {
+          $m_Lcom_yuiwai_tetrics_js_Example$();
+          var ctx$3 = $m_Lcom_yuiwai_tetrics_js_Example$().com$yuiwai$tetrics$js$Example$$ctx$1;
+          var setting$3 = $m_Lcom_yuiwai_tetrics_js_Example$().setting$1;
+          $f_Lcom_yuiwai_tetrics_core_TetricsGame__act__Lcom_yuiwai_tetrics_core_AutoPlayer__O__Lcom_yuiwai_tetrics_core_TetricsSetting__V(game$1, autoPlayer$1, ctx$3, setting$3)
+        })
+      })(game, autoPlayer), 250.0))
+    } else if ((x1 === "semiAuto")) {
+      var this$7 = $as_Lcom_yuiwai_tetrics_core_TetricsGame(initializer$1.apply__O());
+      var ctx$4 = $m_Lcom_yuiwai_tetrics_js_Example$().com$yuiwai$tetrics$js$Example$$ctx$1;
+      var setting$4 = $m_Lcom_yuiwai_tetrics_js_Example$().setting$1;
+      $f_Lcom_yuiwai_tetrics_core_TetricsGame__autoPlay__O__Lcom_yuiwai_tetrics_core_TetricsSetting__V(this$7, ctx$4, setting$4);
+      return (void 0)
+    } else if ((x1 === "semiAutoLoop")) {
+      var x1$2 = $m_Lcom_yuiwai_tetrics_js_Example$().semiAuto$1;
+      if ($is_s_Some(x1$2)) {
+        var x2 = $as_s_Some(x1$2);
+        var s = $as_Lcom_yuiwai_tetrics_js_SemiAuto(x2.value$2);
+        var this$8 = $m_Lcom_yuiwai_tetrics_js_Example$().game$1;
+        var autoPlayer$2 = s.autoPlayer$1;
+        var ctx$5 = $m_Lcom_yuiwai_tetrics_js_Example$().com$yuiwai$tetrics$js$Example$$ctx$1;
+        var setting$5 = $m_Lcom_yuiwai_tetrics_js_Example$().setting$1;
+        $f_Lcom_yuiwai_tetrics_core_TetricsGame__act__Lcom_yuiwai_tetrics_core_AutoPlayer__O__Lcom_yuiwai_tetrics_core_TetricsSetting__V(this$8, autoPlayer$2, ctx$5, setting$5);
+        return (void 0)
+      } else {
+        var x = $m_s_None$();
+        if ((x === x1$2)) {
+          var this$9 = $as_Lcom_yuiwai_tetrics_core_TetricsGame(initializer$1.apply__O());
+          var ctx$6 = $m_Lcom_yuiwai_tetrics_js_Example$().com$yuiwai$tetrics$js$Example$$ctx$1;
+          var setting$6 = $m_Lcom_yuiwai_tetrics_js_Example$().setting$1;
+          $f_Lcom_yuiwai_tetrics_core_TetricsGame__autoPlay__O__Lcom_yuiwai_tetrics_core_TetricsSetting__V(this$9, ctx$6, setting$6);
+          $m_Lcom_yuiwai_tetrics_js_Example$().semiAuto$1 = new $c_s_Some().init___O(new $c_Lcom_yuiwai_tetrics_js_SemiAuto().init___Lcom_yuiwai_tetrics_core_AutoPlayer(new $c_Lcom_yuiwai_tetrics_core_DefaultAutoPlayer$$anon$1().init___()));
+          return (void 0)
+        } else {
+          throw new $c_s_MatchError().init___O(x1$2)
+        }
+      }
+    } else {
+      throw new $c_s_MatchError().init___O(x1)
+    }
+  } else {
+    return (void 0)
+  }
+});
 $c_Lcom_yuiwai_tetrics_js_Example$.prototype.main__AT__V = (function(args) {
   if ($m_sr_BoxesRunTime$().equals__O__O__Z($m_Lorg_scalajs_dom_package$().window__Lorg_scalajs_dom_raw_Window(), $m_Lorg_scalajs_dom_package$().window__Lorg_scalajs_dom_raw_Window().parent)) {
     if (($uD($m_Lorg_scalajs_dom_package$().window__Lorg_scalajs_dom_raw_Window().screen.width) >= 1080)) {
@@ -6911,8 +6990,10 @@ $c_Lcom_yuiwai_tetrics_js_Example$.prototype.main__AT__V = (function(args) {
       var setting$1 = this.setting$1;
       $f_Lcom_yuiwai_tetrics_core_TetricsGame__start__O__Lcom_yuiwai_tetrics_core_TetricsSetting__V(this$2, ctx$1, setting$1)
     }
+  } else if (($uD($m_Lorg_scalajs_dom_package$().window__Lorg_scalajs_dom_raw_Window().top.screen.width) >= 1080)) {
+    this.initWithParentImpl__p1__Z__V(false)
   } else {
-    this.initWithParent__V()
+    this.initWithParentImpl__p1__Z__V(true)
   }
 });
 $c_Lcom_yuiwai_tetrics_js_Example$.prototype.updater$lzycompute__p1__F1 = (function() {
@@ -6959,89 +7040,21 @@ $c_Lcom_yuiwai_tetrics_js_Example$.prototype.com$yuiwai$tetrics$js$Example$$$ano
     $m_Lcom_yuiwai_tetrics_js_Example$().keyDown$1 = false
   })
 });
-$c_Lcom_yuiwai_tetrics_js_Example$.prototype.com$yuiwai$tetrics$js$Example$$$anonfun$initWithParent$1__Lorg_scalajs_dom_raw_MessageEvent__O = (function(messageEvent) {
-  if (($as_T(messageEvent.origin) === "https://lab.yuiwai.com")) {
-    var x1 = messageEvent.data;
-    if ((x1 === "start")) {
-      var this$2 = $m_Lcom_yuiwai_tetrics_js_Example$();
-      var callback = new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function($this, messageEvent$1) {
-        return (function(gameEvent$2) {
-          var gameEvent = $as_Lcom_yuiwai_tetrics_core_TetricsEvent(gameEvent$2);
-          var qual$1 = messageEvent$1.source;
-          var this$1 = $m_Lcom_yuiwai_tetrics_js_Example$().serializer$1;
-          var x$6 = $byteArray2TypedArray($f_Lcom_yuiwai_tetrics_core_ByteEventSerializer__serialize__Lcom_yuiwai_tetrics_core_TetricsEvent__AB(this$1, gameEvent));
-          var x$7 = $as_T(messageEvent$1.origin);
-          qual$1.postMessage(x$6, x$7)
-        })
-      })(this, messageEvent));
-      var eventBus = $m_Lcom_yuiwai_tetrics_js_Example$().com$yuiwai$tetrics$js$Example$$eventBus$1;
-      $f_Lcom_yuiwai_tetrics_core_EventBus__subscribe__Lcom_yuiwai_tetrics_core_Subscriber__F1__V(eventBus, this$2, callback);
-      var this$3 = $m_Lcom_yuiwai_tetrics_js_Example$().init__Lcom_yuiwai_tetrics_core_TetricsGame();
-      var ctx = $m_Lcom_yuiwai_tetrics_js_Example$().com$yuiwai$tetrics$js$Example$$ctx$1;
-      var setting = $m_Lcom_yuiwai_tetrics_js_Example$().setting$1;
-      $f_Lcom_yuiwai_tetrics_core_TetricsGame__start__O__Lcom_yuiwai_tetrics_core_TetricsSetting__V(this$3, ctx, setting);
-      return (void 0)
-    } else if ((x1 === "readOnly")) {
-      var this$4 = $m_Lcom_yuiwai_tetrics_js_Example$().init__Lcom_yuiwai_tetrics_core_TetricsGame();
-      var ctx$1 = $m_Lcom_yuiwai_tetrics_js_Example$().com$yuiwai$tetrics$js$Example$$ctx$1;
-      var setting$1 = $m_Lcom_yuiwai_tetrics_js_Example$().setting$1;
-      $f_Lcom_yuiwai_tetrics_core_TetricsGame__readOnly__O__Lcom_yuiwai_tetrics_core_TetricsSetting__V(this$4, ctx$1, setting$1);
-      $m_Lorg_scalajs_dom_package$().window__Lorg_scalajs_dom_raw_Window().onmessage = (function(f) {
-        return (function(arg1) {
-          return f.apply__O__O(arg1)
-        })
-      })($m_Lcom_yuiwai_tetrics_js_Example$().handleMessageEvent$1);
-      return (void 0)
-    } else if ((x1 === "autoPlay")) {
-      var game = $m_Lcom_yuiwai_tetrics_js_Example$().init__Lcom_yuiwai_tetrics_core_TetricsGame();
-      var autoPlayer = new $c_Lcom_yuiwai_tetrics_core_DefaultAutoPlayer$$anon$1().init___();
-      var ctx$2 = $m_Lcom_yuiwai_tetrics_js_Example$().com$yuiwai$tetrics$js$Example$$ctx$1;
-      var setting$2 = $m_Lcom_yuiwai_tetrics_js_Example$().setting$1;
-      $f_Lcom_yuiwai_tetrics_core_TetricsGame__autoPlay__O__Lcom_yuiwai_tetrics_core_TetricsSetting__V(game, ctx$2, setting$2);
-      return $uI($m_Lorg_scalajs_dom_package$().window__Lorg_scalajs_dom_raw_Window().setInterval((function(game$1, autoPlayer$1) {
-        return (function() {
-          $m_Lcom_yuiwai_tetrics_js_Example$();
-          var ctx$3 = $m_Lcom_yuiwai_tetrics_js_Example$().com$yuiwai$tetrics$js$Example$$ctx$1;
-          var setting$3 = $m_Lcom_yuiwai_tetrics_js_Example$().setting$1;
-          $f_Lcom_yuiwai_tetrics_core_TetricsGame__act__Lcom_yuiwai_tetrics_core_AutoPlayer__O__Lcom_yuiwai_tetrics_core_TetricsSetting__V(game$1, autoPlayer$1, ctx$3, setting$3)
-        })
-      })(game, autoPlayer), 250.0))
-    } else if ((x1 === "semiAuto")) {
-      var this$7 = $m_Lcom_yuiwai_tetrics_js_Example$().init__Lcom_yuiwai_tetrics_core_TetricsGame();
-      var ctx$4 = $m_Lcom_yuiwai_tetrics_js_Example$().com$yuiwai$tetrics$js$Example$$ctx$1;
-      var setting$4 = $m_Lcom_yuiwai_tetrics_js_Example$().setting$1;
-      $f_Lcom_yuiwai_tetrics_core_TetricsGame__autoPlay__O__Lcom_yuiwai_tetrics_core_TetricsSetting__V(this$7, ctx$4, setting$4);
-      return (void 0)
-    } else if ((x1 === "semiAutoLoop")) {
-      var x1$2 = $m_Lcom_yuiwai_tetrics_js_Example$().semiAuto$1;
-      if ($is_s_Some(x1$2)) {
-        var x2 = $as_s_Some(x1$2);
-        var s = $as_Lcom_yuiwai_tetrics_js_SemiAuto(x2.value$2);
-        var this$8 = $m_Lcom_yuiwai_tetrics_js_Example$().game$1;
-        var autoPlayer$2 = s.autoPlayer$1;
-        var ctx$5 = $m_Lcom_yuiwai_tetrics_js_Example$().com$yuiwai$tetrics$js$Example$$ctx$1;
-        var setting$5 = $m_Lcom_yuiwai_tetrics_js_Example$().setting$1;
-        $f_Lcom_yuiwai_tetrics_core_TetricsGame__act__Lcom_yuiwai_tetrics_core_AutoPlayer__O__Lcom_yuiwai_tetrics_core_TetricsSetting__V(this$8, autoPlayer$2, ctx$5, setting$5);
-        return (void 0)
-      } else {
-        var x = $m_s_None$();
-        if ((x === x1$2)) {
-          var this$9 = $m_Lcom_yuiwai_tetrics_js_Example$().init__Lcom_yuiwai_tetrics_core_TetricsGame();
-          var ctx$6 = $m_Lcom_yuiwai_tetrics_js_Example$().com$yuiwai$tetrics$js$Example$$ctx$1;
-          var setting$6 = $m_Lcom_yuiwai_tetrics_js_Example$().setting$1;
-          $f_Lcom_yuiwai_tetrics_core_TetricsGame__autoPlay__O__Lcom_yuiwai_tetrics_core_TetricsSetting__V(this$9, ctx$6, setting$6);
-          $m_Lcom_yuiwai_tetrics_js_Example$().semiAuto$1 = new $c_s_Some().init___O(new $c_Lcom_yuiwai_tetrics_js_SemiAuto().init___Lcom_yuiwai_tetrics_core_AutoPlayer(new $c_Lcom_yuiwai_tetrics_core_DefaultAutoPlayer$$anon$1().init___()));
-          return (void 0)
-        } else {
-          throw new $c_s_MatchError().init___O(x1$2)
-        }
-      }
-    } else {
-      throw new $c_s_MatchError().init___O(x1)
-    }
-  } else {
-    return (void 0)
-  }
+$c_Lcom_yuiwai_tetrics_js_Example$.prototype.initWithParentImpl__p1__Z__V = (function(isMobile) {
+  var initializer = (isMobile ? new $c_sjsr_AnonFunction0().init___sjs_js_Function0((function($this) {
+    return (function() {
+      return $m_Lcom_yuiwai_tetrics_js_Example$().initMobile__Lcom_yuiwai_tetrics_core_TetricsGame()
+    })
+  })(this)) : new $c_sjsr_AnonFunction0().init___sjs_js_Function0((function(this$2) {
+    return (function() {
+      return $m_Lcom_yuiwai_tetrics_js_Example$().init__Lcom_yuiwai_tetrics_core_TetricsGame()
+    })
+  })(this)));
+  $m_Lorg_scalajs_dom_package$().window__Lorg_scalajs_dom_raw_Window().onmessage = (function(initializer$1) {
+    return (function(arg1$2) {
+      return $m_Lcom_yuiwai_tetrics_js_Example$().com$yuiwai$tetrics$js$Example$$$anonfun$initWithParentImpl$3__Lorg_scalajs_dom_raw_MessageEvent__F0__O(arg1$2, initializer$1)
+    })
+  })(initializer)
 });
 var $d_Lcom_yuiwai_tetrics_js_Example$ = new $TypeData().initClass({
   Lcom_yuiwai_tetrics_js_Example$: 0
@@ -8688,6 +8701,18 @@ function $f_Lcom_yuiwai_tetrics_core_TetricsGame__act__Lcom_yuiwai_tetrics_core_
       }
     }
   }
+}
+function $is_Lcom_yuiwai_tetrics_core_TetricsGame(obj) {
+  return (!(!((obj && obj.$classData) && obj.$classData.ancestors.Lcom_yuiwai_tetrics_core_TetricsGame)))
+}
+function $as_Lcom_yuiwai_tetrics_core_TetricsGame(obj) {
+  return (($is_Lcom_yuiwai_tetrics_core_TetricsGame(obj) || (obj === null)) ? obj : $throwClassCastException(obj, "com.yuiwai.tetrics.core.TetricsGame"))
+}
+function $isArrayOf_Lcom_yuiwai_tetrics_core_TetricsGame(obj, depth) {
+  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.Lcom_yuiwai_tetrics_core_TetricsGame)))
+}
+function $asArrayOf_Lcom_yuiwai_tetrics_core_TetricsGame(obj, depth) {
+  return (($isArrayOf_Lcom_yuiwai_tetrics_core_TetricsGame(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lcom.yuiwai.tetrics.core.TetricsGame;", depth))
 }
 function $is_Ljava_io_IOException(obj) {
   return (!(!((obj && obj.$classData) && obj.$classData.ancestors.Ljava_io_IOException)))

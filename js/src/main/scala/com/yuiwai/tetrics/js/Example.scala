@@ -37,10 +37,17 @@ object Example extends Subscriber with DefaultSettings {
         initMobile().start()
       }
     } else {
-      initWithParent()
+      if (window.top.screen.width >= 1080) {
+        initWithParent()
+      } else {
+        initMobileWithParent()
+      }
     }
   }
-  def initWithParent(): Unit = {
+  def initWithParent(): Unit = initWithParentImpl(false)
+  def initMobileWithParent(): Unit = initWithParentImpl(true)
+  private def initWithParentImpl(isMobile: Boolean): Unit = {
+    val initializer = if (isMobile) initMobile _ else init _
     window.onmessage = (messageEvent: MessageEvent) => {
       if (messageEvent.origin == "https://lab.yuiwai.com") {
         messageEvent.data match {
@@ -51,23 +58,23 @@ object Example extends Subscriber with DefaultSettings {
                 messageEvent.origin
               )
             })
-            init().start()
+            initializer().start()
           case "readOnly" =>
-            init().readOnly()
+            initializer().readOnly()
             window.onmessage = handleMessageEvent
           case "autoPlay" =>
-            val game = init()
+            val game = initializer()
             val autoPlayer = DefaultAutoPlayer()
             game.autoPlay()
             dom.window.setInterval(() => game.act(autoPlayer), 250)
           case "semiAuto" =>
-            init().autoPlay()
+            initializer().autoPlay()
           case "semiAutoLoop" =>
             semiAuto match {
               case Some(s) =>
                 game.act(s.autoPlayer)
               case None =>
-                init().autoPlay()
+                initializer().autoPlay()
                 semiAuto = Some(SemiAuto(DefaultAutoPlayer()))
             }
         }
@@ -102,8 +109,8 @@ object Example extends Subscriber with DefaultSettings {
     document.body.addEventListener("touchmove", (e: Event) => game.input(e.asInstanceOf[TouchEvent]))
     document.body.addEventListener("touchend", (e: Event) => game.input(e.asInstanceOf[TouchEvent]))
     window.requestAnimationFrame(updater)
-    canvas.setAttribute("width", window.screen.width.toString)
-    canvas.setAttribute("height", window.screen.width.toString)
+    canvas.setAttribute("width", window.top.screen.width.toString)
+    canvas.setAttribute("height", window.top.screen.width.toString)
     game
   }
   val handleMessageEvent = (messageEvent: MessageEvent) => {
