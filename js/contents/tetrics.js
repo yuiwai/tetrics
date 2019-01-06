@@ -3034,49 +3034,50 @@ function $f_Lcom_yuiwai_tetrics_js_MobileController__isLeft__Lorg_scalajs_dom_ra
   return ($uD(e.screenX) < ($uD($m_Lorg_scalajs_dom_package$().window__Lorg_scalajs_dom_raw_Window().screen.width) / 2))
 }
 function $f_Lcom_yuiwai_tetrics_js_MobileController__$$init$__V($thiz) {
-  $thiz.com$yuiwai$tetrics$js$MobileController$$state$2 = new $c_Lcom_yuiwai_tetrics_js_MobileController$State().init___s_Option__s_Option($m_s_None$(), $m_s_None$())
+  $thiz.com$yuiwai$tetrics$js$MobileController$$state$und$eq__Lcom_yuiwai_tetrics_js_MobileController$State__V(new $c_Lcom_yuiwai_tetrics_js_MobileController$State().init___s_Option__s_Option($m_s_None$(), $m_s_None$()))
 }
 function $f_Lcom_yuiwai_tetrics_js_MobileController__eventToAction__Lorg_scalajs_dom_raw_UIEvent__s_Option($thiz, e) {
   var touch = e.changedTouches[0];
   var x1 = $as_T(e.type);
   if ((x1 === "touchstart")) {
-    if ($f_Lcom_yuiwai_tetrics_js_MobileController__isLeft__Lorg_scalajs_dom_raw_Touch__Z($thiz, touch)) {
-      var qual$5 = $thiz.com$yuiwai$tetrics$js$MobileController$$state$2;
+    if ($thiz.isLeft__Lorg_scalajs_dom_raw_Touch__Z(touch)) {
+      var qual$5 = $thiz.com$yuiwai$tetrics$js$MobileController$$state__Lcom_yuiwai_tetrics_js_MobileController$State();
       var x$18 = new $c_s_Some().init___O(touch);
       var x$19 = qual$5.right$1;
-      $thiz.com$yuiwai$tetrics$js$MobileController$$state$2 = new $c_Lcom_yuiwai_tetrics_js_MobileController$State().init___s_Option__s_Option(x$18, x$19)
+      $thiz.com$yuiwai$tetrics$js$MobileController$$state$und$eq__Lcom_yuiwai_tetrics_js_MobileController$State__V(new $c_Lcom_yuiwai_tetrics_js_MobileController$State().init___s_Option__s_Option(x$18, x$19))
     } else {
-      var qual$6 = $thiz.com$yuiwai$tetrics$js$MobileController$$state$2;
+      var qual$6 = $thiz.com$yuiwai$tetrics$js$MobileController$$state__Lcom_yuiwai_tetrics_js_MobileController$State();
       var x$20 = new $c_s_Some().init___O(touch);
       var x$21 = qual$6.left$1;
-      $thiz.com$yuiwai$tetrics$js$MobileController$$state$2 = new $c_Lcom_yuiwai_tetrics_js_MobileController$State().init___s_Option__s_Option(x$21, x$20)
+      $thiz.com$yuiwai$tetrics$js$MobileController$$state$und$eq__Lcom_yuiwai_tetrics_js_MobileController$State__V(new $c_Lcom_yuiwai_tetrics_js_MobileController$State().init___s_Option__s_Option(x$21, x$20))
     };
     return $m_s_None$()
   } else if ((x1 === "touchend")) {
-    var this$1 = $thiz.com$yuiwai$tetrics$js$MobileController$$state$2.left$1;
+    $thiz.com$yuiwai$tetrics$js$MobileController$$state__Lcom_yuiwai_tetrics_js_MobileController$State();
+    var this$1 = $thiz.com$yuiwai$tetrics$js$MobileController$$state__Lcom_yuiwai_tetrics_js_MobileController$State().left$1;
     if (this$1.isEmpty__Z()) {
       var left = $m_s_None$()
     } else {
       var arg1 = this$1.get__O();
-      var left = (($uD(arg1.identifier) === $uD(touch.identifier)) ? $m_s_None$() : new $c_s_Some().init___O(arg1))
+      var left = $thiz.$$anonfun$eventToAction$1__pLcom_yuiwai_tetrics_js_MobileController__Lorg_scalajs_dom_raw_Touch__Lorg_scalajs_dom_raw_Touch__s_Option(touch, arg1)
     };
-    var this$2 = $thiz.com$yuiwai$tetrics$js$MobileController$$state$2.right$1;
+    var this$2 = $thiz.com$yuiwai$tetrics$js$MobileController$$state__Lcom_yuiwai_tetrics_js_MobileController$State().right$1;
     if (this$2.isEmpty__Z()) {
       var right = $m_s_None$()
     } else {
       var arg1$1 = this$2.get__O();
-      var right = (($uD(arg1$1.identifier) === $uD(touch.identifier)) ? $m_s_None$() : new $c_s_Some().init___O(arg1$1))
+      var right = $thiz.$$anonfun$eventToAction$2__pLcom_yuiwai_tetrics_js_MobileController__Lorg_scalajs_dom_raw_Touch__Lorg_scalajs_dom_raw_Touch__s_Option(touch, arg1$1)
     };
-    $thiz.com$yuiwai$tetrics$js$MobileController$$state$2 = new $c_Lcom_yuiwai_tetrics_js_MobileController$State().init___s_Option__s_Option(left, right);
+    $thiz.com$yuiwai$tetrics$js$MobileController$$state$und$eq__Lcom_yuiwai_tetrics_js_MobileController$State__V(new $c_Lcom_yuiwai_tetrics_js_MobileController$State().init___s_Option__s_Option(left, right));
     return $m_s_None$()
   } else if ((x1 === "touchmove")) {
-    var x1$2 = $thiz.com$yuiwai$tetrics$js$MobileController$$state$2.moved__Lorg_scalajs_dom_raw_Touch__T2(touch);
+    var x1$2 = $thiz.com$yuiwai$tetrics$js$MobileController$$state__Lcom_yuiwai_tetrics_js_MobileController$State().moved__Lorg_scalajs_dom_raw_Touch__T2(touch);
     if ((x1$2 === null)) {
       throw new $c_s_MatchError().init___O(x1$2)
     };
     var a = $as_s_Option(x1$2.$$und1__O());
     var s = $as_Lcom_yuiwai_tetrics_js_MobileController$State(x1$2.$$und2__O());
-    $thiz.com$yuiwai$tetrics$js$MobileController$$state$2 = s;
+    $thiz.com$yuiwai$tetrics$js$MobileController$$state$und$eq__Lcom_yuiwai_tetrics_js_MobileController$State__V(s);
     return a
   } else {
     throw new $c_s_MatchError().init___O(x1)
@@ -6805,6 +6806,25 @@ function $h_Lcom_yuiwai_tetrics_js_Example$() {
   /*<skip>*/
 }
 $h_Lcom_yuiwai_tetrics_js_Example$.prototype = $c_Lcom_yuiwai_tetrics_js_Example$.prototype;
+$c_Lcom_yuiwai_tetrics_js_Example$.prototype.reset__V = (function() {
+  if ($m_sr_BoxesRunTime$().equals__O__O__Z($m_Lorg_scalajs_dom_package$().window__Lorg_scalajs_dom_raw_Window(), $m_Lorg_scalajs_dom_package$().window__Lorg_scalajs_dom_raw_Window().parent)) {
+    if (($uD($m_Lorg_scalajs_dom_package$().window__Lorg_scalajs_dom_raw_Window().screen.width) >= 1080)) {
+      var this$1 = this.init__Lcom_yuiwai_tetrics_core_TetricsGame();
+      var ctx = this.com$yuiwai$tetrics$js$Example$$ctx$1;
+      var setting = this.setting$1;
+      $f_Lcom_yuiwai_tetrics_core_TetricsGame__start__O__Lcom_yuiwai_tetrics_core_TetricsSetting__V(this$1, ctx, setting)
+    } else {
+      var this$2 = this.initMobile__Lcom_yuiwai_tetrics_core_TetricsGame();
+      var ctx$1 = this.com$yuiwai$tetrics$js$Example$$ctx$1;
+      var setting$1 = this.setting$1;
+      $f_Lcom_yuiwai_tetrics_core_TetricsGame__start__O__Lcom_yuiwai_tetrics_core_TetricsSetting__V(this$2, ctx$1, setting$1)
+    }
+  } else if (($uD($m_Lorg_scalajs_dom_package$().window__Lorg_scalajs_dom_raw_Window().top.screen.width) >= 1080)) {
+    this.initWithParentImpl__p1__Z__V(false)
+  } else {
+    this.initWithParentImpl__p1__Z__V(true)
+  }
+});
 $c_Lcom_yuiwai_tetrics_js_Example$.prototype.init___ = (function() {
   $n_Lcom_yuiwai_tetrics_js_Example$ = this;
   $f_Lcom_yuiwai_tetrics_core_DefaultSettings__$$init$__V(this);
@@ -6817,13 +6837,17 @@ $c_Lcom_yuiwai_tetrics_js_Example$.prototype.init___ = (function() {
   this.lastUpdated$1 = 0.0;
   this.handleMessageEvent$1 = new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function($this) {
     return (function(messageEvent$2) {
-      var this$3 = $m_Lcom_yuiwai_tetrics_js_Example$().game$1;
-      var this$2 = $m_Lcom_yuiwai_tetrics_js_Example$().serializer$1;
-      var data = $typedArray2ByteArray(messageEvent$2.data);
-      var event = $f_Lcom_yuiwai_tetrics_core_ByteEventSerializer__deserialize__AB__Lcom_yuiwai_tetrics_core_TetricsEvent(this$2, data);
-      var ctx = $m_Lcom_yuiwai_tetrics_js_Example$().com$yuiwai$tetrics$js$Example$$ctx$1;
-      var setting = $m_Lcom_yuiwai_tetrics_js_Example$().setting$1;
-      $f_Lcom_yuiwai_tetrics_core_TetricsGame__act__Lcom_yuiwai_tetrics_core_TetricsEvent__O__Lcom_yuiwai_tetrics_core_TetricsSetting__V(this$3, event, ctx, setting)
+      if ($m_sr_BoxesRunTime$().equals__O__O__Z(messageEvent$2.data, 0)) {
+        $m_Lcom_yuiwai_tetrics_js_Example$().reset__V()
+      } else {
+        var this$3 = $m_Lcom_yuiwai_tetrics_js_Example$().game$1;
+        var this$2 = $m_Lcom_yuiwai_tetrics_js_Example$().serializer$1;
+        var data = $typedArray2ByteArray(messageEvent$2.data);
+        var event = $f_Lcom_yuiwai_tetrics_core_ByteEventSerializer__deserialize__AB__Lcom_yuiwai_tetrics_core_TetricsEvent(this$2, data);
+        var ctx = $m_Lcom_yuiwai_tetrics_js_Example$().com$yuiwai$tetrics$js$Example$$ctx$1;
+        var setting = $m_Lcom_yuiwai_tetrics_js_Example$().setting$1;
+        $f_Lcom_yuiwai_tetrics_core_TetricsGame__act__Lcom_yuiwai_tetrics_core_TetricsEvent__O__Lcom_yuiwai_tetrics_core_TetricsSetting__V(this$3, event, ctx, setting)
+      }
     })
   })(this));
   return this
@@ -6978,23 +7002,7 @@ $c_Lcom_yuiwai_tetrics_js_Example$.prototype.com$yuiwai$tetrics$js$Example$$$ano
   }
 });
 $c_Lcom_yuiwai_tetrics_js_Example$.prototype.main__AT__V = (function(args) {
-  if ($m_sr_BoxesRunTime$().equals__O__O__Z($m_Lorg_scalajs_dom_package$().window__Lorg_scalajs_dom_raw_Window(), $m_Lorg_scalajs_dom_package$().window__Lorg_scalajs_dom_raw_Window().parent)) {
-    if (($uD($m_Lorg_scalajs_dom_package$().window__Lorg_scalajs_dom_raw_Window().screen.width) >= 1080)) {
-      var this$1 = this.init__Lcom_yuiwai_tetrics_core_TetricsGame();
-      var ctx = this.com$yuiwai$tetrics$js$Example$$ctx$1;
-      var setting = this.setting$1;
-      $f_Lcom_yuiwai_tetrics_core_TetricsGame__start__O__Lcom_yuiwai_tetrics_core_TetricsSetting__V(this$1, ctx, setting)
-    } else {
-      var this$2 = this.initMobile__Lcom_yuiwai_tetrics_core_TetricsGame();
-      var ctx$1 = this.com$yuiwai$tetrics$js$Example$$ctx$1;
-      var setting$1 = this.setting$1;
-      $f_Lcom_yuiwai_tetrics_core_TetricsGame__start__O__Lcom_yuiwai_tetrics_core_TetricsSetting__V(this$2, ctx$1, setting$1)
-    }
-  } else if (($uD($m_Lorg_scalajs_dom_package$().window__Lorg_scalajs_dom_raw_Window().top.screen.width) >= 1080)) {
-    this.initWithParentImpl__p1__Z__V(false)
-  } else {
-    this.initWithParentImpl__p1__Z__V(true)
-  }
+  this.reset__V()
 });
 $c_Lcom_yuiwai_tetrics_js_Example$.prototype.updater$lzycompute__p1__F1 = (function() {
   if ((!this.bitmap$0$1)) {
@@ -11705,7 +11713,17 @@ function $f_Lcom_yuiwai_tetrics_js_AnimationComponent__update__D__O__Lcom_yuiwai
 function $f_Lcom_yuiwai_tetrics_js_AnimationComponent__beforeAction__Lcom_yuiwai_tetrics_core_TetricsAction__Lcom_yuiwai_tetrics_core_TetricsAction($thiz, action) {
   if ($is_Lcom_yuiwai_tetrics_core_DropAndNormalizeAction(action)) {
     var x2 = $as_Lcom_yuiwai_tetrics_core_DropAndNormalizeAction(action);
-    var x1$2 = $thiz.tetrics$1.act__Lcom_yuiwai_tetrics_core_TetricsAction__Lcom_yuiwai_tetrics_core_Tetrics(x2.dropAction$1).field__Lcom_yuiwai_tetrics_core_FieldType__Lcom_yuiwai_tetrics_core_Field(x2.dropAction$1.fieldType__Lcom_yuiwai_tetrics_core_FieldType()).filledRows__sc_Seq();
+    var this$2 = $thiz.tetrics$1;
+    var eventBus = new $c_Lcom_yuiwai_tetrics_core_EventBus$$anon$1().init___();
+    var fieldSize = this$2.fieldSize$1;
+    var block = this$2.block$1;
+    var offset = this$2.offset$1;
+    var rotation = this$2.rotation$1;
+    var bottomField = this$2.bottomField$1;
+    var rightField = this$2.rightField$1;
+    var leftField = this$2.leftField$1;
+    var topField = this$2.topField$1;
+    var x1$2 = new $c_Lcom_yuiwai_tetrics_core_Tetrics().init___I__Lcom_yuiwai_tetrics_core_Block__Lcom_yuiwai_tetrics_core_Offset__Lcom_yuiwai_tetrics_core_Rotation__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_Field__Lcom_yuiwai_tetrics_core_EventBus(fieldSize, block, offset, rotation, bottomField, rightField, leftField, topField, eventBus).act__Lcom_yuiwai_tetrics_core_TetricsAction__Lcom_yuiwai_tetrics_core_Tetrics(x2.dropAction$1).field__Lcom_yuiwai_tetrics_core_FieldType__Lcom_yuiwai_tetrics_core_Field(x2.dropAction$1.fieldType__Lcom_yuiwai_tetrics_core_FieldType()).filledRows__sc_Seq();
     if ((x1$2 !== null)) {
       if (x1$2.nonEmpty__Z()) {
         var anim = new $c_Lcom_yuiwai_tetrics_js_BlockDeletionAnimation().init___Lcom_yuiwai_tetrics_core_FieldType__sc_Seq__D(x2.dropAction$1.fieldType__Lcom_yuiwai_tetrics_core_FieldType(), x1$2, 0.0);
@@ -12392,11 +12410,11 @@ $c_s_PartialFunction$$anon$1.prototype.init___ = (function() {
 $c_s_PartialFunction$$anon$1.prototype.apply__O__O = (function(v1) {
   this.apply__O__sr_Nothing$(v1)
 });
-$c_s_PartialFunction$$anon$1.prototype.runWith__F1__F1 = (function(action) {
-  return $m_s_PartialFunction$().scala$PartialFunction$$constFalse$f
-});
 $c_s_PartialFunction$$anon$1.prototype.apply$mcDD$sp__D__D = (function(v1) {
   return $uD(this.apply__O__sr_Nothing$(v1))
+});
+$c_s_PartialFunction$$anon$1.prototype.runWith__F1__F1 = (function(action) {
+  return $m_s_PartialFunction$().scala$PartialFunction$$constFalse$f
 });
 $c_s_PartialFunction$$anon$1.prototype.toString__T = (function() {
   return "<function1>"
@@ -23093,6 +23111,12 @@ $c_Lcom_yuiwai_tetrics_js_Example$$anon$2.prototype.init___ = (function() {
   this.com$yuiwai$tetrics$js$AnimationComponent$$animation$2 = $m_s_None$();
   return this
 });
+$c_Lcom_yuiwai_tetrics_js_Example$$anon$2.prototype.com$yuiwai$tetrics$js$MobileController$$state$und$eq__Lcom_yuiwai_tetrics_js_MobileController$State__V = (function(x$1) {
+  this.com$yuiwai$tetrics$js$MobileController$$state$2 = x$1
+});
+$c_Lcom_yuiwai_tetrics_js_Example$$anon$2.prototype.$$anonfun$eventToAction$2__pLcom_yuiwai_tetrics_js_MobileController__Lorg_scalajs_dom_raw_Touch__Lorg_scalajs_dom_raw_Touch__s_Option = (function(touch$1, x0$3) {
+  return (($uD(x0$3.identifier) === $uD(touch$1.identifier)) ? $m_s_None$() : new $c_s_Some().init___O(x0$3))
+});
 $c_Lcom_yuiwai_tetrics_js_Example$$anon$2.prototype.com$yuiwai$tetrics$js$JsView$$undsetter$und$offset$und$eq__I__V = (function(x$1) {
   this.offset$2 = x$1
 });
@@ -23102,6 +23126,9 @@ $c_Lcom_yuiwai_tetrics_js_Example$$anon$2.prototype.tileWidth__I = (function() {
 $c_Lcom_yuiwai_tetrics_js_Example$$anon$2.prototype.com$yuiwai$tetrics$js$AnimationComponent$$animation__s_Option = (function() {
   return this.com$yuiwai$tetrics$js$AnimationComponent$$animation$2
 });
+$c_Lcom_yuiwai_tetrics_js_Example$$anon$2.prototype.isLeft__Lorg_scalajs_dom_raw_Touch__Z = (function(e) {
+  return $f_Lcom_yuiwai_tetrics_js_MobileController__isLeft__Lorg_scalajs_dom_raw_Touch__Z(this, e)
+});
 $c_Lcom_yuiwai_tetrics_js_Example$$anon$2.prototype.com$yuiwai$tetrics$js$JsView$$undsetter$und$tileHeight$und$eq__I__V = (function(x$1) {
   this.tileHeight$2 = x$1
 });
@@ -23110,6 +23137,12 @@ $c_Lcom_yuiwai_tetrics_js_Example$$anon$2.prototype.com$yuiwai$tetrics$js$JsView
 });
 $c_Lcom_yuiwai_tetrics_js_Example$$anon$2.prototype.labelMargin__I = (function() {
   return this.labelMargin$2
+});
+$c_Lcom_yuiwai_tetrics_js_Example$$anon$2.prototype.$$anonfun$eventToAction$1__pLcom_yuiwai_tetrics_js_MobileController__Lorg_scalajs_dom_raw_Touch__Lorg_scalajs_dom_raw_Touch__s_Option = (function(touch$1, x0$2) {
+  return (($uD(x0$2.identifier) === $uD(touch$1.identifier)) ? $m_s_None$() : new $c_s_Some().init___O(x0$2))
+});
+$c_Lcom_yuiwai_tetrics_js_Example$$anon$2.prototype.com$yuiwai$tetrics$js$MobileController$$state__Lcom_yuiwai_tetrics_js_MobileController$State = (function() {
+  return this.com$yuiwai$tetrics$js$MobileController$$state$2
 });
 $c_Lcom_yuiwai_tetrics_js_Example$$anon$2.prototype.com$yuiwai$tetrics$js$JsView$$undsetter$und$tileWidth$und$eq__I__V = (function(x$1) {
   this.tileWidth$2 = x$1
@@ -25848,11 +25881,11 @@ function $h_sc_AbstractSet() {
   /*<skip>*/
 }
 $h_sc_AbstractSet.prototype = $c_sc_AbstractSet.prototype;
-$c_sc_AbstractSet.prototype.isEmpty__Z = (function() {
-  return $f_sc_SetLike__isEmpty__Z(this)
-});
 $c_sc_AbstractSet.prototype.apply$mcDD$sp__D__D = (function(v1) {
   return $uD(this.contains__O__Z(v1))
+});
+$c_sc_AbstractSet.prototype.isEmpty__Z = (function() {
+  return $f_sc_SetLike__isEmpty__Z(this)
 });
 $c_sc_AbstractSet.prototype.equals__O__Z = (function(that) {
   return $f_sc_GenSetLike__equals__O__Z(this, that)
@@ -29456,13 +29489,13 @@ $c_sci_HashMap$HashMapCollision1.prototype.filter0__F1__Z__I__Asci_HashMap__I__s
     }
   }
 });
+$c_sci_HashMap$HashMapCollision1.prototype.size__I = (function() {
+  return this.kvs$6.size__I()
+});
 $c_sci_HashMap$HashMapCollision1.prototype.iterator__sc_Iterator = (function() {
   var this$1 = this.kvs$6;
   var this$2 = this$1.reverseList$1__p5__sci_List();
   return new $c_sc_LinearSeqLike$$anon$1().init___sc_LinearSeqLike(this$2)
-});
-$c_sci_HashMap$HashMapCollision1.prototype.size__I = (function() {
-  return this.kvs$6.size__I()
 });
 $c_sci_HashMap$HashMapCollision1.prototype.init___I__sci_ListMap = (function(hash, kvs) {
   this.hash$6 = hash;
@@ -29635,11 +29668,11 @@ $c_sci_HashMap$HashTrieMap.prototype.filter0__F1__Z__I__Asci_HashMap__I__sci_Has
     return new $c_sci_HashMap$HashTrieMap().init___I__Asci_HashMap__I(bitmap1, elems1, rs)
   }
 });
-$c_sci_HashMap$HashTrieMap.prototype.iterator__sc_Iterator = (function() {
-  return new $c_sci_HashMap$HashTrieMap$$anon$1().init___sci_HashMap$HashTrieMap(this)
-});
 $c_sci_HashMap$HashTrieMap.prototype.size__I = (function() {
   return this.size0$6
+});
+$c_sci_HashMap$HashTrieMap.prototype.iterator__sc_Iterator = (function() {
+  return new $c_sci_HashMap$HashTrieMap$$anon$1().init___sci_HashMap$HashTrieMap(this)
 });
 $c_sci_HashMap$HashTrieMap.prototype.init___I__Asci_HashMap__I = (function(bitmap, elems, size0) {
   this.bitmap$6 = bitmap;

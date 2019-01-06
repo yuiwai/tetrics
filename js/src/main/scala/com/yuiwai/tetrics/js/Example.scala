@@ -30,6 +30,9 @@ object Example extends Subscriber with DefaultSettings {
     window.requestAnimationFrame(updater)
   }
   def main(args: Array[String]): Unit = {
+    reset()
+  }
+  def reset(): Unit = {
     if (window == window.parent) {
       if (window.screen.width >= 1080) {
         init().start()
@@ -114,7 +117,9 @@ object Example extends Subscriber with DefaultSettings {
     game
   }
   val handleMessageEvent = (messageEvent: MessageEvent) => {
-    game.act(
+    // FIXME 暫定readOnlyモード終了処理
+    if (messageEvent.data == 0) reset()
+    else game.act(
       serializer.deserialize(int8Array2ByteArray(messageEvent.data.asInstanceOf[Int8Array]))
     )
   }
@@ -279,7 +284,7 @@ trait AnimationComponent[E, C] extends TetricsGame[E, C] {
     super.beforeAction(action)
     action match {
       case dn: DropAndNormalizeAction =>
-        tetrics.act(dn.dropAction).field(dn.fieldType).filledRows match {
+        tetrics.clone(EventBus()).act(dn.dropAction).field(dn.fieldType).filledRows match {
           case s: Seq[Int] if s.nonEmpty =>
             addAnimation(BlockDeletionAnimation(dn.fieldType, s))
             block(dn.normalizeAction)

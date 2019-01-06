@@ -30,31 +30,46 @@ iframe {
 <script>
     var index = 0;
     var evants = [];
+    var mode = "normal";
+    var lastEventTime = Date.now();
     window.onload = function() {
         start();
+        window.top.child.focus();
+        window.top.child.onblur = function() {
+            this.focus();
+        };
     }
     window.addEventListener("message", function(e) {
         if (e.origin != "https://lab.yuiwai.com") {
             return;
         }
         if (e.source == window.top.child.contentWindow) {
-            events.push(e.data);
+            if (mode == "normal") {
+                events.push([e.data, Date.now() - lastEventTime]);
+                lastEventTime = Date.now();
+            }
         }
     });
     function start() {
-        index = 0;
+        if (mode == "replay") {
+           window.top.child.contentWindow.postMessage(0, "https://lab.yuiwai.com");
+           mode = "normal";
+        }
         events = [];
+        lastEventTime = Date.now();
         window.top.child.contentWindow.postMessage("start", "https://lab.yuiwai.com");
     }
     function replay() {
+        mode = "replay";
+        index = 0;
         window.top.child.contentWindow.postMessage("readOnly", "https://lab.yuiwai.com");
         sendReplayData();
     }
     function sendReplayData() {
-        if (index < events.length) {
-            window.top.child.contentWindow.postMessage(events[index], "https://lab.yuiwai.com");
-            index++;
-            setTimeout(sendReplayData, 1000);
+        window.top.child.contentWindow.postMessage(events[index][0], "https://lab.yuiwai.com");
+        index++;
+        if (events.length > index) {
+            setTimeout(sendReplayData, events[index][1]);
         }
     }
 </script>
