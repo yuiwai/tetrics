@@ -30,6 +30,9 @@ object Example extends Subscriber with DefaultSettings {
     window.requestAnimationFrame(updater)
   }
   def main(args: Array[String]): Unit = {
+    reset()
+  }
+  def reset(): Unit = {
     if (window == window.parent) {
       if (window.screen.width >= 1080) {
         init().start()
@@ -37,10 +40,17 @@ object Example extends Subscriber with DefaultSettings {
         initMobile().start()
       }
     } else {
-      initWithParent()
+      if (window.top.screen.width >= 1080) {
+        initWithParent()
+      } else {
+        initMobileWithParent()
+      }
     }
   }
-  def initWithParent(): Unit = {
+  def initWithParent(): Unit = initWithParentImpl(false)
+  def initMobileWithParent(): Unit = initWithParentImpl(true)
+  private def initWithParentImpl(isMobile: Boolean): Unit = {
+    val initializer = if (isMobile) initMobile _ else init _
     window.onmessage = (messageEvent: MessageEvent) => {
       if (messageEvent.origin == "https://lab.yuiwai.com") {
         messageEvent.data match {
@@ -51,23 +61,23 @@ object Example extends Subscriber with DefaultSettings {
                 messageEvent.origin
               )
             })
-            init().start()
+            initializer().start()
           case "readOnly" =>
-            init().readOnly()
+            initializer().readOnly()
             window.onmessage = handleMessageEvent
           case "autoPlay" =>
-            val game = init()
+            val game = initializer()
             val autoPlayer = DefaultAutoPlayer()
             game.autoPlay()
             dom.window.setInterval(() => game.act(autoPlayer), 250)
           case "semiAuto" =>
-            init().autoPlay()
+            initializer().autoPlay()
           case "semiAutoLoop" =>
             semiAuto match {
               case Some(s) =>
                 game.act(s.autoPlayer)
               case None =>
-                init().autoPlay()
+                initializer().autoPlay()
                 semiAuto = Some(SemiAuto(DefaultAutoPlayer()))
             }
         }
@@ -102,12 +112,14 @@ object Example extends Subscriber with DefaultSettings {
     document.body.addEventListener("touchmove", (e: Event) => game.input(e.asInstanceOf[TouchEvent]))
     document.body.addEventListener("touchend", (e: Event) => game.input(e.asInstanceOf[TouchEvent]))
     window.requestAnimationFrame(updater)
-    canvas.setAttribute("width", window.screen.width.toString)
-    canvas.setAttribute("height", window.screen.width.toString)
+    canvas.setAttribute("width", window.top.screen.width.toString)
+    canvas.setAttribute("height", window.top.screen.width.toString)
     game
   }
   val handleMessageEvent = (messageEvent: MessageEvent) => {
-    game.act(
+    // FIXME 暫定readOnlyモード終了処理
+    if (messageEvent.data == 0) reset()
+    else game.act(
       serializer.deserialize(int8Array2ByteArray(messageEvent.data.asInstanceOf[Int8Array]))
     )
   }
@@ -272,7 +284,7 @@ trait AnimationComponent[E, C] extends TetricsGame[E, C] {
     super.beforeAction(action)
     action match {
       case dn: DropAndNormalizeAction =>
-        tetrics.act(dn.dropAction).field(dn.fieldType).filledRows match {
+        tetrics.clone(EventBus()).act(dn.dropAction).field(dn.fieldType).filledRows match {
           case s: Seq[Int] if s.nonEmpty =>
             addAnimation(BlockDeletionAnimation(dn.fieldType, s))
             block(dn.normalizeAction)

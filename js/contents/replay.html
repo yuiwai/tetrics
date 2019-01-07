@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
+    <title>replay test</title>
+    <style>
+html {
+  touch-action: none;
+  touch-callout: none;
+  user-select: none;
+  background-color: black;
+  overflow: hidden;
+  color: white;
+  height: 100%;
+}
+body {
+  margin: 0;
+  height: 100%;
+}
+iframe {
+  width: 100%;
+  height: 100%;
+}
+    </style>
+</head>
+<body>
+<div><button onclick="start()">reset</button><button onclick="replay()">replay</button></div>
+<iframe src="multitouch.html" id="child" style="border: 0"></iframe>
+<script>
+    var index = 0;
+    var evants = [];
+    var mode = "normal";
+    var lastEventTime = Date.now();
+    window.onload = function() {
+        start();
+        window.top.child.focus();
+        window.top.child.onblur = function() {
+            this.focus();
+        };
+    }
+    window.addEventListener("message", function(e) {
+        if (e.origin != "https://lab.yuiwai.com") {
+            return;
+        }
+        if (e.source == window.top.child.contentWindow) {
+            if (mode == "normal") {
+                events.push([e.data, Date.now() - lastEventTime]);
+                lastEventTime = Date.now();
+            }
+        }
+    });
+    function start() {
+        if (mode == "replay") {
+           window.top.child.contentWindow.postMessage(0, "https://lab.yuiwai.com");
+           mode = "normal";
+        }
+        events = [];
+        lastEventTime = Date.now();
+        window.top.child.contentWindow.postMessage("start", "https://lab.yuiwai.com");
+    }
+    function replay() {
+        mode = "replay";
+        index = 0;
+        window.top.child.contentWindow.postMessage("readOnly", "https://lab.yuiwai.com");
+        sendReplayData();
+    }
+    function sendReplayData() {
+        window.top.child.contentWindow.postMessage(events[index][0], "https://lab.yuiwai.com");
+        index++;
+        if (events.length > index) {
+            setTimeout(sendReplayData, events[index][1]);
+        }
+    }
+</script>
+</body>
+</html>

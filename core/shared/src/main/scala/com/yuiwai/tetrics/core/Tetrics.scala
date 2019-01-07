@@ -12,6 +12,7 @@ case class Tetrics(
 )(implicit eventBus: EventBus) extends Publisher {
   require(fieldSize >= block.width + offset.x && offset.x >= 0, "block is outside of field width")
   require(fieldSize >= block.height + offset.y && offset.y >= 0, "block is outside of field height")
+  def clone(eventBus: EventBus): Tetrics = copy()(eventBus)
   private val emptyField = Field(fieldSize)
   private def publishAndReturn(f: Tetrics => TetricsEvent): Tetrics = {
     publish(f(this))
