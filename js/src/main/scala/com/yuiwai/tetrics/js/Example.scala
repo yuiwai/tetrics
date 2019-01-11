@@ -13,6 +13,7 @@ object Example extends Subscriber with DefaultSettings {
   self =>
   import dom.window
   import window.document
+  private var animationRequestId = 0
   private var semiAuto: Option[SemiAuto] = None
   private var keyDown = false
   private val canvas = document.createElement("canvas")
@@ -27,7 +28,7 @@ object Example extends Subscriber with DefaultSettings {
   private lazy val updater: Double => Unit = (timestamp: Double) => {
     game.update(timestamp - lastUpdated)
     lastUpdated = timestamp
-    window.requestAnimationFrame(updater)
+    animationRequestId = window.requestAnimationFrame(updater)
   }
   def main(args: Array[String]): Unit = {
     reset()
@@ -100,26 +101,32 @@ object Example extends Subscriber with DefaultSettings {
         keyDown = false
       }
     }
-    window.requestAnimationFrame(updater)
+    animationRequestId = window.requestAnimationFrame(updater)
     canvas.setAttribute("width", (game.offset * 2 + game.tileWidth * 32).toString)
     canvas.setAttribute("height", (game.offset * 2 + game.tileHeight * 32).toString)
     game
   }
   def initMobile(): TetricsGame[UIEvent, Context2D] = {
     game = new TenTen[UIEvent, Context2D] with MobileController with JsView with JsCanvasAnimation
-    document.body.appendChild(canvas)
-    document.body.addEventListener("touchstart", (e: Event) => game.input(e.asInstanceOf[TouchEvent]))
-    document.body.addEventListener("touchmove", (e: Event) => game.input(e.asInstanceOf[TouchEvent]))
-    document.body.addEventListener("touchend", (e: Event) => game.input(e.asInstanceOf[TouchEvent]))
-    window.requestAnimationFrame(updater)
+    if (animationRequestId == 0) {
+      document.body.appendChild(canvas)
+      document.body.addEventListener("touchstart", handleTouchEvent)
+      document.body.addEventListener("touchmove", handleTouchEvent)
+      document.body.addEventListener("touchend", handleTouchEvent)
+    }
+    animationRequestId = window.requestAnimationFrame(updater)
     canvas.setAttribute("width", window.top.screen.width.toString)
     canvas.setAttribute("height", window.top.screen.width.toString)
     game
   }
+  val handleTouchEvent = (e: Event) => game.input(e.asInstanceOf[TouchEvent])
   val handleMessageEvent = (messageEvent: MessageEvent) => {
     // FIXME 暫定readOnlyモード終了処理
-    if (messageEvent.data == 0) reset()
-    else game.act(
+    if (messageEvent.data == 0) {
+      window.cancelAnimationFrame(animationRequestId)
+      game = null
+      reset()
+    } else game.act(
       serializer.deserialize(int8Array2ByteArray(messageEvent.data.asInstanceOf[Int8Array]))
     )
   }
@@ -225,6 +232,7 @@ trait MobileController extends TetricsController[UIEvent, Context2D] {
         val (a, s) = state.moved(touch)
         state = s
         a
+      case _ => None
     }
   }
   def isLeft(e: Touch): Boolean = {
@@ -266,6 +274,7 @@ object MobileController {
           } else if (r.screenY < y - moveUnit) {
             (Some(DropAndNormalizeAction(DropBottomAction, NormalizeBottomAction)), copy(right = None))
           } else (None, this)
+        case _ => (None, this)
       }
     }
   }

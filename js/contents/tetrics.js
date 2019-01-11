@@ -3034,53 +3034,52 @@ function $f_Lcom_yuiwai_tetrics_js_MobileController__isLeft__Lorg_scalajs_dom_ra
   return ($uD(e.screenX) < ($uD($m_Lorg_scalajs_dom_package$().window__Lorg_scalajs_dom_raw_Window().screen.width) / 2))
 }
 function $f_Lcom_yuiwai_tetrics_js_MobileController__$$init$__V($thiz) {
-  $thiz.com$yuiwai$tetrics$js$MobileController$$state$und$eq__Lcom_yuiwai_tetrics_js_MobileController$State__V(new $c_Lcom_yuiwai_tetrics_js_MobileController$State().init___s_Option__s_Option($m_s_None$(), $m_s_None$()))
+  $thiz.com$yuiwai$tetrics$js$MobileController$$state$2 = new $c_Lcom_yuiwai_tetrics_js_MobileController$State().init___s_Option__s_Option($m_s_None$(), $m_s_None$())
 }
 function $f_Lcom_yuiwai_tetrics_js_MobileController__eventToAction__Lorg_scalajs_dom_raw_UIEvent__s_Option($thiz, e) {
   var touch = e.changedTouches[0];
   var x1 = $as_T(e.type);
   if ((x1 === "touchstart")) {
-    if ($thiz.isLeft__Lorg_scalajs_dom_raw_Touch__Z(touch)) {
-      var qual$5 = $thiz.com$yuiwai$tetrics$js$MobileController$$state__Lcom_yuiwai_tetrics_js_MobileController$State();
+    if ($f_Lcom_yuiwai_tetrics_js_MobileController__isLeft__Lorg_scalajs_dom_raw_Touch__Z($thiz, touch)) {
+      var qual$5 = $thiz.com$yuiwai$tetrics$js$MobileController$$state$2;
       var x$18 = new $c_s_Some().init___O(touch);
       var x$19 = qual$5.right$1;
-      $thiz.com$yuiwai$tetrics$js$MobileController$$state$und$eq__Lcom_yuiwai_tetrics_js_MobileController$State__V(new $c_Lcom_yuiwai_tetrics_js_MobileController$State().init___s_Option__s_Option(x$18, x$19))
+      $thiz.com$yuiwai$tetrics$js$MobileController$$state$2 = new $c_Lcom_yuiwai_tetrics_js_MobileController$State().init___s_Option__s_Option(x$18, x$19)
     } else {
-      var qual$6 = $thiz.com$yuiwai$tetrics$js$MobileController$$state__Lcom_yuiwai_tetrics_js_MobileController$State();
+      var qual$6 = $thiz.com$yuiwai$tetrics$js$MobileController$$state$2;
       var x$20 = new $c_s_Some().init___O(touch);
       var x$21 = qual$6.left$1;
-      $thiz.com$yuiwai$tetrics$js$MobileController$$state$und$eq__Lcom_yuiwai_tetrics_js_MobileController$State__V(new $c_Lcom_yuiwai_tetrics_js_MobileController$State().init___s_Option__s_Option(x$21, x$20))
+      $thiz.com$yuiwai$tetrics$js$MobileController$$state$2 = new $c_Lcom_yuiwai_tetrics_js_MobileController$State().init___s_Option__s_Option(x$21, x$20)
     };
     return $m_s_None$()
   } else if ((x1 === "touchend")) {
-    $thiz.com$yuiwai$tetrics$js$MobileController$$state__Lcom_yuiwai_tetrics_js_MobileController$State();
-    var this$1 = $thiz.com$yuiwai$tetrics$js$MobileController$$state__Lcom_yuiwai_tetrics_js_MobileController$State().left$1;
+    var this$1 = $thiz.com$yuiwai$tetrics$js$MobileController$$state$2.left$1;
     if (this$1.isEmpty__Z()) {
       var left = $m_s_None$()
     } else {
       var arg1 = this$1.get__O();
-      var left = $thiz.$$anonfun$eventToAction$1__pLcom_yuiwai_tetrics_js_MobileController__Lorg_scalajs_dom_raw_Touch__Lorg_scalajs_dom_raw_Touch__s_Option(touch, arg1)
+      var left = (($uD(arg1.identifier) === $uD(touch.identifier)) ? $m_s_None$() : new $c_s_Some().init___O(arg1))
     };
-    var this$2 = $thiz.com$yuiwai$tetrics$js$MobileController$$state__Lcom_yuiwai_tetrics_js_MobileController$State().right$1;
+    var this$2 = $thiz.com$yuiwai$tetrics$js$MobileController$$state$2.right$1;
     if (this$2.isEmpty__Z()) {
       var right = $m_s_None$()
     } else {
       var arg1$1 = this$2.get__O();
-      var right = $thiz.$$anonfun$eventToAction$2__pLcom_yuiwai_tetrics_js_MobileController__Lorg_scalajs_dom_raw_Touch__Lorg_scalajs_dom_raw_Touch__s_Option(touch, arg1$1)
+      var right = (($uD(arg1$1.identifier) === $uD(touch.identifier)) ? $m_s_None$() : new $c_s_Some().init___O(arg1$1))
     };
-    $thiz.com$yuiwai$tetrics$js$MobileController$$state$und$eq__Lcom_yuiwai_tetrics_js_MobileController$State__V(new $c_Lcom_yuiwai_tetrics_js_MobileController$State().init___s_Option__s_Option(left, right));
+    $thiz.com$yuiwai$tetrics$js$MobileController$$state$2 = new $c_Lcom_yuiwai_tetrics_js_MobileController$State().init___s_Option__s_Option(left, right);
     return $m_s_None$()
   } else if ((x1 === "touchmove")) {
-    var x1$2 = $thiz.com$yuiwai$tetrics$js$MobileController$$state__Lcom_yuiwai_tetrics_js_MobileController$State().moved__Lorg_scalajs_dom_raw_Touch__T2(touch);
+    var x1$2 = $thiz.com$yuiwai$tetrics$js$MobileController$$state$2.moved__Lorg_scalajs_dom_raw_Touch__T2(touch);
     if ((x1$2 === null)) {
       throw new $c_s_MatchError().init___O(x1$2)
     };
     var a = $as_s_Option(x1$2.$$und1__O());
     var s = $as_Lcom_yuiwai_tetrics_js_MobileController$State(x1$2.$$und2__O());
-    $thiz.com$yuiwai$tetrics$js$MobileController$$state$und$eq__Lcom_yuiwai_tetrics_js_MobileController$State__V(s);
+    $thiz.com$yuiwai$tetrics$js$MobileController$$state$2 = s;
     return a
   } else {
-    throw new $c_s_MatchError().init___O(x1)
+    return $m_s_None$()
   }
 }
 /** @constructor */
@@ -6787,6 +6786,7 @@ function $m_Lcom_yuiwai_tetrics_core_Tetrics$() {
 function $c_Lcom_yuiwai_tetrics_js_Example$() {
   $c_O.call(this);
   this.updater$1 = null;
+  this.animationRequestId$1 = 0;
   this.semiAuto$1 = null;
   this.keyDown$1 = false;
   this.canvas$1 = null;
@@ -6795,6 +6795,7 @@ function $c_Lcom_yuiwai_tetrics_js_Example$() {
   this.game$1 = null;
   this.serializer$1 = null;
   this.lastUpdated$1 = 0.0;
+  this.handleTouchEvent$1 = null;
   this.handleMessageEvent$1 = null;
   this.setting$1 = null;
   this.bitmap$0$1 = false
@@ -6828,6 +6829,7 @@ $c_Lcom_yuiwai_tetrics_js_Example$.prototype.reset__V = (function() {
 $c_Lcom_yuiwai_tetrics_js_Example$.prototype.init___ = (function() {
   $n_Lcom_yuiwai_tetrics_js_Example$ = this;
   $f_Lcom_yuiwai_tetrics_core_DefaultSettings__$$init$__V(this);
+  this.animationRequestId$1 = 0;
   this.semiAuto$1 = $m_s_None$();
   this.keyDown$1 = false;
   this.canvas$1 = $m_Lorg_scalajs_dom_package$().window__Lorg_scalajs_dom_raw_Window().document.createElement("canvas");
@@ -6835,18 +6837,28 @@ $c_Lcom_yuiwai_tetrics_js_Example$.prototype.init___ = (function() {
   this.com$yuiwai$tetrics$js$Example$$ctx$1 = this.canvas$1.getContext("2d");
   this.serializer$1 = new $c_Lcom_yuiwai_tetrics_js_Example$$anon$3().init___();
   this.lastUpdated$1 = 0.0;
-  this.handleMessageEvent$1 = new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function($this) {
+  this.handleTouchEvent$1 = new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function($this) {
+    return (function(e$2) {
+      var this$2 = $m_Lcom_yuiwai_tetrics_js_Example$().game$1;
+      var ctx = $m_Lcom_yuiwai_tetrics_js_Example$().com$yuiwai$tetrics$js$Example$$ctx$1;
+      var setting = $m_Lcom_yuiwai_tetrics_js_Example$().setting$1;
+      $f_Lcom_yuiwai_tetrics_core_TetricsGame__input__O__O__Lcom_yuiwai_tetrics_core_TetricsSetting__V(this$2, e$2, ctx, setting)
+    })
+  })(this));
+  this.handleMessageEvent$1 = new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function(this$2$1) {
     return (function(messageEvent$2) {
       if ($m_sr_BoxesRunTime$().equals__O__O__Z(messageEvent$2.data, 0)) {
+        $m_Lorg_scalajs_dom_package$().window__Lorg_scalajs_dom_raw_Window().cancelAnimationFrame($m_Lcom_yuiwai_tetrics_js_Example$().animationRequestId$1);
+        $m_Lcom_yuiwai_tetrics_js_Example$().game$1 = null;
         $m_Lcom_yuiwai_tetrics_js_Example$().reset__V()
       } else {
-        var this$3 = $m_Lcom_yuiwai_tetrics_js_Example$().game$1;
-        var this$2 = $m_Lcom_yuiwai_tetrics_js_Example$().serializer$1;
+        var this$4 = $m_Lcom_yuiwai_tetrics_js_Example$().game$1;
+        var this$3 = $m_Lcom_yuiwai_tetrics_js_Example$().serializer$1;
         var data = $typedArray2ByteArray(messageEvent$2.data);
-        var event = $f_Lcom_yuiwai_tetrics_core_ByteEventSerializer__deserialize__AB__Lcom_yuiwai_tetrics_core_TetricsEvent(this$2, data);
-        var ctx = $m_Lcom_yuiwai_tetrics_js_Example$().com$yuiwai$tetrics$js$Example$$ctx$1;
-        var setting = $m_Lcom_yuiwai_tetrics_js_Example$().setting$1;
-        $f_Lcom_yuiwai_tetrics_core_TetricsGame__act__Lcom_yuiwai_tetrics_core_TetricsEvent__O__Lcom_yuiwai_tetrics_core_TetricsSetting__V(this$3, event, ctx, setting)
+        var event = $f_Lcom_yuiwai_tetrics_core_ByteEventSerializer__deserialize__AB__Lcom_yuiwai_tetrics_core_TetricsEvent(this$3, data);
+        var ctx$1 = $m_Lcom_yuiwai_tetrics_js_Example$().com$yuiwai$tetrics$js$Example$$ctx$1;
+        var setting$1 = $m_Lcom_yuiwai_tetrics_js_Example$().setting$1;
+        $f_Lcom_yuiwai_tetrics_core_TetricsGame__act__Lcom_yuiwai_tetrics_core_TetricsEvent__O__Lcom_yuiwai_tetrics_core_TetricsSetting__V(this$4, event, ctx$1, setting$1)
       }
     })
   })(this));
@@ -6854,45 +6866,41 @@ $c_Lcom_yuiwai_tetrics_js_Example$.prototype.init___ = (function() {
 });
 $c_Lcom_yuiwai_tetrics_js_Example$.prototype.initMobile__Lcom_yuiwai_tetrics_core_TetricsGame = (function() {
   this.game$1 = new $c_Lcom_yuiwai_tetrics_js_Example$$anon$2().init___();
-  $m_Lorg_scalajs_dom_package$().window__Lorg_scalajs_dom_raw_Window().document.body.appendChild(this.canvas$1);
-  var qual$2 = $m_Lorg_scalajs_dom_package$().window__Lorg_scalajs_dom_raw_Window().document.body;
-  var x$10 = (function(arg1$2) {
-    $m_Lcom_yuiwai_tetrics_js_Example$();
-    var this$2 = $m_Lcom_yuiwai_tetrics_js_Example$().game$1;
-    var ctx = $m_Lcom_yuiwai_tetrics_js_Example$().com$yuiwai$tetrics$js$Example$$ctx$1;
-    var setting = $m_Lcom_yuiwai_tetrics_js_Example$().setting$1;
-    $f_Lcom_yuiwai_tetrics_core_TetricsGame__input__O__O__Lcom_yuiwai_tetrics_core_TetricsSetting__V(this$2, arg1$2, ctx, setting)
-  });
-  qual$2.addEventListener("touchstart", x$10);
-  var qual$3 = $m_Lorg_scalajs_dom_package$().window__Lorg_scalajs_dom_raw_Window().document.body;
-  var x$13 = (function(arg1$2$1) {
-    $m_Lcom_yuiwai_tetrics_js_Example$();
-    var this$4 = $m_Lcom_yuiwai_tetrics_js_Example$().game$1;
-    var ctx$1 = $m_Lcom_yuiwai_tetrics_js_Example$().com$yuiwai$tetrics$js$Example$$ctx$1;
-    var setting$1 = $m_Lcom_yuiwai_tetrics_js_Example$().setting$1;
-    $f_Lcom_yuiwai_tetrics_core_TetricsGame__input__O__O__Lcom_yuiwai_tetrics_core_TetricsSetting__V(this$4, arg1$2$1, ctx$1, setting$1)
-  });
-  qual$3.addEventListener("touchmove", x$13);
-  var qual$4 = $m_Lorg_scalajs_dom_package$().window__Lorg_scalajs_dom_raw_Window().document.body;
-  var x$16 = (function(arg1$2$2) {
-    $m_Lcom_yuiwai_tetrics_js_Example$();
-    var this$6 = $m_Lcom_yuiwai_tetrics_js_Example$().game$1;
-    var ctx$2 = $m_Lcom_yuiwai_tetrics_js_Example$().com$yuiwai$tetrics$js$Example$$ctx$1;
-    var setting$2 = $m_Lcom_yuiwai_tetrics_js_Example$().setting$1;
-    $f_Lcom_yuiwai_tetrics_core_TetricsGame__input__O__O__Lcom_yuiwai_tetrics_core_TetricsSetting__V(this$6, arg1$2$2, ctx$2, setting$2)
-  });
-  qual$4.addEventListener("touchend", x$16);
-  $m_Lorg_scalajs_dom_package$().window__Lorg_scalajs_dom_raw_Window().requestAnimationFrame((function(f) {
-    return (function(arg1) {
-      return f.apply__O__O(arg1)
+  if ((this.animationRequestId$1 === 0)) {
+    $m_Lorg_scalajs_dom_package$().window__Lorg_scalajs_dom_raw_Window().document.body.appendChild(this.canvas$1);
+    var qual$2 = $m_Lorg_scalajs_dom_package$().window__Lorg_scalajs_dom_raw_Window().document.body;
+    var x$10 = (function(f) {
+      return (function(arg1) {
+        return f.apply__O__O(arg1)
+      })
+    })(this.handleTouchEvent$1);
+    qual$2.addEventListener("touchstart", x$10);
+    var qual$3 = $m_Lorg_scalajs_dom_package$().window__Lorg_scalajs_dom_raw_Window().document.body;
+    var x$13 = (function(f$1) {
+      return (function(arg1$1) {
+        return f$1.apply__O__O(arg1$1)
+      })
+    })(this.handleTouchEvent$1);
+    qual$3.addEventListener("touchmove", x$13);
+    var qual$4 = $m_Lorg_scalajs_dom_package$().window__Lorg_scalajs_dom_raw_Window().document.body;
+    var x$16 = (function(f$2) {
+      return (function(arg1$2) {
+        return f$2.apply__O__O(arg1$2)
+      })
+    })(this.handleTouchEvent$1);
+    qual$4.addEventListener("touchend", x$16)
+  };
+  this.animationRequestId$1 = $uI($m_Lorg_scalajs_dom_package$().window__Lorg_scalajs_dom_raw_Window().requestAnimationFrame((function(f$3) {
+    return (function(arg1$3) {
+      return f$3.apply__O__O(arg1$3)
     })
-  })(this.updater__p1__F1()));
+  })(this.updater__p1__F1())));
   var jsx$1 = this.canvas$1;
-  var this$7 = $uD($m_Lorg_scalajs_dom_package$().window__Lorg_scalajs_dom_raw_Window().top.screen.width);
-  jsx$1.setAttribute("width", ("" + this$7));
+  var this$1 = $uD($m_Lorg_scalajs_dom_package$().window__Lorg_scalajs_dom_raw_Window().top.screen.width);
+  jsx$1.setAttribute("width", ("" + this$1));
   var jsx$2 = this.canvas$1;
-  var this$9 = $uD($m_Lorg_scalajs_dom_package$().window__Lorg_scalajs_dom_raw_Window().top.screen.width);
-  jsx$2.setAttribute("height", ("" + this$9));
+  var this$3 = $uD($m_Lorg_scalajs_dom_package$().window__Lorg_scalajs_dom_raw_Window().top.screen.width);
+  jsx$2.setAttribute("height", ("" + this$3));
   return this.game$1
 });
 $c_Lcom_yuiwai_tetrics_js_Example$.prototype.updater__p1__F1 = (function() {
@@ -6904,11 +6912,11 @@ $c_Lcom_yuiwai_tetrics_js_Example$.prototype.init__Lcom_yuiwai_tetrics_core_Tetr
   $m_Lorg_scalajs_dom_package$().window__Lorg_scalajs_dom_raw_Window().onkeydown = (function(arg1$2) {
     $m_Lcom_yuiwai_tetrics_js_Example$().com$yuiwai$tetrics$js$Example$$$anonfun$init$1__Lorg_scalajs_dom_raw_KeyboardEvent__V(arg1$2)
   });
-  $m_Lorg_scalajs_dom_package$().window__Lorg_scalajs_dom_raw_Window().requestAnimationFrame((function(f) {
+  this.animationRequestId$1 = $uI($m_Lorg_scalajs_dom_package$().window__Lorg_scalajs_dom_raw_Window().requestAnimationFrame((function(f) {
     return (function(arg1) {
       return f.apply__O__O(arg1)
     })
-  })(this.updater__p1__F1()));
+  })(this.updater__p1__F1())));
   var jsx$1 = this.canvas$1;
   var this$1 = (((this.game$1.offset__I() << 1) + (this.game$1.tileWidth__I() << 5)) | 0);
   jsx$1.setAttribute("width", ("" + this$1));
@@ -7015,11 +7023,11 @@ $c_Lcom_yuiwai_tetrics_js_Example$.prototype.updater$lzycompute__p1__F1 = (funct
         var setting = $m_Lcom_yuiwai_tetrics_js_Example$().setting$1;
         $f_Lcom_yuiwai_tetrics_js_AnimationComponent__update__D__O__Lcom_yuiwai_tetrics_core_TetricsSetting__V(this$1, delta, ctx, setting);
         $m_Lcom_yuiwai_tetrics_js_Example$().lastUpdated$1 = timestamp;
-        $m_Lorg_scalajs_dom_package$().window__Lorg_scalajs_dom_raw_Window().requestAnimationFrame((function(f) {
+        $m_Lcom_yuiwai_tetrics_js_Example$().animationRequestId$1 = $uI($m_Lorg_scalajs_dom_package$().window__Lorg_scalajs_dom_raw_Window().requestAnimationFrame((function(f) {
           return (function(arg1) {
             return f.apply__O__O(arg1)
           })
-        })($m_Lcom_yuiwai_tetrics_js_Example$().updater__p1__F1()))
+        })($m_Lcom_yuiwai_tetrics_js_Example$().updater__p1__F1())))
       })
     })(this));
     this.bitmap$0$1 = true
@@ -11806,26 +11814,23 @@ $c_Lcom_yuiwai_tetrics_js_MobileController$State.prototype.toString__T = (functi
   return $m_sr_ScalaRunTime$().$$undtoString__s_Product__T(this)
 });
 $c_Lcom_yuiwai_tetrics_js_MobileController$State.prototype.moved__Lorg_scalajs_dom_raw_Touch__T2 = (function(touch) {
-  var x1 = new $c_T2().init___O__O(this.left$1, this.right$1);
-  var p2 = $as_s_Option(x1.$$und1$f);
-  var p3 = $as_s_Option(x1.$$und2$f);
+  var _1 = this.left$1;
+  var _2 = this.right$1;
   var x = $m_s_None$();
-  if ((x === p2)) {
+  if ((x === _1)) {
     var x$3 = $m_s_None$();
-    var jsx$1 = (x$3 === p3)
+    var jsx$1 = (x$3 === _2)
   } else {
     var jsx$1 = false
   };
   if (jsx$1) {
     return new $c_T2().init___O__O($m_s_None$(), this)
   };
-  var p4 = $as_s_Option(x1.$$und1$f);
-  var p5 = $as_s_Option(x1.$$und2$f);
-  if ($is_s_Some(p4)) {
-    var x6 = $as_s_Some(p4);
+  if ($is_s_Some(_1)) {
+    var x6 = $as_s_Some(_1);
     var l = x6.value$2;
     var x$5 = $m_s_None$();
-    if (((x$5 === p5) && ($uD(l.identifier) === $uD(touch.identifier)))) {
+    if (((x$5 === _2) && ($uD(l.identifier) === $uD(touch.identifier)))) {
       if (($uD(l.screenX) > ($uD(touch.screenX) + $m_Lcom_yuiwai_tetrics_js_MobileController$().moveUnit$1))) {
         var jsx$2 = new $c_s_Some().init___O($m_Lcom_yuiwai_tetrics_core_MoveLeftAction$());
         var left = new $c_s_Some().init___O(touch);
@@ -11851,11 +11856,9 @@ $c_Lcom_yuiwai_tetrics_js_MobileController$State.prototype.moved__Lorg_scalajs_d
       }
     }
   };
-  var p7 = $as_s_Option(x1.$$und1$f);
-  var p8 = $as_s_Option(x1.$$und2$f);
   var x$7 = $m_s_None$();
-  if (((x$7 === p7) && $is_s_Some(p8))) {
-    var x9 = $as_s_Some(p8);
+  if (((x$7 === _1) && $is_s_Some(_2))) {
+    var x9 = $as_s_Some(_2);
     var r = x9.value$2;
     if (($uD(r.identifier) === $uD(touch.identifier))) {
       if (($uD(r.screenX) > ($uD(touch.screenX) + $m_Lcom_yuiwai_tetrics_js_MobileController$().rotateUnit$1))) {
@@ -11873,10 +11876,8 @@ $c_Lcom_yuiwai_tetrics_js_MobileController$State.prototype.moved__Lorg_scalajs_d
       }
     }
   };
-  var p10 = $as_s_Option(x1.$$und1$f);
-  var p11 = $as_s_Option(x1.$$und2$f);
-  if (($is_s_Some(p10) && $is_s_Some(p11))) {
-    var x14 = $as_s_Some(p11);
+  if (($is_s_Some(_1) && $is_s_Some(_2))) {
+    var x14 = $as_s_Some(_2);
     var r$2 = x14.value$2;
     if (($uD(r$2.identifier) === $uD(touch.identifier))) {
       if (($uD(r$2.screenX) > ($uD(touch.screenX) + $m_Lcom_yuiwai_tetrics_js_MobileController$().moveUnit$1))) {
@@ -11904,7 +11905,7 @@ $c_Lcom_yuiwai_tetrics_js_MobileController$State.prototype.moved__Lorg_scalajs_d
       }
     }
   };
-  throw new $c_s_MatchError().init___O(x1)
+  return new $c_T2().init___O__O($m_s_None$(), this)
 });
 $c_Lcom_yuiwai_tetrics_js_MobileController$State.prototype.init___s_Option__s_Option = (function(left, right) {
   this.left$1 = left;
@@ -12410,11 +12411,11 @@ $c_s_PartialFunction$$anon$1.prototype.init___ = (function() {
 $c_s_PartialFunction$$anon$1.prototype.apply__O__O = (function(v1) {
   this.apply__O__sr_Nothing$(v1)
 });
-$c_s_PartialFunction$$anon$1.prototype.apply$mcDD$sp__D__D = (function(v1) {
-  return $uD(this.apply__O__sr_Nothing$(v1))
-});
 $c_s_PartialFunction$$anon$1.prototype.runWith__F1__F1 = (function(action) {
   return $m_s_PartialFunction$().scala$PartialFunction$$constFalse$f
+});
+$c_s_PartialFunction$$anon$1.prototype.apply$mcDD$sp__D__D = (function(v1) {
+  return $uD(this.apply__O__sr_Nothing$(v1))
 });
 $c_s_PartialFunction$$anon$1.prototype.toString__T = (function() {
   return "<function1>"
@@ -23111,12 +23112,6 @@ $c_Lcom_yuiwai_tetrics_js_Example$$anon$2.prototype.init___ = (function() {
   this.com$yuiwai$tetrics$js$AnimationComponent$$animation$2 = $m_s_None$();
   return this
 });
-$c_Lcom_yuiwai_tetrics_js_Example$$anon$2.prototype.com$yuiwai$tetrics$js$MobileController$$state$und$eq__Lcom_yuiwai_tetrics_js_MobileController$State__V = (function(x$1) {
-  this.com$yuiwai$tetrics$js$MobileController$$state$2 = x$1
-});
-$c_Lcom_yuiwai_tetrics_js_Example$$anon$2.prototype.$$anonfun$eventToAction$2__pLcom_yuiwai_tetrics_js_MobileController__Lorg_scalajs_dom_raw_Touch__Lorg_scalajs_dom_raw_Touch__s_Option = (function(touch$1, x0$3) {
-  return (($uD(x0$3.identifier) === $uD(touch$1.identifier)) ? $m_s_None$() : new $c_s_Some().init___O(x0$3))
-});
 $c_Lcom_yuiwai_tetrics_js_Example$$anon$2.prototype.com$yuiwai$tetrics$js$JsView$$undsetter$und$offset$und$eq__I__V = (function(x$1) {
   this.offset$2 = x$1
 });
@@ -23126,9 +23121,6 @@ $c_Lcom_yuiwai_tetrics_js_Example$$anon$2.prototype.tileWidth__I = (function() {
 $c_Lcom_yuiwai_tetrics_js_Example$$anon$2.prototype.com$yuiwai$tetrics$js$AnimationComponent$$animation__s_Option = (function() {
   return this.com$yuiwai$tetrics$js$AnimationComponent$$animation$2
 });
-$c_Lcom_yuiwai_tetrics_js_Example$$anon$2.prototype.isLeft__Lorg_scalajs_dom_raw_Touch__Z = (function(e) {
-  return $f_Lcom_yuiwai_tetrics_js_MobileController__isLeft__Lorg_scalajs_dom_raw_Touch__Z(this, e)
-});
 $c_Lcom_yuiwai_tetrics_js_Example$$anon$2.prototype.com$yuiwai$tetrics$js$JsView$$undsetter$und$tileHeight$und$eq__I__V = (function(x$1) {
   this.tileHeight$2 = x$1
 });
@@ -23137,12 +23129,6 @@ $c_Lcom_yuiwai_tetrics_js_Example$$anon$2.prototype.com$yuiwai$tetrics$js$JsView
 });
 $c_Lcom_yuiwai_tetrics_js_Example$$anon$2.prototype.labelMargin__I = (function() {
   return this.labelMargin$2
-});
-$c_Lcom_yuiwai_tetrics_js_Example$$anon$2.prototype.$$anonfun$eventToAction$1__pLcom_yuiwai_tetrics_js_MobileController__Lorg_scalajs_dom_raw_Touch__Lorg_scalajs_dom_raw_Touch__s_Option = (function(touch$1, x0$2) {
-  return (($uD(x0$2.identifier) === $uD(touch$1.identifier)) ? $m_s_None$() : new $c_s_Some().init___O(x0$2))
-});
-$c_Lcom_yuiwai_tetrics_js_Example$$anon$2.prototype.com$yuiwai$tetrics$js$MobileController$$state__Lcom_yuiwai_tetrics_js_MobileController$State = (function() {
-  return this.com$yuiwai$tetrics$js$MobileController$$state$2
 });
 $c_Lcom_yuiwai_tetrics_js_Example$$anon$2.prototype.com$yuiwai$tetrics$js$JsView$$undsetter$und$tileWidth$und$eq__I__V = (function(x$1) {
   this.tileWidth$2 = x$1
@@ -25881,11 +25867,11 @@ function $h_sc_AbstractSet() {
   /*<skip>*/
 }
 $h_sc_AbstractSet.prototype = $c_sc_AbstractSet.prototype;
-$c_sc_AbstractSet.prototype.apply$mcDD$sp__D__D = (function(v1) {
-  return $uD(this.contains__O__Z(v1))
-});
 $c_sc_AbstractSet.prototype.isEmpty__Z = (function() {
   return $f_sc_SetLike__isEmpty__Z(this)
+});
+$c_sc_AbstractSet.prototype.apply$mcDD$sp__D__D = (function(v1) {
+  return $uD(this.contains__O__Z(v1))
 });
 $c_sc_AbstractSet.prototype.equals__O__Z = (function(that) {
   return $f_sc_GenSetLike__equals__O__Z(this, that)
