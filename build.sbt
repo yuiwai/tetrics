@@ -84,3 +84,17 @@ lazy val server = (project in file("server"))
     )
   )
   .dependsOn(coreJVM)
+
+lazy val svg = (project in file("svg"))
+  .settings(
+    name := "tetrics-svg",
+    libraryDependencies += "com.lihaoyi" %%% "utest" % "0.6.5" % "test",
+    testFrameworks += new TestFramework("utest.runner.Framework"),
+    libraryDependencies += "com.github.japgolly.scalajs-react" %%% "core" % "1.3.1",
+    scalaJSUseMainModuleInitializer := true,
+    npmDependencies in Compile ++= Seq(
+      "react" -> "16.5.1",
+      "react-dom" -> "16.5.1")
+  )
+  .enablePlugins(ScalaJSBundlerPlugin)
+  .dependsOn(coreJS)
