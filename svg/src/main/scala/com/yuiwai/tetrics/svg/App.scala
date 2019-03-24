@@ -36,11 +36,16 @@ final class SingleGame(presenter: Presenter)(implicit setting: TetricsSetting) e
   implicit val eventBus: core.EventBus = EventBus()
   private var tetrics = Tetrics()
   override def start(): Game = {
-    tetrics = draw(tetrics, randPut())
+    tetrics = draw(tetrics, randPut(tetrics))
     this
   }
   override def act(action: TetricsAction): Game = {
-    tetrics = draw(tetrics, tetrics.act(action))
+    action match {
+      case _: DropAndNormalizeAction =>
+        tetrics = draw(tetrics, randPut(tetrics.act(action)))
+      case _ =>
+        tetrics = draw(tetrics, tetrics.act(action))
+    }
     this
   }
   def draw(before: Tetrics, after: Tetrics): Tetrics = {
@@ -53,7 +58,7 @@ final class SingleGame(presenter: Presenter)(implicit setting: TetricsSetting) e
         fieldType -> FieldData.fromField(after.field(fieldType))
     }.toMap
   }
-  def randPut()(implicit setting: TetricsSetting): Tetrics = {
+  def randPut(tetrics: Tetrics)(implicit setting: TetricsSetting): Tetrics = {
     import setting.blocks
     tetrics.putCenter(blocks((Math.random() * blocks.size).toInt))
   }
@@ -89,7 +94,11 @@ final class GamePresenter extends Presenter with Broadcaster[ViewModel] {
     tileSize = 15,
     fieldWidth = 10,
     fieldHeight = 10,
-    centralFieldPos = Pos(150, 150)
+    leftFieldPos = Pos(0, 170),
+    rightFieldPos = Pos(340, 170),
+    topFieldPos = Pos(170, 0),
+    bottomFieldPos = Pos(170, 340),
+    centralFieldPos = Pos(170, 170)
   )
   override def draw(modifiedFields: Map[FieldType, FieldData]): Unit = {
     viewModel = viewModel.applyDiff(modifiedFields)
@@ -114,10 +123,10 @@ final case class ViewModel(
 ) {
   def applyDiff(modifiedFields: Map[FieldType, FieldData]): ViewModel = modifiedFields.foldLeft(this) {
     case (viewModel, (fieldType, fieldData)) => fieldType match {
-      case FieldLeft => viewModel.copy(leftFieldData = fieldData)
-      case FieldRight => viewModel
-      case FieldTop => viewModel
-      case FieldBottom => viewModel
+      case FieldLeft => viewModel.copy(leftFieldData = fieldData.rotateRight(fieldHeight))
+      case FieldRight => viewModel.copy(rightFieldData = fieldData.rotateLeft(fieldWidth))
+      case FieldTop => viewModel.copy(topFieldData = fieldData.rotateTwice(fieldWidth, fieldHeight))
+      case FieldBottom => viewModel.copy(bottomFieldData = fieldData)
       case FieldCentral => viewModel.copy(centralFieldData = fieldData)
     }
   }
@@ -138,8 +147,13 @@ object Pos {
 }
 final case class FieldData(filled: Set[Pos]) {
   import FieldData._
+  def map(f: Pos => Pos): FieldData = FieldData(filled.map(f))
   def apply(x: Int, y: Int): String = apply(Pos(x, y))
   def apply(pos: Pos): String = if (filled(pos)) RED else BLACK
+  def rotateRight(fieldHeight: Int): FieldData = map(pos => Pos(fieldHeight - pos.y - 1, pos.x))
+  def rotateLeft(fieldWidth: Int): FieldData = map(pos => Pos(pos.y, fieldWidth - pos.x - 1))
+  def rotateTwice(fieldWidth: Int, fieldHeight: Int): FieldData =
+    map(pos => Pos(fieldWidth - pos.x - 1, fieldHeight - pos.y - 1))
 }
 object FieldData {
   val RED = "#ff0000"

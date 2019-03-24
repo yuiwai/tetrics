@@ -19,6 +19,9 @@ object GameView {
         ^.width := "100%",
         ^.height := "100%",
         FieldView.Props(leftFieldPos, fieldWidth, fieldHeight, tileSize, leftFieldData).render,
+        FieldView.Props(rightFieldPos, fieldWidth, fieldHeight, tileSize, rightFieldData).render,
+        FieldView.Props(bottomFieldPos, fieldWidth, fieldHeight, tileSize, bottomFieldData).render,
+        FieldView.Props(topFieldPos, fieldWidth, fieldHeight, tileSize, topFieldData).render,
         FieldView.Props(centralFieldPos, fieldWidth, fieldHeight, tileSize, centralFieldData).render,
       )
     }
