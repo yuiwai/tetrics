@@ -99,3 +99,8 @@ lazy val svg = (project in file("svg"))
   )
   .enablePlugins(ScalaJSBundlerPlugin)
   .dependsOn(coreJS)
+
+lazy val experimental = (project in file("experimental"))
+  .settings(
+    name := "tetrics-experimental"
+  )
