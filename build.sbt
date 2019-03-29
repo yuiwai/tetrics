@@ -104,6 +104,17 @@ lazy val cli = (project in file("cli"))
   .settings(
     name := "tetrics-cli"
   )
+  .dependsOn(appJVM)
+
+lazy val app = crossProject(JVMPlatform, JSPlatform)
+  .crossType(CrossType.Pure)
+  .in(file("app"))
+  .settings(
+    name := "tetrics-app"
+  )
+  .dependsOn(core)
+lazy val appJVM = app.jvm
+lazy val appJS = app.js
 
 lazy val experimental = (project in file("experimental"))
   .settings(
