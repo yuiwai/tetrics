@@ -165,6 +165,9 @@ case object FieldBottom extends FieldType with DroppableField {
   override val normalizeAction: NormalizeAction = NormalizeBottomAction
 }
 case object FieldCentral extends FieldType
+object FieldTypes {
+  val all: Seq[FieldType] = Seq(FieldLeft, FieldRight, FieldTop, FieldBottom, FieldCentral)
+}
 sealed trait FieldStatus
 case object FieldStatusActive extends FieldStatus
 case object FieldStatusFrozen extends FieldStatus
