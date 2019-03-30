@@ -18,3 +18,10 @@ trait Controller[I, C] {
 trait Presenter[T] {
   def draw(modifiedFields: Map[FieldType, T])
 }
+
+final case class Pos(x: Int, y: Int) {
+  def +(that: Pos): Pos = Pos(x + that.x, y + that.y)
+}
+object Pos {
+  def zero = Pos(0, 0)
+}
