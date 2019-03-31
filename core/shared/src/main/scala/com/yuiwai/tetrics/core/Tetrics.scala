@@ -1,7 +1,8 @@
 package com.yuiwai.tetrics.core
 
 case class Tetrics(
-  fieldSize: Int,
+  fieldWidth: Int,
+  fieldHeight: Int,
   block: Block,
   offset: Offset,
   rotation: Rotation,
@@ -10,10 +11,10 @@ case class Tetrics(
   leftField: Field,
   topField: Field
 )(implicit eventBus: EventBus) extends Publisher {
-  require(fieldSize >= block.width + offset.x && offset.x >= 0, "block is outside of field width")
-  require(fieldSize >= block.height + offset.y && offset.y >= 0, "block is outside of field height")
+  require(fieldWidth >= block.width + offset.x && offset.x >= 0, "block is outside of field width")
+  require(fieldHeight >= block.height + offset.y && offset.y >= 0, "block is outside of field height")
   def clone(eventBus: EventBus): Tetrics = copy()(eventBus)
-  private val emptyField = Field(fieldSize)
+  private val emptyField = Field(fieldWidth, fieldHeight)
   private def publishAndReturn(f: Tetrics => TetricsEvent): Tetrics = {
     publish(f(this))
     this
@@ -32,8 +33,8 @@ case class Tetrics(
     copy(block = block, offset = offset, rotation = rotation)
       .publishAndReturn(_ => BlockAdded(block))
   def putCenter(block: Block): Tetrics = put(block, Offset(
-    Math.round((fieldSize - block.width) / 2.0).toInt,
-    Math.round((fieldSize - block.height) / 2.0).toInt
+    Math.round((fieldWidth - block.width) / 2.0).toInt,
+    Math.round((fieldHeight - block.height) / 2.0).toInt
   ))
   def moveRight: Tetrics = copy(offset = offset.moveRight)
     .publishAndReturn(_ => BlockMoved(MoveRight))
@@ -55,9 +56,9 @@ case class Tetrics(
     .publishAndReturn(_ => BlockRotated(RotationRight))
   def dropLeft: Tetrics = copy(leftField = leftField.drop(block.turnLeft, offset.y))
     .publishAndReturn(t => BlockDropped(FieldLeft, t.leftField.numRows, t.leftField.filledRows))
-  def dropRight: Tetrics = copy(rightField = rightField.drop(block.turnRight, fieldSize - offset.y - block.height))
+  def dropRight: Tetrics = copy(rightField = rightField.drop(block.turnRight, fieldHeight - offset.y - block.height))
     .publishAndReturn(t => BlockDropped(FieldRight, t.rightField.numRows, t.rightField.filledRows))
-  def dropTop: Tetrics = copy(topField = topField.drop(block.turnLeft.turnLeft, fieldSize - offset.x - block.width))
+  def dropTop: Tetrics = copy(topField = topField.drop(block.turnLeft.turnLeft, fieldWidth - offset.x - block.width))
     .publishAndReturn(t => BlockDropped(FieldTop, t.topField.numRows, t.topField.filledRows))
   def dropBottom: Tetrics = copy(bottomField = bottomField.drop(block, offset.x))
     .publishAndReturn(t => BlockDropped(FieldBottom, t.bottomField.numRows, t.bottomField.filledRows))
@@ -89,16 +90,18 @@ case class Tetrics(
   }
 }
 object Tetrics {
-  def apply(fieldSize: Int = 10)(implicit eventBus: EventBus): Tetrics = new Tetrics(
-    fieldSize,
+  def apply(fieldWidth: Int, fieldHeight: Int)(implicit eventBus: EventBus): Tetrics = Tetrics(
+    fieldWidth,
+    fieldHeight,
     Block.empty,
     Offset(),
     Rotation0,
-    Field(fieldSize),
-    Field(fieldSize),
-    Field(fieldSize),
-    Field(fieldSize)
+    Field(fieldWidth, fieldHeight),
+    Field(fieldWidth, fieldHeight),
+    Field(fieldWidth, fieldHeight),
+    Field(fieldWidth, fieldHeight)
   )
+  def apply(fieldSize: Int = 10)(implicit eventBus: EventBus): Tetrics = Tetrics(fieldSize, fieldSize)
 }
 case class Offset(x: Int = 0, y: Int = 0) {
   def +(other: Offset): Offset = Offset(x + other.x, y + other.y)
