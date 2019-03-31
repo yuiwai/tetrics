@@ -25,6 +25,8 @@ trait TetricsView[C] {
     drawField(tetrics.bottomField, offset + (tileWidth * (fieldSize + 1)), offset + (tileHeight * (fieldSize + 1) * 2))
   def drawField(field: Field, offsetX: Int, offsetY: Int)(implicit ctx: C): Unit
 }
+
+@deprecated("implement View for each platform without this trait", "0.2.0")
 trait LabeledFieldView[C] extends TetricsView[C] {
   def labelHeight: Int = offset
   def labelMargin: Int = 0

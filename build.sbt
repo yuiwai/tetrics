@@ -57,7 +57,7 @@ lazy val native = (project in file("native"))
     name := "tetrics-native",
     scalaVersion := "2.11.11"
   )
-  .dependsOn(coreNative)
+  .dependsOn(coreNative, appNative)
   .enablePlugins(ScalaNativePlugin)
 
 lazy val libgdx = (project in file("libgdx"))
@@ -106,15 +106,19 @@ lazy val cli = (project in file("cli"))
   )
   .dependsOn(appJVM)
 
-lazy val app = crossProject(JVMPlatform, JSPlatform)
+lazy val app = crossProject(JVMPlatform, JSPlatform, NativePlatform)
   .crossType(CrossType.Pure)
   .in(file("app"))
   .settings(
     name := "tetrics-app"
   )
+  .nativeSettings(
+    scalaVersion := "2.11.11"
+  )
   .dependsOn(core)
 lazy val appJVM = app.jvm
 lazy val appJS = app.js
+lazy val appNative = app.native
 
 lazy val experimental = (project in file("experimental"))
   .settings(

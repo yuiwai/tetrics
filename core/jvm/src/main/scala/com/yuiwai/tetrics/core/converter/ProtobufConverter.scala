@@ -27,6 +27,7 @@ object ProtobufConverter {
     val (block, offset) = fromProto(pTetrics.centerField.get).trim
     Tetrics(
       10, // FIXME 定数化
+      10, // FIXME 定数化
       block,
       offset,
       Rotation0,

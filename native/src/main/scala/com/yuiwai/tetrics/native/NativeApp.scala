@@ -1,24 +1,25 @@
 package com.yuiwai.tetrics.native
 
+import com.yuiwai.tetrics.app.{Controller, FieldData, Game, Presenter}
 import com.yuiwai.tetrics.core._
 
-import scala.scalanative.native
 import scala.scalanative.native._
-import scala.scalanative.posix.unistd
 
-object Example {
-  import DefaultSettings._
+object NativeApp {
   import Ncurses._
-  implicit val ctx: NativeContext = new NativeContext
   implicit val eventBus = EventBus()
-  private var game = new TenTen[CInt, NativeContext] with NativeView with NativeController
+  implicit val setting = DefaultSettings.setting.copy(5, 5)
+  val controller = new NativeController
+  val presenter = new NativePresenter
+  private val game = new NativeGame(presenter)
   def main(args: Array[String]): Unit = {
     val screen: Ptr[Window] = initscr()
     cbreak()
     noecho()
     curs_set(0)
     args.headOption match {
-      case Some("autoPlay") => autoPlay()
+      // TODO: fix auto play
+      // case Some("autoPlay") => autoPlay()
       case _ => start()
     }
     endwin()
@@ -27,22 +28,26 @@ object Example {
     game.start()
     loop()
   }
+  // TODO: fix auto play
+  /*
   def autoPlay(): Unit = {
     val autoPlayer = DefaultAutoPlayer()
     game.autoPlay()
     loopAutoPlay(autoPlayer)
   }
+  */
   def loop(): Unit = {
     val char = getch
     try {
-      game.input(char)
-      game.update(0)
+      controller(game, char)
     } catch {
       case _: IllegalArgumentException =>
       case e => throw e
     }
     loop()
   }
+  // TODO: fix auto play
+  /*
   def loopAutoPlay(autoPlayer: AutoPlayer): Unit = {
     unistd.usleep(200000.toUInt)
     game.act(autoPlayer)
@@ -50,41 +55,74 @@ object Example {
     refresh()
     loopAutoPlay(autoPlayer)
   }
+  */
 }
 
-trait NativeView extends LabeledFieldView[NativeContext] {
+final class NativeGame(presenter: Presenter[FieldData])(implicit val setting: TetricsSetting) extends Game {
+  implicit val eventBus: EventBus = EventBus()
+  private var tetrics = Tetrics(setting.fieldWidth, setting.fieldHeight)
+  override def start(): Game = {
+    tetrics = draw(randPut(tetrics))
+    this
+  }
+  override def act(action: TetricsAction): Game = {
+    action match {
+      case _: DropAndNormalizeAction =>
+        tetrics = draw(randPut(tetrics.act(action)))
+      case _ =>
+        tetrics = draw(tetrics.act(action))
+    }
+    this
+  }
+  def draw(tetrics: Tetrics): Tetrics = {
+    presenter.draw(FieldTypes.all.map(ft => ft -> FieldData.fromField(tetrics.field(ft))).toMap)
+    tetrics
+  }
+}
+
+final class NativePresenter(implicit setting: TetricsSetting) extends Presenter[FieldData] {
+  override def draw(modifiedFields: Map[FieldType, FieldData]): Unit = {
+    import setting.{fieldWidth => w, fieldHeight => h}
+    val d: (FieldData, CInt, CInt) => Unit = View.drawField(w, h, _, _, _)
+    modifiedFields foreach { case (ft, fd) =>
+      ft match {
+        case FieldLeft => d(fd.rotateRight(h), 0, h + 1)
+        case FieldRight => d(fd.rotateLeft(w), (w + 1) * 4, h + 1)
+        case FieldTop => d(fd.rotateTwice(w, h), (w + 1) * 2, 0)
+        case FieldBottom => d(fd, (w + 1) * 2, (h + 1) * 2)
+        case FieldCentral => d(fd, (w + 1) * 2, h + 1)
+        case _ =>
+      }
+    }
+  }
+}
+
+object View {
   import Ncurses._
-  override def offset: CInt = 1
-  override def tileWidth: CInt = 2
-  override def tileHeight: CInt = 1
-  def drawField(field: Field, offsetX: Int, offsetY: Int)(implicit ctx: NativeContext): Unit = {
+  def drawField(fieldWidth: Int, fieldHeight: Int, fieldData: FieldData, offsetX: Int, offsetY: Int): Unit = {
     val pair1 = 1.toShort
     val pair2 = 2.toShort
     start_color()
     init_pair(pair1, Colors.COLOR_BLACK, Colors.COLOR_YELLOW)
     init_pair(pair2, Colors.COLOR_BLACK, Colors.COLOR_RED)
-    field.rows.zipWithIndex.foreach { case (row, y) =>
-      (0 until row.width) foreach { x =>
-        if ((row.cols >> x & 1) == 0) {
-          attron(COLOR_PAIR(pair1))
-          mvprintw(y + offsetY, x * 2 + offsetX, c"  ")
-          attroff(COLOR_PAIR(pair1))
-        } else {
+    (0 until fieldHeight).foreach { y =>
+      (0 until fieldWidth) foreach { x =>
+        if (fieldData(x, y)) {
           attron(COLOR_PAIR(pair2))
           mvprintw(y + offsetY, x * 2 + offsetX, c"  ")
           attroff(COLOR_PAIR(pair2))
+        } else {
+          attron(COLOR_PAIR(pair1))
+          mvprintw(y + offsetY, x * 2 + offsetX, c"  ")
+          attroff(COLOR_PAIR(pair1))
         }
       }
     }
   }
-  override def drawLabel(label: Label, offsetX: CInt, offsetY: CInt)(implicit ctx: NativeContext): Unit = Zone {
-    implicit z =>
-      mvprintw(offsetY, offsetX, native.toCString(label.text))
-  }
 }
 
-trait NativeController extends TetricsController[CInt, NativeContext] {
-  override protected def eventToAction(event: CInt): Option[TetricsAction] = {
+final class NativeController extends Controller[CInt, Unit] {
+  def inputToAction(event: CInt): Option[TetricsAction] = {
     event match {
       // D
       case 100 => Some(TurnLeftAction)
@@ -107,8 +145,6 @@ trait NativeController extends TetricsController[CInt, NativeContext] {
     }
   }
 }
-
-class NativeContext
 
 @link("ncurses")
 @extern

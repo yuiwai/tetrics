@@ -1,6 +1,6 @@
 package com.yuiwai.tetrics.cli
 
-import com.yuiwai.tetrics.app.{Controller, Game, Pos, Presenter}
+import com.yuiwai.tetrics.app._
 import com.yuiwai.tetrics.core._
 
 import scala.io.StdIn
@@ -74,25 +74,6 @@ final class CliPresenter extends Presenter[FieldData] {
     modifiedFields.foreach(t => fields = fields.updated(t._1, t._2))
     // FIXME とりあえずフィールドサイズは固定値
     View.render(10, 10, fields)
-  }
-}
-final case class FieldData(filled: Set[Pos]) {
-  def map(f: Pos => Pos): FieldData = FieldData(filled.map(f))
-  def apply(x: Int, y: Int): Boolean = apply(Pos(x, y))
-  def apply(pos: Pos): Boolean = filled(pos)
-  def rotateRight(fieldHeight: Int): FieldData = map(pos => Pos(fieldHeight - pos.y - 1, pos.x))
-  def rotateLeft(fieldWidth: Int): FieldData = map(pos => Pos(pos.y, fieldWidth - pos.x - 1))
-  def rotateTwice(fieldWidth: Int, fieldHeight: Int): FieldData =
-    map(pos => Pos(fieldWidth - pos.x - 1, fieldHeight - pos.y - 1))
-}
-object FieldData {
-  def empty: FieldData = FieldData(Set.empty)
-  def fromField(field: Field): FieldData = FieldData {
-    (for {
-      y <- 0 until field.height
-      x <- 0 until field.rows(y).width
-      if (field.rows(y).cols & 1 << x) != 0
-    } yield Pos(x, y)).toSet
   }
 }
 object View {

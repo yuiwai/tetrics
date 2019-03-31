@@ -1,6 +1,6 @@
 package com.yuiwai.tetrics.svg
 
-import com.yuiwai.tetrics.app.{Controller, Game, Pos, Presenter}
+import com.yuiwai.tetrics.app._
 import com.yuiwai.tetrics.core._
 import japgolly.scalajs.react.Callback
 import japgolly.scalajs.react.extra.Broadcaster
@@ -25,6 +25,11 @@ object App {
       controller(game, e)
     }
     dom.window.setTimeout(() => game.start(), 1000)
+  }
+  implicit class FieldDataEx(fieldData: FieldData) {
+    import Colors._
+    def color(x: Int, y: Int): String = color(Pos(x, y))
+    def color(pos: Pos): String = if (fieldData.filled(pos)) RED else BLACK
   }
 }
 
@@ -134,25 +139,7 @@ object ViewModel {
     Pos.zero, FieldData.empty
   )
 }
-final case class FieldData(filled: Set[Pos]) {
-  import FieldData._
-  def map(f: Pos => Pos): FieldData = FieldData(filled.map(f))
-  def apply(x: Int, y: Int): String = apply(Pos(x, y))
-  def apply(pos: Pos): String = if (filled(pos)) RED else BLACK
-  def rotateRight(fieldHeight: Int): FieldData = map(pos => Pos(fieldHeight - pos.y - 1, pos.x))
-  def rotateLeft(fieldWidth: Int): FieldData = map(pos => Pos(pos.y, fieldWidth - pos.x - 1))
-  def rotateTwice(fieldWidth: Int, fieldHeight: Int): FieldData =
-    map(pos => Pos(fieldWidth - pos.x - 1, fieldHeight - pos.y - 1))
-}
-object FieldData {
+object Colors {
   val RED = "#ff0000"
   val BLACK = "#000000"
-  def empty = FieldData(Set.empty)
-  def fromField(field: Field): FieldData = FieldData {
-    (for {
-      y <- 0 until field.height
-      x <- 0 until field.rows(y).width
-      if (field.rows(y).cols & 1 << x) != 0
-    } yield Pos(x, y)).toSet
-  }
 }
