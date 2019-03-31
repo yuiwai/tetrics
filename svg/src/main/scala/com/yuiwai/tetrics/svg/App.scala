@@ -7,7 +7,11 @@ import org.scalajs.dom
 import org.scalajs.dom.ext.KeyCode
 import org.scalajs.dom.raw.KeyboardEvent
 
-object App extends DefaultSettings {
+object App {
+  implicit val setting = DefaultSettings.setting.copy(
+    fieldWidth = 5,
+    fieldHeight = 5,
+  )
   def main(args: Array[String]): Unit = init()
   def init(): Unit = {
     implicit val eventBus: EventBus = EventBus()
@@ -29,7 +33,7 @@ trait Game {
 }
 final class SingleGame(presenter: Presenter)(implicit setting: TetricsSetting) extends Game {
   implicit val eventBus: EventBus = EventBus()
-  private var tetrics = Tetrics()
+  private var tetrics = Tetrics(setting.fieldWidth)
   override def start(): Game = {
     tetrics = draw(tetrics, randPut(tetrics))
     this
@@ -84,11 +88,11 @@ final class GameController extends Controller[KeyboardEvent, Unit] {
 trait Presenter {
   def draw(modifiedFields: Map[FieldType, FieldData])
 }
-final class GamePresenter extends Presenter with Broadcaster[ViewModel] {
+final class GamePresenter(implicit setting: TetricsSetting) extends Presenter with Broadcaster[ViewModel] {
   private var viewModel = ViewModel.empty.copy(
     tileSize = 15,
-    fieldWidth = 10,
-    fieldHeight = 10,
+    fieldWidth = setting.fieldWidth,
+    fieldHeight = setting.fieldHeight,
     leftFieldPos = Pos(0, 170),
     rightFieldPos = Pos(340, 170),
     topFieldPos = Pos(170, 0),
