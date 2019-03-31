@@ -1,5 +1,6 @@
 package com.yuiwai.tetrics.core
 
+@deprecated("implement View for each platform without this trait", "0.2.0")
 trait TetricsView[C] {
   def offset: Int
   def tileWidth: Int

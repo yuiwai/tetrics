@@ -4,6 +4,7 @@ import java.util.concurrent.LinkedBlockingQueue
 
 import scala.util.{Success, Try}
 
+@deprecated("use com.yuiwai.tetrics.app.Game", "0.2.0")
 trait TetricsGame[E, C]
   extends AnyRef
     with TetricsController[E, C]
