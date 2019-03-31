@@ -1,5 +1,6 @@
 package com.yuiwai.tetrics.svg
 
+import com.yuiwai.tetrics.app.{Controller, Game, Pos, Presenter}
 import com.yuiwai.tetrics.core._
 import japgolly.scalajs.react.Callback
 import japgolly.scalajs.react.extra.Broadcaster
@@ -7,7 +8,11 @@ import org.scalajs.dom
 import org.scalajs.dom.ext.KeyCode
 import org.scalajs.dom.raw.KeyboardEvent
 
-object App extends DefaultSettings {
+object App {
+  implicit val setting = DefaultSettings.setting.copy(
+    fieldWidth = 5,
+    fieldHeight = 5,
+  )
   def main(args: Array[String]): Unit = init()
   def init(): Unit = {
     implicit val eventBus: EventBus = EventBus()
@@ -23,13 +28,9 @@ object App extends DefaultSettings {
   }
 }
 
-trait Game {
-  def start(): Game
-  def act(action: TetricsAction): Game
-}
-final class SingleGame(presenter: Presenter)(implicit setting: TetricsSetting) extends Game {
+final class SingleGame(presenter: Presenter[FieldData])(implicit val setting: TetricsSetting) extends Game {
   implicit val eventBus: EventBus = EventBus()
-  private var tetrics = Tetrics()
+  private var tetrics = Tetrics(setting.fieldWidth, setting.fieldHeight)
   override def start(): Game = {
     tetrics = draw(tetrics, randPut(tetrics))
     this
@@ -58,10 +59,6 @@ final class SingleGame(presenter: Presenter)(implicit setting: TetricsSetting) e
     tetrics.putCenter(blocks((Math.random() * blocks.size).toInt))
   }
 }
-trait Controller[I, C] {
-  def apply(game: Game, input: I): Unit = inputToAction(input).foreach(game.act)
-  def inputToAction(input: I): Option[TetricsAction]
-}
 final class GameController extends Controller[KeyboardEvent, Unit] {
   override def inputToAction(input: KeyboardEvent): Option[TetricsAction] = input.keyCode match {
     case KeyCode.F => Some(TurnRightAction)
@@ -81,19 +78,20 @@ final class GameController extends Controller[KeyboardEvent, Unit] {
     case _ => None
   }
 }
-trait Presenter {
-  def draw(modifiedFields: Map[FieldType, FieldData])
-}
-final class GamePresenter extends Presenter with Broadcaster[ViewModel] {
+final class GamePresenter(implicit setting: TetricsSetting) extends Presenter[FieldData] with Broadcaster[ViewModel] {
+  import setting.{fieldWidth, fieldHeight}
+  private val tSize = 15
+  private val padding = 10
+  private val tUnit = tSize + 1
   private var viewModel = ViewModel.empty.copy(
-    tileSize = 15,
-    fieldWidth = 10,
-    fieldHeight = 10,
-    leftFieldPos = Pos(0, 170),
-    rightFieldPos = Pos(340, 170),
-    topFieldPos = Pos(170, 0),
-    bottomFieldPos = Pos(170, 340),
-    centralFieldPos = Pos(170, 170)
+    tileSize = tSize,
+    fieldWidth = fieldWidth,
+    fieldHeight = fieldHeight,
+    leftFieldPos = Pos(0, tUnit * fieldHeight + padding),
+    rightFieldPos = Pos((tUnit * fieldWidth + padding) * 2, tUnit * fieldHeight + padding),
+    topFieldPos = Pos(tUnit * fieldWidth + padding, 0),
+    bottomFieldPos = Pos(tUnit * fieldWidth + padding, (tUnit * fieldHeight + padding) * 2),
+    centralFieldPos = Pos(tUnit * fieldWidth + padding, tUnit * fieldHeight + padding)
   )
   override def draw(modifiedFields: Map[FieldType, FieldData]): Unit = {
     viewModel = viewModel.applyDiff(modifiedFields)
@@ -135,10 +133,6 @@ object ViewModel {
     Pos.zero, FieldData.empty,
     Pos.zero, FieldData.empty
   )
-}
-final case class Pos(x: Int, y: Int)
-object Pos {
-  def zero = Pos(0, 0)
 }
 final case class FieldData(filled: Set[Pos]) {
   import FieldData._

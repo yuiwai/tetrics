@@ -1,5 +1,6 @@
 package com.yuiwai.tetrics.svg
 
+import com.yuiwai.tetrics.app.Pos
 import japgolly.scalajs.react._
 import japgolly.scalajs.react.vdom.svg_<^._
 

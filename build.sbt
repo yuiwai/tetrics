@@ -2,7 +2,7 @@ import sbtcrossproject.CrossPlugin.autoImport.{crossProject, CrossType}
 import scalapb.compiler.Version.scalapbVersion
 
 scalaVersion in ThisBuild := "2.12.7"
-version in ThisBuild := "0.1.0"
+version in ThisBuild := "0.2.0"
 
 val pbruntime = "com.thesamet.scalapb" %% "scalapb-runtime" % scalapbVersion % "protobuf"
 
@@ -98,7 +98,7 @@ lazy val svg = (project in file("svg"))
       "react-dom" -> "16.5.1")
   )
   .enablePlugins(ScalaJSBundlerPlugin)
-  .dependsOn(coreJS)
+  .dependsOn(coreJS, appJS)
 
 lazy val cli = (project in file("cli"))
   .settings(

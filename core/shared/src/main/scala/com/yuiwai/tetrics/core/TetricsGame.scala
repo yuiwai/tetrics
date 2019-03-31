@@ -4,6 +4,7 @@ import java.util.concurrent.LinkedBlockingQueue
 
 import scala.util.{Success, Try}
 
+@deprecated("use com.yuiwai.tetrics.app.Game", "0.2.0")
 trait TetricsGame[E, C]
   extends AnyRef
     with TetricsController[E, C]
@@ -157,9 +158,10 @@ object TenTen {
   }
 }
 sealed trait TetricsRule
-case class TetricsSetting(blocks: Seq[Block])
+case class TetricsSetting(fieldWidth: Int, fieldHeight: Int, blocks: Seq[Block])
 trait DefaultSettings {
   implicit val setting: TetricsSetting = TetricsSetting(
+    10, 10,
     Seq(
       Block("1111", 4),
       Block("1111", 2),
