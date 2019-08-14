@@ -8,14 +8,11 @@ import scala.util.{Success, Try}
 trait TetricsGame[E, C]
   extends AnyRef
     with TetricsController[E, C]
-    with TetricsView[C]
-    with Publisher
-    with Subscriber {
+    with TetricsView[C] {
   val gameType: GameType
   private var status: GameStatus = GameStatusReady
   protected var tetrics: Tetrics
   protected val handler: TetricsEvent => Unit
-  implicit val eventBus: EventBus
   protected def beforeAction(action: TetricsAction): TetricsAction = action
   protected def afterAction(action: TetricsAction): Unit = ()
   protected def modify(f: Tetrics => Tetrics): Tetrics = {
@@ -33,14 +30,10 @@ trait TetricsGame[E, C]
   def update(delta: Double)(implicit ctx: C, setting: TetricsSetting): Unit = drawAll(tetrics)
   def start()(implicit ctx: C, setting: TetricsSetting): Unit = {
     status = GameStatusPlaying
-    publish(GameStarted(gameType))
-    subscribe(handler)
     drawAll(randPut())
   }
   def end(): Unit = {
     status = GameStatusFinished
-    unsubscribe()
-    publish(GameEnded(gameType))
   }
   def readOnly()(implicit ctx: C, setting: TetricsSetting): Unit = {
     status = GameStatusPlaying
@@ -120,7 +113,7 @@ case object GameStatusAutoPlay extends GameStatus
 
 sealed trait GameType
 case object GameTypeTenTen extends GameType
-abstract class TenTen[E, C](implicit val eventBus: EventBus, ctx: C)
+abstract class TenTen[E, C](implicit ctx: C)
   extends TetricsGame[E, C]
     with LabeledFieldView[C] {
   val gameType: GameType = GameTypeTenTen

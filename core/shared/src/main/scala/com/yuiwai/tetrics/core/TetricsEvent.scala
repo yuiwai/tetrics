@@ -1,7 +1,5 @@
 package com.yuiwai.tetrics.core
 
-import com.yuiwai.tetrics.core.EventBus.Callback
-
 sealed trait TetricsEvent
 final case class GameStarted(gameType: GameType) extends TetricsEvent
 final case class GameEnded(gameType: GameType) extends TetricsEvent
@@ -99,26 +97,4 @@ trait ByteEventSerializer extends EventSerializer[Array[Byte]] {
     case 4 => FieldBottom
     case 5 => FieldCentral
   }
-}
-
-trait EventBus {
-  private var subscribers: Map[Subscriber, Callback] = Map.empty
-  private[core] def subscribe(subscriber: Subscriber, callback: Callback): Unit = {
-    subscribers = subscribers + (subscriber -> callback)
-  }
-  private[core] def unsubscribe(subscriber: Subscriber): Unit = subscribers = subscribers - subscriber
-  private[core] def publish(tetricsEvent: TetricsEvent): Unit = subscribers.values foreach (_ (tetricsEvent))
-}
-object EventBus {
-  type Callback = TetricsEvent => Unit
-  def apply(): EventBus = new EventBus {}
-}
-trait Subscriber {
-  protected def subscribe(callback: EventBus.Callback)
-    (implicit eventBus: EventBus): Unit = eventBus.subscribe(this, callback)
-  protected def unsubscribe()(implicit eventBus: EventBus): Unit = eventBus.unsubscribe(this)
-}
-trait Publisher {
-  protected def publish(tetricsEvent: TetricsEvent)
-    (implicit eventBus: EventBus): Unit = eventBus.publish(tetricsEvent)
 }
