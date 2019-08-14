@@ -33,7 +33,6 @@ object TetricsTest extends TestSuite {
       }
     }
     "tetrics" - {
-      implicit val eb = EventBus()
       val tetrics = Tetrics()
       "put center" - {
         tetrics.putCenter(Block("1111", 2)).offset ==> Offset(4, 4)

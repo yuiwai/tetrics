@@ -8,7 +8,6 @@ object Main {
     assert(2 == Field(10).put(Block("111010", 3), 0, 8).slice(0, 3).spaces)
   }
   def spacing = {
-    implicit val eventBus = EventBus()
     val oldTetrics = Tetrics()
     val newTetrics1 = oldTetrics.putCenter(Block("010111", 3)).dropBottom
     val newTetrics2 = oldTetrics.putCenter(Block("111010", 3)).dropBottom

@@ -10,13 +10,11 @@ case class Tetrics(
   rightField: Field,
   leftField: Field,
   topField: Field
-)(implicit eventBus: EventBus) extends Publisher {
+) {
   require(fieldWidth >= block.width + offset.x && offset.x >= 0, "block is outside of field width")
   require(fieldHeight >= block.height + offset.y && offset.y >= 0, "block is outside of field height")
-  def clone(eventBus: EventBus): Tetrics = copy()(eventBus)
   private val emptyField = Field(fieldWidth, fieldHeight)
   private def publishAndReturn(f: Tetrics => TetricsEvent): Tetrics = {
-    publish(f(this))
     this
   }
   def field(fieldType: FieldType): Field = fieldType match {
@@ -90,7 +88,7 @@ case class Tetrics(
   }
 }
 object Tetrics {
-  def apply(fieldWidth: Int, fieldHeight: Int)(implicit eventBus: EventBus): Tetrics = Tetrics(
+  def apply(fieldWidth: Int, fieldHeight: Int): Tetrics = Tetrics(
     fieldWidth,
     fieldHeight,
     Block.empty,
@@ -101,7 +99,7 @@ object Tetrics {
     Field(fieldWidth, fieldHeight),
     Field(fieldWidth, fieldHeight)
   )
-  def apply(fieldSize: Int = 10)(implicit eventBus: EventBus): Tetrics = Tetrics(fieldSize, fieldSize)
+  def apply(fieldSize: Int = 10): Tetrics = Tetrics(fieldSize, fieldSize)
 }
 case class Offset(x: Int = 0, y: Int = 0) {
   def +(other: Offset): Offset = Offset(x + other.x, y + other.y)
