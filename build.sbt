@@ -1,8 +1,8 @@
 import sbtcrossproject.CrossPlugin.autoImport.{crossProject, CrossType}
 import scalapb.compiler.Version.scalapbVersion
 
-scalaVersion in ThisBuild := "2.12.7"
-version in ThisBuild := "0.2.0"
+scalaVersion in ThisBuild := "2.12.8"
+version in ThisBuild := "0.3.0-SNAPSHOT"
 
 val pbruntime = "com.thesamet.scalapb" %% "scalapb-runtime" % scalapbVersion % "protobuf"
 
