@@ -32,6 +32,25 @@ lazy val core = (crossProject(JSPlatform, JVMPlatform, NativePlatform).crossType
     )
   )
 
+lazy val ui = crossProject(JSPlatform, JVMPlatform)
+  .crossType(CrossType.Pure)
+  .in(file("ui"))
+  .settings(
+    name := "tetrics-ui",
+    resolvers += "yuiwai repo" at "https://s3-us-west-2.amazonaws.com/repo.yuiwai.com"
+  )
+  .jvmSettings(
+    libraryDependencies ++= Seq(
+      "com.yuiwai" %% "yachiyo-ui" % "0.2.2-SNAPSHOT"
+    )
+  )
+  .jsSettings(
+    libraryDependencies ++= Seq(
+      "com.yuiwai" %%% "yachiyo-ui" % "0.2.2-SNAPSHOT"
+    )
+  )
+  .dependsOn(core)
+
 lazy val coreJVM = core.jvm
 lazy val coreJS = core.js
 lazy val coreNative = core.native
