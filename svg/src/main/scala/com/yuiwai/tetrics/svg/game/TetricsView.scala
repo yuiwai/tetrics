@@ -1,9 +1,9 @@
-package com.yuiwai.tetrics.svg
+package com.yuiwai.tetrics.svg.game
 
 import com.yuiwai.tetrics.ui.GameViewModel
-import japgolly.scalajs.react._
-import japgolly.scalajs.react.extra._
-import japgolly.scalajs.react.vdom.svg_<^._
+import japgolly.scalajs.react.extra.{Broadcaster, Listenable, OnUnmount}
+import japgolly.scalajs.react.vdom.svg_<^.{<, VdomElement, ^}
+import japgolly.scalajs.react.{BackendScope, ScalaComponent}
 
 object TetricsView {
   final case class Props(broadcaster: Broadcaster[GameViewModel]) {

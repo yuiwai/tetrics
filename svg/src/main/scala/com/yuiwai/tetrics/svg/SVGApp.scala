@@ -1,8 +1,10 @@
 package com.yuiwai.tetrics.svg
 
 import com.yuiwai.tetrics.core._
+import com.yuiwai.tetrics.svg.game.TetricsView
 import com.yuiwai.tetrics.ui.GameScene.TetricsActionCommand
 import com.yuiwai.tetrics.ui._
+import com.yuiwai.yachiyo.ui.SceneSuite
 import com.yuiwai.yachiyo.zio.ApplicationHandler
 import com.yuiwai.yachiyo.zio.ApplicationHandler.AppEnv
 import japgolly.scalajs.react.extra.Broadcaster
@@ -16,11 +18,14 @@ object SVGApp extends TetricsApplication with App {
     fieldWidth = 5,
     fieldHeight = 5,
   )
+  val TopSceneKey = 2
+  override def initialSceneSuiteKey: Int = TopSceneKey
   override def gameScene: GameScene = new GameScene
   override def gamePresenter: GamePresenter = new SVGGamePresenter
   override def gameView: GameView = SVGGameView
   override def run(args: List[String]): ZIO[SVGApp.Environment, Nothing, Unit] =
     AppEnv.init(this).flatMap(ApplicationHandler.program.provide).fold(_ => (), _ => ())
+  override val sceneSuiteMap: Map[Int, SceneSuite] = super.sceneSuiteMap ++ Map()
   implicit class FieldDataEx(fieldData: FieldData) {
     import Colors._
     def color(x: Int, y: Int): String = color(Pos(x, y))

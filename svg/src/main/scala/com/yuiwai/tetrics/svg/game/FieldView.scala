@@ -1,8 +1,9 @@
-package com.yuiwai.tetrics.svg
+package com.yuiwai.tetrics.svg.game
 
+import com.yuiwai.tetrics.svg.SVGApp
 import com.yuiwai.tetrics.ui.{FieldData, Pos}
-import japgolly.scalajs.react._
-import japgolly.scalajs.react.vdom.svg_<^._
+import japgolly.scalajs.react.vdom.svg_<^.{<, VdomElement, ^}
+import japgolly.scalajs.react.{BackendScope, ScalaComponent}
 
 object FieldView {
   import SVGApp.FieldDataEx
