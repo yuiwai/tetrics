@@ -9,7 +9,7 @@ import org.scalajs.dom.{CanvasRenderingContext2D => Context2D}
 
 import scala.scalajs.js.typedarray._
 
-object Example extends Subscriber with DefaultSettings {
+object Example extends DefaultSettings {
   self =>
   import dom.window
   import window.document
@@ -17,7 +17,6 @@ object Example extends Subscriber with DefaultSettings {
   private var semiAuto: Option[SemiAuto] = None
   private var keyDown = false
   private val canvas = document.createElement("canvas")
-  private implicit val eventBus = EventBus()
   private implicit val ctx: Context2D =
     canvas.asInstanceOf[Canvas].getContext("2d").asInstanceOf[Context2D]
   private var game: TetricsGame[UIEvent, Context2D] = _
@@ -56,12 +55,6 @@ object Example extends Subscriber with DefaultSettings {
       if (messageEvent.origin == "https://lab.yuiwai.com") {
         messageEvent.data match {
           case "start" =>
-            subscribe(gameEvent => {
-              messageEvent.source.postMessage(
-                byteArray2Int8Array(serializer.serialize(gameEvent)),
-                messageEvent.origin
-              )
-            })
             initializer().start()
           case "readOnly" =>
             initializer().readOnly()
@@ -293,7 +286,7 @@ trait AnimationComponent[E, C] extends TetricsGame[E, C] {
     super.beforeAction(action)
     action match {
       case dn: DropAndNormalizeAction =>
-        tetrics.clone(EventBus()).act(dn.dropAction).field(dn.fieldType).filledRows match {
+        tetrics.act(dn.dropAction).field(dn.fieldType).filledRows match {
           case s: Seq[Int] if s.nonEmpty =>
             addAnimation(BlockDeletionAnimation(dn.fieldType, s))
             block(dn.normalizeAction)

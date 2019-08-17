@@ -1,16 +1,17 @@
 package com.yuiwai.tetrics.svg
 
+import com.yuiwai.tetrics.ui.GameViewModel
 import japgolly.scalajs.react._
 import japgolly.scalajs.react.extra._
 import japgolly.scalajs.react.vdom.svg_<^._
 
-object GameView {
-  final case class Props(broadcaster: Broadcaster[ViewModel]) {
+object TetricsView {
+  final case class Props(broadcaster: Broadcaster[GameViewModel]) {
     @inline def render: VdomElement = Component(this)
   }
-  final case class State(viewModel: ViewModel)
+  final case class State(viewModel: GameViewModel)
   object State {
-    def init: State = State(ViewModel.empty)
+    def init: State = State(GameViewModel.empty)
   }
   final class Backend(bs: BackendScope[Props, State]) extends OnUnmount {
     def render(p: Props, s: State): VdomElement = {
@@ -31,6 +32,6 @@ object GameView {
     .builder[Props]("MainView")
     .initialState(State.init)
     .renderBackend[Backend]
-    .configure(Listenable.listen(_.broadcaster, bs => (vm: ViewModel) => bs.modState(_.copy(viewModel = vm))))
+    .configure(Listenable.listen(_.broadcaster, bs => (vm: GameViewModel) => bs.modState(_.copy(viewModel = vm))))
     .build
 }

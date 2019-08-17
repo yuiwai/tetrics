@@ -22,8 +22,6 @@ object ProtobufConverter {
     case DROP_BOTTOM => DropBottomAction.withNormalize
   }
   def fromProto(pRequest: PRequest): Tetrics = pRequest.tetrics.map { pTetrics =>
-    // FIXME eventBusをどうするか
-    implicit val eventBus = EventBus()
     val (block, offset) = fromProto(pTetrics.centerField.get).trim
     Tetrics(
       10, // FIXME 定数化

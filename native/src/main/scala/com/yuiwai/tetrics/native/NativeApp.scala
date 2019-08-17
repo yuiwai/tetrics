@@ -7,7 +7,6 @@ import scala.scalanative.native._
 
 object NativeApp {
   import Ncurses._
-  implicit val eventBus = EventBus()
   implicit val setting = DefaultSettings.setting.copy(5, 5)
   val controller = new NativeController
   val presenter = new NativePresenter
@@ -59,7 +58,6 @@ object NativeApp {
 }
 
 final class NativeGame(presenter: Presenter[FieldData])(implicit val setting: TetricsSetting) extends Game {
-  implicit val eventBus: EventBus = EventBus()
   private var tetrics = Tetrics(setting.fieldWidth, setting.fieldHeight)
   override def start(): Game = {
     tetrics = draw(randPut(tetrics))
