@@ -1,11 +1,11 @@
 package com.yuiwai.tetrics.svg
 
-import com.yuiwai.tetrics.app.{FieldData, Pos}
+import com.yuiwai.tetrics.ui.{FieldData, Pos}
 import japgolly.scalajs.react._
 import japgolly.scalajs.react.vdom.svg_<^._
 
 object FieldView {
-  import App.FieldDataEx
+  import SVGApp.FieldDataEx
 
   final case class Props(pos: Pos, cols: Int, rows: Int, size: Int, fieldData: FieldData) {
     @inline def render: VdomElement = Component(this)
