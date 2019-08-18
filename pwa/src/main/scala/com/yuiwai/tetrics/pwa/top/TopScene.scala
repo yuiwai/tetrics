@@ -6,6 +6,9 @@ import com.yuiwai.tetrics.pwa.top.TopScene.{GoToGame, TopCommand}
 import com.yuiwai.yachiyo.ui._
 import japgolly.scalajs.react.vdom.html_<^._
 import japgolly.scalajs.react.{CallbackTo, ScalaComponent}
+import org.scalajs.dom.experimental.serviceworkers.ServiceWorkerContainer
+
+import scala.scalajs.js
 
 object TopScene extends Scene {
   override type State = None.type
@@ -48,8 +51,21 @@ object TopView {
         <.button(
           ^.onClick --> CallbackTo(p.commandHandler(GoToGame)),
           "Start Game"
+        ),
+        <.button(
+          ^.onClick --> CallbackTo(clearCache()),
+          "Clear Cache"
         )
       )
     }
     .build
+  def clearCache(): Unit = {
+    import scala.concurrent.ExecutionContext.Implicits.global
+    if (!js.isUndefined(js.Dynamic.global.navigator.serviceWorker)) {
+      js.Dynamic.global.navigator.serviceWorker.asInstanceOf[ServiceWorkerContainer]
+        .getRegistration()
+        .toFuture
+        .foreach(_.foreach(_.unregister()))
+    }
+  }
 }

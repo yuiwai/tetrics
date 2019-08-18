@@ -19,6 +19,7 @@
             user-select: none;
             -webkit-user-select: none;
         }
+
     </style>
 </head>
 <body>
@@ -26,9 +27,13 @@
 <script>
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker
-             .register('./worker.js');
+      .register('./worker.js')
+      .then(function(registration) {
+         registration.onupdatefound = function() {
+             registration.update();
+         }
+      })
   }
-
 </script>
 <noscript>JavaScriptを有効にしてください</noscript>
 <script src="tetrics.js"></script>
