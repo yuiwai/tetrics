@@ -50,7 +50,7 @@ object VController {
       ^.textAlign := "center",
       ^.left := s"${left}px",
       ^.top := s"${top}px",
-      ^.onClick --> CallbackTo(p.commandHandler(TetricsActionCommand(action))),
+      ^.onTouchStart --> CallbackTo(p.commandHandler(TetricsActionCommand(action))),
       label
     )
   }
