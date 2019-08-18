@@ -1,7 +1,7 @@
 package com.yuiwai.tetrics.pwa.global
 
 import com.yuiwai.tetrics.pwa.game.GameScene.{BackToTop, GameCommand}
-import com.yuiwai.tetrics.pwa.game.{HeaderView, TetricsView}
+import com.yuiwai.tetrics.pwa.game.{HeaderView, TetricsView, VController}
 import com.yuiwai.tetrics.pwa.top.TopScene.TopCommand
 import com.yuiwai.tetrics.pwa.top.{TopView, TopViewModel}
 import com.yuiwai.tetrics.ui.GameViewModel
@@ -62,7 +62,8 @@ object GameLayout {
       <.div(
         ^.height := "100%",
         HeaderView.Props(() => p.commandHandler(BackToTop)).render,
-        TetricsView.Props(p.viewModel).render
+        TetricsView.Props(p.viewModel).render,
+        VController.Props(p.commandHandler).render
       )
     }
     .build

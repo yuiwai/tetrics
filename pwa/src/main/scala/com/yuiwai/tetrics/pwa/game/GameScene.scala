@@ -3,11 +3,10 @@ package com.yuiwai.tetrics.pwa.game
 import com.yuiwai.tetrics.core._
 import com.yuiwai.tetrics.pwa.PWAApp
 import com.yuiwai.tetrics.pwa.PWAApp.AppBroadcaster
-import com.yuiwai.tetrics.pwa.game.GameScene.{BackToTop, TetricsActionCommand, GameCommand}
+import com.yuiwai.tetrics.pwa.game.GameScene.{BackToTop, GameCommand, TetricsActionCommand}
 import com.yuiwai.tetrics.ui
 import com.yuiwai.tetrics.ui.{GameViewModel, Pos}
 import com.yuiwai.yachiyo.ui.{NextSceneCallback, NoCallback, Scene, View}
-import japgolly.scalajs.react.extra.Broadcaster
 import org.scalajs.dom
 import org.scalajs.dom.ext.KeyCode
 import org.scalajs.dom.raw.{Element, KeyboardEvent}
