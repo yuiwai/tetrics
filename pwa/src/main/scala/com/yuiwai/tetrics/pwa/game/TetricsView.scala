@@ -19,8 +19,8 @@ object TetricsView {
     def render(p: Props, s: State): VdomElement = {
       import p.viewModel._
       <.svg(
-        ^.width := "100%",
-        ^.height := "100%",
+        ^.width := 300,
+        ^.height := 300,
         FieldView.Props(leftFieldPos, fieldWidth, fieldHeight, tileSize, leftFieldData).render,
         FieldView.Props(rightFieldPos, fieldWidth, fieldHeight, tileSize, rightFieldData).render,
         FieldView.Props(bottomFieldPos, fieldWidth, fieldHeight, tileSize, bottomFieldData).render,
@@ -58,7 +58,7 @@ object VController {
     .builder[Props]("VController")
     .render_P { implicit p =>
       <.div(
-        ^.top := "310px",
+        ^.top := "10px",
         ^.position := "absolute",
         genButton("⬅️", 10, 60, MoveLeftAction),
         genButton("➡️", 70, 60, MoveRightAction),

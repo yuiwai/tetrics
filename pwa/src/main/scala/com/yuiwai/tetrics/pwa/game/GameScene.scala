@@ -30,18 +30,19 @@ class GamePresenter(implicit setting: TetricsSetting)
   extends ui.GamePresenter {
   override type S = GameScene
   import setting.{fieldHeight, fieldWidth}
-  private val tSize = 15
+  private val tSize = 17
+  private val offset = 5
   private val padding = 10
   private val tUnit = tSize + 1
   def initialViewModel: GameViewModel = GameViewModel.empty.copy(
     tileSize = tSize,
     fieldWidth = fieldWidth,
     fieldHeight = fieldHeight,
-    leftFieldPos = Pos(0, tUnit * fieldHeight + padding),
-    rightFieldPos = Pos((tUnit * fieldWidth + padding) * 2, tUnit * fieldHeight + padding),
-    topFieldPos = Pos(tUnit * fieldWidth + padding, 0),
-    bottomFieldPos = Pos(tUnit * fieldWidth + padding, (tUnit * fieldHeight + padding) * 2),
-    centralFieldPos = Pos(tUnit * fieldWidth + padding, tUnit * fieldHeight + padding)
+    leftFieldPos = Pos(offset, offset + tUnit * fieldHeight + padding),
+    rightFieldPos = Pos(offset + (tUnit * fieldWidth + padding) * 2, offset + tUnit * fieldHeight + padding),
+    topFieldPos = Pos(offset + tUnit * fieldWidth + padding, offset),
+    bottomFieldPos = Pos(offset + tUnit * fieldWidth + padding, offset + (tUnit * fieldHeight + padding) * 2),
+    centralFieldPos = Pos(offset + tUnit * fieldWidth + padding, offset + tUnit * fieldHeight + padding)
   )
   // override def usePrevModel: Boolean = true
   override def setup(initialState: (Tetrics, Tetrics)): GameViewModel = initialViewModel

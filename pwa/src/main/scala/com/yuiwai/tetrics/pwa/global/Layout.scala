@@ -62,8 +62,17 @@ object GameLayout {
       <.div(
         ^.height := "100%",
         HeaderView.Props(() => p.commandHandler(BackToTop)).render,
-        TetricsView.Props(p.viewModel).render,
-        VController.Props(p.commandHandler).render
+        <.div(
+          ^.height := "300px",
+          ^.textAlign := "center",
+          TetricsView.Props(p.viewModel).render,
+        ),
+        <.div(
+          ^.position := "relative",
+          ^.margin := "auto",
+          ^.width := "300px",
+          VController.Props(p.commandHandler).render
+        )
       )
     }
     .build
