@@ -48,13 +48,34 @@ object TopView {
     .builder[Props]("TopView")
     .render_P { p =>
       <.div(
-        <.button(
-          ^.onClick --> CallbackTo(p.commandHandler(GoToGame)),
-          "Start Game"
-        ),
-        <.button(
-          ^.onClick --> CallbackTo(clearCache()),
-          "Clear Cache"
+        ^.height := "100%",
+        ^.width := "100%",
+        ^.display := "flex",
+        ^.justifyContent := "center",
+        ^.alignItems := "center",
+        <.div(
+          ^.height := "200px",
+          ^.width := "100%",
+          ^.textAlign := "center",
+          <.h1(
+            ^.color := "white",
+            "Tetrics"
+          ),
+          <.button(
+            ^.width := "150px",
+            ^.fontSize := "20px",
+            ^.borderRadius := "15px",
+            ^.onClick --> CallbackTo(p.commandHandler(GoToGame)),
+            "Start Game"
+          ),
+          <.br,
+          <.button(
+            ^.width := "150px",
+            ^.fontSize := "20px",
+            ^.borderRadius := "15px",
+            ^.onClick --> CallbackTo(clearCache()),
+            "Clear Cache"
+          )
         )
       )
     }

@@ -1,7 +1,6 @@
 package com.yuiwai.tetrics.pwa.game
 
 import com.yuiwai.tetrics.core._
-import com.yuiwai.tetrics.pwa.PWAApp.AppBroadcaster
 import com.yuiwai.tetrics.pwa.game.GameScene.{GameCommand, TetricsActionCommand}
 import com.yuiwai.tetrics.ui.GameViewModel
 import japgolly.scalajs.react.extra.OnUnmount
