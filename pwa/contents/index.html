@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
+    <meta name="theme-color" content="white"/>
+    <title>Tetrics</title>
+    <link rel="manifest" href="manifest.json">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+        body {
+            overscroll-behavior-y: none;
+            background-color: black;
+        }
+        :not(input, textarea) {
+            user-select: none;
+            -webkit-user-select: none;
+        }
+    </style>
+</head>
+<body>
+<div id="stage" style="height: 100%"></div>
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker
+             .register('./worker.js');
+  }
+
+</script>
+<noscript>JavaScriptを有効にしてください</noscript>
+<script src="tetrics.js"></script>
+</body>
+</html>

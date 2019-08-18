@@ -1,45 +1,40 @@
-package com.yuiwai.tetrics.svg
+package com.yuiwai.tetrics.pwa.game
 
 import com.yuiwai.tetrics.core._
-import com.yuiwai.tetrics.svg.game.TetricsView
-import com.yuiwai.tetrics.ui.GameScene.TetricsActionCommand
-import com.yuiwai.tetrics.ui._
-import com.yuiwai.yachiyo.ui.SceneSuite
-import com.yuiwai.yachiyo.zio.ApplicationHandler
-import com.yuiwai.yachiyo.zio.ApplicationHandler.AppEnv
+import com.yuiwai.tetrics.pwa.PWAApp
+import com.yuiwai.tetrics.pwa.PWAApp.AppBroadcaster
+import com.yuiwai.tetrics.pwa.game.GameScene.{BackToTop, TetricsActionCommand, GameCommand}
+import com.yuiwai.tetrics.ui
+import com.yuiwai.tetrics.ui.{GameViewModel, Pos}
+import com.yuiwai.yachiyo.ui.{NextSceneCallback, NoCallback, Scene, View}
 import japgolly.scalajs.react.extra.Broadcaster
 import org.scalajs.dom
 import org.scalajs.dom.ext.KeyCode
-import org.scalajs.dom.raw.KeyboardEvent
-import zio.{App, ZIO}
+import org.scalajs.dom.raw.{Element, KeyboardEvent}
 
-object SVGApp extends TetricsApplication with App {
-  implicit val setting = DefaultSettings.setting.copy(
-    fieldWidth = 5,
-    fieldHeight = 5,
-  )
-  val TopSceneKey = 2
-  override def initialSceneSuiteKey: Int = TopSceneKey
-  override def gameScene: GameScene = new GameScene
-  override def gamePresenter: GamePresenter = new SVGGamePresenter
-  override def gameView: GameView = SVGGameView
-  override def run(args: List[String]): ZIO[SVGApp.Environment, Nothing, Unit] =
-    AppEnv.init(this).flatMap(ApplicationHandler.program.provide).fold(_ => (), _ => ())
-  override val sceneSuiteMap: Map[Int, SceneSuite] = super.sceneSuiteMap ++ Map()
-  implicit class FieldDataEx(fieldData: FieldData) {
-    import Colors._
-    def color(x: Int, y: Int): String = color(Pos(x, y))
-    def color(pos: Pos): String = if (fieldData.filled(pos)) RED else BLACK
-  }
+object GameScene {
+  sealed trait GameCommand
+  final case class TetricsActionCommand(action: TetricsAction) extends GameCommand
+  case object BackToTop extends GameCommand
+}
+class GameScene(implicit setting: TetricsSetting) extends ui.GameScene {
+  override type Command = GameCommand
+  override type Event = None.type
+  override def execute(state: State, input: GameCommand): Result =
+    input match {
+      case TetricsActionCommand(action) => (act(state._1, action) -> state._2, None, NoCallback)
+      case BackToTop => (state, None, NextSceneCallback(PWAApp.TopSceneKey))
+    }
 }
 
-class SVGGamePresenter(implicit setting: TetricsSetting)
-  extends GamePresenter {
+class GamePresenter(implicit setting: TetricsSetting)
+  extends ui.GamePresenter {
+  override type S = GameScene
   import setting.{fieldHeight, fieldWidth}
   private val tSize = 15
   private val padding = 10
   private val tUnit = tSize + 1
-  def initialViewModel = GameViewModel.empty.copy(
+  def initialViewModel: GameViewModel = GameViewModel.empty.copy(
     tileSize = tSize,
     fieldWidth = fieldWidth,
     fieldHeight = fieldHeight,
@@ -49,25 +44,24 @@ class SVGGamePresenter(implicit setting: TetricsSetting)
     bottomFieldPos = Pos(tUnit * fieldWidth + padding, (tUnit * fieldHeight + padding) * 2),
     centralFieldPos = Pos(tUnit * fieldWidth + padding, tUnit * fieldHeight + padding)
   )
-  override def usePrevModel: Boolean = true
+  // override def usePrevModel: Boolean = true
   override def setup(initialState: (Tetrics, Tetrics)): GameViewModel = initialViewModel
   override def updated(state: (Tetrics, Tetrics), prevModel: Prev): GameViewModel =
     prevModel.getOrElse(initialViewModel).applyDiff(diff(state._2, state._1))
 }
 
-object SVGGameView extends GameView with Broadcaster[GameViewModel] {
+class GameView(broadcaster: AppBroadcaster) extends View {
+  override type S = GameScene
   override type M = GameViewModel
-  def stage = dom.document.getElementById("stage")
-  override def setup(viewModel: GameViewModel, listener: SVGGameView.Listener): Unit = {
-    val gameView = TetricsView.Component
-    gameView(TetricsView.Props(this)).renderIntoDOM(stage)
+  def stage: Element = dom.document.getElementById("stage")
+  override def setup(viewModel: GameViewModel, listener: Listener): Unit = {
+    broadcaster.send(viewModel, listener.asInstanceOf[Scene#Command => Unit])
     dom.document.body.onkeydown = { e =>
       inputToAction(e).foreach(a => listener(TetricsActionCommand(a)))
     }
   }
-  override def update(viewModel: GameViewModel): Unit = broadcast(viewModel).runNow()
+  override def update(viewModel: GameViewModel): Unit = broadcaster.send(viewModel)
   override def cleanup(): Unit = {
-    stage.innerHTML = ""
     dom.document.body.onkeydown = null
   }
   def inputToAction(input: KeyboardEvent): Option[TetricsAction] = input.keyCode match {
@@ -91,4 +85,8 @@ object SVGGameView extends GameView with Broadcaster[GameViewModel] {
 object Colors {
   val RED = "#ff0000"
   val BLACK = "#000000"
+  implicit class FieldDataEx(fieldData: ui.FieldData) {
+    def color(x: Int, y: Int): String = color(ui.Pos(x, y))
+    def color(pos: ui.Pos): String = if (fieldData.filled(pos)) RED else BLACK
+  }
 }

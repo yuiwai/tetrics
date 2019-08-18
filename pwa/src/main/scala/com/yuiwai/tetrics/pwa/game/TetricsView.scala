@@ -1,12 +1,12 @@
-package com.yuiwai.tetrics.svg.game
+package com.yuiwai.tetrics.pwa.game
 
 import com.yuiwai.tetrics.ui.GameViewModel
-import japgolly.scalajs.react.extra.{Broadcaster, Listenable, OnUnmount}
-import japgolly.scalajs.react.vdom.svg_<^.{<, VdomElement, ^}
+import japgolly.scalajs.react.extra.OnUnmount
+import japgolly.scalajs.react.vdom.svg_<^._
 import japgolly.scalajs.react.{BackendScope, ScalaComponent}
 
 object TetricsView {
-  final case class Props(broadcaster: Broadcaster[GameViewModel]) {
+  final case class Props(viewModel: GameViewModel) {
     @inline def render: VdomElement = Component(this)
   }
   final case class State(viewModel: GameViewModel)
@@ -15,7 +15,8 @@ object TetricsView {
   }
   final class Backend(bs: BackendScope[Props, State]) extends OnUnmount {
     def render(p: Props, s: State): VdomElement = {
-      import s.viewModel._
+      import p.viewModel._
+      val r = "↩"
       <.svg(
         ^.width := "100%",
         ^.height := "100%",
@@ -24,14 +25,14 @@ object TetricsView {
         FieldView.Props(bottomFieldPos, fieldWidth, fieldHeight, tileSize, bottomFieldData).render,
         FieldView.Props(topFieldPos, fieldWidth, fieldHeight, tileSize, topFieldData).render,
         FieldView.Props(centralFieldPos, fieldWidth, fieldHeight, tileSize, centralFieldData).render,
+        <.text(^.fontSize := 20, ^.x := 10, ^.y := 300, ^.color := "black",  r)
       )
     }
   }
 
   val Component = ScalaComponent
-    .builder[Props]("MainView")
+    .builder[Props]("TetricsView")
     .initialState(State.init)
     .renderBackend[Backend]
-    .configure(Listenable.listen(_.broadcaster, bs => (vm: GameViewModel) => bs.modState(_.copy(viewModel = vm))))
     .build
 }
