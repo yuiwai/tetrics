@@ -4,7 +4,7 @@ import com.yuiwai.tetrics.core._
 import com.yuiwai.tetrics.pwa.game.GameScene.{GameCommand, TetricsActionCommand}
 import com.yuiwai.tetrics.ui.GameViewModel
 import japgolly.scalajs.react.extra.OnUnmount
-import japgolly.scalajs.react.{BackendScope, CallbackTo, ScalaComponent}
+import japgolly.scalajs.react.{BackendScope, Callback, CallbackTo, ScalaComponent}
 
 object TetricsView {
   import japgolly.scalajs.react.vdom.svg_<^._
@@ -42,14 +42,17 @@ object VController {
   final case class Props(commandHandler: GameCommand => Unit) {
     @inline def render: VdomElement = Component(this)
   }
-  def genButton(label: String, left: Int, top: Int, action: TetricsAction)
+  def genButton(label: String, left: Int, top: Int, action: TetricsAction, size: Int = 30, radius: Int = 0)
     (implicit p: Props): VdomElement = {
     <.button(
+      ^.borderRadius := s"${radius}px",
       ^.position := "absolute",
-      ^.width := "25px",
+      ^.width := s"${size}px",
+      ^.height := s"${size}px",
       ^.textAlign := "center",
       ^.left := s"${left}px",
       ^.top := s"${top}px",
+      ^.onSelect --> Callback(false),
       ^.onTouchStart --> CallbackTo(p.commandHandler(TetricsActionCommand(action))),
       label
     )
@@ -60,18 +63,18 @@ object VController {
       <.div(
         ^.top := "10px",
         ^.position := "absolute",
-        genButton("⬅️", 10, 60, MoveLeftAction),
-        genButton("➡️", 70, 60, MoveRightAction),
-        genButton("⬆️", 40, 30, MoveUpAction),
-        genButton("⬇️", 40, 90, MoveDownAction),
+        genButton("⬅️", 10, 70, MoveLeftAction),
+        genButton("➡️", 90, 70, MoveRightAction),
+        genButton("⬆️", 50, 30, MoveUpAction),
+        genButton("⬇️", 50, 110, MoveDownAction),
 
-        genButton("↩️", 170, 0, TurnRightAction),
-        genButton("↪️", 210, 0, TurnLeftAction),
+        genButton("R", 250, -20, TurnRightAction, 40, 20),
+        genButton("L", 10, -20, TurnLeftAction, 40, 20),
 
-        genButton("⏪", 160, 70, DropAndNormalizeAction(DropLeftAction, NormalizeLeftAction)),
-        genButton("⏩️", 220, 70, DropAndNormalizeAction(DropRightAction, NormalizeRightAction)),
-        genButton("⏫️", 190, 40, DropAndNormalizeAction(DropTopAction, NormalizeTopAction)),
-        genButton("⏬️", 190, 100, DropAndNormalizeAction(DropBottomAction, NormalizeBottomAction)),
+        genButton("⏪", 180, 70, DropAndNormalizeAction(DropLeftAction, NormalizeLeftAction)),
+        genButton("⏩️", 260, 70, DropAndNormalizeAction(DropRightAction, NormalizeRightAction)),
+        genButton("⏫️", 220, 30, DropAndNormalizeAction(DropTopAction, NormalizeTopAction)),
+        genButton("⏬️", 220, 110, DropAndNormalizeAction(DropBottomAction, NormalizeBottomAction)),
       )
     }
     .build
