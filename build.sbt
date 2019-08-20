@@ -107,9 +107,9 @@ lazy val server = (project in file("server"))
   )
   .dependsOn(coreJVM)
 
-lazy val svg = (project in file("svg"))
+lazy val pwa = (project in file("pwa"))
   .settings(
-    name := "tetrics-svg",
+    name := "tetrics-pwa",
     resolvers += "yuiwai repo" at "https://s3-us-west-2.amazonaws.com/repo.yuiwai.com",
     testFrameworks += new TestFramework("utest.runner.Framework"),
     libraryDependencies ++= Seq(

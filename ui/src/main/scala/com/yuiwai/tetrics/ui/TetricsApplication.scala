@@ -1,44 +1,17 @@
 package com.yuiwai.tetrics.ui
 
 import com.yuiwai.tetrics.core._
-import com.yuiwai.tetrics.ui.GameScene.{TetricsActionCommand, TetricsCommand}
 import com.yuiwai.yachiyo.ui._
 
 import scala.util.Try
 
-trait TetricsApplication extends Application {
-  val GameSceneKey = 1
-  def gameScene: GameScene
-  def gamePresenter: GamePresenter
-  def gameView: GameView
-  override def initialSceneSuiteKey: Int = GameSceneKey
-  override val sceneSuiteMap: Map[Int, SceneSuite] = Map(
-    GameSceneKey -> SceneSuite(
-      () => gameScene,
-      () => gamePresenter,
-      () => gameView
-    )
-  )
-}
-
-object GameScene {
-  sealed trait TetricsCommand
-  final case class TetricsActionCommand(action: TetricsAction) extends TetricsCommand
-}
-class GameScene(implicit setting: TetricsSetting) extends Scene /* TODO settings should be from global state via initialState() */ {
+abstract class GameScene(implicit setting: TetricsSetting) extends Scene /* TODO settings should be from global state via initialState() */ {
   override type State = (Tetrics, Tetrics)
-  override type Command = TetricsCommand
-  override type Event = None.type
-  type Reply = (State, Event, SceneCallback)
 
   override def initialState(): State = {
     val tetrics = Tetrics(setting.fieldWidth, setting.fieldHeight)
     randPut(tetrics) -> tetrics
   }
-  override def execute(state: State, input: TetricsCommand): Reply =
-    input match {
-      case TetricsActionCommand(action) => (act(state._1, action) -> state._2, None, NoCallback)
-    }
   def act(tetrics: Tetrics, action: TetricsAction): Tetrics = {
     action match {
       case _: DropAndNormalizeAction => randPut(tetrics.act(action))
@@ -52,7 +25,6 @@ class GameScene(implicit setting: TetricsSetting) extends Scene /* TODO settings
 }
 
 trait GamePresenter extends Presenter {
-  override type S = GameScene
   override type M = GameViewModel
   def diff(before: Tetrics, after: Tetrics): Map[FieldType, FieldData] = {
     Seq(FieldLeft, FieldRight, FieldTop, FieldBottom, FieldCentral).collect {
@@ -96,10 +68,6 @@ object GameViewModel {
     Pos.zero, FieldData.empty,
     Pos.zero, FieldData.empty
   )
-}
-
-trait GameView extends View {
-  override type S = GameScene
 }
 
 final case class Pos(x: Int, y: Int) {
