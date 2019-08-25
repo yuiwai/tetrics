@@ -1,5 +1,7 @@
 package com.yuiwai.tetrics.core
 
+import scala.util.Try
+
 case class Tetrics(
   fieldWidth: Int,
   fieldHeight: Int,
@@ -14,9 +16,6 @@ case class Tetrics(
   require(fieldWidth >= block.width + offset.x && offset.x >= 0, "block is outside of field width")
   require(fieldHeight >= block.height + offset.y && offset.y >= 0, "block is outside of field height")
   private val emptyField = Field(fieldWidth, fieldHeight)
-  private def publishAndReturn(f: Tetrics => TetricsEvent): Tetrics = {
-    this
-  }
   def field(fieldType: FieldType): Field = fieldType match {
     case FieldLeft => leftField
     case FieldRight => rightField
@@ -24,24 +23,26 @@ case class Tetrics(
     case FieldBottom => bottomField
     case FieldCentral => centralField
   }
+  private[core] def mapField(fieldType: FieldType)(f: Field => Field): Tetrics = fieldType match {
+    case FieldLeft => copy(leftField = f(leftField))
+    case FieldRight => copy(rightField = f(rightField))
+    case FieldTop => copy(topField = f(topField))
+    case FieldBottom => copy(bottomField = f(bottomField))
+    case FieldCentral => this
+  }
   def fields: Seq[Field] = Seq(leftField, rightField, topField, bottomField)
   def deactivatedFields: Seq[Field] = fields.filterNot(_.active)
   def centralField: Field = emptyField.put(block, offset.x, offset.y)
   def put(block: Block, offset: Offset = Offset(), rotation: Rotation = Rotation0): Tetrics =
     copy(block = block, offset = offset, rotation = rotation)
-      .publishAndReturn(_ => BlockAdded(block))
   def putCenter(block: Block): Tetrics = put(block, Offset(
     Math.round((fieldWidth - block.width) / 2.0).toInt,
     Math.round((fieldHeight - block.height) / 2.0).toInt
   ))
   def moveRight: Tetrics = copy(offset = offset.moveRight)
-    .publishAndReturn(_ => BlockMoved(MoveRight))
   def moveLeft: Tetrics = copy(offset = offset.moveLeft)
-    .publishAndReturn(_ => BlockMoved(MoveLeft))
   def moveUp: Tetrics = copy(offset = offset.moveUp)
-    .publishAndReturn(_ => BlockMoved(MoveUp))
   def moveDown: Tetrics = copy(offset = offset.moveDown)
-    .publishAndReturn(_ => BlockMoved(MoveDown))
   protected def turn(b: Block, r: Rotation): Tetrics =
     copy(block = b, offset = turnedOffset(b, r), rotation = r)
   protected def turnedOffset(b: Block, r: Rotation): Offset = Offset(
@@ -49,26 +50,17 @@ case class Tetrics(
     offset.y + r.round((block.height - b.height) / 2.0)
   )
   def turnLeft: Tetrics = turn(block.turnLeft, rotation.left)
-    .publishAndReturn(_ => BlockRotated(RotationLeft))
   def turnRight: Tetrics = turn(block.turnRight, rotation.right)
-    .publishAndReturn(_ => BlockRotated(RotationRight))
   def dropLeft: Tetrics = copy(leftField = leftField.drop(block.turnLeft, offset.y))
-    .publishAndReturn(t => BlockDropped(FieldLeft, t.leftField.numRows, t.leftField.filledRows))
   def dropRight: Tetrics = copy(rightField = rightField.drop(block.turnRight, fieldHeight - offset.y - block.height))
-    .publishAndReturn(t => BlockDropped(FieldRight, t.rightField.numRows, t.rightField.filledRows))
   def dropTop: Tetrics = copy(topField = topField.drop(block.turnLeft.turnLeft, fieldWidth - offset.x - block.width))
-    .publishAndReturn(t => BlockDropped(FieldTop, t.topField.numRows, t.topField.filledRows))
   def dropBottom: Tetrics = copy(bottomField = bottomField.drop(block, offset.x))
-    .publishAndReturn(t => BlockDropped(FieldBottom, t.bottomField.numRows, t.bottomField.filledRows))
   def normalizeLeft: Tetrics = copy(leftField = leftField.normalized)
-    .publishAndReturn(t => FieldNormalized(FieldLeft, t.leftField.numRows))
   def normalizeRight: Tetrics = copy(rightField = rightField.normalized)
-    .publishAndReturn(t => FieldNormalized(FieldRight, t.rightField.numRows))
   def normalizeTop: Tetrics = copy(topField = topField.normalized)
-    .publishAndReturn(t => FieldNormalized(FieldTop, t.topField.numRows))
   def normalizeBottom: Tetrics = copy(bottomField = bottomField.normalized)
-    .publishAndReturn(t => FieldNormalized(FieldBottom, t.bottomField.numRows))
   def act(action: TetricsAction): Tetrics = action match {
+    case PutBlockAction(block) => putCenter(block)
     case MoveLeftAction => moveLeft
     case MoveRightAction => moveRight
     case MoveUpAction => moveUp
@@ -100,6 +92,25 @@ object Tetrics {
     Field(fieldWidth, fieldHeight)
   )
   def apply(fieldSize: Int = 10): Tetrics = Tetrics(fieldSize, fieldSize)
+}
+trait TetricsOpsWithEvent {
+  def act(tetrics: Tetrics, action: TetricsAction): (Tetrics, TetricsEvent) =
+    Try(tetrics.act(action))
+      .map(result => result -> (action match {
+        case PutBlockAction(b) => BlockPut(b)
+        case r: RotateAction => BlockRotated(r.rotationType)
+        case m: MoveAction => BlockMoved(m.moveType)
+        case d: DropAction => BlockDropped(d.fieldType)
+        case n: NormalizeAction =>
+          FieldNormalized(
+            n.fieldType.asInstanceOf[DroppableField],
+            tetrics.field(n.fieldType).numRows,
+            result.field(n.fieldType).numRows
+          )
+        case NoAction => NoEvent
+        case _ => NoEvent
+      }))
+      .fold(_ => tetrics -> NoEvent, identity)
 }
 case class Offset(x: Int = 0, y: Int = 0) {
   def +(other: Offset): Offset = Offset(x + other.x, y + other.y)
@@ -177,6 +188,10 @@ case class Field(rows: List[Row], width: Int, status: FieldStatus = FieldStatusA
   require(!rows.exists(_.width != width), "Field contains different width rows.")
   lazy val height: Int = rows.length
   lazy val numRows: Int = rows.count(_.nonEmpty)
+  def mapRow(index: Int)(f: Row => Row): Field = {
+    require(index < height)
+    copy(rows = rows.updated(index, f(rows(index))))
+  }
   def surface: Surface = Surface {
     turnRightRows(rows, width).map {
       case row if row.isEmpty => 0

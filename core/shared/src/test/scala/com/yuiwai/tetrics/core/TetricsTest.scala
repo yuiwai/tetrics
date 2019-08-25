@@ -55,5 +55,68 @@ object TetricsTest extends TestSuite {
         t.turnLeft.turnLeft.turnLeft.offset ==> o6
       }
     }
+    "tetrics ops with event" - {
+      val tetrics = Tetrics()
+      val ops = new TetricsOpsWithEvent {}
+      "put" - {
+        ops.act(tetrics, PutBlockAction(Block("1111", 2))) match {
+          case (t, e) =>
+            t.centralField.count ==> 4
+            e ==> BlockPut(Block("1111", 2))
+        }
+      }
+      "rotate" - {
+        val a = tetrics.putCenter(Block("111010", 3))
+        ops.act(a, TurnRightAction) match {
+          case (t, e) =>
+            t.centralField.count ==> 4
+            e ==> BlockRotated(RotationRight)
+        }
+        ops.act(a, TurnLeftAction) match {
+          case (t, e) =>
+            t.centralField.count ==> 4
+            e ==> BlockRotated(RotationLeft)
+        }
+        "no space to rotation" - {
+          // TODO test
+        }
+      }
+      "move" - {
+        val a = tetrics.putCenter(Block("1111", 2))
+        ops.act(a, MoveLeftAction) match {
+          case (t, e) =>
+            t.centralField.count ==> 4
+            e ==> BlockMoved(MoveLeft)
+        }
+        "out of field" - {
+          // TODO test
+        }
+      }
+      "drop" - {
+        val a = tetrics.putCenter(Block("1111", 1))
+        ops.act(a, DropLeftAction) match {
+          case (t, e) =>
+            t.leftField.numRows ==> 1
+            t.leftField.status ==> FieldStatusActive
+            e ==> BlockDropped(FieldLeft)
+        }
+        "out of field" - {
+          ops.act(ops.act(ops.act(a, DropBottomAction)._1, DropBottomAction)._1, DropBottomAction) match {
+            case (t, e) =>
+              t.bottomField.status ==> FieldStatusFrozen
+              e ==> BlockDropped(FieldBottom)
+          }
+        }
+      }
+      "normalize" - {
+        val a = tetrics.mapField(FieldBottom)(_.mapRow(0)(_ => Row("1111111111")))
+        a.bottomField.numRows ==> 1
+        ops.act(a, NormalizeBottomAction) match  {
+          case (t, e) =>
+            t.bottomField.numRows ==> 0
+            e ==> FieldNormalized(FieldBottom, 1, 0)
+        }
+      }
+    }
   }
 }

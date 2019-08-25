@@ -3,11 +3,13 @@ package com.yuiwai.tetrics.core
 sealed trait TetricsEvent
 final case class GameStarted(gameType: GameType) extends TetricsEvent
 final case class GameEnded(gameType: GameType) extends TetricsEvent
+final case class BlockPut(block: Block) extends TetricsEvent
 final case class BlockAdded(block: Block) extends TetricsEvent
 final case class BlockRotated(rotationType: RotationType) extends TetricsEvent
 final case class BlockMoved(moveType: MoveType) extends TetricsEvent
-final case class BlockDropped(fieldType: DroppableField, numRows: Int, filledRows: Seq[Int]) extends TetricsEvent
-final case class FieldNormalized(fieldType: DroppableField, numRows: Int) extends TetricsEvent
+final case class BlockDropped(fieldType: DroppableField) extends TetricsEvent
+final case class FieldNormalized(fieldType: DroppableField, beforeNumRows: Int, afterNumRows: Int) extends TetricsEvent
+case object NoEvent extends TetricsEvent
 
 trait EventSerializer[T] {
   val setting: TetricsSetting
@@ -44,8 +46,9 @@ trait ByteEventSerializer extends EventSerializer[Array[Byte]] {
     case BlockAdded(block) => s(3) ++ s(block)
     case BlockRotated(rotationType) => s(4) ++ s(rotationType)
     case BlockMoved(moveType) => s(5) ++ s(moveType)
-    case BlockDropped(fieldType, numRows, filledRows) => s(6) ++ s(fieldType) ++ s(numRows) ++ s(filledRows)
-    case FieldNormalized(fieldType, numRows) => s(7) ++ s(fieldType) ++ s(numRows)
+    case BlockDropped(fieldType) => s(6) ++ s(fieldType)
+    case FieldNormalized(fieldType, beforeNumRows, afterNumRows) =>
+      s(7) ++ s(fieldType) ++ s(beforeNumRows) ++ s(afterNumRows)
   }
   private def s(intVal: Int): Array[Byte] = Array(intVal.toByte)
   private def s(gameType: GameType): Array[Byte] = s(gameType2Int(gameType))
@@ -63,8 +66,8 @@ trait ByteEventSerializer extends EventSerializer[Array[Byte]] {
     case 3 => BlockAdded(a2bl(data.tail))
     case 4 => BlockRotated(a2rt(data.tail))
     case 5 => BlockMoved(a2mt(data.tail))
-    case 6 => BlockDropped(a2df(data.tail), data.drop(2).head.toInt, i2sq(data.drop(3).head.toInt))
-    case 7 => FieldNormalized(a2df(data.tail), data.drop(2).head.toInt)
+    case 6 => BlockDropped(a2df(data.tail))
+    case 7 => FieldNormalized(a2df(data.tail), data.drop(2).head.toInt, data.drop(3).head.toInt)
   }
   private def i2sq(i: Int): Seq[Int] = (1 to 4).foldLeft(Seq(i & 15)) { (acc, j) =>
     if ((i >> (j + 3) & 1) == 1) acc :+ (acc.head + j)

@@ -64,7 +64,7 @@ trait TetricsGame[E, C]
       case MoveUp => MoveUpAction
       case MoveDown => MoveDownAction
     })
-    case BlockDropped(fieldType, _, _) => act(fieldType match {
+    case BlockDropped(fieldType) => act(fieldType match {
       case FieldLeft => DropAndNormalizeAction(DropLeftAction, NormalizeLeftAction)
       case FieldRight => DropAndNormalizeAction(DropRightAction, NormalizeRightAction)
       case FieldTop => DropAndNormalizeAction(DropTopAction, NormalizeTopAction)
