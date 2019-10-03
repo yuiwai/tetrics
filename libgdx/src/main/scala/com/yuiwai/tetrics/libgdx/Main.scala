@@ -38,7 +38,6 @@ case class Task(interval: Float, current: Float, callback: () => Unit) {
   } else copy(current = current + delta)
 }
 class MainScreen(mode: Mode) extends Screen with DefaultSettings {
-  implicit val eventBus = EventBus()
   implicit val ctx = new GdxContext
   lazy val shapeRenderer: ShapeRenderer = new ShapeRenderer()
   lazy val camera: OrthographicCamera = new OrthographicCamera()

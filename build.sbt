@@ -1,8 +1,8 @@
 import sbtcrossproject.CrossPlugin.autoImport.{crossProject, CrossType}
 import scalapb.compiler.Version.scalapbVersion
 
-scalaVersion in ThisBuild := "2.12.7"
-version in ThisBuild := "0.2.0"
+scalaVersion in ThisBuild := "2.12.8"
+version in ThisBuild := "0.3.0"
 
 val pbruntime = "com.thesamet.scalapb" %% "scalapb-runtime" % scalapbVersion % "protobuf"
 
@@ -35,6 +35,28 @@ lazy val core = (crossProject(JSPlatform, JVMPlatform, NativePlatform).crossType
 lazy val coreJVM = core.jvm
 lazy val coreJS = core.js
 lazy val coreNative = core.native
+
+lazy val ui = crossProject(JSPlatform, JVMPlatform)
+  .crossType(CrossType.Pure)
+  .in(file("ui"))
+  .settings(
+    name := "tetrics-ui",
+    resolvers += "yuiwai repo" at "https://s3-us-west-2.amazonaws.com/repo.yuiwai.com"
+  )
+  .jvmSettings(
+    libraryDependencies ++= Seq(
+      "com.yuiwai" %% "yachiyo-ui" % "0.2.2-SNAPSHOT"
+    )
+  )
+  .jsSettings(
+    libraryDependencies ++= Seq(
+      "com.yuiwai" %%% "yachiyo-ui" % "0.2.2-SNAPSHOT"
+    )
+  )
+  .dependsOn(core)
+
+lazy val uiJVM = ui.jvm
+lazy val uiJS = ui.js
 
 lazy val check = (project in file("check"))
   .settings(
@@ -85,20 +107,24 @@ lazy val server = (project in file("server"))
   )
   .dependsOn(coreJVM)
 
-lazy val svg = (project in file("svg"))
+lazy val pwa = (project in file("pwa"))
   .settings(
-    name := "tetrics-svg",
-    libraryDependencies += "com.lihaoyi" %%% "utest" % "0.6.5" % "test",
+    name := "tetrics-pwa",
+    resolvers += "yuiwai repo" at "https://s3-us-west-2.amazonaws.com/repo.yuiwai.com",
     testFrameworks += new TestFramework("utest.runner.Framework"),
-    libraryDependencies += "com.github.japgolly.scalajs-react" %%% "core" % "1.4.1",
-    libraryDependencies += "com.github.japgolly.scalajs-react" %%% "extra" % "1.4.1",
+    libraryDependencies ++= Seq(
+      "com.lihaoyi" %%% "utest" % "0.6.5" % "test",
+      "com.github.japgolly.scalajs-react" %%% "core" % "1.4.1",
+      "com.github.japgolly.scalajs-react" %%% "extra" % "1.4.1",
+      "com.yuiwai" %%% "yachiyo-zio" % "0.2.2-SNAPSHOT"
+    ),
     scalaJSUseMainModuleInitializer := true,
     npmDependencies in Compile ++= Seq(
       "react" -> "16.5.1",
       "react-dom" -> "16.5.1")
   )
   .enablePlugins(ScalaJSBundlerPlugin)
-  .dependsOn(coreJS, appJS)
+  .dependsOn(coreJS, uiJS)
 
 lazy val cli = (project in file("cli"))
   .settings(
