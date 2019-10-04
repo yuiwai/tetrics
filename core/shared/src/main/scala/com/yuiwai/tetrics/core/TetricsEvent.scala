@@ -98,3 +98,6 @@ trait ByteEventSerializer extends EventSerializer[Array[Byte]] {
     case 5 => FieldCentral
   }
 }
+
+trait GameType
+case object GameTypeTenTen extends GameType
