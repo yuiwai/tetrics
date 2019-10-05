@@ -19,6 +19,7 @@ lazy val core = (crossProject(JSPlatform, JVMPlatform, NativePlatform)
   .crossType(CrossType.Full) in file("core"))
   .settings(
     name := "tetrics-core",
+    crossScalaVersions := Seq(scalaVersion.value, "2.11.11"),
     publishTo := Some(Resolver.file("file", file("release"))),
     testFrameworks += new TestFramework("utest.runner.Framework"),
   )
