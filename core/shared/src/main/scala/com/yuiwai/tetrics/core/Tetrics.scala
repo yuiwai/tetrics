@@ -183,6 +183,7 @@ case class Field(rows: List[Row], width: Int, status: FieldStatus = FieldStatusA
       case row => (0 until width).foldLeft(0)((acc, i) => if ((row.cols >> i & 1) == 1) i + 1 else acc)
     }
   }
+  def hitTest(x: Int, y: Int): Boolean = (rows(y).cols & 1 << x) != 0
   def active: Boolean = status == FieldStatusActive
   def freeze: Field = copy(status = FieldStatusFrozen)
   def drop(block: Block, offset: Int): Field = {

@@ -31,6 +31,13 @@ object TetricsTest extends TestSuite {
         field.put(Block("0111", 2), 8, 8).trim ==> (Block("0111", 2), Offset(8, 8))
         field.put(Block("1110", 2), 8, 8).trim ==> (Block("1110", 2), Offset(8, 8))
       }
+      "hitTest" - {
+        field.hitTest(0, 0) ==> false
+        field.put(Block("11", 2), 0, 0).hitTest(0, 0) ==> true
+        field.put(Block("11", 2), 0, 0).hitTest(1, 0) ==> true
+        field.put(Block("11", 2), 0, 0).hitTest(2, 0) ==> false
+        field.put(Block("11", 2), 0, 0).hitTest(1, 1) ==> false
+      }
     }
     "tetrics" - {
       val tetrics = Tetrics()

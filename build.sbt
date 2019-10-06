@@ -34,6 +34,7 @@ lazy val core = (crossProject(JSPlatform, JVMPlatform, NativePlatform)
   )
   .nativeSettings(
     scalaVersion := "2.11.11",
+    crossScalaVersions := Seq("2.11.11"),
     libraryDependencies ++= Seq(
       pbruntime,
       "com.lihaoyi" %%% "utest" % "0.6.5" % "test"
