@@ -38,6 +38,12 @@ object TetricsTest extends TestSuite {
         field.put(Block("11", 2), 0, 0).hitTest(2, 0) ==> false
         field.put(Block("11", 2), 0, 0).hitTest(1, 1) ==> false
       }
+      "turn" - {
+        "with status" - {
+          field.freeze.turnRight.status ==> FieldStatusFrozen
+          field.freeze.turnLeft.status ==> FieldStatusFrozen
+        }
+      }
     }
     "tetrics" - {
       val tetrics = Tetrics()

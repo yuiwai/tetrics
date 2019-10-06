@@ -211,8 +211,8 @@ case class Field(rows: List[Row], width: Int, status: FieldStatus = FieldStatusA
   def normalized: Field = copy(fillLeftRows(rows.filter(!_.isFilled), width, height))
   def count: Int = rows.map(c => bitCount(c.cols)).sum
   private def bitCount(i: Int, count: Int = 0): Int = if (i == 0) count else bitCount(i & i - 1, count + 1)
-  def turnRight: Field = Field(turnRightRows(rows, width), height)
-  def turnLeft: Field = Field(turnLeftRows(rows, width), height)
+  def turnRight: Field = copy(turnRightRows(rows, width), height)
+  def turnLeft: Field = copy(turnLeftRows(rows, width), height)
   def offset: Option[Offset] = for {
     x <- offsetX
     y <- offsetY
