@@ -68,9 +68,9 @@ trait DefaultAutoPlayer extends QueueingAutoPlayer {
       .actions.reverse
   def evalRotate(tetrics: Tetrics)(implicit droppableField: DroppableField): Eval = {
     evalField(tetrics, Eval.empty) >>
-      evalField(tetrics.turnLeft, Eval(TurnLeftAction)) >>
-      evalField(tetrics.turnRight, Eval(TurnRightAction)) >>
-      evalField(tetrics.turnLeft.turnLeft, Eval(TurnLeftAction :: TurnLeftAction :: Nil))
+      evalField(tetrics.turnLeft.tetrics, Eval(TurnLeftAction)) >>
+      evalField(tetrics.turnRight.tetrics, Eval(TurnRightAction)) >>
+      evalField(tetrics.turnLeft.tetrics.turnLeft.tetrics, Eval(TurnLeftAction :: TurnLeftAction :: Nil))
   }
   def evalField(tetrics: Tetrics, eval: Eval)(implicit droppableField: DroppableField): Eval = {
     evalDrop(tetrics, eval) >> evalMove(tetrics, eval)
@@ -82,13 +82,13 @@ trait DefaultAutoPlayer extends QueueingAutoPlayer {
   def evalMove(tetrics: Tetrics, moveAction: MoveAction, eval: Eval)(implicit droppableField: DroppableField): Eval =
     Try(tetrics.act(moveAction)) match {
       case Success(newTetrics) =>
-        evalDrop(newTetrics, eval.moved(moveAction)) >>
-          evalMove(newTetrics, moveAction, eval.moved(moveAction))
+        evalDrop(newTetrics.tetrics, eval.moved(moveAction)) >>
+          evalMove(newTetrics.tetrics, moveAction, eval.moved(moveAction))
       case _ => Eval.failed
     }
   def evalDrop(tetrics: Tetrics, eval: Eval)(implicit droppableField: DroppableField): Eval =
     try {
-      eval.dropped(evalAction(tetrics, tetrics.act(DropAndNormalizeAction(droppableField.dropAction, droppableField.normalizeAction))))
+      eval.dropped(evalAction(tetrics, tetrics.act(DropAndNormalizeAction(droppableField.dropAction, droppableField.normalizeAction)).tetrics))
     } catch {
       case _: Throwable => Eval.failed
     }

@@ -48,9 +48,9 @@ object TetricsTest extends TestSuite {
     "tetrics" - {
       val tetrics = Tetrics()
       "put center" - {
-        tetrics.putCenter(Block("1111", 2)).offset ==> Offset(4, 4)
-        tetrics.putCenter(Block("1111", 4)).offset ==> Offset(3, 5)
-        tetrics.putCenter(Block("100111", 3)).offset ==> Offset(4, 4)
+        tetrics.putCenter(Block("1111", 2)).tetrics.offset ==> Offset(4, 4)
+        tetrics.putCenter(Block("1111", 4)).tetrics.offset ==> Offset(3, 5)
+        tetrics.putCenter(Block("100111", 3)).tetrics.offset ==> Offset(4, 4)
       }
       "rotate" - {
         val o1 = Offset(4, 4)
@@ -59,13 +59,13 @@ object TetricsTest extends TestSuite {
         val o4 = o1 + Offset(Math.floor((4 - 1) / 2.0).toInt, Math.floor((1 - 4) / 2.0).toInt) // (5, 2)
         val o5 = o4 + Offset(Math.floor((1 - 4) / 2.0).toInt, Math.floor((4 - 1) / 2.0).toInt) // (3, 3)
         val o6 = o5 + Offset(Math.ceil((4 - 1) / 2.0).toInt, Math.ceil((1 - 4) / 2.0).toInt) // (5, 2)
-        val t = tetrics.put(Block("1111", 4), o1)
-        t.turnRight.offset ==> o2
-        t.turnRight.turnRight.offset ==> o3
-        t.turnRight.turnRight.turnRight.offset ==> o4
-        t.turnLeft.offset ==> o4
-        t.turnLeft.turnLeft.offset ==> o5
-        t.turnLeft.turnLeft.turnLeft.offset ==> o6
+        val t = tetrics.put(Block("1111", 4), o1).tetrics
+        t.turnRight.tetrics.offset ==> o2
+        t.turnRight.tetrics.turnRight.tetrics.offset ==> o3
+        t.turnRight.tetrics.turnRight.tetrics.turnRight.tetrics.offset ==> o4
+        t.turnLeft.tetrics.offset ==> o4
+        t.turnLeft.tetrics.turnLeft.tetrics.offset ==> o5
+        t.turnLeft.tetrics.turnLeft.tetrics.turnLeft.tetrics.offset ==> o6
       }
     }
   }
