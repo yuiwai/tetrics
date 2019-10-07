@@ -110,6 +110,10 @@ final case class TetricsResult(tetrics: Tetrics, event: TetricsEvent) {
   def compose(f: Tetrics => TetricsResult): TetricsResult = f(tetrics) match {
     case TetricsResult(t, e) => TetricsResult(t, CompositeEvent(event, e))
   }
+  def tap(f: TetricsResult => Unit): TetricsResult = {
+    f(this)
+    this
+  }
 }
 object TetricsResult {
   def apply(tetrics: Tetrics)(f: Tetrics => TetricsEvent): TetricsResult = apply(tetrics, f(tetrics))
