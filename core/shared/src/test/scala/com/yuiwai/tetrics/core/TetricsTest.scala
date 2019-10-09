@@ -67,6 +67,11 @@ object TetricsTest extends TestSuite {
         t.turnLeft.tetrics.turnLeft.tetrics.offset ==> o5
         t.turnLeft.tetrics.turnLeft.tetrics.turnLeft.tetrics.offset ==> o6
       }
+      "rotate -- out of field" - {
+        val t = Tetrics(5, 5)
+        t.put(Block("1111", 1), Offset(4))
+          .tetrics.turnRight
+      }
     }
   }
 }
