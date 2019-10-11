@@ -13,7 +13,7 @@ object TetricsTest extends TestSuite {
       }
     }
     "field" - {
-      val field = Field(10)
+      val field = TetricsField(10)
       "offset" - {
         field.offset ==> None
         field.put(Block("1", 1), 0, 0).offset ==> Some(Offset.zero)
@@ -52,6 +52,12 @@ object TetricsTest extends TestSuite {
         tetrics.putCenter(Block("1111", 4)).tetrics.offset ==> Offset(3, 5)
         tetrics.putCenter(Block("100111", 3)).tetrics.offset ==> Offset(4, 4)
       }
+      "move" - {
+        tetrics.putCenter(Block("1111", 2)).tetrics.moveRight.right.get.tetrics.offset ==> Offset(5, 4)
+      }
+      "move - out of field" - {
+        // TODO
+      }
       "rotate" - {
         val o1 = Offset(4, 4)
         val o2 = o1 + Offset(Math.ceil((4 - 1) / 2.0).toInt, Math.ceil((1 - 4) / 2.0).toInt) // (6, 3)
@@ -60,17 +66,19 @@ object TetricsTest extends TestSuite {
         val o5 = o4 + Offset(Math.floor((1 - 4) / 2.0).toInt, Math.floor((4 - 1) / 2.0).toInt) // (3, 3)
         val o6 = o5 + Offset(Math.ceil((4 - 1) / 2.0).toInt, Math.ceil((1 - 4) / 2.0).toInt) // (5, 2)
         val t = tetrics.put(Block("1111", 4), o1).tetrics
-        t.turnRight.tetrics.offset ==> o2
-        t.turnRight.tetrics.turnRight.tetrics.offset ==> o3
-        t.turnRight.tetrics.turnRight.tetrics.turnRight.tetrics.offset ==> o4
-        t.turnLeft.tetrics.offset ==> o4
-        t.turnLeft.tetrics.turnLeft.tetrics.offset ==> o5
-        t.turnLeft.tetrics.turnLeft.tetrics.turnLeft.tetrics.offset ==> o6
+        t.turnRight.right.get.tetrics.offset ==> o2
+        t.turnRight.right.get.tetrics.turnRight.right.get.tetrics.offset ==> o3
+        t.turnRight.right.get.tetrics.turnRight.right.get.tetrics.turnRight.right.get.tetrics.offset ==> o4
+        t.turnLeft.right.get.tetrics.offset ==> o4
+        t.turnLeft.right.get.tetrics.turnLeft.right.get.tetrics.offset ==> o5
+        t.turnLeft.right.get.tetrics.turnLeft.right.get.tetrics.turnLeft.right.get.tetrics.offset ==> o6
       }
       "rotate -- out of field" - {
         val t = Tetrics(5, 5)
         t.put(Block("1111", 1), Offset(4))
-          .tetrics.turnRight
+          .tetrics.turnRight.right.get.tetrics.offset ==> Offset(1, 2)
+        t.put(Block("1111", 4), Offset())
+          .tetrics.turnLeft
       }
     }
   }

@@ -19,8 +19,8 @@ object TetricsTests extends TestSuite {
     }
     "field" - {
       "surface" - {
-        assert(Field(5).surface.value == List(0, 0, 0, 0, 0))
-        assert(Field(5).drop(Block("010111", 3), 0).surface.value == List(1, 2, 1, 0, 0))
+        assert(TetricsField(5).surface.value == List(0, 0, 0, 0, 0))
+        assert(TetricsField(5).drop(Block("010111", 3), 0).surface.value == List(1, 2, 1, 0, 0))
       }
     }
     "surface" - {

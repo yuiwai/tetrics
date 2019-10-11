@@ -132,7 +132,7 @@ trait JsView extends LabeledFieldView[Context2D] {
   override val labelMargin = 1
   val tileWidth: Int = 15
   val tileHeight: Int = 15
-  def drawField(field: Field, offsetX: Int, offsetY: Int)
+  def drawField(field: TetricsField, offsetX: Int, offsetY: Int)
     (implicit ctx: Context2D): Unit = {
     val n = ctx.canvas.width.toDouble / 520
     val m = (d: Double) => d * n
