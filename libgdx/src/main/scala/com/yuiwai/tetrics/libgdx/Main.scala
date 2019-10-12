@@ -122,7 +122,7 @@ trait GdxView extends TetricsView[GdxContext] with LabeledFieldView[GdxContext] 
   override def offset: Int = 20
   override def tileWidth: Int = 15
   override def tileHeight: Int = 15
-  override def drawField(field: Field, offsetX: Int, offsetY: Int)(implicit ctx: GdxContext): Unit = {
+  override def drawField(field: TetricsField, offsetX: Int, offsetY: Int)(implicit ctx: GdxContext): Unit = {
     ctx.pushRenderer { r =>
       r.setColor(Color.GREEN)
       r.rect(offsetX - 1, 520 - (offsetY + tileHeight * fieldSize + offset - tileHeight) - 1, tileWidth * fieldSize + 1, tileHeight * fieldSize + 1)

@@ -6,69 +6,95 @@ case class Tetrics(
   block: Block,
   offset: Offset,
   rotation: Rotation,
-  bottomField: Field,
-  rightField: Field,
-  leftField: Field,
-  topField: Field
+  bottomField: TetricsField,
+  rightField: TetricsField,
+  leftField: TetricsField,
+  topField: TetricsField
 ) {
-  require(fieldWidth >= block.width + offset.x && offset.x >= 0, "block is outside of field width")
-  require(fieldHeight >= block.height + offset.y && offset.y >= 0, "block is outside of field height")
-  private val emptyField = Field(fieldWidth, fieldHeight)
-  private def publishAndReturn(f: Tetrics => TetricsEvent): Tetrics = {
-    this
-  }
-  def field(fieldType: FieldType): Field = fieldType match {
+  type R[E <: TetricsError] = Either[E, TetricsResult]
+  // require(fieldWidth >= block.width + offset.x && offset.x >= 0, "block is outside of field width")
+  // require(fieldHeight >= block.height + offset.y && offset.y >= 0, "block is outside of field height")
+  private val emptyField = TetricsField(fieldWidth, fieldHeight)
+  def field(fieldType: FieldType): TetricsField = fieldType match {
     case FieldLeft => leftField
     case FieldRight => rightField
     case FieldTop => topField
     case FieldBottom => bottomField
     case FieldCentral => centralField
   }
-  def fields: Seq[Field] = Seq(leftField, rightField, topField, bottomField)
-  def deactivatedFields: Seq[Field] = fields.filterNot(_.active)
-  def centralField: Field = emptyField.put(block, offset.x, offset.y)
-  def put(block: Block, offset: Offset = Offset(), rotation: Rotation = Rotation0): Tetrics =
-    copy(block = block, offset = offset, rotation = rotation)
-      .publishAndReturn(_ => BlockAdded(block))
-  def putCenter(block: Block): Tetrics = put(block, Offset(
+  def fields: Seq[TetricsField] = Seq(leftField, rightField, topField, bottomField)
+  def deactivatedFields: Seq[TetricsField] = fields.filterNot(_.active)
+  def centralField: TetricsField = emptyField.put(block, offset.x, offset.y)
+  def put(block: Block, offset: Offset = Offset(), rotation: Rotation = Rotation0): TetricsResult =
+    TetricsResult(copy(block = block, offset = offset, rotation = rotation), BlockAdded(block))
+  def putCenter(block: Block): TetricsResult = put(block, Offset(
     Math.round((fieldWidth - block.width) / 2.0).toInt,
     Math.round((fieldHeight - block.height) / 2.0).toInt
   ))
-  def moveRight: Tetrics = copy(offset = offset.moveRight)
-    .publishAndReturn(_ => BlockMoved(MoveRight))
-  def moveLeft: Tetrics = copy(offset = offset.moveLeft)
-    .publishAndReturn(_ => BlockMoved(MoveLeft))
-  def moveUp: Tetrics = copy(offset = offset.moveUp)
-    .publishAndReturn(_ => BlockMoved(MoveUp))
-  def moveDown: Tetrics = copy(offset = offset.moveDown)
-    .publishAndReturn(_ => BlockMoved(MoveDown))
-  protected def turn(b: Block, r: Rotation): Tetrics =
-    copy(block = b, offset = turnedOffset(b, r), rotation = r)
-  protected def turnedOffset(b: Block, r: Rotation): Offset = Offset(
+  def moveLeft: R[MoveError] = offset.moveLeft match {
+    case o if o.x < 0 => Left(OutOfField(o.x, 0))
+    case o => Right(TetricsResult(copy(offset = o), BlockMoved(MoveLeft)))
+  }
+  def moveRight: R[MoveError] = offset.moveRight match {
+    case o if o.x + block.width > fieldWidth => Left(OutOfField(o.x + block.width - fieldWidth, 0))
+    case o => Right(TetricsResult(copy(offset = o), BlockMoved(MoveRight)))
+  }
+  def moveUp: R[MoveError] = offset.moveUp match {
+    case o if o.y < 0 => Left(OutOfField(0, o.y))
+    case o => Right(TetricsResult(copy(offset = o), BlockMoved(MoveUp)))
+  }
+  def moveDown: R[MoveError] = offset.moveDown match {
+    case o if o.y + block.height > fieldHeight => Left(OutOfField(0, o.y + block.height - fieldHeight))
+    case o => Right(TetricsResult(copy(offset = o), BlockMoved(MoveDown)))
+  }
+  private def turn(b: Block, r: Rotation): Tetrics = turnedOffset(b, r) match {
+    case Offset(x, y) =>
+      val ox =
+        if (x < 0) 0
+        else if (x + b.width > fieldWidth) fieldWidth - b.width
+        else x
+      val oy =
+        if (y < 0) 0
+        else if (y + b.height > fieldHeight) fieldHeight - b.height
+        else y
+      copy(block = b, offset = Offset(ox, oy), rotation = r)
+  }
+  private def turnedOffset(b: Block, r: Rotation): Offset = Offset(
     offset.x + r.round((block.width - b.width) / 2.0),
     offset.y + r.round((block.height - b.height) / 2.0)
   )
-  def turnLeft: Tetrics = turn(block.turnLeft, rotation.left)
-    .publishAndReturn(_ => BlockRotated(RotationLeft))
-  def turnRight: Tetrics = turn(block.turnRight, rotation.right)
-    .publishAndReturn(_ => BlockRotated(RotationRight))
-  def dropLeft: Tetrics = copy(leftField = leftField.drop(block.turnLeft, offset.y))
-    .publishAndReturn(t => BlockDropped(FieldLeft, t.leftField.numRows, t.leftField.filledRows))
-  def dropRight: Tetrics = copy(rightField = rightField.drop(block.turnRight, fieldHeight - offset.y - block.height))
-    .publishAndReturn(t => BlockDropped(FieldRight, t.rightField.numRows, t.rightField.filledRows))
-  def dropTop: Tetrics = copy(topField = topField.drop(block.turnLeft.turnLeft, fieldWidth - offset.x - block.width))
-    .publishAndReturn(t => BlockDropped(FieldTop, t.topField.numRows, t.topField.filledRows))
-  def dropBottom: Tetrics = copy(bottomField = bottomField.drop(block, offset.x))
-    .publishAndReturn(t => BlockDropped(FieldBottom, t.bottomField.numRows, t.bottomField.filledRows))
-  def normalizeLeft: Tetrics = copy(leftField = leftField.normalized)
-    .publishAndReturn(t => FieldNormalized(FieldLeft, t.leftField.numRows))
-  def normalizeRight: Tetrics = copy(rightField = rightField.normalized)
-    .publishAndReturn(t => FieldNormalized(FieldRight, t.rightField.numRows))
-  def normalizeTop: Tetrics = copy(topField = topField.normalized)
-    .publishAndReturn(t => FieldNormalized(FieldTop, t.topField.numRows))
-  def normalizeBottom: Tetrics = copy(bottomField = bottomField.normalized)
-    .publishAndReturn(t => FieldNormalized(FieldBottom, t.bottomField.numRows))
-  def act(action: TetricsAction): Tetrics = action match {
+  def turnLeft: R[TetricsError] =
+    Right(TetricsResult(turn(block.turnLeft, rotation.left), BlockRotated(RotationLeft)))
+  def turnRight: R[TetricsError] =
+    Right(TetricsResult(turn(block.turnRight, rotation.right), BlockRotated(RotationRight)))
+  def dropLeft: R[TetricsError] = Right(TetricsResult(copy(leftField = leftField.drop(block.turnLeft, offset.y))) {
+    t => BlockDropped(FieldLeft, t.leftField.numRows, t.leftField.filledRows)
+  })
+  def dropRight: R[TetricsError] = Right(TetricsResult(
+    copy(rightField = rightField.drop(block.turnRight, fieldHeight - offset.y - block.height))) {
+    t => BlockDropped(FieldRight, t.rightField.numRows, t.rightField.filledRows)
+  })
+  def dropTop: R[TetricsError] = Right(TetricsResult(
+    copy(topField = topField.drop(block.turnLeft.turnLeft, fieldWidth - offset.x - block.width))) {
+    t => BlockDropped(FieldTop, t.topField.numRows, t.topField.filledRows)
+  })
+  def dropBottom: R[TetricsError] = Right(TetricsResult(
+    copy(bottomField = bottomField.drop(block, offset.x))) {
+    t => BlockDropped(FieldBottom, t.bottomField.numRows, t.bottomField.filledRows)
+  })
+  def normalizeLeft: R[TetricsError] = Right(TetricsResult(copy(leftField = leftField.normalized)) {
+    t => FieldNormalized(FieldLeft, t.leftField.numRows)
+  })
+  def normalizeRight: R[TetricsError] = Right(TetricsResult(copy(rightField = rightField.normalized)) {
+    t => FieldNormalized(FieldRight, t.rightField.numRows)
+  })
+  def normalizeTop: R[TetricsError] = Right(TetricsResult(copy(topField = topField.normalized)) {
+    t => FieldNormalized(FieldTop, t.topField.numRows)
+  })
+  def normalizeBottom: R[TetricsError] = Right(TetricsResult(copy(bottomField = bottomField.normalized)) {
+    t => FieldNormalized(FieldBottom, t.bottomField.numRows)
+  })
+  def act(action: TetricsAction): Either[TetricsError, TetricsResult] = action match {
     case MoveLeftAction => moveLeft
     case MoveRightAction => moveRight
     case MoveUpAction => moveUp
@@ -83,8 +109,8 @@ case class Tetrics(
     case NormalizeBottomAction => normalizeBottom
     case TurnLeftAction => turnLeft
     case TurnRightAction => turnRight
-    case DropAndNormalizeAction(d, n) => act(d).act(n)
-    case NoAction => this
+    case DropAndNormalizeAction(d, n) => act(d).right.map(_.compose(_.act(n).right.get))
+    case NoAction => Right(TetricsResult(this, NoEvent))
   }
 }
 object Tetrics {
@@ -94,13 +120,28 @@ object Tetrics {
     Block.empty,
     Offset(),
     Rotation0,
-    Field(fieldWidth, fieldHeight),
-    Field(fieldWidth, fieldHeight),
-    Field(fieldWidth, fieldHeight),
-    Field(fieldWidth, fieldHeight)
+    TetricsField(fieldWidth, fieldHeight),
+    TetricsField(fieldWidth, fieldHeight),
+    TetricsField(fieldWidth, fieldHeight),
+    TetricsField(fieldWidth, fieldHeight)
   )
   def apply(fieldSize: Int = 10): Tetrics = Tetrics(fieldSize, fieldSize)
 }
+
+final case class TetricsResult(tetrics: Tetrics, event: TetricsEvent) {
+  def compose(f: Tetrics => TetricsResult): TetricsResult = f(tetrics) match {
+    case TetricsResult(t, e) => TetricsResult(t, CompositeEvent(event, e))
+  }
+  def compose(f: Tetrics => Either[TetricsError, TetricsResult]): Either[TetricsError, TetricsResult] = f(tetrics)
+  def tap(f: TetricsResult => Unit): TetricsResult = {
+    f(this)
+    this
+  }
+}
+object TetricsResult {
+  def apply(tetrics: Tetrics)(f: Tetrics => TetricsEvent): TetricsResult = apply(tetrics, f(tetrics))
+}
+
 case class Offset(x: Int = 0, y: Int = 0) {
   def +(other: Offset): Offset = Offset(x + other.x, y + other.y)
   def moveRight: Offset = copy(x = x + 1)
@@ -172,67 +213,6 @@ object FieldTypes {
 sealed trait FieldStatus
 case object FieldStatusActive extends FieldStatus
 case object FieldStatusFrozen extends FieldStatus
-case class Field(rows: List[Row], width: Int, status: FieldStatus = FieldStatusActive) {
-  import RowsOps._
-  require(!rows.exists(_.width != width), "Field contains different width rows.")
-  lazy val height: Int = rows.length
-  lazy val numRows: Int = rows.count(_.nonEmpty)
-  def surface: Surface = Surface {
-    turnRightRows(rows, width).map {
-      case row if row.isEmpty => 0
-      case row => (0 until width).foldLeft(0)((acc, i) => if ((row.cols >> i & 1) == 1) i + 1 else acc)
-    }
-  }
-  def active: Boolean = status == FieldStatusActive
-  def freeze: Field = copy(status = FieldStatusFrozen)
-  def drop(block: Block, offset: Int): Field = {
-    require(active, "Field is not active")
-    val sliced = slice(offset, block.width)
-    val dropPos = sliced.dropPos(block)
-    val dropped = put(block, offset, dropPos)
-    if (sliced.hitTest(block, dropPos)) dropped.freeze else dropped
-  }
-  def put(block: Block, x: Int, y: Int): Field = copy(put(rows, block.rows, x, y))
-  protected def put(baseRows: List[Row], putRows: List[Row], x: Int, y: Int, resultRows: List[Row] = Nil): List[Row] =
-    putRows match {
-      case Nil => resultRows ++ baseRows
-      case _ if y > 0 => put(baseRows.tail, putRows, x, y - 1, resultRows :+ baseRows.head)
-      case h :: t => put(baseRows.tail, t, x, 0, resultRows :+ (baseRows.head + (h, x)))
-    }
-  def putCenter(block: Block, offset: Offset = Offset()): Field =
-    put(
-      block,
-      Math.round((width - block.width) / 2.0).toInt + offset.x,
-      Math.round((rows.length - block.height) / 2.0).toInt + offset.y
-    )
-  def filledRows: Seq[Int] = rows.zipWithIndex.collect { case (row, i) if row.isFilled => i }
-  def slice(offset: Int, width: Int): Slice = Slice(rows.map(row => row.copy(row.cols >> offset, width)))
-  def normalized: Field = copy(fillLeftRows(rows.filter(!_.isFilled), width, height))
-  def count: Int = rows.map(c => bitCount(c.cols)).sum
-  private def bitCount(i: Int, count: Int = 0): Int = if (i == 0) count else bitCount(i & i - 1, count + 1)
-  def turnRight: Field = Field(turnRightRows(rows, width), height)
-  def turnLeft: Field = Field(turnLeftRows(rows, width), height)
-  def offset: Option[Offset] = for {
-    x <- offsetX
-    y <- offsetY
-  } yield Offset(x, y)
-  def offsetX: Option[Int] = turnRight.offsetY
-  def offsetY: Option[Int] = rows.zipWithIndex.find(_._1.nonEmpty).map(_._2)
-  def region(offset: Offset, width: Int, height: Int): Block = {
-    val rs = rows.slice(offset.y, offset.y + height).map(_.slice(offset.x, width))
-    Block(rs, width)
-  }
-  def trim: (Block, Offset) =
-    (for {
-      os <- offset
-      oe <- turnRight.turnRight.offset
-    } yield region(os, width - oe.x - os.x, height - oe.y - os.y) -> os)
-      .getOrElse(Block.empty, Offset.zero)
-}
-object Field {
-  def apply(size: Int): Field = Field(size, size)
-  def apply(width: Int, height: Int): Field = Field(List.fill(height)(Row(0, width)), width)
-}
 case class Slice(rows: List[Row]) {
   def spaces: Int = rows.filter(_.nonEmpty) match {
     case _ :: t => t.map(_.spaces).sum
@@ -338,3 +318,6 @@ case class Surface(value: List[Int]) extends AnyVal {
   }
 }
 
+sealed trait TetricsError
+sealed trait MoveError extends TetricsError
+final case class OutOfField(overX: Int, overY: Int) extends MoveError

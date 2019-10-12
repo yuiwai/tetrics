@@ -2,23 +2,32 @@ import sbtcrossproject.CrossPlugin.autoImport.{crossProject, CrossType}
 import scalapb.compiler.Version.scalapbVersion
 
 scalaVersion in ThisBuild := "2.12.8"
-version in ThisBuild := "0.3.0"
+version in ThisBuild := "0.4.0"
+organization in ThisBuild := "com.yuiwai"
 
 val pbruntime = "com.thesamet.scalapb" %% "scalapb-runtime" % scalapbVersion % "protobuf"
 
-lazy val core = (crossProject(JSPlatform, JVMPlatform, NativePlatform).crossType(CrossType.Full) in file("core"))
+lazy val root = project
+  .in(file("."))
+  .aggregate(coreJVM, coreJS)
+  .settings(
+    name := "tetrics",
+    publish / skip := true
+  )
+
+lazy val core = (crossProject(JSPlatform, JVMPlatform, NativePlatform)
+  .crossType(CrossType.Full) in file("core"))
   .settings(
     name := "tetrics-core",
-    PB.protoSources in Compile := Seq((baseDirectory in ThisBuild).value / "proto"),
-    PB.targets in Compile := Seq(
-      scalapb.gen() -> (sourceManaged in Compile).value
-    ),
-    testFrameworks += new TestFramework("utest.runner.Framework")
+    publishTo := Some(Resolver.file("file", file("release"))),
+    testFrameworks += new TestFramework("utest.runner.Framework"),
   )
   .jvmSettings(
+    crossScalaVersions := Seq(scalaVersion.value, "2.11.11"),
     libraryDependencies += "com.lihaoyi" %% "utest" % "0.6.5" % "test"
   )
   .jsSettings(
+    crossScalaVersions := Seq(scalaVersion.value, "2.11.11"),
     libraryDependencies ++= Seq(
       pbruntime,
       "com.lihaoyi" %%% "utest" % "0.6.5" % "test"
@@ -35,6 +44,21 @@ lazy val core = (crossProject(JSPlatform, JVMPlatform, NativePlatform).crossType
 lazy val coreJVM = core.jvm
 lazy val coreJS = core.js
 lazy val coreNative = core.native
+
+lazy val pb = (crossProject(JSPlatform, JVMPlatform, NativePlatform)
+  .crossType(CrossType.Pure) in file("pb"))
+  .settings(
+    name := "tetrics-pb",
+    PB.protoSources in Compile := Seq((baseDirectory in ThisBuild).value / "proto"),
+    PB.targets in Compile := Seq(
+      scalapb.gen() -> (sourceManaged in Compile).value
+    ),
+  )
+  .dependsOn(core)
+
+lazy val pbJVM = pb.jvm
+lazy val pbJS = pb.js
+lazy val pbNative = pb.native
 
 lazy val ui = crossProject(JSPlatform, JVMPlatform)
   .crossType(CrossType.Pure)
@@ -85,10 +109,8 @@ lazy val native = (project in file("native"))
 lazy val libgdx = (project in file("libgdx"))
   .settings(
     name := "tetrics-gdx",
-    resolvers += "scala-sapporo repo" at "https://s3-us-west-2.amazonaws.com/repo.scala-sapporo.org",
     libraryDependencies ++= Seq(
       "com.typesafe" % "config" % "1.3.2",
-      "org.scalasapporo.gamecenter" %% "scala-gamecenter-connector" % "0.1.0-SNAPSHOT",
       "com.softwaremill.sttp" %% "akka-http-backend" % "1.3.8",
       "com.typesafe.akka" %% "akka-stream" % "2.5.11",
       "com.badlogicgames.gdx" % "gdx-backend-lwjgl" % "1.9.8",

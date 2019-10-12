@@ -1,6 +1,7 @@
 package com.yuiwai.tetrics.core
 
 sealed trait TetricsEvent
+case object NoEvent extends TetricsEvent
 final case class GameStarted(gameType: GameType) extends TetricsEvent
 final case class GameEnded(gameType: GameType) extends TetricsEvent
 final case class BlockAdded(block: Block) extends TetricsEvent
@@ -8,6 +9,7 @@ final case class BlockRotated(rotationType: RotationType) extends TetricsEvent
 final case class BlockMoved(moveType: MoveType) extends TetricsEvent
 final case class BlockDropped(fieldType: DroppableField, numRows: Int, filledRows: Seq[Int]) extends TetricsEvent
 final case class FieldNormalized(fieldType: DroppableField, numRows: Int) extends TetricsEvent
+final case class CompositeEvent(head: TetricsEvent, tail: TetricsEvent) extends TetricsEvent
 
 trait EventSerializer[T] {
   val setting: TetricsSetting
@@ -98,3 +100,6 @@ trait ByteEventSerializer extends EventSerializer[Array[Byte]] {
     case 5 => FieldCentral
   }
 }
+
+trait GameType
+case object GameTypeTenTen extends GameType

@@ -15,6 +15,8 @@ case class TetricsStats(
   def bottomDeleted: Int = bottomField.deletedRows
   def totalDeleted: Int = leftDeleted + rightDeleted + topDeleted + bottomDeleted
   def apply(event: TetricsEvent): TetricsStats = event match {
+    case CompositeEvent(head, tail) =>
+      apply(head).apply(tail)
     case BlockAdded(_) =>
       copy(blockCount = blockCount + 1)
     case BlockRotated(_) =>
