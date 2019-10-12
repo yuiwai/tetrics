@@ -8,7 +8,7 @@ trait Game {
   def act(action: TetricsAction): Game
   def randPut(tetrics: Tetrics): Tetrics = {
     import setting.blocks
-    tetrics.putCenter(blocks((Math.random() * blocks.size).toInt))
+    tetrics.putCenter(blocks((Math.random() * blocks.size).toInt)).tetrics
   }
 }
 trait Controller[I, C] {

@@ -47,31 +47,26 @@ case class Tetrics(
     case o if o.y + block.height > fieldHeight => Left(OutOfField(0, o.y + block.height - fieldHeight))
     case o => Right(TetricsResult(copy(offset = o), BlockMoved(MoveDown)))
   }
-  private def turn(b: Block, r: Rotation): Either[RotateError, Tetrics] = turnedOffset(b, r) match {
-    case o@Offset(x, y) =>
-      val o1 = if (x < 0) OutOfField(x, 0)
-      else if (x + b.width > fieldWidth) OutOfField(x + b.width - fieldWidth, 0)
-      else OutOfField(0, 0)
-      val o2 = if (y < 0) o1.copy(overY = y)
-      else if (y + b.height > fieldHeight) o1.copy(overY = y + b.height - fieldHeight)
-      else OutOfField(0, 0)
-      if (o2 == OutOfField(0, 0)) Right(copy(block = b, offset = o, rotation = r))
-      else Left(o2)
+  private def turn(b: Block, r: Rotation): Tetrics = turnedOffset(b, r) match {
+    case Offset(x, y) =>
+      val ox =
+        if (x < 0) 0
+        else if (x + b.width > fieldWidth) fieldWidth - b.width
+        else x
+      val oy =
+        if (y < 0) 0
+        else if (y + b.height > fieldHeight) fieldHeight - b.height
+        else y
+      copy(block = b, offset = Offset(ox, oy), rotation = r)
   }
   private def turnedOffset(b: Block, r: Rotation): Offset = Offset(
     offset.x + r.round((block.width - b.width) / 2.0),
     offset.y + r.round((block.height - b.height) / 2.0)
   )
-  // TODO turnのシグネチャ更新に合わせる
-  def turnLeft: R[RotateError] = turn(block.turnLeft, rotation.left) match {
-    case Right(t) => Right(TetricsResult(t, BlockRotated(RotationLeft)))
-    case Left(l) => Left(l)
-  }
-  // TODO turnのシグネチャ更新に合わせる
-  def turnRight: R[RotateError] = turn(block.turnRight, rotation.right) match {
-    case Right(t) => Right(TetricsResult(t, BlockRotated(RotationRight)))
-    case Left(l) => Left(l)
-  }
+  def turnLeft: R[TetricsError] =
+    Right(TetricsResult(turn(block.turnLeft, rotation.left), BlockRotated(RotationLeft)))
+  def turnRight: R[TetricsError] =
+    Right(TetricsResult(turn(block.turnRight, rotation.right), BlockRotated(RotationRight)))
   def dropLeft: R[TetricsError] = Right(TetricsResult(copy(leftField = leftField.drop(block.turnLeft, offset.y))) {
     t => BlockDropped(FieldLeft, t.leftField.numRows, t.leftField.filledRows)
   })
@@ -114,7 +109,7 @@ case class Tetrics(
     case NormalizeBottomAction => normalizeBottom
     case TurnLeftAction => turnLeft
     case TurnRightAction => turnRight
-    case DropAndNormalizeAction(d, n) => act(d).flatMap(_.compose(_.act(n)))
+    case DropAndNormalizeAction(d, n) => act(d).right.map(_.compose(_.act(n).right.get))
     case NoAction => Right(TetricsResult(this, NoEvent))
   }
 }
@@ -325,5 +320,4 @@ case class Surface(value: List[Int]) extends AnyVal {
 
 sealed trait TetricsError
 sealed trait MoveError extends TetricsError
-sealed trait RotateError extends TetricsError
-final case class OutOfField(overX: Int, overY: Int) extends MoveError with RotateError
+final case class OutOfField(overX: Int, overY: Int) extends MoveError
