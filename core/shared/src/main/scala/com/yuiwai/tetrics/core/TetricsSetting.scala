@@ -2,8 +2,6 @@ package com.yuiwai.tetrics.core
 
 import java.util.concurrent.LinkedBlockingQueue
 
-import scala.util.{Success, Try}
-
 sealed trait GameStatus
 case object GameStatusReady extends GameStatus
 case object GameStatusPlaying extends GameStatus
@@ -68,9 +66,10 @@ trait DefaultAutoPlayer extends QueueingAutoPlayer {
       .actions.reverse
   def evalRotate(tetrics: Tetrics)(implicit droppableField: DroppableField): Eval = {
     evalField(tetrics, Eval.empty) >>
-      evalField(tetrics.turnLeft.tetrics, Eval(TurnLeftAction)) >>
-      evalField(tetrics.turnRight.tetrics, Eval(TurnRightAction)) >>
-      evalField(tetrics.turnLeft.tetrics.turnLeft.tetrics, Eval(TurnLeftAction :: TurnLeftAction :: Nil))
+      // TODO 暫定的にEitherを強制で剥がす応急処置
+      evalField(tetrics.turnLeft.right.get.tetrics, Eval(TurnLeftAction)) >>
+      evalField(tetrics.turnRight.right.get.tetrics, Eval(TurnRightAction)) >>
+      evalField(tetrics.turnLeft.right.get.tetrics.turnLeft.right.get.tetrics, Eval(TurnLeftAction :: TurnLeftAction :: Nil))
   }
   def evalField(tetrics: Tetrics, eval: Eval)(implicit droppableField: DroppableField): Eval = {
     evalDrop(tetrics, eval) >> evalMove(tetrics, eval)
@@ -80,15 +79,18 @@ trait DefaultAutoPlayer extends QueueingAutoPlayer {
     case _ => evalMove(tetrics, MoveUpAction, eval) >> evalMove(tetrics, MoveDownAction, eval)
   }
   def evalMove(tetrics: Tetrics, moveAction: MoveAction, eval: Eval)(implicit droppableField: DroppableField): Eval =
-    Try(tetrics.act(moveAction)) match {
-      case Success(newTetrics) =>
+    tetrics.act(moveAction) match {
+      case Right(newTetrics) =>
         evalDrop(newTetrics.tetrics, eval.moved(moveAction)) >>
           evalMove(newTetrics.tetrics, moveAction, eval.moved(moveAction))
       case _ => Eval.failed
     }
   def evalDrop(tetrics: Tetrics, eval: Eval)(implicit droppableField: DroppableField): Eval =
     try {
-      eval.dropped(evalAction(tetrics, tetrics.act(DropAndNormalizeAction(droppableField.dropAction, droppableField.normalizeAction)).tetrics))
+      eval.dropped(evalAction(
+        tetrics,
+        tetrics.act(DropAndNormalizeAction(droppableField.dropAction, droppableField.normalizeAction)).right.get.tetrics
+      ))
     } catch {
       case _: Throwable => Eval.failed
     }

@@ -4,8 +4,8 @@ import com.yuiwai.tetrics.core._
 
 object Main {
   def main(args: Array[String]): Unit = {
-    assert(0 == Field(10).put(Block("010111", 3), 0, 8).slice(0, 3).spaces)
-    assert(2 == Field(10).put(Block("111010", 3), 0, 8).slice(0, 3).spaces)
+    assert(0 == TetricsField(10).put(Block("010111", 3), 0, 8).slice(0, 3).spaces)
+    assert(2 == TetricsField(10).put(Block("111010", 3), 0, 8).slice(0, 3).spaces)
   }
   def spacing = {
     val oldTetrics = Tetrics()

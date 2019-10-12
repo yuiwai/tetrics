@@ -3,8 +3,6 @@ package com.yuiwai.tetrics.ui
 import com.yuiwai.tetrics.core._
 import com.yuiwai.yachiyo.ui._
 
-import scala.util.Try
-
 abstract class GameScene(implicit setting: TetricsSetting) extends Scene /* TODO settings should be from global state via initialState() */ {
   override type State = (Tetrics, Tetrics)
 
@@ -13,14 +11,18 @@ abstract class GameScene(implicit setting: TetricsSetting) extends Scene /* TODO
     randPut(tetrics) -> tetrics
   }
   def act(tetrics: Tetrics, action: TetricsAction): Tetrics = {
-    action match {
-      case _: DropAndNormalizeAction => randPut(tetrics.act(action))
-      case _ => Try(tetrics.act(action)).fold(_ => tetrics, identity)
+    tetrics.act(action) match {
+      case Left(_) => tetrics
+      case Right(r) =>
+        action match {
+          case _: DropAndNormalizeAction => randPut(r.tetrics)
+          case _ => r.tetrics
+        }
     }
   }
   def randPut(tetrics: Tetrics)(implicit setting: TetricsSetting): Tetrics = {
     import setting.blocks
-    tetrics.putCenter(blocks((Math.random() * blocks.size).toInt))
+    tetrics.putCenter(blocks((Math.random() * blocks.size).toInt)).tetrics
   }
 }
 
@@ -87,7 +89,7 @@ final case class FieldData(filled: Set[Pos]) {
 }
 object FieldData {
   def empty: FieldData = FieldData(Set.empty)
-  def fromField(field: Field): FieldData = FieldData {
+  def fromField(field: TetricsField): FieldData = FieldData {
     (for {
       y <- 0 until field.height
       x <- 0 until field.rows(y).width

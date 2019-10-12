@@ -8,7 +8,7 @@ trait Game {
   def act(action: TetricsAction): Game
   def randPut(tetrics: Tetrics): Tetrics = {
     import setting.blocks
-    tetrics.putCenter(blocks((Math.random() * blocks.size).toInt))
+    tetrics.putCenter(blocks((Math.random() * blocks.size).toInt)).tetrics
   }
 }
 trait Controller[I, C] {
@@ -36,7 +36,7 @@ final case class FieldData(filled: Set[Pos]) {
 }
 object FieldData {
   def empty: FieldData = FieldData(Set.empty)
-  def fromField(field: Field): FieldData = FieldData {
+  def fromField(field: TetricsField): FieldData = FieldData {
     (for {
       y <- 0 until field.height
       x <- 0 until field.rows(y).width

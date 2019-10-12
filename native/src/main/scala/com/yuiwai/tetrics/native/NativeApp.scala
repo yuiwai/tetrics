@@ -64,13 +64,17 @@ final class NativeGame(presenter: Presenter[FieldData])(implicit val setting: Te
     this
   }
   override def act(action: TetricsAction): Game = {
-    action match {
-      case _: DropAndNormalizeAction =>
-        tetrics = draw(randPut(tetrics.act(action)))
-      case _ =>
-        tetrics = draw(tetrics.act(action))
+    tetrics.act(action) match {
+      case Left(_) => this
+      case Right(r) =>
+        action match {
+          case _: DropAndNormalizeAction =>
+            tetrics = draw(randPut(r.tetrics))
+          case _ =>
+            tetrics = draw(r.tetrics)
+        }
+        this
     }
-    this
   }
   def draw(tetrics: Tetrics): Tetrics = {
     presenter.draw(FieldTypes.all.map(ft => ft -> FieldData.fromField(tetrics.field(ft))).toMap)
