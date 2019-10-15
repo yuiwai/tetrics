@@ -12,8 +12,6 @@ case class Tetrics(
   topField: TetricsField
 ) {
   type R[E <: TetricsError] = Either[E, TetricsResult]
-  // require(fieldWidth >= block.width + offset.x && offset.x >= 0, "block is outside of field width")
-  // require(fieldHeight >= block.height + offset.y && offset.y >= 0, "block is outside of field height")
   private val emptyField = TetricsField(fieldWidth, fieldHeight)
   def field(fieldType: FieldType): TetricsField = fieldType match {
     case FieldLeft => leftField
@@ -67,21 +65,25 @@ case class Tetrics(
     Right(TetricsResult(turn(block.turnLeft, rotation.left), BlockRotated(RotationLeft)))
   def turnRight: R[TetricsError] =
     Right(TetricsResult(turn(block.turnRight, rotation.right), BlockRotated(RotationRight)))
-  def dropLeft: R[TetricsError] = Right(TetricsResult(copy(leftField = leftField.drop(block.turnLeft, offset.y))) {
-    t => BlockDropped(FieldLeft, t.leftField.numRows, t.leftField.filledRows)
-  })
-  def dropRight: R[TetricsError] = Right(TetricsResult(
-    copy(rightField = rightField.drop(block.turnRight, fieldHeight - offset.y - block.height))) {
-    t => BlockDropped(FieldRight, t.rightField.numRows, t.rightField.filledRows)
-  })
-  def dropTop: R[TetricsError] = Right(TetricsResult(
-    copy(topField = topField.drop(block.turnLeft.turnLeft, fieldWidth - offset.x - block.width))) {
-    t => BlockDropped(FieldTop, t.topField.numRows, t.topField.filledRows)
-  })
-  def dropBottom: R[TetricsError] = Right(TetricsResult(
-    copy(bottomField = bottomField.drop(block, offset.x))) {
-    t => BlockDropped(FieldBottom, t.bottomField.numRows, t.bottomField.filledRows)
-  })
+  private def putField(fieldType: FieldType, field: TetricsField): Tetrics = fieldType match {
+    case FieldLeft => copy(leftField = field)
+    case FieldRight => copy(rightField = field)
+    case FieldTop => copy(topField = field)
+    case FieldBottom => copy(bottomField = field)
+  }
+  private def drop(targetField: DroppableField, block: Block, offset: Int): R[TetricsError] =
+    field(targetField).drop(block, offset) match {
+      case Right(field) =>
+        Right(TetricsResult(
+          putField(targetField, field),
+          BlockDropped(targetField, field.numRows, field.filledRows)
+        ))
+      case Left(_) => Left(DropFailed)
+    }
+  def dropLeft: R[TetricsError] = drop(FieldLeft, block.turnLeft, offset.y)
+  def dropRight: R[TetricsError] = drop(FieldRight, block.turnRight, fieldHeight - offset.y - block.height)
+  def dropTop: R[TetricsError] = drop(FieldTop, block.turnLeft.turnLeft, fieldWidth - offset.x - block.width)
+  def dropBottom: R[TetricsError] = drop(FieldBottom, block, offset.x)
   def normalizeLeft: R[TetricsError] = Right(TetricsResult(copy(leftField = leftField.normalized)) {
     t => FieldNormalized(FieldLeft, t.leftField.numRows)
   })
@@ -321,3 +323,6 @@ case class Surface(value: List[Int]) extends AnyVal {
 sealed trait TetricsError
 sealed trait MoveError extends TetricsError
 final case class OutOfField(overX: Int, overY: Int) extends MoveError
+sealed trait DropError extends TetricsError
+case object DropFailed extends DropError
+

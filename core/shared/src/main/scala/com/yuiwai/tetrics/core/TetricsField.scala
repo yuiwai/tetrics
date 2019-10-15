@@ -14,12 +14,14 @@ case class TetricsField(rows: List[Row], width: Int, status: FieldStatus = Field
   def hitTest(x: Int, y: Int): Boolean = (rows(y).cols & 1 << x) != 0
   def active: Boolean = status == FieldStatusActive
   def freeze: TetricsField = copy(status = FieldStatusFrozen)
-  def drop(block: Block, offset: Int): TetricsField = {
-    require(active, "Field is not active")
-    val sliced = slice(offset, block.width)
-    val dropPos = sliced.dropPos(block)
-    val dropped = put(block, offset, dropPos)
-    if (sliced.hitTest(block, dropPos)) dropped.freeze else dropped
+  def drop(block: Block, offset: Int): Either[FieldError, TetricsField] = {
+    if (!active) Left(FieldIsFrozen)
+    else {
+      val sliced = slice(offset, block.width)
+      val dropPos = sliced.dropPos(block)
+      val dropped = put(block, offset, dropPos)
+      if (sliced.hitTest(block, dropPos)) Right(dropped.freeze) else Right(dropped)
+    }
   }
   def put(block: Block, x: Int, y: Int): TetricsField = copy(put(rows, block.rows, x, y))
   protected def put(baseRows: List[Row], putRows: List[Row], x: Int, y: Int, resultRows: List[Row] = Nil): List[Row] =
@@ -62,3 +64,5 @@ object TetricsField {
   def apply(size: Int): TetricsField = TetricsField(size, size)
   def apply(width: Int, height: Int): TetricsField = TetricsField(List.fill(height)(Row(0, width)), width)
 }
+sealed trait FieldError
+case object FieldIsFrozen extends FieldError
