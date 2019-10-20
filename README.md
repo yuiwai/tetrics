@@ -54,8 +54,13 @@ Rotate Left: D
 
 ## ターミナル版
 
-(要clang/libcurses) cloneしてsbtで以下のコマンドを実行します。
+cloneしてsbtで実行ファイルを生成し、実行します。
 
-`> native/run`
+注）[scala-native](http://www.scala-native.org/en/v0.3.9-docs/)のセットアップとlibncursesが必要です。
+
+```
+$ sbt native/nativeLink
+$ ./native/target/scala-2.11/tetrics-native-out
+```
 
 操作方法はPC版と同じです。
