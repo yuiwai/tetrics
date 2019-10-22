@@ -80,6 +80,13 @@ object TetricsTest extends TestSuite {
         t.put(Block("1111", 4), Offset())
           .tetrics.turnLeft
       }
+      "freeze" - {
+        val t = Tetrics(5, 5).freeze
+        t.leftField.active ==> false
+        t.rightField.active ==> false
+        t.topField.active ==> false
+        t.bottomField.active ==> false
+      }
     }
   }
 }
