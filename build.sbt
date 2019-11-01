@@ -54,6 +54,9 @@ lazy val pb = (crossProject(JSPlatform, JVMPlatform, NativePlatform)
       scalapb.gen() -> (sourceManaged in Compile).value
     ),
   )
+  .nativeSettings(
+    scalaVersion := "2.11.11"
+  )
   .dependsOn(core)
 
 lazy val pbJVM = pb.jvm
