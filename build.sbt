@@ -63,7 +63,7 @@ lazy val pbJVM = pb.jvm
 lazy val pbJS = pb.js
 lazy val pbNative = pb.native
 
-lazy val ui = crossProject(JSPlatform, JVMPlatform)
+lazy val ui = crossProject(JSPlatform, JVMPlatform, NativePlatform)
   .crossType(CrossType.Pure)
   .in(file("ui"))
   .settings(
@@ -80,10 +80,17 @@ lazy val ui = crossProject(JSPlatform, JVMPlatform)
       "com.yuiwai" %%% "yachiyo-ui" % "0.2.2-SNAPSHOT"
     )
   )
+  .nativeSettings(
+    scalaVersion := "2.11.11",
+    libraryDependencies ++= Seq(
+      "com.yuiwai" %%% "yachiyo-ui" % "0.3.0-SNAPSHOT"
+    )
+  )
   .dependsOn(core)
 
 lazy val uiJVM = ui.jvm
 lazy val uiJS = ui.js
+lazy val uiNative = ui.native
 
 lazy val check = (project in file("check"))
   .settings(
@@ -104,9 +111,12 @@ lazy val js = (project in file("js"))
 lazy val native = (project in file("native"))
   .settings(
     name := "tetrics-native",
-    scalaVersion := "2.11.11"
+    scalaVersion := "2.11.11",
+    libraryDependencies ++= Seq(
+      "com.yuiwai" %%% "yachiyo-plain" % "0.3.0-SNAPSHOT"
+    )
   )
-  .dependsOn(coreNative, appNative)
+  .dependsOn(uiNative)
   .enablePlugins(ScalaNativePlugin)
 
 lazy val libgdx = (project in file("libgdx"))

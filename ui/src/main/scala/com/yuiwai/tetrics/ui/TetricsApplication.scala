@@ -49,7 +49,7 @@ final case class GameViewModel(
   bottomFieldPos: Pos,
   bottomFieldData: FieldData,
   centralFieldPos: Pos,
-  centralFieldData: FieldData,
+  centralFieldData: FieldData
 ) extends ViewModel {
   def applyDiff(modifiedFields: Map[FieldType, FieldData]): GameViewModel = modifiedFields.foldLeft(this) {
     case (viewModel, (fieldType, fieldData)) => fieldType match {
