@@ -96,6 +96,12 @@ case class Tetrics(
   def normalizeBottom: R[TetricsError] = Right(TetricsResult(copy(bottomField = bottomField.normalized)) {
     t => FieldNormalized(FieldBottom, t.bottomField.numRows)
   })
+  def freeze: Tetrics = copy(
+    leftField = leftField.freeze,
+    rightField = rightField.freeze,
+    topField = topField.freeze,
+    bottomField = bottomField.freeze
+  )
   def act(action: TetricsAction): Either[TetricsError, TetricsResult] = action match {
     case MoveLeftAction => moveLeft
     case MoveRightAction => moveRight
@@ -211,6 +217,7 @@ case object FieldBottom extends FieldType with DroppableField {
 case object FieldCentral extends FieldType
 object FieldTypes {
   val all: Seq[FieldType] = Seq(FieldLeft, FieldRight, FieldTop, FieldBottom, FieldCentral)
+  val allDroppable: Seq[FieldType] = Seq(FieldLeft, FieldRight, FieldTop, FieldBottom)
 }
 sealed trait FieldStatus
 case object FieldStatusActive extends FieldStatus
