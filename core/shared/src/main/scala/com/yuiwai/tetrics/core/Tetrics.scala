@@ -217,6 +217,7 @@ case object FieldBottom extends FieldType with DroppableField {
 case object FieldCentral extends FieldType
 object FieldTypes {
   val all: Seq[FieldType] = Seq(FieldLeft, FieldRight, FieldTop, FieldBottom, FieldCentral)
+  val allDroppable: Seq[FieldType] = Seq(FieldLeft, FieldRight, FieldTop, FieldBottom)
 }
 sealed trait FieldStatus
 case object FieldStatusActive extends FieldStatus
