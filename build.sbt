@@ -1,6 +1,10 @@
 import sbtcrossproject.CrossPlugin.autoImport.{crossProject, CrossType}
 import scalapb.compiler.Version.scalapbVersion
 
+val dottyVersion = "0.21.0-RC1"
+val scala212_version = "2.12.8"
+val scala211_version = "2.11.12"
+
 scalaVersion in ThisBuild := "2.12.8"
 version in ThisBuild := "0.4.2"
 organization in ThisBuild := "com.yuiwai"
@@ -19,15 +23,16 @@ lazy val core = (crossProject(JSPlatform, JVMPlatform, NativePlatform)
   .crossType(CrossType.Full) in file("core"))
   .settings(
     name := "tetrics-core",
+    scalaVersion := scala212_version,
     publishTo := Some(Resolver.file("file", file("release"))),
     testFrameworks += new TestFramework("utest.runner.Framework"),
   )
   .jvmSettings(
-    crossScalaVersions := Seq(scalaVersion.value, "2.11.11"),
-    libraryDependencies += "com.lihaoyi" %% "utest" % "0.6.5" % "test"
+    crossScalaVersions := Seq(dottyVersion, scala212_version, scala211_version),
+    // libraryDependencies += "com.lihaoyi" %% "utest" % "0.6.5" % "test"
   )
   .jsSettings(
-    crossScalaVersions := Seq(scalaVersion.value, "2.11.11"),
+    crossScalaVersions := Seq(scala212_version, scala211_version),
     libraryDependencies ++= Seq(
       pbruntime,
       "com.lihaoyi" %%% "utest" % "0.6.5" % "test"
